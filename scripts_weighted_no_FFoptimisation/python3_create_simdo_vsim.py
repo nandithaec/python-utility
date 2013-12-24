@@ -2,7 +2,10 @@
 
 #Read in the pnr netlist, testbench and the entity name for the testbench, simulate it to create a file with FF outputs
 
-##Example usage: python python3_create_simdo_vsim.py -v c499_clk_opFF_final_modelsim.v -t test_decoder_pnr.vhd -b t_decoder_pnr -r 1us
+
+#Modifications:
+#1. Added an option to run Modelsim without invoking GUI. vsim -c. Errors will be written out to vsim.log file: 17th Dec 2013
+##Example usage: python python3_create_simdo_vsim.py -v c880_clk_ipFF_modelsim.v -t /home/users/nanditha/Documents/utility/c880_alu/test_c880.v -b test_c880 -r 100us
 
 ##The pnr netlist is by default assumed to be in /pnr/op_data folder
 
@@ -84,7 +87,7 @@ fw1.write('#!/bin/bash\n\n')
 #Remove work directory if it exists
 fw1.write('\\rm -rf ./work\n')
 #Run simulation, invoke modelsim
-fw1.write('vsim -do simulate_vsim.do\n')
+fw1.write('vsim -c -do simulate_vsim.do >vsim.log\n')
 
 fw.close()
 fw1.close()
@@ -92,6 +95,6 @@ print "\n********************INVOKING MODELSIM********************\n"
 
 #Run the bash script
 os.system('bash run_sim.bash')	
-print "\n****Completed simulating the post layout verilog netlist.\n Reference FF outputs written****"
+print "\n****Completed simulating the post layout verilog netlist.\n Reference FF outputs written\nCreated vsim.log..Check this file for log contents****"
 
 
