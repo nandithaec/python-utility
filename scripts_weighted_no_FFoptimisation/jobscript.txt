@@ -16,7 +16,7 @@ echo PBS_QUEUE is $PBS_QUEUE
 NPROCS=`wc -l < $PBS_NODEFILE` 
 echo NPROCS is $NPROCS 
 cd $PBS_O_WORKDIR 
-###PBS -e /home/external/iitb/nanditha/simulations/c880_alu/error.txt
-###PBS -o /home/external/iitb/nanditha/simulations/c880_alu/outfile.txt
-python /home/external/iitb/nanditha/simulations/c880_alu/python_utility3_yuva_echo_wt_2cycles.py -m c880_clk_ipFF -p /home/external/iitb/nanditha/simulations/c880_alu -d c880_alu -t 180 -n 10 --group 10 --clk 125 --std_lib osu018_stdcells_correct_vdd_gnd.sp >/dev/null 2&>1
+###PBS -e /home/external/iitb/nanditha/simulations/c2670_alu/error.txt
+###PBS -o /home/external/iitb/nanditha/simulations/c2670_alu/outfile.txt
+python /home/external/iitb/nanditha/simulations/c2670_alu/python_utility3_yuva_echo_wt_2cycles.py -m c2670_clk_ipFF -p /home/external/iitb/nanditha/simulations/c2670_alu -d c2670_alu -t 180 -n 10 --group 10 --clk 100 --std_lib osu018_stdcells_correct_vdd_gnd.sp >/dev/null 2&>1
 ###############################################################
