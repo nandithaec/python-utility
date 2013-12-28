@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-#Example usage: python utility_python_top_level_echo.py --rtl=/home/users/nanditha/Documents/utility/c2670_alu/c2670_clk_ipFF.v --mod=c2670_clk_ipFF --test=/home/users/nanditha/Documents/utility/c2670_alu/test_c2670.v --tb_mod=test_c2670 --clk=100 --run=100us --design=c2670_alu --tech=180 --num=10 --group 10 --path=/home/external/iitb/nanditha/simulations/c2670_alu  --std_lib osu018_stdcells_correct_vdd_gnd.sp  --proc_node 1 --ppn 10 --days 00 --hrs 00 --mins 10 --script python_utility3_yuva_echo_wt_2cycles.py
+#Example usage: python utility_python_top_level_echo.py --rtl=/home/users/nanditha/Documents/utility/c880_alu/c880_clk_ipFF.v --mod=c880_clk_ipFF --test=/home/users/nanditha/Documents/utility/c880_alu/test_c880.v --tb_mod=test_c880 --clk=200 --run=100us --design=c880_alu --tech=180 --num=10 --group 10 --path=/home/external/iitb/nanditha/simulations/c880_alu  --std_lib osu018_stdcells_correct_vdd_gnd.sp  --proc_node 1 --ppn 10 --days 00 --hrs 00 --mins 10 --script python_utility3_yuva_echo_wt_2cycles.py
 
 
 #This script does a synthesis, place and route of the vhd/verilog file using rtl2gds. The pnr verilog file is modified to include fwrite statements to write the FF outputs to a reference file. This verilog file simulated using modelsim and the reference FF output values written to a text file.
