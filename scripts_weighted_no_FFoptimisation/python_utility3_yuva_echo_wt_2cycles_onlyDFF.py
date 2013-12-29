@@ -141,7 +141,7 @@ clk_period = (1.0/float(clk))*(0.000001) #for the MHz
 print "\nclk is ",clk
 print "\nClk_period: ", clk_period
 
-"""
+
 os.system('cat $PBS_NODEFILE > %s/nodes.txt' %path)
 print "PBS NODEFILE contents....written to nodes.txt\n"
 time.sleep(3)
@@ -150,7 +150,7 @@ os.system('python %s/python_ssh_addr_yuva.py -p %s' %(path,path))
 os.system('cat %s/sshmachines.txt' %path)
 print "Check contents of sshmachines.txt file....\n"
 time.sleep(10)
-"""
+
 
 #Uncomment this for future designs. For decoder esxample, decoder folder has already been created on desktop
 #os.system('ssh nanditha@10.107.90.52 mkdir /home/nanditha/simulations/%s' %(design_folder))
