@@ -86,8 +86,14 @@ fw1 = open('run_sim.bash', 'w') ## This is the commands input file for modelsim
 fw1.write('#!/bin/bash\n\n')
 #Remove work directory if it exists
 fw1.write('\\rm -rf ./work\n')
+
+#Run simulation, do not invoke modelsim
+#fw1.write('vsim -c -do simulate_vsim.do >vsim.log\n')
+
 #Run simulation, invoke modelsim
-fw1.write('vsim -c -do simulate_vsim.do >vsim.log\n')
+fw1.write('vsim -do simulate_vsim.do \n')
+
+
 
 fw.close()
 fw1.close()

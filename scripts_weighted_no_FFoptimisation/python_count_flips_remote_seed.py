@@ -213,6 +213,16 @@ fflip.close()
 
 
 
+#Add the details of number of DFFs
+fa=open('/%s/subcktinstances.sp' %path, 'r')
+fb=open('/%s/spice_results/count_flips_summary.csv' %path, 'a+')
+read=fa.readlines()
+filelen=len(read)
+fb.writelines(read[filelen-3])
+fb.writelines(read[filelen-2])
+fb.writelines(read[filelen-1])
+fa.close()
+fb.close()
 
 
 

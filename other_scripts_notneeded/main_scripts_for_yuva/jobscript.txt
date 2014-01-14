@@ -1,0 +1,24 @@
+############################################################### 
+#!/bin/bash 
+#PBS -l nodes=6:ppn=10
+#PBS -l walltime=40:00:00 
+#PBS -q batch 
+#PBS -m bae  
+## Comma separated list of email address and mobile numbers 
+##PBS -M nanditha@ee.iitb.ac.in, 9769834234
+#PBS -r n 
+#PBS -V 
+##PBS -A <Project Name> # Account to be charged/debited 
+export I_MPI_JOB_CONTEXT=$PBS_JOBID
+echo PBS JOB id is $PBS_JOBID 
+echo PBS_NODEFILE is $PBS_NODEFILE 
+echo PBS_QUEUE is $PBS_QUEUE 
+NPROCS=`wc -l < $PBS_NODEFILE` 
+echo NPROCS is $NPROCS 
+cd $PBS_O_WORKDIR 
+###PBS -e /home/external/iitb/nanditha/simulations/c2670_alu/error.txt
+###PBS -o /home/external/iitb/nanditha/simulations/c2670_alu/outfile.txt
+###mpirun –f $PBS_NODEFILE ./hello_world –n $NPROCS 
+###python /home/external/iitb/nanditha/simulations/c2670_alu/python_yuva_commands.py
+python /home/external/iitb/nanditha/simulations/c2670_alu/python_utility3_remote_seed_yuva_echo.py -m c2670_clk -p /home/external/iitb/nanditha/simulations/c2670_alu -d c2670_alu -t 180 -n 10000 --group 1000 --clk 100 --std_lib osu018_stdcells_correct_vdd_gnd.sp
+###############################################################
