@@ -251,15 +251,18 @@ for loop in range(start_loop, (num_of_loops+1)):
 		if (initial_clk_part_abs < end_PWL) : 
 			initial_clk_part = end_PWL/clk_period
 
-		unif=random.uniform(0,arrival_clk_part*clk_period)
-		rand_glitch= (initial_clk_part*clk_period) +  unif  #A random glitch picked
+		
+		#This formula is incorrect if we run the expt with large slack. 
+		#If slack is large, the glitch window gets reduced
+		#unif=random.uniform(0,arrival_clk_part*clk_period)
+		#rand_glitch= (initial_clk_part*clk_period) +  unif  #A random glitch picked
 		
 		#glitch is being inserted at the 5th clk cycle
 		#unif=random.uniform(0,0.85*clk_period) 
 		#rand_glitch= (4.67*clk_period) +  unif #arrival_clk + initial_clk should add up to 4.5+0.15=4.65. 1 period-0.15=0.85
-
-		#unif=random.uniform(0,1.39*clk_period) 
-		#rand_glitch= (0*clk_period) +  unif #arrival_clk + initial_clk should add up to 1.5
+		
+		unif=random.uniform(0,0.95*clk_period) 
+		rand_glitch= (0.55*clk_period) +  unif #arrival_clk + initial_clk should add up to 1.5
 
 		print "\nglitch within clk cycle= ",unif
 		print "\nRandom gate: %d\nRandom drain: %d\nRandom clock cycle:%d\nRandom glitch location:%e\n " %(rand_gate,rand_drain,rand_clk,rand_glitch)
@@ -332,5 +335,4 @@ fb.writelines(read[filelen-2])
 fb.writelines(read[filelen-1])
 fa.close()
 fb.close()
-
 
