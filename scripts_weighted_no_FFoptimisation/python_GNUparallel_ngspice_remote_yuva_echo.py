@@ -66,7 +66,7 @@ start= ((outloop-1)*num_spice) + 1  # ((1-1)*10) +1 =1  , ((2-1)*10) +1 =11
 end = (num_spice)*outloop  #(10*1) = 10, (10*2)=20
 
 
-os.system("seq %d %d| /opt/parallel-20130422/bin/parallel --progress -j +0 --sshloginfile %s/sshmachines.txt 'cd %s/spice_decks_%s; pwd; /home/external/iitb/nanditha/ngspice-25/bin/ngspice %s/spice_decks_%s/deck_{}.sp;pwd;' " % (start,end, path,path,outloop,path,outloop))
+os.system("seq %d %d| /opt/app/parallel-20130422/bin/parallel --progress -j +0 --sshloginfile %s/sshmachines.txt 'cd %s/spice_decks_%s; pwd; /home/external/iitb/nanditha/ngspice-25/bin/ngspice %s/spice_decks_%s/deck_{}.sp;pwd;' " % (start,end, path,path,outloop,path,outloop))
 
 
 #os.system("find %s/%s/spice_decks -name '*.sp' | parallel --progress -j +0 --sshloginfile %s/%s/sshmachines.txt --transfer 'cd %s/%s/spice_decks && ngspice {}'" %(path_fixed,folder,path_fixed,folder,path_fixed,folder))
@@ -142,7 +142,6 @@ print "****Combined all csv files into a single file in the results folder along
 print "Pause..."
 time.sleep(10)
 ########################################################################################################
-
 
 
 
