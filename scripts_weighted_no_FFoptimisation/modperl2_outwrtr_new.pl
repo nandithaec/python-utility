@@ -1,7 +1,9 @@
 #!/usr/bin/perl
-#Example usage: perl modperl2_outwrtr_new.pl -v pnr/op_data/c499_clk_opFF_final.v -m c499_clk_opFF
+#Example usage: perl modperl2_outwrtr_new.pl -v pnr/op_data/decoder_op_ip_final.v -m decoder_op_ip
 
 #Modifications:
+#Outputs of all FFs being written out at +ve clock edge, instead of -ve clk edge. fwrite statements are being changed: Feb 6 2014
+#Square brackets in headers.csv replaced with '_'. - Jan 14 2014
 #Code modified backto write out.. not all inputs of DFFs to modelsim file, but only all the outputs - Oct 21
 #Code modified to write out fwrite statements to the modelsim verilog file for all inputs of all FFs(pos edge) and write out headers of all inputs to the tool_reference_out.txt  - Oct 11 2013
 #RTL and spice headers were being written in Netlstfrmt.pl. Now, they are being written in this script (much better) - Oct 8 2013
@@ -207,11 +209,31 @@ while(<VLOG>)
 	print OPT 'fileout= $fopen("./'.$ref.'/our_reference_out.txt","a+");'."\n";
 	print OPT 'fileout1= $fopen("./'.$ref.'/tool_reference_out.txt","a+");'."\n";
 	print OPT 'end'."\n";
+	print OPT "//**************************************************\n";
 #Writing output of flip flop at negative edge
-	print OPT 'always @(negedge clk)'."\n";
+	#print OPT 'always @(posedge clk)'."\n";
+	#print OPT 'begin'."\n";
+	
+	
+	#print OPT 'end'."\n";
+	print OPT 'always @(posedge clk)'."\n";
 	print OPT 'begin'."\n";
 	
-#Merging the output pins which are not the output pin of any flip flop
+        print OPT 'clk_count=clk_count+1;'."\n";
+		
+	
+	print OPT '$fwrite(fileout,"%d CLOCK CYCLE STARTS :SIGNAL VALUES AT THE RISING EDGE OF THIS CLOCK CYCLE ARE: \n\n",clk_count);'."\n";
+	print OPT "//*************The inputs of the FFs are as follows:********************\n";
+	push @ffipin,@ipin;
+	foreach $i(0 .. $#ffipin) #Inputs of the FFs
+		{
+		  print OPT '$fwrite(fileout,"'.$ffipin[$i].' = %b\n", '.$ffipin[$i].");\n";
+		  print OPT '$fwrite(fileout1,"%b ", '.$ffipin[$i].");\n";
+		}
+	print OPT "//*************The outputs of the FFs are as follows:********************\n";	
+		
+		#Outputs of the FFs
+		#Merging the output pins which are not the output pin of any flip flop
     #$c_pins = join(" ",@ffopin);
     $limit = $#ffopin;	
     foreach $j(0 .. $#opin)
@@ -239,18 +261,8 @@ while(<VLOG>)
 	print OPT '$fwrite(fileout,"\n");'."\n";
 	print OPT '$fwrite(fileout1,"\n");'."\n";
 	print OPT '$fwrite(fileout,"%d CLOCK CYCLE ENDS   :SIGNAL VALUES AT THIS POINT \n\n",clk_count);'."\n";
-	print OPT '$fwrite(fileout,"***********************************************************************************************************\n\n");'."\n";			
-	print OPT 'end'."\n";
-	print OPT 'always @(posedge clk)'."\n";
-	print OPT 'begin'."\n";
-        print OPT 'clk_count=clk_count+1;'."\n";
-	print OPT '$fwrite(fileout,"%d CLOCK CYCLE STARTS :SIGNAL VALUES AT THIS POINT \n\n",clk_count);'."\n";
-	push @ffipin,@ipin;
-	foreach $i(0 .. $#ffipin)
-		{
-		  print OPT '$fwrite(fileout,"'.$ffipin[$i].' = %b\n", '.$ffipin[$i].");\n";
-		  print OPT '$fwrite(fileout1,"%b ", '.$ffipin[$i].");\n";
-		}
+	print OPT '$fwrite(fileout,"***********************************************************************************************************\n\n");'."\n";	
+	
 	print OPT 'end'."\n"; 
 	print OPT $_;
    }
@@ -372,6 +384,9 @@ open(RES,">./spice_results/headers.csv")||die("unable to open file : $!");
 foreach $i(0 .. $#ffopin)
 {
   $new1=$ffopin[$i];
+   $new1=~s/\[/_/g;
+   $new1=~s/\]/_/g;
+   $new1=~s/\//_/g;
   print RES "$new1".",";
 
 }

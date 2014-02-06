@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #Read in a RTL file, do synthesis and placement, route
-#Example usage: python python1_read_RTL_syn_pnr.py -f decoder.vhd -m decoder_behav_pnr -c 900
+#Example usage: python python1_read_RTL_syn_pnr.py -f /home/users/nanditha/Documents/utility/decoder_ip_opFF/decoder_op_ip.vhd -m decoder_op_ip -c 300
 
 #freq added to synthesis part: Nov 19 2013
 

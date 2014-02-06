@@ -2,7 +2,7 @@
 
 #Read in the def file and extract the pnr spice netlist in dspf format, along with the vdd, gnd etc.,using Cadence QRC, instead of using the SoC Encounter generated dspf file (using rcOut)
 
-##Example usage: python python2_run_qrc_spice_extraction.py -m c499_clk_opFF
+##Example usage: python python2_run_qrc_spice_extraction.py -m decoder_op_ip
 
 ##The pnr def.gz file is by default assumed to be in /pnr/op_data folder
 
