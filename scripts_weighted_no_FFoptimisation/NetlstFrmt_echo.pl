@@ -1,5 +1,5 @@
 
-#Example: perl NetlstFrmt_echo.pl -v decoder_op_ip_modelsim.v -s decoder_op_ip_qrc.dspf -l glitch_osu018_stdcells_correct_vdd_gnd.sp -c 300 -t 180 -m decoder_op_ip
+#Example: perl NetlstFrmt_echo.pl -v c432_clk_ipFF_modelsim.v -s c432_clk_ipFF.dspf -l glitch_osu018_stdcells_correct_vdd_gnd.sp -c 300 -t 180 -m c432_clk_ipFF
 
 
 #clk frequency in MHz
@@ -598,8 +598,8 @@ print "v(X$module.$to_ff[$i]:Q)\n";
 foreach $i(0 .. $#to_ff)
  {
 
- #$measure_at_falling_edge.="meas tran ff_op_$i MAX v(X$module.$to_ff[$i]\_q\_reg:Q) from=$fall_from"."s"." to=$fall_to"."s\n";
- $measure_at_falling_edge.="meas tran ff_op_$i MAX v(X$module.$to_ff[$i]:Q) from=$fall_from"."s"." to=$fall_to"."s\n";
+ $measure_at_falling_edge.="meas tran ff_op_$i MAX v(X$module.$to_ff[$i]\_q\_reg:Q) from=$fall_from"."s"." to=$fall_to"."s\n";
+ #$measure_at_falling_edge.="meas tran ff_op_$i MAX v(X$module.$to_ff[$i]:Q) from=$fall_from"."s"." to=$fall_to"."s\n";
  }
 
 #Adding the control part

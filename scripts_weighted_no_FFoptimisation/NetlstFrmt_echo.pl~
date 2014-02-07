@@ -1,8 +1,14 @@
 
-#Example: perl NetlstFrmt_echo.pl -v c499_clk_opFF_modelsim.v -s c499_clk_opFF.dspf -l glitch_osu018_stdcells_correct_vdd_gnd.sp -c 100 -t 180 -m c499_clk_opFF
+#Example: perl NetlstFrmt_echo.pl -v decoder_op_ip_modelsim.v -s decoder_op_ip_qrc.dspf -l glitch_osu018_stdcells_correct_vdd_gnd.sp -c 300 -t 180 -m decoder_op_ip
+
+
 #clk frequency in MHz
 
 #Modifications:
+#Added param for change_time_rise. Modified PWL statement to initialise all FFs to previous cycle value to begin with and then change the input of the FF to the current cycle reference input in Verilog sim - Feb 7 2014
+
+#This is for the no FF optimisation case/ extra _q_reg is added back. And simulation run for 2.5 cycles instead of 6.5 cycles. - Nov 19 2013
+
 #Initialising output of all FFs to initial value-..commented out
 #The meas statement is reverted back to original one.. where the extra _q_reg is not appended. It was appended for the c499 (without balance reg option) - oct 22
 #If there are several modules, and dffs inside these, the code was printing out all DFFs. Modified this to search for DFF outputs only within the top  module - Oct 21 2013
@@ -367,9 +373,14 @@ print SIM "\n\n******Simulation parameters*****"."\n\n";
 #including the user defined clock information
 
 $clk_period = (1/$clk)*(0.000001);
-$sim_time=6.5*$clk_period;#defining simulation time
-$fall_from=(6*$clk_period); #defining fall time window
-$fall_to= 6.2*$clk_period;
+
+#$sim_time=6.5*$clk_period;#defining simulation time
+#$fall_from=(6*$clk_period); #defining fall time window
+#$fall_to= 6.2*$clk_period;
+
+$sim_time=2.5*$clk_period;#defining simulation time
+$fall_from=(2*$clk_period); #defining fall time window
+$fall_to= 2.2*$clk_period;
 
 #$half_clk_period=$clk_period/2;
 #$double_clk_period=2*$clk_period;
@@ -395,23 +406,26 @@ print SIM "+ fall_time= 50p\n\n";
 
 
 print SIM ".param change_time='(half_clk_period/3)'\n";
-
-print SIM ".param k_minus_4='(half_clk_period/3)'\n";
-
-print SIM ".param k_minus_3='k_minus_4 + clk_period'\n";
-print SIM ".param k_minus_3rise='k_minus_3 + 100ps'\n";
-
-print SIM ".param k_minus_2='k_minus_3 + clk_period'\n";
-print SIM ".param k_minus_2rise='k_minus_2 + 100ps'\n";
-
-print SIM ".param k_minus_1='k_minus_2 + clk_period'\n";
-print SIM ".param k_minus_1rise='k_minus_1 + 100ps'\n";
-
-print SIM ".param k_cycle = 'k_minus_1 + clk_period'\n";
-print SIM ".param k_cycle_rise = 'k_cycle + 100ps'\n";
-
-print SIM ".param k_plus1= '(k_cycle + half_clk_period )'\n";
+print SIM ".param change_time_rise= '(change_time + 100ps)'\n";
+print SIM ".param k_plus1= '(half_clk_period + change_time)'\n";
 print SIM ".param k_plus1_rise = '(k_plus1 + 100ps)'\n";
+#print SIM "+end_PWL_rise = \'(end_PWL + 100ps)\'\n\n";
+
+#print SIM ".param k_minus_4='(half_clk_period/3)'\n";
+
+#print SIM ".param k_minus_3='k_minus_4 + clk_period'\n";
+#print SIM ".param k_minus_3rise='k_minus_3 + 100ps'\n";
+
+#print SIM ".param k_minus_2='k_minus_3 + clk_period'\n";
+#print SIM ".param k_minus_2rise='k_minus_2 + 100ps'\n";
+
+#print SIM ".param k_minus_1='k_minus_2 + clk_period'\n";
+#print SIM ".param k_minus_1rise='k_minus_1 + 100ps'\n";
+
+#print SIM ".param k_cycle = 'k_minus_1 + clk_period'\n";
+#print SIM ".param k_cycle_rise = 'k_cycle + 100ps'\n";
+
+#print SIM ".param k_plus1= '(k_cycle + half_clk_period )'\n";
 
 print SIM ".param current_magnitude = $idd";
 print SIM "mA\n";
@@ -497,8 +511,14 @@ foreach $i(0 .. $#ipins)
 #Old PWL statement
 ##     print SIM "\n\nV$i $new 0 PWL( 0 ##$new\_reference_1## k_plus1 ##$new\_reference_1## k_plus1_rise ##$new\_reference_2## $sim_time ##$new\_reference_2##)\n";
 
+#Simulating 6.5 cycles
 
-     print SIM "\n\nV$i $new 0 PWL( 0 ##$new\_reference_minus4##  k_minus_3 ##$new\_reference_minus4## k_minus_3rise ##$new\_reference_minus3## k_minus_2 ##$new\_reference_minus3## k_minus_2rise ##$new\_reference_minus2## k_minus_1 ##$new\_reference_minus2## k_minus_1rise ##$new\_reference_minus1## k_cycle ##$new\_reference_minus1## k_cycle_rise ##$new\_reference_1## k_plus1 ##$new\_reference_1## k_plus1_rise ##$new\_reference_2## $sim_time ##$new\_reference_2##)\n";
+    # print SIM "\n\nV$i $new 0 PWL( 0 ##$new\_reference_minus4##  k_minus_3 ##$new\_reference_minus4## k_minus_3rise ##$new\_reference_minus3## k_minus_2 ##$new\_reference_minus3## k_minus_2rise ##$new\_reference_minus2## k_minus_1 ##$new\_reference_minus2## k_minus_1rise ##$new\_reference_minus1## k_cycle ##$new\_reference_minus1## k_cycle_rise ##$new\_reference_1## k_plus1 ##$new\_reference_1## k_plus1_rise ##$new\_reference_2## $sim_time ##$new\_reference_2##)\n";
+
+#Simulating 2.5 cycles
+#This will initialise the outputs of all FFs to 0 to begin with and then change the input of the FF to the current cycle reference input in Verilog sim
+ print SIM "\n\nV$i $new 0 PWL( 0 ##$new\_reference_minus1##  change_time ##$new\_reference_minus1## change_time_rise  ##$new\_reference_1## k_plus1 ##$new\_reference_1## k_plus1_rise ##$new\_reference_2## $sim_time ##$new\_reference_2##)\n";
+
    }
 }
 
@@ -578,8 +598,8 @@ print "v(X$module.$to_ff[$i]:Q)\n";
 foreach $i(0 .. $#to_ff)
  {
 
-
-   $measure_at_falling_edge.="meas tran ff_op_$i MAX v(X$module.$to_ff[$i]:Q) from=$fall_from"."s"." to=$fall_to"."s\n";
+ #$measure_at_falling_edge.="meas tran ff_op_$i MAX v(X$module.$to_ff[$i]\_q\_reg:Q) from=$fall_from"."s"." to=$fall_to"."s\n";
+ $measure_at_falling_edge.="meas tran ff_op_$i MAX v(X$module.$to_ff[$i]:Q) from=$fall_from"."s"." to=$fall_to"."s\n";
  }
 
 #Adding the control part
@@ -656,7 +676,6 @@ close(out);
 chomp($sim1=`pwd`);
 $sim1=$sim1."/$sim\n";
 print "\n SPICE FILE written named ".$sim."\n";
-
 
 
 
