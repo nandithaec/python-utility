@@ -1,8 +1,12 @@
 
 #Example: perl NetlstFrmt_echo.pl -v decoder_op_ip_modelsim.v -s decoder_op_ip_qrc.dspf -l glitch_osu018_stdcells_correct_vdd_gnd.sp -c 300 -t 180 -m decoder_op_ip
+
+
 #clk frequency in MHz
 
 #Modifications:
+#Added param for change_time_rise. Modified PWL statement to initialise all FFs to previous cycle value to begin with and then change the input of the FF to the current cycle reference input in Verilog sim - Feb 7 2014
+
 #This is for the no FF optimisation case/ extra _q_reg is added back. And simulation run for 2.5 cycles instead of 6.5 cycles. - Nov 19 2013
 
 #Initialising output of all FFs to initial value-..commented out
@@ -402,7 +406,7 @@ print SIM "+ fall_time= 50p\n\n";
 
 
 print SIM ".param change_time='(half_clk_period/3)'\n";
-
+print SIM ".param change_time_rise= '(change_time + 100ps)'\n";
 print SIM ".param k_plus1= '(half_clk_period + change_time)'\n";
 print SIM ".param k_plus1_rise = '(k_plus1 + 100ps)'\n";
 #print SIM "+end_PWL_rise = \'(end_PWL + 100ps)\'\n\n";
@@ -512,7 +516,8 @@ foreach $i(0 .. $#ipins)
     # print SIM "\n\nV$i $new 0 PWL( 0 ##$new\_reference_minus4##  k_minus_3 ##$new\_reference_minus4## k_minus_3rise ##$new\_reference_minus3## k_minus_2 ##$new\_reference_minus3## k_minus_2rise ##$new\_reference_minus2## k_minus_1 ##$new\_reference_minus2## k_minus_1rise ##$new\_reference_minus1## k_cycle ##$new\_reference_minus1## k_cycle_rise ##$new\_reference_1## k_plus1 ##$new\_reference_1## k_plus1_rise ##$new\_reference_2## $sim_time ##$new\_reference_2##)\n";
 
 #Simulating 2.5 cycles
- print SIM "\n\nV$i $new 0 PWL( 0  ##$new\_reference_1## k_plus1 ##$new\_reference_1## k_plus1_rise ##$new\_reference_2## $sim_time ##$new\_reference_2##)\n";
+#This will initialise the outputs of all FFs to 0 to begin with and then change the input of the FF to the current cycle reference input in Verilog sim
+ print SIM "\n\nV$i $new 0 PWL( 0 ##$new\_reference_minus1##  change_time ##$new\_reference_minus1## change_time_rise  ##$new\_reference_1## k_plus1 ##$new\_reference_1## k_plus1_rise ##$new\_reference_2## $sim_time ##$new\_reference_2##)\n";
 
    }
 }
