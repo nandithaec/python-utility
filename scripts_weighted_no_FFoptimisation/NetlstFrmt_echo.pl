@@ -1,11 +1,12 @@
 
-#Example: perl NetlstFrmt_echo.pl -v c432_clk_ipFF_modelsim.v -s c432_clk_ipFF.dspf -l glitch_osu018_stdcells_correct_vdd_gnd.sp -c 300 -t 180 -m c432_clk_ipFF
+#Example: perl NetlstFrmt_echo.pl -v c432_clk_ipFF_modelsim.v -s c432_clk_ipFF.dspf -l glitch_osu018_stdcells_correct_vdd_gnd.sp -c 200 -t 180 -m c432_clk_ipFF
 
 
 #clk frequency in MHz
 
 #Modifications:
 #Added param for change_time_rise. Modified PWL statement to initialise all FFs to previous cycle value to begin with and then change the input of the FF to the current cycle reference input in Verilog sim - Feb 7 2014
+# extra _q_reg is added back.This is needed for the ISCAS benchmarks and not needed for decoder and multiplier - feb 7 2014: 
 
 #This is for the no FF optimisation case/ extra _q_reg is added back. And simulation run for 2.5 cycles instead of 6.5 cycles. - Nov 19 2013
 
@@ -676,6 +677,5 @@ close(out);
 chomp($sim1=`pwd`);
 $sim1=$sim1."/$sim\n";
 print "\n SPICE FILE written named ".$sim."\n";
-
 
 
