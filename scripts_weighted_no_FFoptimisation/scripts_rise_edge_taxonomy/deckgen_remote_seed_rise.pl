@@ -129,6 +129,7 @@ $done=0;
 $cycle=0;
 $current_cycle="";
 $next_cycle="";
+$next_2_cycle="";
 $minus1_cycle="";
 $minus2_cycle="";
 $minus3_cycle="";
@@ -409,7 +410,7 @@ if(($_=~m/\.ic/))
         }
 
  }
-#Appending to the RTL reference output file, which contains outputs of those clk cycles that were picked by this script randomly
+#Appending to the RTL reference output file, which contains outputs of those clk cycles, that were picked by this script randomly, at the 3rd rising edge of the clk
 #This will be used for the spice vs verilog simulation comparison
 open(IM,">>$folder/$module\_reference_out/RTL.csv");
 print IM "\n";
@@ -432,7 +433,26 @@ foreach $index( $start .. $#temp)
 
 
 
+#Appending to the RTL_2nd_edge reference output file, which contains outputs of those clk cycles, that were picked by this script randomly , at the 2nd rising edge of the clk
+#This will be used for the spice vs verilog simulation comparison
+open(IM,">>$folder/$module\_reference_out/RTL_2nd_edge.csv");
+print IM "\n";
+print IM "$deck_num,$cycle,$glitch_location,$random_gate,$rand_gate,";
+@temp=split (" ",$next_cycle);
+$start=$#temp-$num_opt+1;
+foreach $index( $start .. $#temp)
+  {
+     
+       if ($index == $#temp) 
+	{
+	print IM "$temp[$index]";
+	} 
+	else 
+	{
+	print IM "$temp[$index],";
+	}
 
+  }
 
 
 

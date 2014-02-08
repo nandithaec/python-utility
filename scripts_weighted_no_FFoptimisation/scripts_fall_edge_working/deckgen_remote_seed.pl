@@ -1,7 +1,6 @@
-#Example: perl deckgen_remote_seed.pl -s reference_spice.sp -l glitch_osu018_stdcells_correct_vdd_gnd.sp -r decoder_op_ip_reference_out/tool_reference_out.txt -n 1 -m decoder_op_ip -f /home/users/nanditha/Documents/utility/decoder_ip_opFF -g 3 -d 2 -c 10 -i 4.42061344093991e-09 -o 1 
+#Example: perl deckgen_remote_seed.pl -s reference_spice.sp -l glitch_osu018_stdcells_correct_vdd_gnd.sp -r c499_clk_opFF_reference_out/tool_reference_out.txt -n 1 -m c499_clk_opFF -f /home/users/nanditha/Documents/utility/c499_yuva_new -g 27 -d 2 -c 100 -i 1.42061344093991e-09 -o 1 
 
 #Modifications:
-#Introduced 'next_2_cycle', which will capture the value of the rising edge of the next to next clk cycle. This is in sync with the change in modperl2_outwrtr_new.pl which was modified to write out all outputs at the rising edge instead of -ve edge: Feb 6 2014
 #Code changed to include .ic ref values to all outputs of all FFs- Oct 20 2013
 #Code changed to include .ic ref values for all inputs of all FFs in the spice file- didnt help - Oct 11 2013
 
@@ -33,7 +32,6 @@ NAME
 
 deckgen_remote_seed − Utility to create a simulatable spice deck from the template reference_spice.sp
 
-
 SYNOPSIS
 
 deckgen_remote_seed [input library file]  
@@ -41,7 +39,6 @@ deckgen_remote_seed [input library file]
 DESCRIPTION
 
 deckgen_remote_seed utility takes a spice library as input and creates a glitched induced library where eache subciruit has different version, each version has glitch induced to one of its distinct drain excluding Vdd and gnd.
-deckgen.pl will modify the template spice file to introduce the glitched version of the gate in the spice file. The deckgen will get the 4 random numbers as input: random clk, random glitch instant, random gate and the random drain. It will go to the corresponding clk cycle in the decoder_op_ip_reference_out/tool_reference_out.txt and grab the input values at that clk edge and will insert these values into the reference_spice.sp file, to create, say, deck_1.sp. Again, for the next set of random numbers, the same is repeated, till the max number of decks specified, is reached. For each of the random clk cycles picked, this script will also write out the corresponding output values (which were written on the -ve edge) of the next clock cycle, into the decoder_op_ip_reference_out/RTL.csv file, which will be used as a reference value, during comparison of spice vs verilog simulation.
 
 OPTIONS
 
@@ -267,8 +264,7 @@ while(<SPC>)
          $minus2_cycle =  $minus1_cycle;
          $minus1_cycle =  $current_cycle;
          $current_cycle=$next_cycle;
-         $next_cycle=$next_2_cycle;
-         chomp($next_2_cycle=$_);
+         chomp($next_cycle=$_);
        }
        
     if($count==($cycle+3))
@@ -282,7 +278,6 @@ while(<SPC>)
 #print " next clock cycle input/output condition is $next_cycle \n";
 @cycle1=split(" ",$current_cycle);
 @cycle2=split(" ",$next_cycle);
-
 @cycle_minus1=split(" ",$minus1_cycle);
 @cycle_minus2=split(" ",$minus2_cycle);
 @cycle_minus3=split(" ",$minus3_cycle);
@@ -343,7 +338,7 @@ while(<SPC>)
                 if($pinname eq $temp[$index])
                    {
                       #print "match found $pinname === $temp[$index]\n";
-			#This is for the PWL statements in the spice file
+	
 		      $ref1=$cycle1[$index]*$vdd;
 		      $ref2=$cycle2[$index]*$vdd;
 		      $ref_minus1=$cycle_minus1[$index]*$vdd;
@@ -368,8 +363,6 @@ while(<SPC>)
 
 ##################### Although this part is used, the corresponding .ic statments in the spice file
 ####################have been commented out as initialising the inputs did not work
-
-#This part of the code is not being used
 if(($_=~m/\.ic/))
         {
 	   ($junk1,$temp1,$pinname)=split(" ",$_);
@@ -410,11 +403,10 @@ if(($_=~m/\.ic/))
 
  }
 #Appending to the RTL reference output file, which contains outputs of those clk cycles that were picked by this script randomly
-#This will be used for the spice vs verilog simulation comparison
 open(IM,">>$folder/$module\_reference_out/RTL.csv");
 print IM "\n";
 print IM "$deck_num,$cycle,$glitch_location,$random_gate,$rand_gate,";
-@temp=split (" ",$next_2_cycle);
+@temp=split (" ",$next_cycle);
 $start=$#temp-$num_opt+1;
 foreach $index( $start .. $#temp)
   {
