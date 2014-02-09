@@ -1,5 +1,5 @@
 
-#Example: perl NetlstFrmt_echo.pl -v decoder_op_ip_modelsim.v -s decoder_op_ip_qrc.dspf -l glitch_osu018_stdcells_correct_vdd_gnd.sp -c 300 -t 180 -m decoder_op_ip
+#Example: perl NetlstFrmt_echo.pl -v decoder_op_ip_modelsim.v -s decoder_op_ip.dspf -l glitch_osu018_stdcells_correct_vdd_gnd.sp -c 300 -t 180 -m decoder_op_ip
 
 
 #clk frequency in MHz
@@ -518,6 +518,8 @@ foreach $i(0 .. $#ipins)
 #Simulating 2.5 cycles
 #This will initialise the outputs of all FFs to 0 to begin with and then change the input of the FF to the current cycle reference input in Verilog sim
  print SIM "\n\nV$i $new 0 PWL( 0 ##$new\_reference_minus1##  change_time ##$new\_reference_minus1## change_time_rise  ##$new\_reference_1## k_plus1 ##$new\_reference_1## k_plus1_rise ##$new\_reference_2## $sim_time ##$new\_reference_2##)\n";
+# print SIM "\n\nV$i $new 0 PWL( 0  ##$new\_reference_1## k_plus1 ##$new\_reference_1## k_plus1_rise ##$new\_reference_2## $sim_time ##$new\_reference_2##)\n";
+
 
    }
 }
