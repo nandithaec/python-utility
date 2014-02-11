@@ -3,7 +3,6 @@
 
 #IMPORTANT: It is assumed that we are running parallel ngspice simulations on a remote 48-core cluster at 10.107.105.201. If this is not the case, you will need to modify this script to run it on this machine, by commenting out the scp and ssh commands.
 
-#Calling the python_FF_strike_taxonomy.py and python_gate_strike_taxonomy.py scripts explicitly, since calling it through a function did not run on the yuva cluster: Feb 11 2014
 #Calling the python_taxonomy_gate_FF.py script to tabulate the gate and FF taxonomy and combine the resultant 2 pdf files: Feb 11 2014
 #Backup directories etc created for the 2nd rise edge measurement backup. Other scripts which are being used to measure the 2nd rise edge data are being run from this script: Feb 7 2014
 #This version of the script has the facility of selecting the gate based on the area of the gate. This version of the script uses another script python_weighted_gateselection.py to pick the random gate based on its area: Nov 17 2013

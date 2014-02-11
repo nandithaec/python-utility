@@ -2,6 +2,7 @@
 #Example usage: perl modperl2_outwrtr_new.pl -v pnr/op_data/decoder_op_ip_final.v -m decoder_op_ip
 
 #Modifications:
+#Appended the random_drain to the RTL*.csv header. This is needed to generate decks by just looking at the taxonomy.csv: Feb 11 2014
 #RTL_2nd_edge.csv header file created to store reference outputs at the 2nd rising edge : feb 7 2014
 #Outputs of all FFs being written out at +ve clock edge, instead of -ve clk edge. fwrite statements are being changed: Feb 6 2014
 #Square brackets in headers.csv replaced with '_'. - Jan 14 2014
@@ -308,7 +309,7 @@ foreach $i(0 .. $#ffopin)
 #creating the toplevel csv file - which contains the RTL headers
 #ffopin contains outputs of all DFFs
 open(IM,">./$module\_reference_out/RTL.csv");
-print IM 'deck_num,clk,glitch,gate,subcktlinenum,';
+print IM 'deck_num,clk,glitch,gate,subcktlinenum,drain,';
 foreach $i(0 .. $#ffopin)
 
  {
@@ -339,7 +340,7 @@ close(IM);
 #creating the toplevel csv file - which contains the RTL headers
 #ffopin contains outputs of all DFFs
 open(IM3,">./$module\_reference_out/RTL_2nd_edge.csv");
-print IM3 'deck_num,clk,glitch,gate,subcktlinenum,';
+print IM3 'deck_num,clk,glitch,gate,subcktlinenum,drain,';
 foreach $i(0 .. $#ffopin)
 
  {
@@ -370,7 +371,7 @@ close(IM3);
 
 #Backup header file required later
 open(IM2,">./$module\_reference_out/RTL_backup.csv");
-print IM2 'deck_num,clk,glitch,gate,subcktlinenum,';
+print IM2 'deck_num,clk,glitch,gate,subcktlinenum,drain,';
 foreach $i(0 .. $#ffopin)
  {
    $new1=$ffopin[$i];

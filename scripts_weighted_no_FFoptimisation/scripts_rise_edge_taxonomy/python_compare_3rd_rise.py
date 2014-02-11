@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+#Changed the #column iteration number from range(5) to range(6), since the drain number is also added: Feb 11 2014
+
 #Compare results of spice and RTL, creates difference files and validation files for each run. Compare the 3rd rising edge in Verilog with the 2nd falling edge in spice (just an optimisation in spice, to save simulating another extra half cycle)
 
 #Example usage: python python_compare_3rd_rise.py -m decoder_op_ip -f /home/external/iitb/nanditha/simulations/decoder_ip_opFF_rise -n 10 -t 180 -l 1
@@ -357,7 +359,7 @@ for row in diff_file: #For every row in the diff file. row is a list.
 	#print "\nDeck number is:", deck_number
 
 #column iteration - number of columns. Dont count first 5 columns- since they are deck_num, clk and glitch, gate and subcktlinenum
-	for i in (range(5,num_col)): #len is 11. so loop indexs stops at 10. So, if we want it to loop from 3 to 10, give range(3,11)		
+	for i in (range(6,num_col)): #len is 11. so loop indexs stops at 10. So, if we want it to loop from 3 to 10, give range(3,11)		
 		#k.append(row [i])
 		count_num = count_num + int(row[i])
 		

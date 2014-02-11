@@ -1,6 +1,8 @@
-#Example: perl deckgen_remote_seed.pl -s reference_spice.sp -l glitch_osu018_stdcells_correct_vdd_gnd.sp -r decoder_op_ip_reference_out/tool_reference_out.txt -n 1 -m decoder_op_ip -f /home/users/nanditha/Documents/utility/decoder_ip_opFF -g 3 -d 2 -c 10 -i 4.42061344093991e-09 -o 1 
+#Example: perl deckgen_remote_seed_rise.pl -s reference_spice.sp -l glitch_osu018_stdcells_correct_vdd_gnd.sp -r decoder_op_ip_reference_out/tool_reference_out.txt -n 1 -m decoder_op_ip -f /home/external/iitb/nanditha/simulations/decoder_ip_opFF_rise -g 2 -d 2 -c 23584 -i 4.91e-09 -o 1 
 
 #Modifications:
+#Since I added 'drain' info also, I had to modify "$start=$#temp-$num_opt+1;" to :$start=$#temp-$num_opt;" inorder to print out all the RTL reference output values to the RTL.csv and RTL_2ndedge.csv : Feb 11 2014
+#Appended the $random_drain to the RTL*.csv. This is needed to generate decks by just looking at the taxonomy.csv: Feb 11 2014
 #Introduced 'next_2_cycle', which will capture the value of the rising edge of the next to next clk cycle. This is in sync with the change in modperl2_outwrtr_new.pl which was modified to write out all outputs at the rising edge instead of -ve edge: Feb 6 2014
 #Code changed to include .ic ref values to all outputs of all FFs- Oct 20 2013
 #Code changed to include .ic ref values for all inputs of all FFs in the spice file- didnt help - Oct 11 2013
@@ -414,9 +416,10 @@ if(($_=~m/\.ic/))
 #This will be used for the spice vs verilog simulation comparison
 open(IM,">>$folder/$module\_reference_out/RTL.csv");
 print IM "\n";
-print IM "$deck_num,$cycle,$glitch_location,$random_gate,$rand_gate,";
+print IM "$deck_num,$cycle,$glitch_location,$random_gate,$rand_gate,$random_drain";
 @temp=split (" ",$next_2_cycle);
-$start=$#temp-$num_opt+1;
+#$start=$#temp-$num_opt+1;
+$start=$#temp-$num_opt;
 foreach $index( $start .. $#temp)
   {
      
@@ -437,9 +440,10 @@ foreach $index( $start .. $#temp)
 #This will be used for the spice vs verilog simulation comparison
 open(IM,">>$folder/$module\_reference_out/RTL_2nd_edge.csv");
 print IM "\n";
-print IM "$deck_num,$cycle,$glitch_location,$random_gate,$rand_gate,";
+print IM "$deck_num,$cycle,$glitch_location,$random_gate,$rand_gate,$random_drain";
 @temp=split (" ",$next_cycle);
-$start=$#temp-$num_opt+1;
+#$start=$#temp-$num_opt+1;
+$start=$#temp-$num_opt;
 foreach $index( $start .. $#temp)
   {
      

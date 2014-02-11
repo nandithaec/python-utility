@@ -1,7 +1,10 @@
 #!/usr/bin/env python
 
 #Compare results of spice and RTL
+
+#Changed the column iteration number for header from range(5) to range(6), since the drain number is also added: Feb 11 2014
 #This script will count flips on the 2nd rising edge: Feb 7 2014
+
 #Example usage: python python_count_flips_2nd_3rd_rise.py -f /home/external/iitb/nanditha/simulations/decoder_ip_opFF_rise  -n 10 --group 10 -s 2594275917096658334
 
 import optparse
@@ -128,13 +131,13 @@ k=[]
 k2=[]
 k3=[]
 
-#Append header - start from 5- since we are omitting first 5 columns which have deck_num,clk,glitch,gate and subcktlinenum info
+#Append header - start from 6- since we are omitting first 6 columns which have deck_num,clk,glitch,gate and subcktlinenum info,drain
 #This is for the final summary file
-for i in range(5,len(diff_headers)):
+for i in range(6,len(diff_headers)):
 	k.append(diff_headers[i])
 	#print "\nk in headers:",k
 
-for i in range(5,len(diff_headers_rise)):
+for i in range(6,len(diff_headers_rise)):
 	k.append(diff_headers_rise[i])
 
 k.append('flip_count')
@@ -142,7 +145,7 @@ flip.append(k)
 #print "flip header is\n:", flip
 
 #Header for the 2nd edge file
-for i in range(5,len(diff_headers_rise)):
+for i in range(6,len(diff_headers_rise)):
 	k2.append(diff_headers_rise[i])
 
 k2.append('flip_count_2nd_edge')
@@ -150,7 +153,7 @@ flip2.append(k2)
 
 
 #Header for the 3rd edge file
-for i in range(5,len(diff_headers)):
+for i in range(6,len(diff_headers)):
 	k3.append(diff_headers[i])
 
 k3.append('flip_count_3rd_edge')
@@ -179,10 +182,10 @@ for row in diff_file: #For every row in the diff file. There will be as many row
 	count_num=0
 	
 	row_rise= diff_file_rise.next() #get the next row in the diff_file_rise
-#column iteration - number of columns. Dont count first 5 columns- since they are deck_num, clk, glitch, gate and subcktlinenum
+#column iteration - number of columns. Dont count first 6 columns- since they are deck_num, clk, glitch, gate and subcktlinenum,drain
 
 	#First append all the diff elements of 3rd rise edge (2nd fall) in one row
-	for i in (range(5,num_col)): #python will stop looping at (num_col - 1)
+	for i in (range(6,num_col)): #python will stop looping at (num_col - 1)
 
 		print "\nRow in diff file is:", row
 		print "Row is:", row[i]  #Each value which is a string
@@ -195,7 +198,7 @@ for row in diff_file: #For every row in the diff file. There will be as many row
 	flip3.append(k3)
 	
 	#Next append all the diff_rise (2nd edge rise) elements in the same row
-	for j in (range(5,num_col_rise)): #python will stop looping at (num_col - 1)
+	for j in (range(6,num_col_rise)): #python will stop looping at (num_col - 1)
 
 		print "\nRow in diff_rise file is:", row_rise
 		#print "Row in diff_rise file is:", row_rise

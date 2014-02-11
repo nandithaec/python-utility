@@ -30,13 +30,13 @@ if (os.path.isdir('%s' %path)):
 	#print "Inside if"		
 	input1 = PdfFileReader(file("%s/taxonomy_report_gates_%s.pdf" %(path,design), "rb"))
 	# print how many pages input1 has:
-	print "\n%s/taxonomy_report_gates_%s.pdf has %s pages." % (path,design,input1.getNumPages())
+	print "%s/taxonomy_report_gates_%s.pdf has %s pages." % (path,design,input1.getNumPages())
 	# add page 1 from input1 to output document, unchanged. Each pdf has only one page
 	output.addPage(input1.getPage(0))
 
 	input2 = PdfFileReader(file("%s/taxonomy_report_FFs_%s.pdf" %(path,design), "rb"))
 	# print how many pages input1 has:
-	print "\n%s/taxonomy_report_FFs_%s.pdf has %s pages." % (path,design,input1.getNumPages())
+	print "%s/taxonomy_report_FFs_%s.pdf has %s pages." % (path,design,input1.getNumPages())
 	# add page 1 from input1 to output document, unchanged. Each pdf has only one page
 	output.addPage(input2.getPage(0))
 
