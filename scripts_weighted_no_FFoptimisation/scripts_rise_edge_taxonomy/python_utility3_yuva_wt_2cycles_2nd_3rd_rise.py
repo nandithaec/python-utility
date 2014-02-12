@@ -3,6 +3,7 @@
 
 #IMPORTANT: It is assumed that we are running parallel ngspice simulations on a remote 48-core cluster at 10.107.105.201. If this is not the case, you will need to modify this script to run it on this machine, by commenting out the scp and ssh commands.
 
+#Backup directories renamed to 'backup_spice_decks_3rd_edge' and 'backup_spice_decks_2nd_edge': feb 12 2014.
 #Calling the python_FF_strike_taxonomy.py and python_gate_strike_taxonomy.py scripts explicitly, since calling it through a function did not run on the yuva cluster: Feb 11 2014
 #Calling the python_taxonomy_gate_FF.py script to tabulate the gate and FF taxonomy and combine the resultant 2 pdf files: Feb 11 2014
 #Backup directories etc created for the 2nd rise edge measurement backup. Other scripts which are being used to measure the 2nd rise edge data are being run from this script: Feb 7 2014
@@ -118,8 +119,8 @@ if os.path.isfile('%s/spice_results/result_summary_flipcount.csv' %(path)):
 
 #Clear Back up directory
 
-backup_dir = '%s/backup_spice_decks' %(path)
-#test_backup_dir = '%s/test_backup_spice_decks' %(path)
+backup_dir = '%s/backup_spice_decks_3rd_edge' %(path)
+
 
 if os.path.exists(backup_dir):
 	shutil.rmtree(backup_dir)
@@ -130,7 +131,7 @@ if not os.path.exists(backup_dir):
 
 #Clear Back up directory for the rise edge case
 
-backup_dir_rise = '%s/backup_spice_decks_rise' %(path)
+backup_dir_rise = '%s/backup_spice_decks_2nd_edge' %(path)
 
 if os.path.exists(backup_dir_rise):
 	shutil.rmtree(backup_dir_rise)
@@ -364,13 +365,13 @@ for loop in range(start_loop, (num_of_loops+1)):
 ########################################End of loop########################################################
 #For validation of backup spice files
 #Copy the lib sp file and the technology (*.m) file to the backup directory
-shutil.copy('%s/glitch_%s' %(path,std_lib), '%s/backup_spice_decks' %path )
-shutil.copy('%s/tsmc018.m' %path, '%s/backup_spice_decks' %path )
+shutil.copy('%s/glitch_%s' %(path,std_lib), '%s/backup_spice_decks_3rd_edge' %path )
+shutil.copy('%s/tsmc018.m' %path, '%s/backup_spice_decks_3rd_edge' %path )
 
 #For validation of backup spice files
 #Copy the lib sp file and the technology (*.m) file to the backup directory
-shutil.copy('%s/glitch_%s' %(path,std_lib), '%s/backup_spice_decks_rise' %path )
-shutil.copy('%s/tsmc018.m' %path, '%s/backup_spice_decks_rise' %path )
+shutil.copy('%s/glitch_%s' %(path,std_lib), '%s/backup_spice_decks_2nd_edge' %path )
+shutil.copy('%s/tsmc018.m' %path, '%s/backup_spice_decks_2nd_edge' %path )
 
 print "Combining all rtl diff files\n"
 os.system('python  %s/python_count_flips_2nd_3rd_rise.py -f %s  -n %s  --group %s -s %s' %(path,path,num,num_at_a_time,seed))  #To save the seed to results file
