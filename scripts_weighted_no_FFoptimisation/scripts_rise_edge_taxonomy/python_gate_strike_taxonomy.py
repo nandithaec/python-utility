@@ -446,7 +446,8 @@ if (os.path.isdir('%s/spice_results' %(path))):
 	gate_glitch_captured=0
 	gate_glitch_captured_multiple=0
 	gate_no_effect=0
-
+	gate_strange_FF=0
+	gate_strange_FN=0
 	for row in gate_read2:
 	
 		temp_row=[]
@@ -469,31 +470,34 @@ if (os.path.isdir('%s/spice_results' %(path))):
 		#print "int(row[inputFF_2nd_rise[0]])" ,int(row[inputFF_2nd_rise[0]])
 		#print "int(row3[outputFF_3rd_rise[0]])",int(row3[outputFF_3rd_rise[0]])
 
+		FF_at_2nd_rise= int(row[inputFF_2nd_rise[0]]) + int(row[outputFF_2nd_rise[0]])
+		FF_at_3rd_rise= int(row3[inputFF_3rd_rise[0]]) + int(row3[outputFF_3rd_rise[0]])
 
-		if (int(row[inputFF_2nd_rise[0]])==0 and int(row3[outputFF_3rd_rise[0]])==0):
+		if (FF_at_2nd_rise==0 and FF_at_3rd_rise==0):
 			print "case 1"
 			temp_row.append("No effect")
 			gate_no_effect=gate_no_effect+1
-		elif (int(row[inputFF_2nd_rise[0]])==0 and int(row3[outputFF_3rd_rise[0]])>=1):
+		elif (FF_at_2nd_rise==0 and FF_at_3rd_rise>=1):
 			#row.append("Glitched and captured at FF(s)")
 			print "case 2"
 			gate_glitch_captured=gate_glitch_captured+1
-			if (int(row3[outputFF_3rd_rise[0]])>1): #Calculating multiple flips
+			if (FF_at_3rd_rise>1): #Calculating multiple flips
 				temp_row.append("Glitched and captured at multiple FFs")
 				gate_glitch_captured_multiple=gate_glitch_captured_multiple+1
 
-			elif(int(row3[outputFF_3rd_rise[0]])==1):
+			elif(FF_at_3rd_rise==1):
 				temp_row.append("Glitched and captured at a single FF")
 		
 		#If a strike happens on a gate, an input FF cannot flip!!
-		elif (int(row[inputFF_2nd_rise[0]])>=1 and int(row3[outputFF_3rd_rise[0]])==0):
+		elif (FF_at_2nd_rise>=1 and FF_at_3rd_rise==0):
 			print "case 3"
 			temp_row.append("Strange!")
+			gate_strange_FN=gate_strange_FN+1
 
-		elif (int(row[inputFF_2nd_rise[0]])>=1 and int(row3[outputFF_3rd_rise[0]])>=1):
+		elif (FF_at_2nd_rise>=1 and FF_at_3rd_rise>=1):
 			print "case 4"
 			temp_row.append("Strange!")
-
+			gate_strange_FF=gate_strange_FF+1
 		#print "temp_row final:", temp_row
 
 		gates_list_final.append(temp_row) #Append this to the list.. At the end of for loop, it would be a list of lists
@@ -513,6 +517,9 @@ if (os.path.isdir('%s/spice_results' %(path))):
 	prob_gate_strike=(float(gate_csv_rows)/float(total_csv_rows))
 	prob_gate_no_effect=(float(gate_no_effect)/float(gate_csv_rows))
 	prob_gate_glitch_captured=(float(gate_glitch_captured)/float(gate_csv_rows))
+	prob_gate_FN=(float(gate_strange_FN)/float(gate_csv_rows))
+	prob_gate_FF=(float(gate_strange_FF)/float(gate_csv_rows))
+
 	prob_gate_atleast_1flip= float(gate_atleast_1_flip)/float(gate_csv_rows)
 	if (gate_atleast_1_flip >1) :
 		prob_gate_multiple_conditional= float(gate_glitch_captured_multiple)/float(gate_atleast_1_flip)
@@ -557,13 +564,14 @@ if (os.path.isdir('%s/spice_results' %(path))):
 	fout.write ("\nProbability of atleast one flip is: %f"  %prob_gate_atleast_1flip)
 	fout.write ("\nConditional probability of multiple captured flips given atleast one flip, due to gate strike: %f" %prob_gate_multiple_conditional)
 	fout.write ("\n**********************************Taxonomy***************************************\n")
-	fout.write ("\nNumber of no effect due to gate strike is: %d" %gate_no_effect)
-	fout.write ("\nNumber of glitch propagation and capture: due to gate strike is: %d" %gate_glitch_captured)
+	fout.write ("\nNumber of NN(no effect due to gate strike) is: %d" %gate_no_effect)
+	fout.write ("\nNumber of NF(glitch propagation and capture) due to gate strike is: %d" %gate_glitch_captured)
 	fout.write ("\nNumber of Multiple captured flips amongst the captured flips: %d" %gate_glitch_captured_multiple)
-	fout.write ("\nProbability of no effect due to gate strike is: %f" %prob_gate_no_effect)
-	fout.write ("\nPG: Probability of progpagated and captured flips due to gate strike (glitch) is: %f" %prob_gate_glitch_captured)
-	fout.write ("\nConditional Probability of captured flips given PG : %f" %prob_gate_glitch_captured_multiple)
-
+	fout.write ("\nProbability of NN(no effect due to gate strike) is: %f" %prob_gate_no_effect)
+	fout.write ("\nProbability of NF(propagated and captured flips due to gate strike (glitch)) is: %f" %prob_gate_glitch_captured)
+	fout.write ("\nP(multiple|NF): Conditional Probability of multiple captured flips given NF : %f" %prob_gate_glitch_captured_multiple)
+	fout.write ("\nProbability of FN(flip in 2nd cycle, no flip in 3rd cycle), due to gate strike is: %f" %prob_gate_FN)
+	fout.write ("\nProbability of FF(flip in 2nd cycle and flip in 3rd cycle), due to gate strike is: %f" %prob_gate_FF)
 	fout.close()
 
 	###########################Write out the results into a table in a pdf############################
@@ -598,9 +606,11 @@ if (os.path.isdir('%s/spice_results' %(path))):
 	       ['Gate strike', prob_gate_strike],
 		#['Atleast one flip',prob_gate_atleast_1flip],
 		#['Conditional prob of multiple flips',prob_gate_multiple_conditional],
-	       ['No impact', prob_gate_no_effect],
-	       ['GP: Glitch- Propagated and captured', prob_gate_glitch_captured],
-	       ['P(multiple flips at output | GP)', prob_gate_glitch_captured_multiple]]
+	       ['NN (No impact)', prob_gate_no_effect],
+	       ['NF(Glitch- Propagated and captured)', prob_gate_glitch_captured],
+	       ['P(multiple flips at output | NF)', prob_gate_glitch_captured_multiple],
+		['FN (flip in 2nd cycle, no flip in 3rd cycle)', prob_gate_FN],
+		 ['FF (cascaded flip)', prob_gate_FF]]
 	t=Table(data_gate)
 	t.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,-1),colors.white),
 			       ('TEXTCOLOR',(0,0),(1,0),colors.blue),  #(columns,rows) or (0,0,(-1,-4)

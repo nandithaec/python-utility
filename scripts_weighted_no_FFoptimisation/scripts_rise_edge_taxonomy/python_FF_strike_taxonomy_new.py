@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 #Modification summary:
-#Changed the cases and classification. At 2nd edge, any FF flip either input or output is considered as the same. Similarly for the 3rd edge. : feb 12 2014
 #Changed the column iteration number for header from range(5) to range(6), since the drain number is also added: Feb 11 2014
 
 
@@ -429,15 +428,15 @@ if (os.path.isdir('%s/spice_results' %(path))):
 	fout.write ("\nProbability of a FF strike amongst total cases is: %f" %prob_FF_strike)
 	fout.write ("\nProbability of atleast one flip is: %f" %prob_FF_atleast_1flip)
 	fout.write ("\nProbability of multiple flips given atleast one flip is: %f" %prob_FF_multiple_conditional)
-	fout.write ("\nProbability of NN (no effect due to strike on FF) is: %f" %prob_FF_no_effect)
-	fout.write ("\nProbability of NF (captured flips due to strike on FF (glitch)) is: %f" %prob_FF_glitch_captured)
-	fout.write ("\nProbability of FF (cascaded flips due to strike on FF) is: %f" %prob_FF_cascaded_flip)
-	fout.write ("\nProbability of FN (flips due to strike on FF that got masked at output) is: %f" %prob_FF_flip_masked)
+	fout.write ("\nProbability of no effect due to strike on FF is: %f" %prob_FF_no_effect)
+	fout.write ("\nProbability of captured flips due to strike on FF (glitch) is: %f" %prob_FF_glitch_captured)
+	fout.write ("\nProbability of cascaded flips due to strike on FF is: %f" %prob_FF_cascaded_flip)
+	fout.write ("\nProbability of flips due to strike on FF that got masked at output is: %f" %prob_FF_flip_masked)
 	#fout.write ("\nProbability of flips due to direct strike on output FF that got masked at output is: %f" %prob_FF_output_glitch)
 	fout.write ("\n************************MULTIPLE FLIPS*************************************\n")
 
-	fout.write ("\nP(Multiple|NF): Conditional probability of multiple captured flips given atleast one flip, due to strike on FF is: %f" %prob_FF_glitch_captured_multiple)
-	fout.write ("\nP(Multiple|FF): Conditional probability of multiple cascaded flips given atleast one flip, due to strike on FF is: %f" %prob_FF_cascaded_flip_multiple)
+	fout.write ("\nConditional probability of multiple captured flips given atleast one flip, due to strike on FF is: %f" %prob_FF_glitch_captured_multiple)
+	fout.write ("\nConditional probability of multiple cascaded flips given atleast one flip, due to strike on FF is: %f" %prob_FF_cascaded_flip_multiple)
 	fout.close()
 
 
@@ -471,12 +470,12 @@ if (os.path.isdir('%s/spice_results' %(path))):
 	       ['FF strike', prob_FF_strike],
 		#['Atleast 1 flip',prob_FF_atleast_1flip],
 		#['Conditional prob of multiple flips',prob_FF_multiple_conditional],
-	       [' NN(No effect)', prob_FF_no_effect],
-	       ['NF(Glitch- Propagated and captured)', prob_FF_glitch_captured],
-		['P(multiple flips at output | NF)', prob_FF_glitch_captured_multiple],
-	       ['FF(Cascaded flips)', prob_FF_cascaded_flip],
-		 ['P(multiple flips at output | FF)', prob_FF_cascaded_flip_multiple],
-		 ['FN(Flip- Masked)',prob_FF_flip_masked]]
+	       ['No effect', prob_FF_no_effect],
+	       ['GP: Glitch- Propagated and captured', prob_FF_glitch_captured],
+		['P(multiple flips at output | GP)', prob_FF_glitch_captured_multiple],
+	       ['CF: Cascaded flips', prob_FF_cascaded_flip],
+		 ['P(multiple flips at output | CF)', prob_FF_cascaded_flip_multiple],
+		 ['Flip- Masked',prob_FF_flip_masked]]
 		#['Glitch on output(direct strike)',prob_FF_output_glitch]]
 	t1=Table(data_FF)
 	t1.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,-1),colors.white),

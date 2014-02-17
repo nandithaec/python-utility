@@ -1,12 +1,20 @@
 #This script just combines 2 pdfs
 
-#Example usage: python python_combine_pdfs.py -p /home/nanditha/Documents/utility/design_cases_taxonomy/decoder/low_slack/spice_results -m decoder_op_ip
+#Example usage: python python_combine_pdfs.py -p /home/external/iitb/nanditha/simulations/decoder_ip_opFF_rise/spice_results -m decoder_op_ip
 
+#Path to pypdf on param yuva is added, uisng import sys and sys.append: Feb 12 2014
 import optparse,os
 
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer
 from reportlab.lib.pagesizes import letter
 from optparse import OptionParser
+
+#The below lines related to 'sys' are to find the pyPdf module on the Param yuva cluster. 
+#Ideally, if we run it on our systems, the below line should be  "from pyPdf import PdfFileWriter, PdfFileReader"
+
+import sys
+sys.path.append('/opt/app/Pypdf-1.13/lib/python2.6/site-packages/pyPdf')
+from pdf import PdfFileWriter, PdfFileReader
 
 parser = OptionParser('This script just combines 2 pdfs \nAuthor:Nanditha Rao(nanditha@ee.iitb.ac.in)\n')
 
@@ -22,7 +30,7 @@ design=options.module
 doc = SimpleDocTemplate("%s/taxonomy_report_all_%s.pdf" %(path,design), pagesize=letter)
 
 #####################Merge the gate and FF pdfs into one final pdf##################
-from pyPdf import PdfFileWriter, PdfFileReader
+
 
 output = PdfFileWriter()
 

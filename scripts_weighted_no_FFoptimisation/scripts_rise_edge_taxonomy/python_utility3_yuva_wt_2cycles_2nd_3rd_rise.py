@@ -397,5 +397,11 @@ print "\nDoing the taxonomy for FFs\n"
 
 os.system('python  %s/python_FF_strike_taxonomy.py  -p %s -m %s' %(path,path,module)) 
 
+print "\nCombining the pdf reports\n"
+os.system('python %s/python_combine_pdfs.py -p %s/spice_results -m %s' %(path,path,module))
+
+
+
+
 
 
