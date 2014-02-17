@@ -1,12 +1,10 @@
 
-#Example: perl NetlstFrmt_echo_rise.pl -v c432_clk_ipFF_modelsim.v -s c432_clk_ipFF.dspf -l glitch_osu018_stdcells_correct_vdd_gnd.sp -c 200 -t 180 -m c432_clk_ipFF
+#Example: perl NetlstFrmt_echo.pl -v decoder_op_ip_modelsim.v -s decoder_op_ip.dspf -l glitch_osu018_stdcells_correct_vdd_gnd.sp -c 300 -t 180 -m decoder_op_ip
 
 
 #clk frequency in MHz
 
 #Modifications:
-#Spice output value measurement was being done from 2nd clk cycle to 2nd clk cycle +(0.2*clk_period). This might be too long a duration to measure the value. Hence value is now being measured on (2nd rising edge + 150ps) and   (2nd falling edge + 150ps).  : Feb 17 2014
-
 # Added meas and echo statements,added rise_edge parameters for measuring Flip Flop output at 2nd rising edge. Renamed ff_op_ to ff_op__fall. : Feb 7 2014
 
 #Added param for change_time_rise. Modified PWL statement to initialise all FFs to previous cycle value to begin with and then change the input of the FF to the current cycle reference input in Verilog sim - Feb 7 2014
@@ -384,10 +382,10 @@ $clk_period = (1/$clk)*(0.000001);
 
 $sim_time=2.5*$clk_period;#defining simulation time
 $fall_from=(2*$clk_period); #defining fall time window
-$fall_to= ($fall_from + 150e-12);
+$fall_to= 2.2*$clk_period;
 
 $rise_from_2nd=(1.5*$clk_period); #defining fall time window
-$rise_to_2nd= ($rise_from_2nd + 150e-12);
+$rise_to_2nd= 1.6*$clk_period;
 
 #$half_clk_period=$clk_period/2;
 #$double_clk_period=2*$clk_period;
@@ -606,11 +604,8 @@ print "v(X$module.$to_ff[$i]:Q)\n";
 foreach $i(0 .. $#to_ff)
  {
 
-
-#This will need to be commented for non-ISCAS benchmark circuits
- $measure_at_falling_edge.="meas tran ff_op_fall_$i MAX v(X$module.$to_ff[$i]\_q\_reg:Q) from=$fall_from"."s"." to=$fall_to"."s\n";
- #This will need to be enabled for non-ISCAS benchmark circuits
- #$measure_at_falling_edge.="meas tran ff_op_fall_$i MAX v(X$module.$to_ff[$i]:Q) from=$fall_from"."s"." to=$fall_to"."s\n";
+ #$measure_at_falling_edge.="meas tran ff_op_$i MAX v(X$module.$to_ff[$i]\_q\_reg:Q) from=$fall_from"."s"." to=$fall_to"."s\n";
+ $measure_at_falling_edge.="meas tran ff_op_fall_$i MAX v(X$module.$to_ff[$i]:Q) from=$fall_from"."s"." to=$fall_to"."s\n";
  }
 
 
@@ -618,11 +613,8 @@ foreach $i(0 .. $#to_ff)
 foreach $i(0 .. $#to_ff)
  {
 
-#This will need to be commented for non-ISCAS benchmark circuits
- $measure_at_rising_edge.="meas tran ff_op_rise_$i MAX v(X$module.$to_ff[$i]\_q\_reg:Q) from=$rise_from_2nd"."s"." to=$rise_to_2nd"."s\n";
-
- #This will need to be enabled for non-ISCAS benchmark circuits
-# $measure_at_rising_edge.="meas tran ff_op_rise_$i MAX v(X$module.$to_ff[$i]:Q) from=$rise_from_2nd"."s"." to=$rise_to_2nd"."s\n";
+ #$measure_at_falling_edge.="meas tran ff_op_$i MAX v(X$module.$to_ff[$i]\_q\_reg:Q) from=$fall_from"."s"." to=$fall_to"."s\n";
+ $measure_at_rising_edge.="meas tran ff_op_rise_$i MAX v(X$module.$to_ff[$i]:Q) from=$rise_from_2nd"."s"." to=$rise_to_2nd"."s\n";
  }
  
  
