@@ -280,7 +280,7 @@ for s in range(len(headers_diff)):
 	#pattern= re.compile('deck_num |clk |glitch')
 	#if (pattern.match(headers_diff[s])): 
 	#	print "Match found\n"
-	if ((re.match(headers_diff[s], 'deck_num') == None) and (re.match(headers_diff[s], 'clk') == None) and (re.match(headers_diff[s], 'glitch') == None)and (re.match(headers_diff[s], 'gate') == None)and (re.match(headers_diff[s], 'subcktlinenum') == None) and (re.match(headers_diff[s], 'drain') == None)):
+	if ((re.match(headers_diff[s], 'deck_num') == None) and (re.match(headers_diff[s], 'clk') == None) and (re.match(headers_diff[s], 'glitch') == None)and (re.match(headers_diff[s], 'gate') == None)and (re.match(headers_diff[s], 'subcktlinenum') == None)):
 		#print "\n\nDiff Header: %s \nspice column: %s\n" %(headers_diff[s],column_diff[headers_diff[s]])
 		k1=[]
 		k1.append(headers_diff[s]) #Append header

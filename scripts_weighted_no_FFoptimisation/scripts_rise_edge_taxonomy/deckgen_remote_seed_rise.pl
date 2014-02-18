@@ -1,4 +1,4 @@
-#Example: perl deckgen_remote_seed_rise.pl -s reference_spice.sp -l glitch_osu018_stdcells_correct_vdd_gnd.sp -r decoder_op_ip_reference_out/tool_reference_out.txt -n 1 -m decoder_op_ip -f /home/external/iitb/nanditha/simulations/decoder_ip_opFF_rise -g 4 -d 2 -c 23584 -i 4.91e-09 -o 1 
+#Example: perl deckgen_remote_seed_rise.pl -s reference_spice.sp -l glitch_osu018_stdcells_correct_vdd_gnd.sp -r c499_clk_ipFF_reference_out/tool_reference_out.txt -n 1 -m c499_clk_ipFF -f /home/external/iitb/nanditha/simulations/c499_ecat -g 4 -d 2 -c 2914 -i 4.91e-09 -o 1 
 
 #Modifications:
 #THe previous change was incorrect. Reverting it back to "$start=$#temp-$num_opt+1;". A comman is needed after printing the "$random_drain," info to the RTL.csv files. Hence the drain info that it was writing was incorrect earlier. : Feb 12 2014

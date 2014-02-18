@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-#Example usage: python utility_python_top_level_rise.py --rtl=/home/users/nanditha/Documents/utility/c1355_ecat/c1355_clk_ipFF.v --mod=c1355_clk_ipFF --test=/home/users/nanditha/Documents/utility/c1355_ecat/test_c1355.v --tb_mod=test_c1355 --clk=250 --run=100us --design=c1355_ecat --tech=180 --num=10 --group 10 --path=/home/external/iitb/nanditha/simulations/c1355_ecat  --std_lib osu018_stdcells_correct_vdd_gnd.sp  --proc_node 1 --ppn 5 --days 00 --hrs 00 --mins 10 --script python_utility3_yuva_wt_2cycles_2nd_3rd_rise.py
+#Example usage: python utility_python_top_level_rise.py --rtl=/home/users/nanditha/Documents/utility/c499_ecat/c499_clk_ipFF.v --mod=c499_clk_ipFF --test=/home/users/nanditha/Documents/utility/c499_ecat/test_c499.v --tb_mod=test_c499 --clk=250 --run=100us --design=c499_ecat --tech=180 --num=10 --group 10 --path=/home/external/iitb/nanditha/simulations/c499_ecat  --std_lib osu018_stdcells_correct_vdd_gnd.sp  --proc_node 1 --ppn 10 --days 00 --hrs 00 --mins 10 --script python_utility3_yuva_wt_2cycles_2nd_3rd_rise.py
 
 #This script is modified to call those python/perl scripts which have been modified to capture the outputs of the 2nd rising edge in spice and compare them with the 2nd rising edge in RTL simulation: Feb 7 2014
 #This script does a synthesis, place and route of the vhd/verilog file using rtl2gds. The pnr verilog file is modified to include fwrite statements to write the FF outputs to a reference file. This verilog file simulated using modelsim and the reference FF output values written to a text file.

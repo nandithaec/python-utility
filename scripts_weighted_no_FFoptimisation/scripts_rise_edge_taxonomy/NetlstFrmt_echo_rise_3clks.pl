@@ -1,10 +1,14 @@
 
-#Example: perl NetlstFrmt_echo_rise.pl -v c499_clk_ipFF_modelsim.v -s c499_clk_ipFF.dspf -l glitch_osu018_stdcells_correct_vdd_gnd.sp -c 250 -t 180 -m c499_clk_ipFF
+#Example: perl NetlstFrmt_echo_rise_3clks.pl -v c499_clk_ipFF_modelsim.v -s c499_clk_ipFF.dspf -l glitch_osu018_stdcells_correct_vdd_gnd.sp -c 250 -t 180 -m c499_clk_ipFF
 
 
 #clk frequency in MHz
 
 #Modifications:
+
+# in the case of other benchmark circuits, the output of the input FF at time 0 gets initialised to some random value. (infact, exactly opposite value as that of its input). Hence, the output FF value at the 2nd rising edge turns out to be incorrect. extending the simulation to 3.5 cycles. Feb 18 2014
+	# -- sim time: extend. MEas fall and rise edge modify. PWL, kplus_1, change_time modified
+
 #Spice output value measurement was being done from 2nd clk cycle to 2nd clk cycle +(0.2*clk_period). This might be too long a duration to measure the value. Hence value is now being measured on (2nd rising edge + 150ps) and   (2nd falling edge + 150ps).  : Feb 17 2014
 
 # Added meas and echo statements,added rise_edge parameters for measuring Flip Flop output at 2nd rising edge. Renamed ff_op_ to ff_op__fall. : Feb 7 2014
@@ -382,11 +386,11 @@ $clk_period = (1/$clk)*(0.000001);
 #$fall_from=(6*$clk_period); #defining fall time window
 #$fall_to= 6.2*$clk_period;
 
-$sim_time=2.5*$clk_period;#defining simulation time
-$fall_from=(2*$clk_period); #defining fall time window
+$sim_time=3.5*$clk_period;#defining simulation time
+$fall_from=(3*$clk_period); #defining fall time window
 $fall_to= ($fall_from + 150e-12);
 
-$rise_from_2nd=(1.5*$clk_period); #defining fall time window
+$rise_from_2nd=(2.5*$clk_period); #defining rise time window
 $rise_to_2nd= ($rise_from_2nd + 150e-12);
 
 #$half_clk_period=$clk_period/2;
@@ -412,9 +416,9 @@ print SIM "+ rise_time= 50p\n";
 print SIM "+ fall_time= 50p\n\n";
 
 
-print SIM ".param change_time='(half_clk_period/3)'\n";
+print SIM ".param change_time='(clk_period+ (half_clk_period/3))'\n";
 print SIM ".param change_time_rise= '(change_time + 100ps)'\n";
-print SIM ".param k_plus1= '(half_clk_period + change_time)'\n";
+print SIM ".param k_plus1= '(half_clk_period + clk_period + (half_clk_period/3))'\n";
 print SIM ".param k_plus1_rise = '(k_plus1 + 100ps)'\n";
 #print SIM "+end_PWL_rise = \'(end_PWL + 100ps)\'\n\n";
 

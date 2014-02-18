@@ -16,7 +16,7 @@ import math
 from optparse import OptionParser
 
 
-parser = OptionParser('This script counts the number of flips in each simulation result. It first combines all the <path>/spice_results/spice_rtl_difference_*.csv files into one file <path>/spice_results/spice_rtl_difference_summary.csv. This fils is then read and the number of flips is counted. If there is a flip, a \'1\' is reported for that output, and a \'0\' is reported for a no-flip case. \n\nThis information is written out in a table format into a file at <path>/spice_results/count_flips_summary.csv, in which the each row stands for one simulation, and each column contains the names of the output nodes\n This script reports the cases in which there was single flip, multiple flips, double flip, triple and atleast one flip. It calculates the probability of multiple flips given atleast one flip. So this means that, if there is a single particle strike causing a single glitch, and if it happens to cause a single bit-flip (fault), what is the probability that in such cases, more than one fault is likely to occur. If this probability is large, it indicates that, a single strike is likely to cause multiple faults at a high probability.\nAuthor:Nanditha Rao(nanditha@ee.iitb.ac.in)\n')
+parser = OptionParser('This script counts the number of flips in each simulation result. It first combines all the <path>/spice_results/spice_rtl_difference_*.csv files into one file <path>/spice_results/spice_rtl_difference_summary.csv. This fils is then read and the number of flips is counted. If there is a flip, a \'1\' is reported for that output, and a \'0\' is reported for a no-flip case. \n\nThis information is written out in a table format into a file at <path>/spice_results/count_flips_summary.csv, in which the each row stands for one simulation, and each column contains the names of the output nodes\n This script reports the cases in which there was single flip, multiple flips, double flip, triple and atleast one flip. It calculates the probability of multiple flips given atleast one flip. So this meaRons that, if there is a single particle strike causing a single glitch, and if it happens to cause a single bit-flip (fault), what is the probability that in such cases, more than one fault is likely to occur. If this probability is large, it indicates that, a single strike is likely to cause multiple faults at a high probability.\nAuthor:Nanditha Rao(nanditha@ee.iitb.ac.in)\n')
 
 parser.add_option("-f", "--folder", dest="path",help="Enter the ENTIRE path to your design folder(your working dir)- either on this machine or remote machine ")
 parser.add_option("-n", "--num",dest='num',  help='Enter the total number of spice decks that were simulated')
@@ -187,8 +187,8 @@ for row in diff_file: #For every row in the diff file. There will be as many row
 	#First append all the diff elements of 3rd rise edge (2nd fall) in one row
 	for i in (range(6,num_col)): #python will stop looping at (num_col - 1)
 
-		print "\nRow in diff file is:", row
-		print "Row is:", row[i]  #Each value which is a string
+		#print "\nRow in diff file is:", row
+		#print "Row is:", row[i]  #Each value which is a string
 		
 		k.append(row[i]) #append the next row in the diff_file to the final count file
 		k3.append(row[i]) #append the same in the fall edge file (3rd rise edge)
@@ -200,9 +200,9 @@ for row in diff_file: #For every row in the diff file. There will be as many row
 	#Next append all the diff_rise (2nd edge rise) elements in the same row
 	for j in (range(6,num_col_rise)): #python will stop looping at (num_col - 1)
 
-		print "\nRow in diff_rise file is:", row_rise
+		#print "\nRow in diff_rise file is:", row_rise
 		#print "Row in diff_rise file is:", row_rise
-		print "Row_rise is:", row_rise[j]  #Each value which is a string
+		#print "Row_rise is:", row_rise[j]  #Each value which is a string
 		k.append(row_rise[j]) #append the next row in the diff_file_rise	
 		k2.append(row_rise[j]) #append the same in the rise edge file (2nd rise edge)	
 		count_num_rise = count_num_rise + int(row_rise[j])
@@ -218,8 +218,8 @@ for row in diff_file: #For every row in the diff file. There will be as many row
 	#print"\nflip is:",flip
 
 		
-	print "\nAt the end of row ",csv_rows
-	print "k is:",k
+#	print "\nAt the end of row ",csv_rows
+	#print "k is:",k
 
 	#row[last_col]= count_num
 	#print "\nAt the end of the row, count is: ",count_num 
@@ -329,7 +329,7 @@ fflip_3rd.close()
 
 #Add the details of number of DFFs
 fa=open('/%s/subcktinstances.sp' %path, 'r')
-fb=open('/%s/spice_results/count_flips_final_summary.csv' %path, 'a+')
+fb=open('/%s/spice_results/count_flips_summary.csv' %path, 'a+')
 read=fa.readlines()
 filelen=len(read)
 fb.writelines(read[filelen-3])
