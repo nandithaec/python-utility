@@ -72,7 +72,7 @@ else:
 
 if '1\'b1' in open('./pnr/op_data/%s_final.v' %module).read():
 	print "\n*******************WARNING******************\n"
-	print "\n1'b1 is present in the verilog file and the corresponding nets should be manually tie it to vdd in the spice file\n"
+	print "\n1'b1 is present in the verilog file and the corresponding nets should be manually tied to vdd in the spice file\n"
 	time.sleep(15)
 else:
 	print "\n1'b1 is NOT present in the verilog file and there is no need to manually tied to vdd in the spice file\n"

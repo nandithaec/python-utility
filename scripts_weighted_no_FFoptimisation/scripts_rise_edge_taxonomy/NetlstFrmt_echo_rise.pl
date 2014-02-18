@@ -1,5 +1,5 @@
 
-#Example: perl NetlstFrmt_echo_rise.pl -v c432_clk_ipFF_modelsim.v -s c432_clk_ipFF.dspf -l glitch_osu018_stdcells_correct_vdd_gnd.sp -c 200 -t 180 -m c432_clk_ipFF
+#Example: perl NetlstFrmt_echo_rise.pl -v c499_clk_ipFF_modelsim.v -s c499_clk_ipFF.dspf -l glitch_osu018_stdcells_correct_vdd_gnd.sp -c 250 -t 180 -m c499_clk_ipFF
 
 
 #clk frequency in MHz
@@ -734,6 +734,5 @@ close(out);
 chomp($sim1=`pwd`);
 $sim1=$sim1."/$sim\n";
 print "\n SPICE FILE written named ".$sim."\n";
-
 
 
