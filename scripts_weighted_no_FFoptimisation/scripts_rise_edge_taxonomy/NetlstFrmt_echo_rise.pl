@@ -411,7 +411,7 @@ print SIM ".param init_delay = half_clk_period\n";
 print SIM "+ rise_time= 50p\n";
 print SIM "+ fall_time= 50p\n\n";
 
-
+print SIM "**2.5 cycle simulation**\n";
 print SIM ".param change_time='(half_clk_period/3)'\n";
 print SIM ".param change_time_rise= '(change_time + 100ps)'\n";
 print SIM ".param k_plus1= '(half_clk_period + change_time)'\n";
@@ -553,20 +553,20 @@ print SIM "\n**Initialising input of all FFs- commented this out. Doesnt help.PW
    #$measure_at_falling_edge.="meas tran ff_op_$i MAX v(X$module.$to_ff[$i]:Q) from=$fall_from"."s"." to=$fall_to"."s\n";
  #}
 
-print SIM "\n**Initialising output of all FFs- trying..commented out
+print SIM "\n**Initialising output of all FFs- trying..
 \n";
 foreach $i(0 .. $#to_ff)
  {
 if($i ne "clk")
    {
-      print SIM "*.ic v(X$module.$to_ff[$i]:Q)= ##$ffopin1[$i]\_reference_minus5##\n";
+      print SIM ".ic v(X$module.$to_ff[$i]\_q\_reg:Q)= ##$ffopin1[$i]\_reference_minus1##\n";
    }
 
    #$measure_at_falling_edge.="meas tran ff_op_$i MAX v(X$module.$to_ff[$i]:Q) from=$fall_from"."s"." to=$fall_to"."s\n";
  }
 
 ##Initialise primary outputs
- print SIM "\n**Initialising primary outputs\n\n";
+ print SIM "\n**Initialising primary outputs to 0..commented out right now\n\n";
 foreach $i(0 .. $#opins)
  {
    $new1=$opins[$i];
@@ -576,7 +576,7 @@ foreach $i(0 .. $#opins)
    if($new1 ne "clk")
    {
       #print SIM ".ic v($new1)= ##$new1\_reference_1##\n";
-	print SIM ".ic v($new1)= 0\n";t
+	print SIM "*.ic v($new1)= 0\n";t
    }
 }
 

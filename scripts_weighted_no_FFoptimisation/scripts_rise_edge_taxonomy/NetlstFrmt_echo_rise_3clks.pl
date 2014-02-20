@@ -415,7 +415,7 @@ print SIM ".param init_delay = half_clk_period\n";
 print SIM "+ rise_time= 50p\n";
 print SIM "+ fall_time= 50p\n\n";
 
-
+print SIM "**3.5 cycle simulation**\n";
 print SIM ".param change_time='(clk_period+ (half_clk_period/3))'\n";
 print SIM ".param change_time_rise= '(change_time + 100ps)'\n";
 print SIM ".param k_plus1= '(half_clk_period + clk_period + (half_clk_period/3))'\n";
