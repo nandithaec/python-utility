@@ -1,10 +1,14 @@
 
-#Example: perl NetlstFrmt_echo_rise.pl -v c499_clk_ipFF_modelsim.v -s c499_clk_ipFF.dspf -l glitch_osu018_stdcells_correct_vdd_gnd.sp -c 250 -t 180 -m c499_clk_ipFF
+#Example: perl NetlstFrmt_echo_rise.pl -v c432_clk_ipFF_modelsim.v -s c432_clk_ipFF.dspf -l glitch_osu018_stdcells_correct_vdd_gnd.sp -c 250 -t 180 -m c432_clk_ipFF
 
 
 #clk frequency in MHz
 
 #Modifications:
+
+#.ic statement being specified to all outputs of all FFs.. and are being initialised to the rising edge of the current clk cycle thats picked : Feb 21 2014
+#.ic for all primary outputs being deleted. changed the PWL. It doesnt change value before 1st clk rising edge (reverting back to the original PWL statement): feb 21 2014
+
 #Spice output value measurement was being done from 2nd clk cycle to 2nd clk cycle +(0.2*clk_period). This might be too long a duration to measure the value. Hence value is now being measured on (2nd rising edge + 150ps) and   (2nd falling edge + 150ps).  : Feb 17 2014
 
 # Added meas and echo statements,added rise_edge parameters for measuring Flip Flop output at 2nd rising edge. Renamed ff_op_ to ff_op__fall. : Feb 7 2014
@@ -524,8 +528,10 @@ foreach $i(0 .. $#ipins)
 
 #Simulating 2.5 cycles
 #This will initialise the outputs of all FFs to 0 to begin with and then change the input of the FF to the current cycle reference input in Verilog sim
- print SIM "\n\nV$i $new 0 PWL( 0 ##$new\_reference_minus1##  change_time ##$new\_reference_minus1## change_time_rise  ##$new\_reference_1## k_plus1 ##$new\_reference_1## k_plus1_rise ##$new\_reference_2## $sim_time ##$new\_reference_2##)\n";
+# print SIM "\n\nV$i $new 0 PWL( 0 ##$new\_reference_minus1##  change_time ##$new\_reference_minus1## change_time_rise  ##$new\_reference_1## k_plus1 ##$new\_reference_1## k_plus1_rise ##$new\_reference_2## $sim_time ##$new\_reference_2##)\n";
 
+ print SIM "\n\nV$i $new 0 PWL( 0  ##$new\_reference_1## k_plus1 ##$new\_reference_1## k_plus1_rise ##$new\_reference_2## $sim_time ##$new\_reference_2##)\n";
+ 
    }
 }
 
@@ -559,7 +565,7 @@ foreach $i(0 .. $#to_ff)
  {
 if($i ne "clk")
    {
-      print SIM ".ic v(X$module.$to_ff[$i]\_q\_reg:Q)= ##$ffopin1[$i]\_reference_minus1##\n";
+      print SIM ".ic v(X$module.$to_ff[$i]\_q\_reg:Q)= ##$ffopin1[$i]\_reference_1##\n";
    }
 
    #$measure_at_falling_edge.="meas tran ff_op_$i MAX v(X$module.$to_ff[$i]:Q) from=$fall_from"."s"." to=$fall_to"."s\n";
@@ -576,7 +582,9 @@ foreach $i(0 .. $#opins)
    if($new1 ne "clk")
    {
       #print SIM ".ic v($new1)= ##$new1\_reference_1##\n";
-	print SIM "*.ic v($new1)= 0\n";t
+      #commented the following out..
+	#print SIM "*.ic v($new1)= 0\n";t
+	
    }
 }
 

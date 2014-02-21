@@ -1,6 +1,7 @@
-#Example: perl deckgen_remote_seed_rise.pl -s reference_spice.sp -l glitch_osu018_stdcells_correct_vdd_gnd.sp -r c499_clk_ipFF_reference_out/tool_reference_out.txt -n 1 -m c499_clk_ipFF -f /home/external/iitb/nanditha/simulations/c499_ecat -g 4 -d 2 -c 2914 -i 4.91e-09 -o 1 
+#Example: perl deckgen_remote_seed_rise.pl -s reference_spice.sp -l glitch_osu018_stdcells_correct_vdd_gnd.sp -r c432_clk_ipFF_reference_out/tool_reference_out.txt -n 1 -m c432_clk_ipFF -f /home/users/nanditha/Documents/utility/c432_priority_dec -g 4 -d 2 -c 2914 -i 4.91e-09 -o 1 
 
 #Modifications:
+#.ic substitution included as part of the code. This code existed but wasnt being used. Modified reference_minus1 to reference_1.: Feb 21 2014
 #THe previous change was incorrect. Reverting it back to "$start=$#temp-$num_opt+1;". A comman is needed after printing the "$random_drain," info to the RTL.csv files. Hence the drain info that it was writing was incorrect earlier. : Feb 12 2014
 
 #Since I added 'drain' info also, I had to modify "$start=$#temp-$num_opt+1;" to :$start=$#temp-$num_opt;" inorder to print out all the RTL reference output values to the RTL.csv and RTL_2ndedge.csv : Feb 11 2014
@@ -337,8 +338,7 @@ while(<SPC>)
           $new=~s/##deck_num##/$deck_num/;
         }
 #Substituting the reference values
-     if(($_=~m/PWL\(/))
-#||($_=~m/\.ic/)
+     if(($_=~m/PWL\(/))# ||($_=~m/\.ic/)
         {
 	   ($temp1,$pinname)=split(" ",$_);
            #print $pinname."\n";
@@ -379,20 +379,21 @@ if(($_=~m/\.ic/))
         {
 	   ($junk1,$temp1,$pinname)=split(" ",$_);
            chomp($pinname);
-           $pinname=~s/_reference_minus5.*//;
+           $pinname=~s/_reference_1.*//;
            $pinname=~s/\#\#//;
-          # print $pinname."\n";
+           print "pin name $pinname\n";
           # print $pinname."\n";
            @temp=split(" ",$header);
            foreach $index( 0 .. $#temp)
               {
+  	      print "pinname:$pinname, temp $temp[$index] \n";
                 if($pinname eq $temp[$index])
-                   {
-                      $ref_minus5=$cycle_minus5[$index]*$vdd;
+                   {	print "Match: pinname:$pinname, temp $temp[$index] \n";
+                      $ref_1=$cycle1[$index]*$vdd;
       
 
                       $new=$_;
-                      $new=~s/##$pinname\_reference_minus5##/$ref_minus5/g;
+                      $new=~s/##$pinname\_reference_1##/$ref_1/g;
 
 		     
                    }
