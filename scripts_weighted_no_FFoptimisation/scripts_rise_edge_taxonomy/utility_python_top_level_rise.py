@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-#Example usage: python utility_python_top_level_rise.py --rtl=/home/users/nanditha/Documents/utility/c432_priority_dec/c432_clk_ipFF.v --mod=c432_clk_ipFF --test=/home/users/nanditha/Documents/utility/c432_priority_dec/test_c432.v --tb_mod=test_c432 --clk=200 --run=100us --design=c432_priority_dec --tech=180 --num=10 --group 10 --path=/home/external/iitb/nanditha/simulations/c432_priority_dec  --std_lib osu018_stdcells_correct_vdd_gnd.sp  --proc_node 1 --ppn 5 --days 00 --hrs 00 --mins 3 --script python_utility3_yuva_wt_3cycles_2nd_3rd_rise.py
+#Example usage: python utility_python_top_level_rise.py --rtl=/home/users/nanditha/Documents/utility/b09/b09.vhd --mod=b09_mod --test=/home/users/nanditha/Documents/utility/b09/test_b09.vhd --tb_mod=test_b09 --clk=250 --run=100us --design=b09 --tech=180 --num=10 --group 10 --path=/home/external/iitb/nanditha/simulations/b09  --std_lib osu018_stdcells_correct_vdd_gnd.sp  --proc_node 1 --ppn 10 --days 00 --hrs 00 --mins 3 --script python_utility3_yuva_wt_2cycles_2nd_3rd_rise.py
 
 #This script is modified to call those python/perl scripts which have been modified to capture the outputs of the 2nd rising edge in spice and compare them with the 2nd rising edge in RTL simulation: Feb 7 2014
 #This script does a synthesis, place and route of the vhd/verilog file using rtl2gds. The pnr verilog file is modified to include fwrite statements to write the FF outputs to a reference file. This verilog file simulated using modelsim and the reference FF output values written to a text file.
@@ -106,7 +106,7 @@ time.sleep(5)
 ##Generate a template simulatable spice netlist from the dspf file generated after pnr. This would include all .ic, Voltage sources, meas, tran, control, param etc
 #NetlistFormat.pl
 #perl NetlstFrmt.pl -v decoder_behav_pnr_modelsim.v -s pnr/op_data/decoder_behav_pnr_final.dspf -l glitch_osu018_stdcells_correct_allcells.sp -c 1e9 -t 180 -m decoder_behav_pnr
-os.system('perl NetlstFrmt_echo_rise_3clks.pl -v %s_modelsim.v  -s %s.dspf -l glitch_%s -c %s -t %s -m %s' %(module,module,std_lib,clkfreq,techn, module))
+os.system('perl NetlstFrmt_echo_rise.pl -v %s_modelsim.v  -s %s.dspf -l glitch_%s -c %s -t %s -m %s' %(module,module,std_lib,clkfreq,techn, module))
 print "***Done modifying the spice file to make it simulatable. File available in current directory reference_spice.sp\n"
 time.sleep(5)
 

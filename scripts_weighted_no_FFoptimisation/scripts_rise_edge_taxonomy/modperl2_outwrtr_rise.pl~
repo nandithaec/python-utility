@@ -1,8 +1,7 @@
 #!/usr/bin/perl
-#Example usage: perl modperl2_outwrtr_rise.pl -v pnr/op_data/b09_mod_final.v -m b09_mod
+#Example usage: perl modperl2_outwrtr_new.pl -v pnr/op_data/decoder_op_ip_final.v -m decoder_op_ip
 
 #Modifications:
-#Code being modified for DFFSR outputs. It had only DFF outputs. Modelsim fwrite statements and RTL.csv headers will change
 #Appended the random_drain to the RTL*.csv header. This is needed to generate decks by just looking at the taxonomy.csv: Feb 11 2014
 #RTL_2nd_edge.csv header file created to store reference outputs at the 2nd rising edge : feb 7 2014
 #Outputs of all FFs being written out at +ve clock edge, instead of -ve clk edge. fwrite statements are being changed: Feb 6 2014
@@ -99,7 +98,6 @@ print "\t\t**********    Job started on $date    **********\n";
 
 #Initializing the parameters
 $flag=0;
-$dffsrflag=0;
 $op=$module."_modelsim.v";
 $in_main_module=0;
 $ref=$module."_reference_out";
@@ -122,15 +120,13 @@ while(<VLOG>)
    if(($_=~m/module $module \(/ .. /endmodule/)) #parsing the main module only
      {
 	 $in_main_module=1;
-	 #Code does not cover LATCH
-	 if(($_=~m/DFFPOSX1/)||($_=~m/DFFNEGX1/)||($flag==1)) #searching for D flip flops
+	 if(($_=~m/DFF/)||($_=~m/LATCH/)||($flag==1)) #searching for flip flop and latches
 	    {
 		if($flag == 0)
 		   {
                      ($fftype,$ffname,$pin)=split(" ",$_);#capturing the output pin of the flip flop
 		     $pin=~m/\(.*\((.*)\)/;
 		     $ffopin[$i++]=$1;#this array has all output pins of all FFs
-		     print "match 1: DFF: $1\n";
 		     $flag=1;
 		   }
                 else
@@ -140,51 +136,10 @@ while(<VLOG>)
 		     $flag=0;
 		   }
 	    }
-	    else
+	#capturing the input ports of the main module
+       if($_=~m/ *input /)
 	    {
-	    	if(($_=~m/DFFSR/)) #searching for SR FFs
-	    	{
-	    		$dffsrflag=1;
-	    		print "DFF line: $_\n";
-	    	}
-	    	else 
-	    	   {
-	    		if($flag == 0)
-		   	{
-                    
-				($fftype,$ffname,$pin)=split(" ",$_);#capturing the output pin of the flip flop
-                     		print "FFtype: $fftype, FF name $ffname, Pin $pin \n";
-		    		# $pin=~m/\(.*\((.*)\)/;
-         	       		# print "Pin changed: $1 \n";
-         	        	#my @data = split(/\|/, $line);
-	             		#my $nextline = <VLOG>; #2nd line
-	             		#my $nextline = <VLOG>; #3rd line
-	             		#print "...$_ \n";
-	           		if($dffsrflag == 1 && ($_=~m/Q\((.+)\)/))
-		 		{
-		    			print "Match1\n" ;
-		   	
-	            		# ($pin1)=split(" ",$nextline);#capturing the output pin of the flip flop
-	         		#    if(($nextline=~m/.Q\(/))
-	          		#   {
-	         	             
-		            		print "next line = $nextline\n";
-		            		print "dollar 1: $1\n\n";
-			    		$ffopin[$i++]=$1;#this array has all output pins of all FFs
-		     			$flag=1;
-		     			$dffsrflag=0;
-				}
-		        	else
-		  	 	{
-                     			$_=~m/.*\((.*)\)/; #capturing the input pin of the flip flop
-		    			# $ffipin[$j++]=$1; #captures input pins of all FFs. If you comment this out, uncomment push @ffipin,@ipin; this will capture inputs of only input FFs
-		     			$flag=0;
-		   		}
-	    		}
-	    	     }
-	    #capturing the input ports of the main module
-       	if($_=~m/ *input /)
-	    {
+		
 		if($_=~m/ *input \[(.*):(.*)\] (\d*)/)#capturing vector input such as name[0:3] etc to break up the input names
 		  {				
 			$m=$1+$2;		     
@@ -235,13 +190,11 @@ while(<VLOG>)
 			  }
 		  }
 		
-            }
-          }
+     }
  } #ending if module
 
 #copying the file into the new .v file
    if(($in_main_module==0)||(!($_=~m/endmodule/)))
-   #if(!($_=~m/endmodule/))
       {
         print OPT $_;
       }
@@ -314,9 +267,9 @@ while(<VLOG>)
 	
 	print OPT 'end'."\n"; 
 	print OPT $_;
-   } #end else
+   }
 
- } #end while
+ }
 push @pin, @ffipin;
 push @pin, @ffopin;
 foreach $i (0 .. $#pin)

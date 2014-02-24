@@ -1,4 +1,4 @@
-#Example: perl GlitchLibGen.pl -i osu018_stdcells_correct_original.sp
+#Example: perl GlitchLibGen.pl -i osu018_stdcells_correct_vdd_gnd.sp
 
 #!/usr/bin/perl
 use Getopt::Long;

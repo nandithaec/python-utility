@@ -3,6 +3,7 @@
 
 #IMPORTANT: It is assumed that we are running parallel ngspice simulations on a remote 48-core cluster at 10.107.105.201. If this is not the case, you will need to modify this script to run it on this machine, by commenting out the scp and ssh commands.
 
+#Commented out the reqdtime, slack, arrival time part of the code.: Feb 24 2014
 #Backup directories renamed to 'backup_spice_decks_3rd_edge' and 'backup_spice_decks_2nd_edge': feb 12 2014.
 #Calling the python_FF_strike_taxonomy.py and python_gate_strike_taxonomy.py scripts explicitly, since calling it through a function did not run on the yuva cluster: Feb 11 2014
 #Calling the python_taxonomy_gate_FF.py script to tabulate the gate and FF taxonomy and combine the resultant 2 pdf files: Feb 11 2014
@@ -59,7 +60,7 @@ end_PWL= half_clk_period + change_time #in ns generally
 
 with open("%s/pnr/reports/5.postRouteOpt_%s/%s_postRoute.slk" %(path,module,module),"r") as f:
 	words=map(str.split, f)
-
+""" Not being used. this is incorrect
 line1=words[1] #2nd line after header
 slack_read=line1[2]
 print "\nSlack is: %s" %slack_read
@@ -80,7 +81,7 @@ print "\nArrival time is: %e " %arrival_time_ns
 #What fraction of the clk period is the arrival time?
 arrival_clk_part = arrival_time_ns / clk_period
 print "\nArrival time is: %f clk periods" %arrival_clk_part
-
+"""
 #Whatever number of decks to be simulated- is assumed to be more than or equal to 1000.
 #At a time, only 1000 are generated and run- to save disk space. After collecting results, they are deleted
 num_of_loops=(int(num)/int(num_at_a_time))
@@ -287,15 +288,16 @@ for loop in range(start_loop, (num_of_loops+1)):
 #Arrival_time_part + initial_clk_part should add up to 1.5 clk periods
 #The clk starts from low to high and then low, before the 2nd rising edge starts. The input is changed in the high period and the glitch is expected to arrrive later on, and before the next rising edge (when the latch will open)
 		#In every iteration, a different random number needs to be picked. Hence, this is inside the for loop
-		
+		""" Not being used. this is incorrect
 		initial_clk_part = 1.5 - arrival_clk_part
 		initial_clk_part_abs = initial_clk_part * clk_period
 #This means, glitch "can" occur before the input changes in the clk period as well. So, force the glitch to start only after input has changed
 		if (initial_clk_part_abs < end_PWL) : 
 			initial_clk_part = end_PWL/clk_period
+		"""
 		#This formula is incorrect if we run the expt with large slack. 
 		#If slack is large, the glitch window gets reduced
-
+		
 		#unif=random.uniform(0,arrival_clk_part*clk_period)
 		#rand_glitch= (initial_clk_part*clk_period) +  unif  #A random glitch picked
 		
@@ -399,7 +401,6 @@ os.system('python  %s/python_FF_strike_taxonomy.py  -p %s -m %s' %(path,path,mod
 
 print "\nCombining the pdf reports\n"
 os.system('python %s/python_combine_pdfs.py -p %s/spice_results -m %s' %(path,path,module))
-
 
 
 

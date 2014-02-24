@@ -57,7 +57,20 @@ with open("./pnr/reports/5.postRouteOpt_%s/%s_postRoute.slk" %(module,module),"r
 line1=words[1] #2nd line after header
 slack_read=line1[2]
 print "\nSlack is: %s" %slack_read
-slack_string=slack_read.replace("*/","")
+"""
+#Search for */
+if re.search("/*/",slack_read) != "None":
+	slack_string= slack_read.replace("*/","") 
+	print "\nSlack read 1st if is: %s" %slack_read
+	print "\n1st if: Slack is: %s" %slack_read
+	time.sleep(5)
+	#Search for /*
+elif re.search("//*",slack_read) != "None":
+	slack_string= slack_read.replace("/*","") 
+	print "\nSlack read 2nd if is: %s" %slack_read
+	print "\n2nd if: Slack is: %s" %slack_read
+	time.sleep(5)
+print "slackstring: %s\n" %slack_string
 slack_time=float(slack_string)
 print "\nSlack is: %f ns" %slack_time
 print "...Pause..."
@@ -69,7 +82,7 @@ else:
 	print "Slack is positive. Your design WILL function at the frequency %s MHz\n" %clkfreq
 	time.sleep(5)
 
-
+"""
 if '1\'b1' in open('./pnr/op_data/%s_final.v' %module).read():
 	print "\n*******************WARNING******************\n"
 	print "\n1'b1 is present in the verilog file and the corresponding nets should be manually tie it to vdd in the spice file\n"

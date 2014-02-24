@@ -474,9 +474,9 @@ if (os.path.isdir('%s/spice_results' %(path))):
 	       [' NN(No effect)', prob_FF_no_effect],
 	       ['NF(Glitch- Propagated and captured)', prob_FF_glitch_captured],
 		['P(multiple flips at output | NF)', prob_FF_glitch_captured_multiple],
+		['FN(Flip- Masked)',prob_FF_flip_masked],
 	       ['FF(Cascaded flips)', prob_FF_cascaded_flip],
-		 ['P(multiple flips at output | FF)', prob_FF_cascaded_flip_multiple],
-		 ['FN(Flip- Masked)',prob_FF_flip_masked]]
+		 ['P(multiple flips at output | FF)', prob_FF_cascaded_flip_multiple]]
 		#['Glitch on output(direct strike)',prob_FF_output_glitch]]
 	t1=Table(data_FF)
 	t1.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,-1),colors.white),

@@ -1,4 +1,4 @@
-#Example: perl deckgen_remote_seed_rise.pl -s reference_spice.sp -l glitch_osu018_stdcells_correct_vdd_gnd.sp -r c432_clk_ipFF_reference_out/tool_reference_out.txt -n 1 -m c432_clk_ipFF -f /home/users/nanditha/Documents/utility/c432_priority_dec -g 4 -d 2 -c 2914 -i 4.91e-09 -o 1 
+#Example: perl deckgen_remote_seed_rise.pl -s reference_spice.sp -l glitch_osu018_stdcells_correct_vdd_gnd.sp -r b09_mod_reference_out/tool_reference_out.txt -n 1 -m b09_mod -f /home/users/nanditha/Documents/utility/b09 -g 4 -d 2 -c 2914 -i 4.91e-09 -o 1 
 
 #Modifications:
 #.ic substitution included as part of the code. This code existed but wasnt being used. Modified reference_minus1 to reference_1.: Feb 21 2014
@@ -306,7 +306,9 @@ print "Random glitch point is at time $glitch_location \n";
 
 #creating the spice deck
 #`mkdir $folder/spice_decks_$outloop`;
+print "$folder/spice_decks_$outloop/deck_$deck_num.sp";
 open(OPT,">$folder/spice_decks_$outloop/deck_$deck_num.sp")||die("unable to open file : $!");
+
 print "\t\t\ !! SPICE DECK DIRECTORY CREATED !!\n";
 #writing into the new spice file
 $count=0;
@@ -381,14 +383,14 @@ if(($_=~m/\.ic/))
            chomp($pinname);
            $pinname=~s/_reference_1.*//;
            $pinname=~s/\#\#//;
-           print "pin name $pinname\n";
+          # print "pin name $pinname\n";
           # print $pinname."\n";
            @temp=split(" ",$header);
            foreach $index( 0 .. $#temp)
               {
-  	      print "pinname:$pinname, temp $temp[$index] \n";
+  	    #  print "pinname:$pinname, temp $temp[$index] \n";
                 if($pinname eq $temp[$index])
-                   {	print "Match: pinname:$pinname, temp $temp[$index] \n";
+                   {	#print "Match: pinname:$pinname, temp $temp[$index] \n";
                       $ref_1=$cycle1[$index]*$vdd;
       
 
@@ -464,7 +466,6 @@ foreach $index( $start .. $#temp)
 	}
 
   }
-
 
 
 
