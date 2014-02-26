@@ -10,7 +10,7 @@
 #This version of the script has the facility of selecting the gate based on the area of the gate. This version of the script uses another script python_weighted_gateselection.py to pick the random gate based on its area: Nov 17 2013
 #Glitch insertion window is within the 2.5 cycles, and not the 6.5 cycles that is required for the case with intermediate FFs
 
-#Example usage: python python_utility3_remote_seed_yuva_echo.py -m c432_clk_opFF -p /home/nanditha/Documents/iitb/utility/c432_priority_opFF -d c432_priority_opFF -t 180 -n 2 --group 2 --clk 100 --std_lib osu018_stdcells_correct_vdd_gnd.sp
+#Example usage: python python_utility3_yuva_wt_2cycles_2nd_3rd_rise_local.py -m multiplier_ipFF -p /home/nanditha/Documents/simulations/yuva/multiplier_ipFF -d multiplier_ipFF -t 180 -n 4 --group 4 --clk 200 --std_lib osu018_stdcells_correct_vdd_gnd.sp
 
 import optparse
 import re,os
@@ -59,7 +59,7 @@ end_PWL= half_clk_period + change_time #in ns generally
 
 with open("%s/pnr/reports/5.postRouteOpt_%s/%s_postRoute.slk" %(path,module,module),"r") as f:
 	words=map(str.split, f)
-
+"""
 line1=words[1] #2nd line after header
 slack_read=line1[2]
 print "\nSlack is: %s" %slack_read
@@ -80,7 +80,7 @@ print "\nArrival time is: %e " %arrival_time_ns
 #What fraction of the clk period is the arrival time?
 arrival_clk_part = arrival_time_ns / clk_period
 print "\nArrival time is: %f clk periods" %arrival_clk_part
-
+"""
 #Whatever number of decks to be simulated- is assumed to be more than or equal to 1000.
 #At a time, only 1000 are generated and run- to save disk space. After collecting results, they are deleted
 num_of_loops=(int(num)/int(num_at_a_time))
@@ -168,7 +168,7 @@ clk_period = (1.0/float(clk))*(0.000001) #for the MHz
 print "\nclk is ",clk
 print "\nClk_period: ", clk_period
 
-
+"""
 os.system('cat $PBS_NODEFILE > %s/nodes.txt' %path)
 print "PBS NODEFILE contents....written to nodes.txt\n"
 time.sleep(3)
@@ -178,7 +178,7 @@ os.system('cat %s/sshmachines.txt' %path)
 print "Check contents of sshmachines.txt file....\n"
 time.sleep(10)
 
-
+"""
 #Uncomment this for future designs. For decoder example, decoder folder has already been created on desktop
 #os.system('ssh nanditha@10.107.90.52 mkdir /home/nanditha/simulations/%s' %(design_folder))
 ###########################################Comment this out if not using desktop to run##################################
@@ -287,12 +287,13 @@ for loop in range(start_loop, (num_of_loops+1)):
 #Arrival_time_part + initial_clk_part should add up to 1.5 clk periods
 #The clk starts from low to high and then low, before the 2nd rising edge starts. The input is changed in the high period and the glitch is expected to arrrive later on, and before the next rising edge (when the latch will open)
 		#In every iteration, a different random number needs to be picked. Hence, this is inside the for loop
-		
+		"""
 		initial_clk_part = 1.5 - arrival_clk_part
 		initial_clk_part_abs = initial_clk_part * clk_period
 #This means, glitch "can" occur before the input changes in the clk period as well. So, force the glitch to start only after input has changed
 		if (initial_clk_part_abs < end_PWL) : 
 			initial_clk_part = end_PWL/clk_period
+		"""
 		#This formula is incorrect if we run the expt with large slack. 
 		#If slack is large, the glitch window gets reduced
 
