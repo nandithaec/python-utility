@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 #Read in a RTL file, do synthesis and placement, route
-#Example usage: python python1_read_RTL_syn_pnr.py -f /home/users/nanditha/Documents/utility/decoder_ip_opFF/decoder_op_ip.vhd -m decoder_op_ip -c 300
+#Example usage: python python1_read_RTL_syn_pnr.py -f /home/users/nanditha/Documents/utility/b03/b03.vhd -m b03 -c 300
 
+#Eliminated clock gating from synthesis: Feb 27 2014
 #freq added to synthesis part: Nov 19 2013
 
 import optparse
@@ -34,6 +35,62 @@ os.system('rtl2gds -rtl=%s -rtl_top=%s -syn -frequency=%s' %(filepath,options.mo
 #os.system("rtl2gds -rtl={options.filepath} -rtl_top={options.module_name} -syn".format(args=args))
 #subprocess.call(['rtl2gds', '-rtl=' + options.filepath, '-rtl_top=' + options.module_name, '-syn'])
 
+fcr = open('synthesis/scripts/compile_dc.tcl', 'r') ## This is the tcl file for synthesis
+data=fcr.readlines()
+#print data
+fcr.close()
+
+fcw = open('synthesis/scripts/compile_dc_backup.tcl', 'w') ## This is the tcl file for synthesis- backup
+fcw.writelines(data)
+fcw.close()
+
+os.remove('synthesis/scripts/compile_dc.tcl')
+
+fin = open('synthesis/scripts/compile_dc_backup.tcl', 'r') 
+fnew = open('synthesis/scripts/compile_dc.tcl', 'w') ## This is the new tcl file for synthesis
+
+
+#Replace a current line
+#with open('input') as fin, open('output','w') as fout:
+for line in fin:
+	if line == 'set_clock_gating_style  \\n':
+		fnew.write('#set_clock_gating_style  \\n')
+	elif line == 'insert_clock_gating > ../logs/insert_clock_gating.log\n':
+		fnew.write('#insert_clock_gating > ../logs/insert_clock_gating.log\n')
+	elif line == 'propagate_constraints -gate_clock\n':
+		fnew.write('#propagate_constraints -gate_clock\n')
+	elif line == 'identify_clock_gating\n':
+		fnew.write('#identify_clock_gating\n')
+	elif line == 'report_clock_gating -verbose > ../reports/clk_gate_verbose.rpt\n':
+		fnew.write('#report_clock_gating -verbose > ../reports/clk_gate_verbose.rpt\n')
+	else:
+		fnew.write(line)
+
+fnew.close()
+fin.close()
+
+fnew = open('synthesis/scripts/compile_dc.tcl', 'r') 
+newdata=fnew.readlines()
+#print (newdata)
+
+f1 = open('synthesis/scripts/compile_dc_backup.tcl', 'w') 
+#f1.writelines("This was the script compiled by the Design Compiler\n It gets overwritten in the pnr stepp. Hence saving a backup here\n\n")
+f1.writelines(newdata)
+
+f1.close()
+fnew.close()
+
+print "Done creating a new synthesis compile script \"synthesis/scripts/compile_dc.tcl\" \n"
+
+
+if os.path.exists('synthesis/run/'):
+	os.chdir('synthesis/run/')
+	os.system('bash run_dc.bash')
+
+os.chdir('../../')
+print "...Pause...Done synthesis and optimisation of FF.. Starting pnr"
+
+
 #Run place and route
 
 os.system('rtl2gds -rtl=%s -rtl_top=%s -pnr -frequency=%s' %(filepath,options.module_name,clkfreq))	
@@ -57,20 +114,7 @@ with open("./pnr/reports/5.postRouteOpt_%s/%s_postRoute.slk" %(module,module),"r
 line1=words[1] #2nd line after header
 slack_read=line1[2]
 print "\nSlack is: %s" %slack_read
-"""
-#Search for */
-if re.search("/*/",slack_read) != "None":
-	slack_string= slack_read.replace("*/","") 
-	print "\nSlack read 1st if is: %s" %slack_read
-	print "\n1st if: Slack is: %s" %slack_read
-	time.sleep(5)
-	#Search for /*
-elif re.search("//*",slack_read) != "None":
-	slack_string= slack_read.replace("/*","") 
-	print "\nSlack read 2nd if is: %s" %slack_read
-	print "\n2nd if: Slack is: %s" %slack_read
-	time.sleep(5)
-print "slackstring: %s\n" %slack_string
+slack_string=slack_read.replace("*/","")
 slack_time=float(slack_string)
 print "\nSlack is: %f ns" %slack_time
 print "...Pause..."
@@ -82,13 +126,13 @@ else:
 	print "Slack is positive. Your design WILL function at the frequency %s MHz\n" %clkfreq
 	time.sleep(5)
 
-"""
+
 if '1\'b1' in open('./pnr/op_data/%s_final.v' %module).read():
 	print "\n*******************WARNING******************\n"
 	print "\n1'b1 is present in the verilog file and the corresponding nets should be manually tie it to vdd in the spice file\n"
 	time.sleep(15)
 else:
-	print "\n1'b1 is NOT present in the verilog file and there is no need to manually tied to vdd in the spice file\n"
+	print "\n1'b1 is NOT present in the verilog file and there is no need to manually tie it to vdd in the spice file\n"
 	time.sleep(5)
 
 if '1\'b0' in open('./pnr/op_data/%s_final.v' %module).read():

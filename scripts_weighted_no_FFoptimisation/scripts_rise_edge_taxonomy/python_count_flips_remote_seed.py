@@ -2,7 +2,7 @@
 
 #Compare results of spice and RTL
 
-#Example usage: python python_count_flips_remote_seed.py -f /home/external/iitb/nanditha/simulations/decoder_ip_opFF_rise  -n 10 --group 10 -s 2594275917096658334
+#Example usage: python python_count_flips_remote_seed.py -f /home/external/iitb/nanditha/simulations/FF_optimisation/c432_priority_opFF  -n 5000 --group 1000 -s 6705320567285222940
 
 import optparse
 import re,os
@@ -176,46 +176,38 @@ if (num_of_multiple_flips > 0):
 	print "\nvariance 1st term ", variance_1st_term
 	print "\nvariance 2nd term ", variance_2nd_term
 	#N is made (N-1) when random sampling is involved. Hence we use (atleast_one_flip - 1)
-	print "\n Atleast one flip:",atleast_one_flip
-	if (atleast_one_flip >1):
-		variance = (variance_1st_term + variance_2nd_term) /(atleast_one_flip - 1) #no need to make atleast_one_flip as float
-	else:
-		variance = (variance_1st_term + variance_2nd_term) /(atleast_one_flip) 
-		print "\nvariance ", variance
-		#fflip.write('\nVariance cannot be calculated since there is only one case of atleast one flip')
-		#fflip.write('\nHence the statistics for design at path %s: cannot be printed \n' %path )	
-		standard_deviation = math.sqrt(variance) #this returns a float
-		print "\nstandard_deviation ", standard_deviation
-		standard_error = standard_deviation/(math.sqrt(atleast_one_flip)) #float again
-		print "\nstandard_error ", standard_error
-		std_error_by_mean = standard_error/mean
-		print "\nstd_error_by_mean ", std_error_by_mean
-		#95% confidence intervals
+	variance = (variance_1st_term + variance_2nd_term) /(atleast_one_flip - 1) #no need to make atleast_one_flip as float
+	print "\nvariance ", variance
+	standard_deviation = math.sqrt(variance) #this returns a float
+	print "\nstandard_deviation ", standard_deviation
+	standard_error = standard_deviation/(math.sqrt(atleast_one_flip)) #float again
+	print "\nstandard_error ", standard_error
+	std_error_by_mean = standard_error/mean
+	print "\nstd_error_by_mean ", std_error_by_mean
+	#95% confidence intervals
 
-		lower_limit = mean - (standard_error*1.96)
-		upper_limit = mean + (standard_error*1.96)
+	lower_limit = mean - (standard_error*1.96)
+	upper_limit = mean + (standard_error*1.96)
 	
-		print "\nconfidence intervals: upper limit: %f, lower limit: %f\n " %(lower_limit,upper_limit)
+	print "\nconfidence intervals: upper limit: %f, lower limit: %f\n " %(lower_limit,upper_limit)
 
-		print('\n***STATISTICS FOR MULTIPLE BUT FLIPS, GIVEN THAT ATLEAST ONE FAULT (FLIP) HAS OCCURED***\n' )
-		print('Mean of multiple flips given atleast one flip is: %f\n' %(mean))
-		print('Variance is: %f\n' %variance)
-		print('Standard deviation is: %f\n' %standard_deviation)
-		print('Standard error is (sigma/sqrt(N)): %f\n' %standard_error)
-		print('Standard error divided by mean is (sigma/sqrt(N)/mean): %f\n' %std_error_by_mean)
-		print('95 percent Confidence interval is: %f to %f \n' %(upper_limit,lower_limit))
-		print('95 percent Confidence interval in percent is: %f percent to %f percent \n' %(lower_limit*100,upper_limit*100))
+	print('\n***STATISTICS FOR MULTIPLE BUT FLIPS, GIVEN THAT ATLEAST ONE FAULT (FLIP) HAS OCCURED***\n' )
+	print('Mean of multiple flips given atleast one flip is: %f\n' %(mean))
+	print('Variance is: %f\n' %variance)
+	print('Standard deviation is: %f\n' %standard_deviation)
+	print('Standard error is (sigma/sqrt(N)): %f\n' %standard_error)
+	print('Standard error divided by mean is (sigma/sqrt(N)/mean): %f\n' %std_error_by_mean)
+	print('95 percent Confidence interval is: %f to %f \n' %(upper_limit,lower_limit))
+	print('95 percent Confidence interval in percent is: %f percent to %f percent \n' %(lower_limit*100,upper_limit*100))
 
-		fflip.write('\n***STATISTICS*** for design at path %s:\n' %path )
-		fflip.write('Mean of multiple flips given atleast one flip is: %f\n' %(mean))
-		fflip.write('Variance is: %f\n' %variance)
-		fflip.write('Standard deviation is: %f\n' %standard_deviation)
-		fflip.write('Standard error is (sigma/sqrt(N)): %f\n' %standard_error)
-		fflip.write('Standard error divided by mean is (sigma/sqrt(N)/mean): %f\n' %std_error_by_mean)
-		fflip.write('95 percent Confidence interval is: %f to %f \n' %(lower_limit,upper_limit))
-		fflip.write('95 percent Confidence interval in percent is: %f percent to %f percent \n' %(lower_limit*100,upper_limit*100))	
-
-	
+	fflip.write('\n***STATISTICS*** for design at path %s:\n' %path )
+	fflip.write('Mean of multiple flips given atleast one flip is: %f\n' %(mean))
+	fflip.write('Variance is: %f\n' %variance)
+	fflip.write('Standard deviation is: %f\n' %standard_deviation)
+	fflip.write('Standard error is (sigma/sqrt(N)): %f\n' %standard_error)
+	fflip.write('Standard error divided by mean is (sigma/sqrt(N)/mean): %f\n' %std_error_by_mean)
+	fflip.write('95 percent Confidence interval is: %f to %f \n' %(lower_limit,upper_limit))
+	fflip.write('95 percent Confidence interval in percent is: %f percent to %f percent \n' %(lower_limit*100,upper_limit*100))	
 
 fflip.close()
 
@@ -229,7 +221,6 @@ filelen=len(read)
 fb.writelines(read[filelen-3])
 fb.writelines(read[filelen-2])
 fb.writelines(read[filelen-1])
-fb.writelines("\n\n")
 fa.close()
 fb.close()
 

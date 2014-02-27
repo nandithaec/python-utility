@@ -1,12 +1,11 @@
 
-#Example: perl NetlstFrmt_echo_rise.pl -v b09_mod_modelsim.v -s b09_mod.dspf -l glitch_osu018_stdcells_correct_vdd_gnd.sp -c 250 -t 180 -m b09_mod
+#Example: perl NetlstFrmt_echo_rise.pl -v b03_modelsim.v -s b03.dspf -l glitch_osu018_stdcells_correct_vdd_gnd.sp -c 250 -t 180 -m b03
 
 
 #clk frequency in MHz
 
 #Modifications:
-
-#LATCH outputs excluded from being captured in .meas and .ic: Feb 24 2014
+#.ic square brackets being replaced by _ : feb 26 2014
 #.ic statement being specified to all outputs of all FFs.. and are being initialised to the rising edge of the current clk cycle thats picked : Feb 21 2014
 #.ic for all primary outputs being deleted. changed the PWL. It doesnt change value before 1st clk rising edge (reverting back to the original PWL statement): feb 21 2014
 
@@ -199,7 +198,6 @@ print SIM "**********Subckt begins*********"."\n\n";
 $new_inp;
 #parsing the verilog file
 $flag_flop=0;
-$dffsrflag=0;
 $flag1=0;
 $count_line=0;
 while(<VLOG>)
@@ -253,7 +251,7 @@ while(<VLOG>)
   if(($_=~m/module $module \(/ .. /endmodule/)) #parsing the main module only
      {
 	
-	 if(($_=~m/DFFPOSX1/)||($_=~m/DFFNEGX1/)||($flag1==1)) #searching for flip flop and latches
+	 if(($_=~m/DFF/)||($_=~m/LATCH/)||($flag1==1)) #searching for flip flop and latches
 	    {
 
 		# ($junk,$ff_name)=split(" ",$_);
@@ -277,37 +275,13 @@ while(<VLOG>)
 		     $flag1=0;
 		   }
 	    }
-	  if (($_=~m/DFFSR/))
-	  {
-	  	$dffsrflag=1;
-	  }
-	  if(($_=~m/Q\((.+)\)/)) #If the line is a .Q line following DFFSR
-	  {
-	  	if($dffsrflag == 1)
-		   {
-                     #($fftype1,$ffname1,$pin1)=split(" ",$_);#capturing t.ihe output pin of the flip flop
-		     #$pin1=~m/\(.*\((.*)\)/;
-		     $ffopin1[$i++]=$1;#this array has all output pins of all FFs
-		     $dffsrflag=0;
-		  }
-                else
-		   {
-                     #$_=~m/.*\((.*)\)/; #capturing the input pin of the flip flop
-		     #$ffipin[$j++]=$1; #captures input pins of all FFs
-		     #$flag1=0;
-		   }
-	  }
-	    
-	    
   }
-
-
 
 if(($_=~m/module $module \(/ .. /endmodule/)) #parsing the main module only
      {
 
-#This consists of ALL DFF outputs including the primary outputs. Excludes LATCH
-   if(($_=~m/DFF/)||($flag==1)) #searching for flip flop and latch outputs in pnr verilog file
+#This consists of ALL DFF outputs including the primary outputs
+   if(($_=~m/DFF/)||($_=~m/LATCH/)||($flag==1)) #searching for flip flop and latch outputs in pnr verilog file
      {
         ($junk,$ff_name)=split(" ",$_);
         push(@to_ff,$ff_name);
@@ -589,16 +563,16 @@ print SIM "\n**Initialising output of all FFs- trying..
 \n";
 foreach $i(0 .. $#to_ff)
  {
- $new=$ffopin1[$i];
+  $new=$ffopin1[$i];
    $new=~s/\[/_/g;
    $new=~s/\]/_/g;
    $new=~s/\//_/g;
    
+   
 if($i ne "clk")
    {
- #     print SIM ".ic v(X$module.$to_ff[$i]\_q\_reg:Q)= ##$ffopin1[$i]\_reference_1##\n";
-#  print SIM ".ic v(X$module.$to_ff[$i]:Q)= ##$ffopin1[$i]\_reference_1##\n";
-    print SIM ".ic v(X$module.$to_ff[$i]:Q)= ##$new\_reference_1##\n";
+      #print SIM ".ic v(X$module.$to_ff[$i]\_q\_reg:Q)= ##$new\_reference_1##\n";
+      print SIM ".ic v(X$module.$to_ff[$i]:Q)= ##$new\_reference_1##\n";
    }
 
    #$measure_at_falling_edge.="meas tran ff_op_$i MAX v(X$module.$to_ff[$i]:Q) from=$fall_from"."s"." to=$fall_to"."s\n";
@@ -649,7 +623,7 @@ foreach $i(0 .. $#to_ff)
 
 
 #This will need to be commented for non-ISCAS benchmark circuits
-# $measure_at_falling_edge.="meas tran ff_op_fall_$i MAX v(X$module.$to_ff[$i]\_q\_reg:Q) from=$fall_from"."s"." to=$fall_to"."s\n";
+ #$measure_at_falling_edge.="meas tran ff_op_fall_$i MAX v(X$module.$to_ff[$i]\_q\_reg:Q) from=$fall_from"."s"." to=$fall_to"."s\n";
  #This will need to be enabled for non-ISCAS benchmark circuits
  $measure_at_falling_edge.="meas tran ff_op_fall_$i MAX v(X$module.$to_ff[$i]:Q) from=$fall_from"."s"." to=$fall_to"."s\n";
  }
