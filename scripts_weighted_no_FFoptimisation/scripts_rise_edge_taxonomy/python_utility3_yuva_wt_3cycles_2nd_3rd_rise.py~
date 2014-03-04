@@ -3,7 +3,6 @@
 
 #IMPORTANT: It is assumed that we are running parallel ngspice simulations on a remote 48-core cluster at 10.107.105.201. If this is not the case, you will need to modify this script to run it on this machine, by commenting out the scp and ssh commands.
 
-#Changed the random clock final range from (num_clks) to (num_clks-2): Mar 4th 2014
 #Backup directories renamed to 'backup_spice_decks_3rd_edge' and 'backup_spice_decks_2nd_edge': feb 12 2014.
 #Calling the python_FF_strike_taxonomy.py and python_gate_strike_taxonomy.py scripts explicitly, since calling it through a function did not run on the yuva cluster: Feb 11 2014
 #Calling the python_taxonomy_gate_FF.py script to tabulate the gate and FF taxonomy and combine the resultant 2 pdf files: Feb 11 2014
@@ -11,7 +10,7 @@
 #This version of the script has the facility of selecting the gate based on the area of the gate. This version of the script uses another script python_weighted_gateselection.py to pick the random gate based on its area: Nov 17 2013
 #Glitch insertion window is within the 2.5 cycles, and not the 6.5 cycles that is required for the case with intermediate FFs
 
-#Example usage: python python_utility3_yuva_wt_2cycles_2nd_3rd_rise_local.py -m lfsr -p /home/nanditha/Documents/simulations/yuva/LFSR -d  LFSR -t 180 -n 8 --group 8 --clk 320 --std_lib osu018_stdcells_correct_vdd_gnd.sp
+#Example usage: python python_utility3_remote_seed_yuva_echo.py -m c432_clk_opFF -p /home/nanditha/Documents/iitb/utility/c432_priority_opFF -d c432_priority_opFF -t 180 -n 2 --group 2 --clk 100 --std_lib osu018_stdcells_correct_vdd_gnd.sp
 
 import optparse
 import re,os
@@ -60,7 +59,7 @@ end_PWL= half_clk_period + change_time #in ns generally
 
 with open("%s/pnr/reports/5.postRouteOpt_%s/%s_postRoute.slk" %(path,module,module),"r") as f:
 	words=map(str.split, f)
-"""
+
 line1=words[1] #2nd line after header
 slack_read=line1[2]
 print "\nSlack is: %s" %slack_read
@@ -81,7 +80,7 @@ print "\nArrival time is: %e " %arrival_time_ns
 #What fraction of the clk period is the arrival time?
 arrival_clk_part = arrival_time_ns / clk_period
 print "\nArrival time is: %f clk periods" %arrival_clk_part
-"""
+
 #Whatever number of decks to be simulated- is assumed to be more than or equal to 1000.
 #At a time, only 1000 are generated and run- to save disk space. After collecting results, they are deleted
 num_of_loops=(int(num)/int(num_at_a_time))
@@ -169,7 +168,7 @@ clk_period = (1.0/float(clk))*(0.000001) #for the MHz
 print "\nclk is ",clk
 print "\nClk_period: ", clk_period
 
-"""
+
 os.system('cat $PBS_NODEFILE > %s/nodes.txt' %path)
 print "PBS NODEFILE contents....written to nodes.txt\n"
 time.sleep(3)
@@ -179,7 +178,7 @@ os.system('cat %s/sshmachines.txt' %path)
 print "Check contents of sshmachines.txt file....\n"
 time.sleep(10)
 
-"""
+
 #Uncomment this for future designs. For decoder example, decoder folder has already been created on desktop
 #os.system('ssh nanditha@10.107.90.52 mkdir /home/nanditha/simulations/%s' %(design_folder))
 ###########################################Comment this out if not using desktop to run##################################
@@ -270,7 +269,7 @@ for loop in range(start_loop, (num_of_loops+1)):
 		print "Random gate is: ",rand_gate
 
 		#A random clk picked. dont pick the 1st 10 clock cycles. 1st 3 have dont care outputs at the FFs. ANd we are simulating 6 clk cycles, so, initialisation is 4 clk cycles. so, leave a guardband by ignoring the 1st 10 clk cycles
-		rand_clk= int(random.randrange(10,(num_of_clks-2)) ) 
+		rand_clk= int(random.randrange(10,num_of_clks))  
 		#print "Random clock cycle is: ",rand_clk
 		
 		os.system('perl %s/perl_calculate_drain.pl -s %s/reference_spice.sp -l %s/glitch_%s -r %s/%s_reference_out/tool_reference_out.txt -m %s -f %s -g %d ' %(path,path,path,std_lib,path,module,module,path,rand_gate))
@@ -288,13 +287,12 @@ for loop in range(start_loop, (num_of_loops+1)):
 #Arrival_time_part + initial_clk_part should add up to 1.5 clk periods
 #The clk starts from low to high and then low, before the 2nd rising edge starts. The input is changed in the high period and the glitch is expected to arrrive later on, and before the next rising edge (when the latch will open)
 		#In every iteration, a different random number needs to be picked. Hence, this is inside the for loop
-		"""
+		
 		initial_clk_part = 1.5 - arrival_clk_part
 		initial_clk_part_abs = initial_clk_part * clk_period
 #This means, glitch "can" occur before the input changes in the clk period as well. So, force the glitch to start only after input has changed
 		if (initial_clk_part_abs < end_PWL) : 
 			initial_clk_part = end_PWL/clk_period
-		"""
 		#This formula is incorrect if we run the expt with large slack. 
 		#If slack is large, the glitch window gets reduced
 
@@ -304,9 +302,14 @@ for loop in range(start_loop, (num_of_loops+1)):
 		#glitch is being inserted at the 5th clk cycle
 		#unif=random.uniform(0,0.85*clk_period) 
 		#rand_glitch= (4.67*clk_period) +  unif #arrival_clk + initial_clk should add up to 4.5+0.15=4.65. 1 period-0.15=0.85
+		
+		#glitch in the 2nd cycle
+		#unif=random.uniform(0,0.95*clk_period) 
+		#rand_glitch= (0.55*clk_period) +  unif 
 
+		#glitch in the 3rd cycle
 		unif=random.uniform(0,0.95*clk_period) 
-		rand_glitch= (0.55*clk_period) +  unif #arrival_clk + initial_clk should add up to 1.5
+		rand_glitch= (1.55*clk_period) +  unif 
 
 		print "\nglitch within clk cycle= ",unif
 		print "\nRandom gate: %d\nRandom drain: %d\nRandom clock cycle:%d\nRandom glitch location:%e\n " %(rand_gate,rand_drain,rand_clk,rand_glitch)
@@ -334,7 +337,7 @@ for loop in range(start_loop, (num_of_loops+1)):
 
 	
 	print "Running GNU Parallel and ngspice on the created decks\n"
-	os.system('python %s/python_GNUparallel_ngspice_rise_local_mc.py -n %s -d %s -o %s -p %s' %(path,num_at_a_time,design_folder,loop,path))
+	os.system('python %s/python_GNUparallel_ngspice_yuva_rise.py -n %s -d %s -o %s -p %s' %(path,num_at_a_time,design_folder,loop,path))
 
 	seed_new= int(random.randrange(100000)*random.random())  #Used by compare script to backup random decks
 	#seed_new=seed*loop
@@ -400,7 +403,7 @@ print "\nDoing the taxonomy for FFs\n"
 os.system('python  %s/python_FF_strike_taxonomy.py  -p %s -m %s' %(path,path,module)) 
 
 print "\nCombining the pdf reports\n"
-os.system('python %s/python_combine_pdfs_local.py -p %s/spice_results -m %s' %(path,path,module))
+os.system('python %s/python_combine_pdfs.py -p %s/spice_results -m %s' %(path,path,module))
 
 
 

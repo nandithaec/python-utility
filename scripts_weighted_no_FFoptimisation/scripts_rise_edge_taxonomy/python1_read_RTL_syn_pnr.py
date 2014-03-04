@@ -81,6 +81,9 @@ f1.close()
 fnew.close()
 
 print "Done creating a new synthesis compile script \"synthesis/scripts/compile_dc.tcl\" \n"
+print "Eliminating clock gating\n"
+
+time.sleep(5)
 
 
 if os.path.exists('synthesis/run/'):
@@ -88,7 +91,9 @@ if os.path.exists('synthesis/run/'):
 	os.system('bash run_dc.bash')
 
 os.chdir('../../')
-print "...Pause...Done synthesis and optimisation of FF.. Starting pnr"
+print "...Pause...Done synthesis without clk gating.. Starting pnr"
+
+time.sleep(5)
 
 
 #Run place and route
@@ -119,13 +124,14 @@ slack_time=float(slack_string)
 print "\nSlack is: %f ns" %slack_time
 print "...Pause..."
 time.sleep(5)
+"""
 if slack_time < 0 :
 	print "WARNING: Slack is negative. Your design WILL NOT function at the frequency %s\n" %clkfreq
 	time.sleep(30)
 else:
 	print "Slack is positive. Your design WILL function at the frequency %s MHz\n" %clkfreq
 	time.sleep(5)
-
+"""
 
 if '1\'b1' in open('./pnr/op_data/%s_final.v' %module).read():
 	print "\n*******************WARNING******************\n"

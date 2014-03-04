@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-#Example usage: python utility_python_top_level_rise.py --rtl=/home/users/nanditha/Documents/utility/b03/b03.vhd --mod=b03 --test=/home/users/nanditha/Documents/utility/b03/test_b03.vhd --tb_mod=test_b03 --clk=250 --run=100us --design=b03 --tech=180 --num=4 --group 4 --path=/home/external/iitb/nanditha/simulations/b03  --std_lib osu018_stdcells_correct_vdd_gnd.sp  --proc_node 1 --ppn 4 --days 00 --hrs 00 --mins 4 --script python_utility3_yuva_wt_2cycles_2nd_3rd_rise.py
+#Example usage: python utility_python_top_level_rise.py --rtl=/home/users/nanditha/Documents/utility/b06/b06.vhd --mod=b06 --test=/home/users/nanditha/Documents/utility/b06/test_b06.vhd --tb_mod=test_b06 --clk=350 --run=100us --design=b06 --tech=180 --num=4 --group 4 --path=/home/external/iitb/nanditha/simulations/b06  --std_lib osu018_stdcells_correct_vdd_gnd.sp  --proc_node 1 --ppn 4 --days 00 --hrs 00 --mins 4 --script python_utility3_yuva_wt_2cycles_2nd_3rd_rise.py
 
 #This script is modified to call those python/perl scripts which have been modified to capture the outputs of the 2nd rising edge in spice and compare them with the 2nd rising edge in RTL simulation: Feb 7 2014
 #This script does a synthesis, place and route of the vhd/verilog file using rtl2gds. The pnr verilog file is modified to include fwrite statements to write the FF outputs to a reference file. This verilog file simulated using modelsim and the reference FF output values written to a text file.

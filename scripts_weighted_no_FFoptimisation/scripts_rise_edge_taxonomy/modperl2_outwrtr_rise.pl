@@ -1,5 +1,5 @@
 #!/usr/bin/perl
-#Example usage: perl modperl2_outwrtr_rise.pl -v pnr/op_data/b03_final.v -m b03
+#Example usage: perl modperl2_outwrtr_rise.pl -v pnr/op_data/b01_final.v -m b01
 
 #Modifications:
 #Appended the random_drain to the RTL*.csv header. This is needed to generate decks by just looking at the taxonomy.csv: Feb 11 2014
@@ -108,8 +108,10 @@ open(OPT,">$op")||die("unable to open file : $!");
 #This file REF (our_reference.txt is just created. Nothing is written to through this script.
 #The modelsim.v file will write to this file when simulated
 open(REF,">./$ref/our_reference_out.txt")||die("unable to open file : $!");
+open(REF_NEG,">./$ref/our_reference_out_neg.txt")||die("unable to open file : $!");
 open(OUT_FF,">./$ref/ff_oppins.txt")||die("unable to open file : $!");
 open(TOOLREF,">./$ref/tool_reference_out.txt")||die("unable to open file : $!");
+open(TOOLREF_NEG,">./$ref/tool_reference_out_neg.txt")||die("unable to open file : $!");
 use File::Path qw(mkpath);
 mkpath("spice_results");
 
@@ -204,14 +206,19 @@ while(<VLOG>)
         print OPT "//************************* CODE APPENDED TO ORIGINAL .v FILE STARTS FROM HERE *************************\n";
         print OPT 'integer fileout;'."\n";
 	print OPT 'integer clk_count = 0;'."\n";
+	print OPT 'integer clk_count_neg = 0;'."\n";
 	print OPT 'integer fileout1;'."\n";
-	print OPT 'integer clk_count1 = 0;'."\n";
+	print OPT 'integer fileout_neg;'."\n";
+	print OPT 'integer fileout1_neg;'."\n";
 	print OPT 'initial'."\n";
 	print OPT 'begin'."\n"; 
 	print OPT 'fileout= $fopen("./'.$ref.'/our_reference_out.txt","a+");'."\n";
 	print OPT 'fileout1= $fopen("./'.$ref.'/tool_reference_out.txt","a+");'."\n";
+	print OPT 'fileout_neg= $fopen("./'.$ref.'/our_reference_out_neg.txt","a+");'."\n";
+	print OPT 'fileout1_neg= $fopen("./'.$ref.'/tool_reference_out_neg.txt","a+");'."\n";
+	
 	print OPT 'end'."\n";
-	print OPT "//**************************************************\n";
+	print OPT "//*******************POS EDGE*******************************\n";
 #Writing output of flip flop at negative edge
 	#print OPT 'always @(posedge clk)'."\n";
 	#print OPT 'begin'."\n";
@@ -266,6 +273,55 @@ while(<VLOG>)
 	print OPT '$fwrite(fileout,"***********************************************************************************************************\n\n");'."\n";	
 	
 	print OPT 'end'."\n"; 
+	
+	#####################Write out the negative edge values#######################
+	print OPT "//*******************NEG EDGE*******************************\n";
+	print OPT 'always @(negedge clk)'."\n";
+	print OPT 'begin'."\n";
+        print OPT 'clk_count_neg=clk_count_neg+1;'."\n";
+	print OPT '$fwrite(fileout_neg,"%d CLOCK CYCLE STARTS :SIGNAL VALUES AT THE RISING EDGE OF THIS CLOCK CYCLE ARE: \n\n",clk_count_neg);'."\n";
+	print OPT "//*************The inputs of the FFs are as follows:********************\n";
+	#push @ffipin,@ipin;
+	foreach $i(0 .. $#ffipin) #Inputs of the FFs
+		{
+		  print OPT '$fwrite(fileout_neg,"'.$ffipin[$i].' = %b\n", '.$ffipin[$i].");\n";
+		  print OPT '$fwrite(fileout1_neg,"%b ", '.$ffipin[$i].");\n";
+		}
+	print OPT "//*************The outputs of the FFs are as follows:********************\n";	
+		
+		#Outputs of the FFs
+		#Merging the output pins which are not the output pin of any flip flop
+    #$c_pins = join(" ",@ffopin);
+    $limit = $#ffopin;	
+    foreach $j(0 .. $#opin)
+      {  
+		  $match=0;
+		  foreach $l(0 .. $limit)
+		     {
+				 if($opin[$j] eq $ffopin[$l])
+	               {
+		               $match=1;
+		            }
+		      }
+		   if($match==0)
+		      {
+				  #print "\n$opin[$j]\n";
+				  push(@ffopin,$opin[$j]);
+			  }
+      }		        
+     	
+	foreach $i(0 .. $#ffopin)
+		{
+		  print OPT '$fwrite(fileout_neg,"'.$ffopin[$i].' = %b\n", '.$ffopin[$i].");\n";
+		  print OPT '$fwrite(fileout1_neg,"%b ", '.$ffopin[$i].");\n";
+		}
+	print OPT '$fwrite(fileout_neg,"\n");'."\n";
+	print OPT '$fwrite(fileout1_neg,"\n");'."\n";
+	print OPT '$fwrite(fileout_neg,"%d CLOCK CYCLE ENDS   :SIGNAL VALUES AT THIS POINT \n\n",clk_count_neg);'."\n";
+	print OPT '$fwrite(fileout_neg,"***********************************************************************************************************\n\n");'."\n";	
+	print OPT "//*************END********************\n";	
+	
+	print OPT 'end'."\n";
 	print OPT $_;
    }
 
