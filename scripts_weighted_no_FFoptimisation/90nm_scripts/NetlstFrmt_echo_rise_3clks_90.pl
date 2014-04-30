@@ -423,8 +423,9 @@ print SIM ".param init_delay = half_clk_period\n";
 print SIM "+ rise_time= 50p\n";
 print SIM "+ fall_time= 50p\n\n";
 
-print SIM "**2.5 cycle simulation**\n";
-print SIM ".param change_time='(half_clk_period/3)'\n";
+
+print SIM "**3.5 cycle simulation**\n";
+print SIM ".param change_time='(clk_period+ (half_clk_period/3))'\n";
 print SIM ".param change_time_rise= '(change_time + 100ps)'\n";
 print SIM ".param k_plus1= '(half_clk_period + clk_period + (half_clk_period/3))'\n";
 print SIM ".param k_plus1_rise = '(k_plus1 + 100ps)'\n";
@@ -539,11 +540,11 @@ foreach $i(0 .. $#ipins)
     # print SIM "\n\nV$i $new 0 PWL( 0 ##$new\_reference_minus4##  k_minus_3 ##$new\_reference_minus4## k_minus_3rise ##$new\_reference_minus3## k_minus_2 ##$new\_reference_minus3## k_minus_2rise ##$new\_reference_minus2## k_minus_1 ##$new\_reference_minus2## k_minus_1rise ##$new\_reference_minus1## k_cycle ##$new\_reference_minus1## k_cycle_rise ##$new\_reference_1## k_plus1 ##$new\_reference_1## k_plus1_rise ##$new\_reference_2## $sim_time ##$new\_reference_2##)\n";
 
 #Simulating 2.5 cycles
-#This will initialise the outputs of all FFs to 0 to begin with and then change the input of the FF to the current cycle reference input in Verilog sim
-# print SIM "\n\nV$i $new 0 PWL( 0 ##$new\_reference_minus1##  change_time ##$new\_reference_minus1## change_time_rise  ##$new\_reference_1## k_plus1 ##$new\_reference_1## k_plus1_rise ##$new\_reference_2## $sim_time ##$new\_reference_2##)\n";
-
- print SIM "\n\nV$i $new 0 PWL( 0  ##$new\_reference_1## k_plus1 ##$new\_reference_1## k_plus1_rise ##$new\_reference_2## $sim_time ##$new\_reference_2##)\n";
+# print SIM "\n\nV$i $new 0 PWL( 0  ##$new\_reference_1## k_plus1 ##$new\_reference_1## k_plus1_rise ##$new\_reference_2## $sim_time ##$new\_reference_2##)\n";
  
+ #3.5 cycles
+  print SIM "\n\nV$i $new 0 PWL( 0 ##$new\_reference_minus1##  change_time ##$new\_reference_minus1## change_time_rise  ##$new\_reference_1## k_plus1 ##$new\_reference_1## k_plus1_rise ##$new\_reference_2## $sim_time ##$new\_reference_2##)\n";
+  
    }
 }
 
