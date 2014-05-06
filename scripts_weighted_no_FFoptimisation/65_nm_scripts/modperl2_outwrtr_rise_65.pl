@@ -1,5 +1,5 @@
 #!/usr/bin/perl
-#Example usage: perl modperl2_outwrtr_rise_65.pl -v pnr/op_data/decoder_op_ip_final.v -m decoder_op_ip
+#Example usage: perl modperl2_outwrtr_rise_65.pl -v pnr/op_data/c432_clk_ipFF_final.v -m c432_clk_ipFF
 
 #Modifications:
 #Matching "DF" instead of "DFF" for the 65nm std cell library: Mar 19 2014

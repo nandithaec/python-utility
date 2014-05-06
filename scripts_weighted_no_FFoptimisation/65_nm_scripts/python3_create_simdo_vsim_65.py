@@ -5,7 +5,7 @@
 
 #Modifications:
 #1. Added an option to run Modelsim without invoking GUI. vsim -c. Errors will be written out to vsim.log file: 17th Dec 2013
-##Example usage: python python3_create_simdo_vsim.py -v c880_clk_ipFF_modelsim.v -t /home/users/nanditha/Documents/utility/c880_alu/test_c880.v -b test_c880 -r 100us
+##Example usage: python python3_create_simdo_vsim_65.py -v c432_clk_ipFF_modelsim.v -t /home/users/nanditha/Documents/utility/65nm/c432/test_c432.v -b test_c432 -r 100us
 
 ##The pnr netlist is by default assumed to be in /pnr/op_data folder
 

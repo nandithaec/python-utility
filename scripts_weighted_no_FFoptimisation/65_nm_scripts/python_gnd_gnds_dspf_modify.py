@@ -1,7 +1,7 @@
 
 #!/usr/bin/env python
 #Read in a RTL file, do synthesis and placement, route
-#Example usage: python python_gnd_gnds_dspf_modify.py -m decoder_op_ip
+#Example usage: python python_gnd_gnds_dspf_modify.py -m c432_clk_ipFF
 
 #freq added to synthesis part: Nov 19 2013
 
@@ -10,7 +10,7 @@ import re,os
 import time
 from optparse import OptionParser
 
-parser = OptionParser('This script reads in the dspf file and adds \'gnd,gnds,vdd,vdds\' to the subckt instances and will show one instance per line (no + continuation of subckt): Mar 19 2014 .\n The output will be the same dspf with a "_new" suffix at the pnr/op_data location.\nAuthor:Nanditha Rao(nanditha@ee.iitb.ac.in)\n')
+parser = OptionParser('This script reads in the dspf file and will show one instance per line (no + continuation of subckt): Mar 19 2014 .\n The output will be the same dspf with a "_new" suffix at the pnr/op_data location.\nAuthor:Nanditha Rao(nanditha@ee.iitb.ac.in)\n')
 
 parser.add_option("-m","--mod", help='Enter the entity name(vhdl) or module name (verilog) to be synthesised',dest='module_name')
 

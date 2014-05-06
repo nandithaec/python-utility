@@ -10,7 +10,7 @@
 #This version of the script has the facility of selecting the gate based on the area of the gate. This version of the script uses another script python_weighted_gateselection.py to pick the random gate based on its area: Nov 17 2013
 #Glitch insertion window is within the 2.5 cycles, and not the 6.5 cycles that is required for the case with intermediate FFs
 
-#Example usage: python python_utility3_yuva_3cycles_2nd_3rd_local_65.py -m decoder_op_ip -p /home/nanditha/Documents/simulations/ngspice_sim/65nm/sim/decoder_65nm -d decoder_65nm -t 65 -n 10 --group 10 --clk 400 
+#Example usage: python python_utility3_yuva_3cycles_2nd_3rd_local_65.py -m b01 -p /home/nanditha/Documents/simulations/ngspice_sim/65nm/sim/b01 -d b01 -t 65 -n 10 --group 10 --clk 400 
 
 import optparse
 import re,os
@@ -283,13 +283,15 @@ for loop in range(start_loop, (num_of_loops+1)):
 #Arrival_time_part + initial_clk_part should add up to 1.5 clk periods
 #The clk starts from low to high and then low, before the 2nd rising edge starts. The input is changed in the high period and the glitch is expected to arrrive later on, and before the next rising edge (when the latch will open)
 		#In every iteration, a different random number needs to be picked. Hence, this is inside the for loop
-		
+		"""		
 		initial_clk_part = 1.5 - arrival_clk_part
 		initial_clk_part_abs = initial_clk_part * clk_period
 #This means, glitch "can" occur before the input changes in the clk period as well. So, force the glitch to start only after input has changed
 		if (initial_clk_part_abs < end_PWL) : 
 			initial_clk_part = end_PWL/clk_period
-		#This formula is incorrect if we run the expt with large slack. 
+		"""		
+
+#This formula is incorrect if we run the expt with large slack. 
 		#If slack is large, the glitch window gets reduced
 
 		#unif=random.uniform(0,arrival_clk_part*clk_period)
@@ -300,12 +302,12 @@ for loop in range(start_loop, (num_of_loops+1)):
 		#rand_glitch= (4.67*clk_period) +  unif #arrival_clk + initial_clk should add up to 4.5+0.15=4.65. 1 period-0.15=0.85
 		
 		#glitch in the 2nd cycle
-		#unif=random.uniform(0,0.95*clk_period) 
-		#rand_glitch= (0.55*clk_period) +  unif 
+		unif=random.uniform(0,0.95*clk_period) 
+		rand_glitch= (0.55*clk_period) +  unif 
 
 		#glitch in the 3rd cycle
-		unif=random.uniform(0,0.95*clk_period) 
-		rand_glitch= (1.55*clk_period) +  unif 
+		#unif=random.uniform(0,0.95*clk_period) 
+		#rand_glitch= (1.55*clk_period) +  unif 
 
 		print "\nglitch within clk cycle= ",unif
 		print "\nRandom gate: %d\nRandom drain: %d\nRandom clock cycle:%d\nRandom glitch location:%e\n " %(rand_gate,rand_drain,rand_clk,rand_glitch)

@@ -1,7 +1,7 @@
 
 #!/usr/bin/env python
 #Read in a RTL file, do synthesis and placement, route
-#Example usage: python python_choose_subckts_library.py -m decoder_op_ip
+#Example usage: python python_choose_subckts_library.py -m b01
 
 
 import optparse
@@ -19,9 +19,9 @@ parser.add_option("-m","--mod", help='Enter the entity name(vhdl) or module name
 
 module=options.module_name
 
-f=open("../CORE65GPSVT_all.sp" ,"r")
+f=open("../CORE65GPSVT_all_vdd_gnd_bulk_node.sp" ,"r")
 #f=open("test.sp" ,"r")
-fnew=open("CORE65GPSVT_selected_lib.sp" ,"w")
+fnew=open("CORE65GPSVT_selected_lib_vg.sp" ,"w")
 
 lib_data=f.readlines()
 

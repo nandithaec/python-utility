@@ -1,10 +1,11 @@
 
-#Example: perl NetlstFrmt_echo_rise_65.pl -v decoder_op_ip_modelsim.v -s pnr/op_data/decoder_op_ip_final_new.dspf -c 400 -t 65 -m decoder_op_ip
+#Example: perl NetlstFrmt_echo_rise_65.pl -v b01_modelsim.v -s pnr/op_data/b01_final_new.dspf -c 400 -t 65 -m b01
 
 
 #clk frequency in MHz
 
 #Modifications:
+#.option statements added for convergence: 30/4/2014
 #rise and fall edge measurements limitedto 50ps duration. Else false values were being calculated: April 25 2014
 #.ic on net0148:F59 of the DFF to initialise correctly. This value should be the inverted value of what was supposed to be initialised originally.: April 2nd 2014
 #.ic square brackets being replaced by _ : feb 26 2014
@@ -652,6 +653,7 @@ $measure_at_rising_edge.="meas tran ff_op_rise_$i MAX v(X$module.$to_ff[$i]:Q) f
  
 #Adding the control part
 print SIM "\n\n.control\n";
+print SIM "option rshunt = 1e12\noption itl4 = 100  reltol =0.005  trtol=8 pivtol=1e-11  abstol=1e-10\n";
 print SIM "tran 10ps ".$sim_time."s\n\n";
 print SIM "**Uncomment the following and run this spice file, if you need a waveform\n";
 print SIM "**write waveform_file.raw v(clk) v(input_dec_2_) v(input_dec_1_) v(input_dec_0_)  v(output_dec_3_) v(output_dec_1_) \n*+v.xdecoder_behav_pnr.xu11.vcharge#branch \n\n";

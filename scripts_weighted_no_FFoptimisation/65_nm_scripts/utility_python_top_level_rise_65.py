@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 
 
-#Example usage: python utility_python_top_level_rise_65.py --rtl=/home/users/nanditha/Documents/utility/65nm/decoder_65nm/decoder_op_ip.vhd --mod=decoder_op_ip --test=/home/users/nanditha/Documents/utility/65nm/decoder_65nm/test_decoder_opFF.vhd --tb_mod=test_decoder_op_ip --clk=400 --run=100us --design=decoder_65nm --tech=65 --num=10 --group 10 --path=/home/external/iitb/nanditha/simulations/decoder_65nm  --std_lib osu018_stdcells_correct_vdd_gnd.sp  --proc_node 1 --ppn 5 --days 00 --hrs 00 --mins 3 --script python_utility3_yuva_wt_3cycles_2nd_3rd_rise_65.py
+#Example usage: python utility_python_top_level_rise_65.py --rtl=/home/users/nanditha/Documents/utility/65nm/b01/b01.vhd --mod=b01 --test=/home/users/nanditha/Documents/utility/65nm/b01/test_b01.vhd --tb_mod=test_b01 --clk=400 --run=100us --design=b01 --tech=65 --num=10 --group 10 --path=/home/external/iitb/nanditha/simulations/65nm/b01  --proc_node 1 --ppn 5 --days 00 --hrs 00 --mins 3 --script python_utility3_yuva_wt_3cycles_2nd_3rd_rise_65.py
 
+#Modifications made to the script:
 
 #Calling python_gnd_gnds_dspf_modify.py: This script adds 'gnd,gnds,vdd,vdds' to the subckt instances and will show one instance per line (no + continuation of subckt): Mar 19 2014
 #dspf input to the Netlstfrmt will be pnr/op_data/%s_final_new.dspf which is created by the previous script python_gnd_gnds_dspf_modify.py. : Mar 19 2014
@@ -35,7 +36,7 @@ parser.add_option("-c","--clk", help='Enter the clk frequency in MHz, for eg., i
 parser.add_option("-r","--run", help='Enter the duration of the simulation run. e.g., 1us or 1 us',dest='runtime')
 
 #########################################################################
-parser.add_option("-l", "--std_lib",dest='std_lib', help='Enter the file name of the standard cell library (sp file), including the file extension')
+
 parser.add_option("-d", "--design", dest="design_folder",help="Enter the name of the design folder (your current working dir) which will be copied to the 48-core cluster to run simulations parallely")
 parser.add_option("--tech",dest='tech',  help='Enter the technology node that you want to simulate, for eg.,180 for 180nm')
 parser.add_option("-n", "--num",dest='num',  help='Enter the number of spice decks to be generated and simulated')
@@ -63,7 +64,6 @@ runtime=options.runtime
 
 
 ########################
-std_lib = options.std_lib
 design_folder=options.design_folder
 techn=options.tech
 num=options.num
@@ -78,7 +78,7 @@ hrs=options.hrs
 mins=options.mins
 script=options.script
 
-"""
+
 #Example usage: python python1_read_RTL_syn_pnr.py -f decoder.vhd -m decoder_behav_pnr -clk 900
 os.system('python python1_read_RTL_syn_pnr_65.py -f %s -m %s -c %s' %(rtl,module,clkfreq))
 
@@ -86,7 +86,7 @@ print('Done 1st script rtl+pnr\n')
 time.sleep(5)
 
 #Example usage: python python2_run_qrc_spice_extraction.py -m decoder_behav_pnr
-##os.system('python python2_run_qrc_spice_extraction.py -m %s' %module)
+##Not using this for 65nm: os.system('python python2_run_qrc_spice_extraction.py -m %s' %module)
 
 #print('Done 2nd script QRC extracting spice\n')
 #time.sleep(5)
@@ -104,49 +104,52 @@ os.system('python python3_create_simdo_vsim_65.py -v %s_modelsim.v -t %s -b %s -
 print('Done modelsim simulation\n')
 time.sleep(5)
 ####################################################################################################################################################################
-"""
+
+
+##will show one instance per line (no + continuation of subckt)
+os.system('python python_gnd_gnds_dspf_modify.py -m %s' %(module))
+time.sleep(5)
+
+#Run python_remove_vdd_gnd.py to eliminate gnds and vdds One time thing. 
+#Already done. No need to rerun everytime.
 os.system('python python_choose_subckts_library.py -m %s' %(module))
 time.sleep(5)
 
 
 ##Example usage: perl GlitchLibGen.pl -i osu018_stdcells_correct_vdd_gnd.sp- this file will be provided by us for the 180nm technology
 #Create a glitched std cell library file 
-os.system('perl GlitchLibGen_65.pl -i CORE65GPSVT_selected_lib.sp' )
+os.system('perl GlitchLibGen_65.pl -i CORE65GPSVT_selected_lib_vg.sp' )
 print "***Created glitch library..\n"
 time.sleep(5)
 
-##adds \'gnd,gnds,vdd,vdds\' to the subckt instances and will show one instance per line (no + continuation of subckt)
-os.system('python python_gnd_gnds_dspf_modify.py -m %s' %(module))
-time.sleep(5)
+"""
 
 ##Generate a template simulatable spice netlist from the dspf file generated after pnr. This would include all .ic, Voltage sources, meas, tran, control, param etc
 #NetlistFormat.pl
 #perl NetlstFrmt.pl -v decoder_behav_pnr_modelsim.v -s pnr/op_data/decoder_behav_pnr_final.dspf -l glitch_osu018_stdcells_correct_allcells.sp -c 1e9 -t 180 -m decoder_behav_pnr
-os.system('perl NetlstFrmt_echo_rise_3clks_65.pl -v %s_modelsim.v  -s pnr/op_data/%s_final_new.dspf  -c %s -t %s -m %s' %(module,module,clkfreq,techn, module))
+os.system('perl NetlstFrmt_echo_rise_65.pl -v %s_modelsim.v  -s pnr/op_data/%s_final_new.dspf  -c %s -t %s -m %s' %(module,module,clkfreq,techn, module))
 print "***Done modifying the spice file to make it simulatable. File available in current directory reference_spice.sp\n"
 time.sleep(5)
 
-os.system('python python_create_jobscript_65.py -m %s -p %s -d %s -t %s -n %s --group %s --clk %s --std_lib %s  --proc_node %s --ppn %s --days %s --hrs %s --mins %s --script %s' %(module,path_folder,design_folder,techn,num,group,clkfreq,std_lib,nodes,ppn,days,hrs,mins,script))
+os.system('python python_create_jobscript_65.py -m %s -p %s -d %s -t %s -n %s --group %s --clk %s --proc_node %s --ppn %s --days %s --hrs %s --mins %s --script %s' %(module,path_folder,design_folder,techn,num,group,clkfreq,nodes,ppn,days,hrs,mins,script))
 time.sleep(5)
 
 #Copy the entire Current directory to the machine where the simulations will be run in parallel. If running it on the 48-core cluster under the username: user1, password: user123 and copying to the folder /home/user1/simulations. Files will HAVE to be run from the remote machine,since the slave machines are connected only to the master and not to the outside world. So, these slave machines can ONLY be accessed by the master node.
 #print "\nCopying current working directory to remote cluster to run simulations parallely\n"
 #os.system('scp -r ../%s user1@10.107.105.201:/home/user1/simulations' %design_folder)
-
-#Copy to the Pune CDAC cluster
 """
-os.system('scp -r ../%s nanditha@yuva.cdac.in:/home/external/iitb/nanditha/simulations' %design_folder)
-print "Done copying files\n"
-print "Now connecting to the remote machine. Once connected with your password, scripts at that location will be executed..\n"
+#Copy to the Pune CDAC cluster
+
+#os.system('scp -r ../%s nanditha@yuva.cdac.in:/home/external/iitb/nanditha/simulations' %design_folder)
+#print "Done copying files\n"
+#print "Now connecting to the remote machine. Once connected with your password, scripts at that location will be executed..\n"
 
 ####################################################################################################################################################################
 
-#os.system('ssh user1@10.107.105.201 python %s/python_utility3_remote_seed_echo.py -n %s -m %s -p %s -d %s -t %s --group %s --clk %s --std_lib %s' %(path_folder,num,module,path_folder,design_folder,techn,group,clkfreq,std_lib))
-
-print('Executing jobscript remotely on the pune cdac server machine\n')
+#print('Executing jobscript remotely on the pune cdac server machine\n')
 
 #os.system('ssh nanditha@yuva.cdac.in qsub /home/external/iitb/nanditha/simulations/%s/jobscript.txt' %(design_folder))
-"""
+
 
 
 

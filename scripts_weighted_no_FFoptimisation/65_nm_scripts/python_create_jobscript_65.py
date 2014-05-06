@@ -2,7 +2,7 @@
 
 #create a jobscript.txt file in the current directory. This entire dir will be copied to the Pune CDAC machine. The jobscript file will be used to submit the job to the queue
 
-##Example usage: python python_create_jobscript.py -m c432_clk_opFF -p /home/external/iitb/nanditha/simulations/FF_optimisation/c432_priority_opFF -d c432_priority_opFF -t 180 -n 10 --group 10 --clk 250 --std_lib osu018_stdcells_correct_vdd_gnd.sp  --proc_node 1 --ppn 16 --days 00 --hrs 00 --mins 10 --script python_utility3_remote_seed_yuva_echo.py
+##Example usage: python python_create_jobscript.py -m c432_clk_opFF -p /home/external/iitb/nanditha/simulations/FF_optimisation/c432_priority_opFF -d c432_priority_opFF -t 180 -n 10 --group 10 --clk 250  --proc_node 1 --ppn 16 --days 00 --hrs 00 --mins 10 --script python_utility3_remote_seed_yuva_echo.py
 
 ##The pnr def.gz file is by default assumed to be in /pnr/op_data folder
 
@@ -22,7 +22,6 @@ parser.add_option("-d", "--design", dest="design_folder",help="Enter the name of
 parser.add_option("-t", "--tech",dest='tech', help='Enter the technology node-for eg., For 180nm, enter 180')
 parser.add_option("--group",dest='group',  help='Enter the number of spice decks to be simulated at a time. For eg., if -n option is 10000, and say we want to run 100 at a time, then enter 100')
 parser.add_option("-c", "--clk",dest='clk', help='Enter the clk freq in MHz')
-parser.add_option("-l", "--std_lib",dest='std_lib', help='Enter the file name of the standard cell library (sp file)')
 parser.add_option("--proc_node",dest='nodes', help='Enter the number of processor nodes you would need')
 parser.add_option("--ppn",dest='ppn', help='Enter the number of cores per processor you would need (max 16 per processor)')
 parser.add_option("--days",dest='days', help='Enter the walltime- number of days. If it does not take >1 day, enter 00')
@@ -40,7 +39,6 @@ design_folder=options.design_folder
 tech=options.tech
 num_at_a_time=options.group
 clk=(options.clk)
-std_lib = options.std_lib
 nodes=options.nodes
 ppn=options.ppn
 days=options.days
