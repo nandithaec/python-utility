@@ -1,9 +1,8 @@
 #!/usr/bin/env python
 
 
-#Example usage: python utility_python_top_level_rise_65.py --rtl=/home/users/nanditha/Documents/utility/65nm/b01/b01.vhd --mod=b01 --test=/home/users/nanditha/Documents/utility/65nm/b01/test_b01.vhd --tb_mod=test_b01 --clk=400 --run=100us --design=b01 --tech=65 --num=10 --group 10 --path=/home/external/iitb/nanditha/simulations/65nm/b01  --proc_node 1 --ppn 5 --days 00 --hrs 00 --mins 3 --script python_utility3_yuva_wt_3cycles_2nd_3rd_rise_65.py
+#Example usage: python utility_python_top_level_rise_65.py --rtl=/home/users/nanditha/Documents/utility/65nm/c432/c432_clk_ipFF.v --mod=c432_clk_ipFF --test=/home/users/nanditha/Documents/utility/65nm/c432/test_c432.v --tb_mod=test_c432 --clk=300 --run=100us --design=c432 --tech=65 --num=10 --group 10 --path=/home/external/iitb/nanditha/simulations/65nm/c432  --proc_node 1 --ppn 5 --days 00 --hrs 00 --mins 3 --script python_utility3_yuva_2cycles_2nd_3rd_65.py
 
-#Modifications made to the script:
 
 #Calling python_gnd_gnds_dspf_modify.py: This script adds 'gnd,gnds,vdd,vdds' to the subckt instances and will show one instance per line (no + continuation of subckt): Mar 19 2014
 #dspf input to the Netlstfrmt will be pnr/op_data/%s_final_new.dspf which is created by the previous script python_gnd_gnds_dspf_modify.py. : Mar 19 2014
@@ -78,7 +77,7 @@ hrs=options.hrs
 mins=options.mins
 script=options.script
 
-
+"""
 #Example usage: python python1_read_RTL_syn_pnr.py -f decoder.vhd -m decoder_behav_pnr -clk 900
 os.system('python python1_read_RTL_syn_pnr_65.py -f %s -m %s -c %s' %(rtl,module,clkfreq))
 
@@ -110,8 +109,7 @@ time.sleep(5)
 os.system('python python_gnd_gnds_dspf_modify.py -m %s' %(module))
 time.sleep(5)
 
-#Run python_remove_vdd_gnd.py to eliminate gnds and vdds One time thing. 
-#Already done. No need to rerun everytime.
+
 os.system('python python_choose_subckts_library.py -m %s' %(module))
 time.sleep(5)
 
@@ -137,19 +135,19 @@ time.sleep(5)
 #Copy the entire Current directory to the machine where the simulations will be run in parallel. If running it on the 48-core cluster under the username: user1, password: user123 and copying to the folder /home/user1/simulations. Files will HAVE to be run from the remote machine,since the slave machines are connected only to the master and not to the outside world. So, these slave machines can ONLY be accessed by the master node.
 #print "\nCopying current working directory to remote cluster to run simulations parallely\n"
 #os.system('scp -r ../%s user1@10.107.105.201:/home/user1/simulations' %design_folder)
-"""
-#Copy to the Pune CDAC cluster
 
-#os.system('scp -r ../%s nanditha@yuva.cdac.in:/home/external/iitb/nanditha/simulations' %design_folder)
-#print "Done copying files\n"
-#print "Now connecting to the remote machine. Once connected with your password, scripts at that location will be executed..\n"
+#Copy to the Pune CDAC cluster
+"""
+os.system('scp -r ../%s nanditha@yuva.cdac.in:/home/external/iitb/nanditha/simulations' %design_folder)
+print "Done copying files\n"
+print "Now connecting to the remote machine. Once connected with your password, scripts at that location will be executed..\n"
 
 ####################################################################################################################################################################
 
-#print('Executing jobscript remotely on the pune cdac server machine\n')
+print('Executing jobscript remotely on the pune cdac server machine\n')
 
 #os.system('ssh nanditha@yuva.cdac.in qsub /home/external/iitb/nanditha/simulations/%s/jobscript.txt' %(design_folder))
-
+"""
 
 
 

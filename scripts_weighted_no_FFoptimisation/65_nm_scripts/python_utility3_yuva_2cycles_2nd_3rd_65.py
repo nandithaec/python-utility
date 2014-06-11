@@ -10,8 +10,7 @@
 #This version of the script has the facility of selecting the gate based on the area of the gate. This version of the script uses another script python_weighted_gateselection.py to pick the random gate based on its area: Nov 17 2013
 #Glitch insertion window is within the 2.5 cycles, and not the 6.5 cycles that is required for the case with intermediate FFs
 
-#Example usage: python python_utility3_yuva_3cycles_2nd_3rd_local_65.py -m b01 -p /home/nanditha/Documents/simulations/ngspice_sim/65nm/sim/b01 -d b01 -t 65 -n 3000 --group 1000 --clk 400 
-#Example usage: python python_utility3_yuva_2cycles_2nd_3rd_local_65.py -m c432_clk_ipFF -p /home/user1/simulations/65nm/c432 -d c432 -t 65 -n 10 --group 10 --clk 300 
+#Example usage: python python_utility3_remote_seed_yuva_echo.py -m c432_clk_opFF -p /home/nanditha/Documents/iitb/utility/c432_priority_opFF -d c432_priority_opFF -t 180 -n 10000 --group 1000 --clk 100 
 
 import optparse
 import re,os
@@ -169,7 +168,7 @@ clk_period = (1.0/float(clk))*(0.000001) #for the MHz
 print "\nclk is ",clk
 print "\nClk_period: ", clk_period
 
-"""
+
 os.system('cat $PBS_NODEFILE > %s/nodes.txt' %path)
 print "PBS NODEFILE contents....written to nodes.txt\n"
 time.sleep(3)
@@ -178,7 +177,7 @@ os.system('python %s/python_ssh_addr_yuva_65.py -p %s' %(path,path))
 os.system('cat %s/sshmachines.txt' %path)
 print "Check contents of sshmachines.txt file....\n"
 time.sleep(1)
-"""
+
 
 #Uncomment this for future designs. For decoder example, decoder folder has already been created on desktop
 #os.system('ssh nanditha@10.107.90.52 mkdir /home/nanditha/simulations/%s' %(design_folder))
@@ -195,8 +194,8 @@ gate_clk_data = [line.strip() for line in fg]
 #random gate will be picked after weighting it according to its area.
 #This is done in another script python_weighted_gateselection.py
 
-num_of_gates=int(gate_clk_data[0])
-print "\nnum of gates is %d" %num_of_gates
+#num_of_gates=int(gate_clk_data[0])
+#print "\nnum of gates is %d" %num_of_gates
 
 num_of_clks=int(gate_clk_data[1])
 print "\nnum of clocks is %d" %num_of_clks
@@ -269,7 +268,7 @@ for loop in range(start_loop, (num_of_loops+1)):
 		rand_clk= int(random.randrange(10,num_of_clks))  
 		#print "Random clock cycle is: ",rand_clk
 		
-		os.system('perl %s/perl_calculate_drain_65.pl -s %s/reference_spice.sp -l1 %s/glitch_CORE65GPSVT_selected_lib_vg.sp -r %s/%s_reference_out/tool_reference_out.txt -m %s -f %s -g %d ' %(path,path,path,path,module,module,path,rand_gate))
+		os.system('perl %s/perl_calculate_drain_65.pl -s %s/reference_spice.sp -l1 %s/glitch_CORE65GPSVT_selected_lib.sp -r %s/%s_reference_out/tool_reference_out.txt -m %s -f %s -g %d ' %(path,path,path,path,module,module,path,rand_gate))
 
 		fg = open('%s/tmp_random.txt' %(path), 'r')
 		drain_data = [line.strip() for line in fg]
@@ -284,15 +283,13 @@ for loop in range(start_loop, (num_of_loops+1)):
 #Arrival_time_part + initial_clk_part should add up to 1.5 clk periods
 #The clk starts from low to high and then low, before the 2nd rising edge starts. The input is changed in the high period and the glitch is expected to arrrive later on, and before the next rising edge (when the latch will open)
 		#In every iteration, a different random number needs to be picked. Hence, this is inside the for loop
-		"""		
+		
 		initial_clk_part = 1.5 - arrival_clk_part
 		initial_clk_part_abs = initial_clk_part * clk_period
 #This means, glitch "can" occur before the input changes in the clk period as well. So, force the glitch to start only after input has changed
 		if (initial_clk_part_abs < end_PWL) : 
 			initial_clk_part = end_PWL/clk_period
-		"""		
-
-#This formula is incorrect if we run the expt with large slack. 
+		#This formula is incorrect if we run the expt with large slack. 
 		#If slack is large, the glitch window gets reduced
 
 		#unif=random.uniform(0,arrival_clk_part*clk_period)
@@ -303,12 +300,12 @@ for loop in range(start_loop, (num_of_loops+1)):
 		#rand_glitch= (4.67*clk_period) +  unif #arrival_clk + initial_clk should add up to 4.5+0.15=4.65. 1 period-0.15=0.85
 		
 		#glitch in the 2nd cycle
-		unif=random.uniform(0,0.95*clk_period) 
-		rand_glitch= (0.55*clk_period) +  unif 
+		#unif=random.uniform(0,0.95*clk_period) 
+		#rand_glitch= (0.55*clk_period) +  unif 
 
 		#glitch in the 3rd cycle
-		#unif=random.uniform(0,0.95*clk_period) 
-		#rand_glitch= (1.55*clk_period) +  unif 
+		unif=random.uniform(0,0.95*clk_period) 
+		rand_glitch= (1.55*clk_period) +  unif 
 
 		print "\nglitch within clk cycle= ",unif
 		print "\nRandom gate: %d\nRandom drain: %d\nRandom clock cycle:%d\nRandom glitch location:%e\n " %(rand_gate,rand_drain,rand_clk,rand_glitch)
@@ -336,7 +333,7 @@ for loop in range(start_loop, (num_of_loops+1)):
 
 	
 	print "Running GNU Parallel and ngspice on the created decks\n"
-	os.system('python %s/python_GNUparallel_ngspice_rise_local_mc_65.py -n %s -d %s -o %s -p %s' %(path,num_at_a_time,design_folder,loop,path))
+	os.system('python %s/python_GNUparallel_ngspice_yuva_rise_65.py -n %s -d %s -o %s -p %s' %(path,num_at_a_time,design_folder,loop,path))
 
 	seed_new= int(random.randrange(100000)*random.random())  #Used by compare script to backup random decks
 	#seed_new=seed*loop
@@ -358,14 +355,14 @@ for loop in range(start_loop, (num_of_loops+1)):
 	
 ##########################################################
 #Comment this out to see the decks and the result files it generates. 	
-"""
+
 	spice_dir = '%s/spice_decks_%s' %(path,loop)
 
 	
 	if os.path.exists(spice_dir):
 		shutil.rmtree(spice_dir)
 
-"""
+
 ########################################End of loop########################################################
 
 print "Combining all rtl diff files\n"
@@ -394,5 +391,9 @@ os.system('python  %s/python_FF_strike_taxonomy_65.py  -p %s -m %s' %(path,path,
 
 print "\nCombining the pdf reports\n"
 os.system('python %s/python_combine_pdfs_65.py -p %s/spice_results -m %s' %(path,path,module))
+
+
+
+
 
 

@@ -2,7 +2,6 @@
 #Read in a RTL file, do synthesis and placement, route
 #Example usage: python python1_read_RTL_syn_pnr_65.py -f /home/users/nanditha/Documents/utility/65nm/c432/c432_clk_ipFF.v -m c432_clk_ipFF -c 300
 
-#Eliminated clock gating from synthesis: 30/4/2014
 #freq added to synthesis part: Nov 19 2013
 
 import optparse
@@ -74,58 +73,6 @@ fnew.close()
 print "Done creating a new technology script for synthesis \"synthesis/scripts/technology.tcl\" \n"
 
 
-#To eliminate clock gating.. esp for sequential circuits##
-fcr = open('synthesis/scripts/compile_dc.tcl', 'r') ## This is the tcl file for synthesis
-data=fcr.readlines()
-#print data
-fcr.close()
-
-fcw = open('synthesis/scripts/compile_dc_backup.tcl', 'w') ## This is the tcl file for synthesis- backup
-fcw.writelines(data)
-fcw.close()
-
-os.remove('synthesis/scripts/compile_dc.tcl')
-
-fin = open('synthesis/scripts/compile_dc_backup.tcl', 'r') 
-fnew = open('synthesis/scripts/compile_dc.tcl', 'w') ## This is the new tcl file for synthesis
-
-
-#Replace a current line
-#with open('input') as fin, open('output','w') as fout:
-for line in fin:
-	if line == 'set_clock_gating_style  \\n':
-		fnew.write('#set_clock_gating_style  \\n')
-	elif line == 'insert_clock_gating > ../logs/insert_clock_gating.log\n':
-		fnew.write('#insert_clock_gating > ../logs/insert_clock_gating.log\n')
-	elif line == 'propagate_constraints -gate_clock\n':
-		fnew.write('#propagate_constraints -gate_clock\n')
-	elif line == 'identify_clock_gating\n':
-		fnew.write('#identify_clock_gating\n')
-	elif line == 'report_clock_gating -verbose > ../reports/clk_gate_verbose.rpt\n':
-		fnew.write('#report_clock_gating -verbose > ../reports/clk_gate_verbose.rpt\n')
-	else:
-		fnew.write(line)
-
-fnew.close()
-fin.close()
-
-fnew = open('synthesis/scripts/compile_dc.tcl', 'r') 
-newdata=fnew.readlines()
-#print (newdata)
-
-f1 = open('synthesis/scripts/compile_dc_backup.tcl', 'w') 
-#f1.writelines("This was the script compiled by the Design Compiler\n It gets overwritten in the pnr stepp. Hence saving a backup here\n\n")
-f1.writelines(newdata)
-
-f1.close()
-fnew.close()
-
-print "Done creating a new synthesis compile script \"synthesis/scripts/compile_dc.tcl\" \n"
-print "Eliminating clock gating\n"
-
-time.sleep(5)
-
-####################################################
 if os.path.exists('synthesis/run/'):
 	os.chdir('synthesis/run/')
 	os.system('bash run_dc.bash')
@@ -237,14 +184,13 @@ slack_time=float(slack_string)
 print "\nSlack is: %f ns" %slack_time
 print "...Pause..."
 time.sleep(5)
-"""
 if slack_time < 0 :
 	print "WARNING: Slack is negative. Your design WILL NOT function at the frequency %s\n" %clkfreq
 	time.sleep(30)
 else:
 	print "Slack is positive. Your design WILL function at the frequency %s MHz\n" %clkfreq
 	time.sleep(5)
-"""
+
 
 if '1\'b1' in open('./pnr/op_data/%s_final.v' %module).read():
 	print "\n*******************WARNING******************\n"
