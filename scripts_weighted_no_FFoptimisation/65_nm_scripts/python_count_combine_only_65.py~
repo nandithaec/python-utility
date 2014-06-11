@@ -79,13 +79,13 @@ fb.close()
 print "\nDoing the taxonomy for gates\n"
 
 #Always run the gates first and then the FFs. FF script needs some outputs which are written out from the gates script.
-os.system('python  %s/python_gate_strike_taxonomy_65.py  -p %s -m %s' %(path,path,module)) 
+os.system('python  %s/python_gate_strike_taxonomy.py  -p %s -m %s' %(path,path,module)) 
 print "\nDoing the taxonomy for FFs\n"
 
-os.system('python  %s/python_FF_strike_taxonomy_65.py  -p %s -m %s' %(path,path,module)) 
+os.system('python  %s/python_FF_strike_taxonomy.py  -p %s -m %s' %(path,path,module)) 
 
 print "\nCombining the pdf reports\n"
-os.system('python %s/python_combine_pdfs_65.py -p %s/spice_results -m %s' %(path,path,module))
+os.system('python %s/python_combine_pdfs.py -p %s/spice_results -m %s' %(path,path,module))
 
 
 
