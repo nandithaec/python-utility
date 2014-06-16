@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 
-#Example usage: python utility_python_top_level_rise_65.py --rtl=/home/users/nanditha/Documents/utility/65nm/c432/c432_clk_ipFF.v --mod=c432_clk_ipFF --test=/home/users/nanditha/Documents/utility/65nm/c432/test_c432.v --tb_mod=test_c432 --clk=300 --run=100us --design=c432 --tech=65 --num=10 --group 10 --path=/home/external/iitb/nanditha/simulations/65nm/c432  --proc_node 1 --ppn 5 --days 00 --hrs 00 --mins 3 --script python_utility3_yuva_2cycles_2nd_3rd_65.py
+#Example usage: python utility_python_top_level_rise_65.py --rtl=/home/users/nanditha/Documents/utility/65nm/LFSR/lfsr.vhd --mod=lfsr --test=/home/users/nanditha/Documents/utility/65nm/LFSR/test_lfsr.vhd --tb_mod=lfsr_tb --clk=400 --run=100us --design=LFSR --tech=65 --num=10 --group 10 --path=/home/external/iitb/nanditha/simulations/65nm/b04  --proc_node 1 --ppn 5 --days 00 --hrs 00 --mins 10 --script python_utility3_yuva_2cycles_2nd_3rd_65.py
 
 
 #Calling python_gnd_gnds_dspf_modify.py: This script adds 'gnd,gnds,vdd,vdds' to the subckt instances and will show one instance per line (no + continuation of subckt): Mar 19 2014
@@ -77,7 +77,7 @@ hrs=options.hrs
 mins=options.mins
 script=options.script
 
-"""
+
 #Example usage: python python1_read_RTL_syn_pnr.py -f decoder.vhd -m decoder_behav_pnr -clk 900
 os.system('python python1_read_RTL_syn_pnr_65.py -f %s -m %s -c %s' %(rtl,module,clkfreq))
 
@@ -120,7 +120,7 @@ os.system('perl GlitchLibGen_65.pl -i CORE65GPSVT_selected_lib_vg.sp' )
 print "***Created glitch library..\n"
 time.sleep(5)
 
-"""
+
 
 ##Generate a template simulatable spice netlist from the dspf file generated after pnr. This would include all .ic, Voltage sources, meas, tran, control, param etc
 #NetlistFormat.pl

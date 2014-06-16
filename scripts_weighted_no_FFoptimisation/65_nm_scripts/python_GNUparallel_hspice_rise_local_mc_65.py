@@ -2,7 +2,7 @@
 
 #ASSUMPTION: This will always be excecuted on the 48core cluster user1@10.107.105.201 and the design folder will be copied always to /home/user1/simulations folder and executed
 
-# Code modified to do post processing of the result files for the 2nd rising edge : Feb 7 2014
+# Code modified to do post processing of the result files for the 2nd rising edge. Last section of the code is added : Feb 7 2014
 #Multiple spice decks that were generated using deckgen in the remote machine, will be run using ngspice and GNU Parallel on the cluster. We can also ssh to other machines which have GNU Parallel and ngspice installed. ssh-keygen should have been done so that it would not ask for ssh password everytime we ssh to the machines.
 
 #Example usage: python %s/python_GNUparallel_ngspice_remote.py -n 10 -d c2670_alu -o 1 -p /home/user1/simulations/c2670_alu
@@ -67,11 +67,7 @@ start= ((outloop-1)*num_spice) + 1  # ((1-1)*10) +1 =1  , ((2-1)*10) +1 =11
 end = (num_spice)*outloop  #(10*1) = 10, (10*2)=20
 
 
-os.system("seq %d %d| /opt/app/parallel-20130422/bin/parallel --progress -j +0 --sshloginfile %s/sshmachines.txt 'cd %s/spice_decks_%s; pwd; /home/external/iitb/nanditha/ngspice-25/bin/ngspice %s/spice_decks_%s/deck_{}.sp;pwd;' " % (start,end, path,path,outloop,path,outloop))
-
-
-#os.system("find %s/%s/spice_decks -name '*.sp' | parallel --progress -j +0 --sshloginfile %s/%s/sshmachines.txt --transfer 'cd %s/%s/spice_decks && ngspice {}'" %(path_fixed,folder,path_fixed,folder,path_fixed,folder))
-
+os.system("seq %d %d| parallel --progress -j +0 --sshloginfile %s/sshmachines.txt 'cd %s/spice_decks_%s; pwd; hspice %s/spice_decks_%s/deck_{}.sp;pwd;' " % (start,end, path,path,outloop,path,outloop))
 
 #time.sleep(2)
 
@@ -102,7 +98,7 @@ start= ((outloop-1)*num_spice) + 1  # ((1-1)*10) +1 =1  , ((2-1)*10) +1 =11
 end = (num_spice)*outloop  #(10*1) = 10, (10*2)=20
 
 ########################################################################################################
-#Individual echo statements will lead to a process id at the end of each file. Deleting them and getting transpose of all glitch_*.csv files
+#Individual echo statements will lead to a process id at the end of each file. Deleteting them and getting transpose of all glitch_*.csv files
 #Loop over all existing csv files
 print "****Deleting the process id at the end of each row in the result file and transposing the column to row****\n"
 time.sleep(5)
@@ -193,7 +189,6 @@ for num in range(start,(end+1)):  #Always for loop takes max len + 1
 
 fw1_rise.close()
 print "****Combined all csv files into a single file in the results folder along with the header****\n"
-
 
 
 

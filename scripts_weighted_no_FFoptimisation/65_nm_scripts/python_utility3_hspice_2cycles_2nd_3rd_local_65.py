@@ -10,7 +10,7 @@
 #This version of the script has the facility of selecting the gate based on the area of the gate. This version of the script uses another script python_weighted_gateselection.py to pick the random gate based on its area: Nov 17 2013
 #Glitch insertion window is within the 2.5 cycles, and not the 6.5 cycles that is required for the case with intermediate FFs
 
-#Example usage: python python_utility3_yuva_2cycles_2nd_3rd_local_65.py -m b04 -p /home/user1/simulations/65nm/b04 -d b04 -t 65 -n 10 --group 10 --clk 200 
+#Example usage: python python_utility3_hspice_2cycles_2nd_3rd_local_65.py -m lfsr -p /home/user1/simulations/65nm/LFSR -d LFSR -t 65 -n 3000 --group 1000 --clk 400 
 
 import optparse
 import re,os
@@ -30,8 +30,6 @@ parser.add_option("-p", "--path", dest="path",help="Enter the ENTIRE path to you
 parser.add_option("-d", "--design", dest="design_folder",help="Enter the name of your design folder")
 parser.add_option("-t", "--tech",dest='tech', help='Enter the technology node-for eg., For 180nm, enter 180')
 parser.add_option("--group",dest='group',  help='Enter the number of spice decks to be simulated at a time. For eg., if -n option is 10000, and say we want to run 100 at a time, then enter 100')
-#parser.add_option("--backup",dest='backup',  help='Enter the number of spice decks you want to backup/save per run. For ef., if you entered -n 1000 and --group 100, and if you want to save 2 decks per 100, enter 2 ')
-#parser.add_option("-s", "--seed",dest='seed', help='Enter the random seed')
 parser.add_option("-c", "--clk",dest='clk', help='Enter the clk freq in MHz')
 
 
@@ -44,47 +42,19 @@ path=options.path
 design_folder=options.design_folder
 tech=options.tech
 num_at_a_time=options.group
-#backup_per_run=options.backup
-#seed=int(options.seed)
 clk=(options.clk)
 
-
+start_loop=1
 
 clk_period = (1.0/float(clk))*(0.000001)
 half_clk_period = clk_period/2.0
 change_time= half_clk_period/3.0
 end_PWL= half_clk_period + change_time #in ns generally
 
-#To determine when the glitch needs to be introduced, depends on the slack information
-
-with open("%s/pnr/reports/5.postRouteOpt_%s/%s_postRoute.slk" %(path,module,module),"r") as f:
-	words=map(str.split, f)
-
-line1=words[1] #2nd line after header
-slack_read=line1[2]
-print "\nSlack is: %s" %slack_read
-slack_string=slack_read.replace("*/","")
-slack_time=float(slack_string)
-print "\nSlack is: %f ns" %slack_time
-
-reqdtime_read=line1[1]
-print "\nReqd time is: %s" %reqdtime_read
-reqdtime_string=reqdtime_read.replace("*/","")
-reqd_time=float(reqdtime_string)
-print "\nReqd time is: %f ns" %reqd_time
-
-arrival_time = reqd_time - slack_time
-arrival_time_ns = arrival_time *(0.000000001)
-print "\nArrival time is: %e " %arrival_time_ns
-
-#What fraction of the clk period is the arrival time?
-arrival_clk_part = arrival_time_ns / clk_period
-print "\nArrival time is: %f clk periods" %arrival_clk_part
-
 #Whatever number of decks to be simulated- is assumed to be more than or equal to 1000.
 #At a time, only 1000 are generated and run- to save disk space. After collecting results, they are deleted
 num_of_loops=(int(num)/int(num_at_a_time))
-
+"""
 
 if os.path.exists('%s/spice_results' %path):
 	os.chdir('%s/spice_results' %path)
@@ -112,10 +82,6 @@ if os.path.exists('%s/spice_results' %path):
 		os.remove(f)
 
 
-"""
-if os.path.isfile('%s/spice_results/result_summary_flipcount.csv' %(path)):
-	os.remove('%s/spice_results/result_summary_flipcount.csv' %(path))
-"""
 
 #Clear Back up directory
 
@@ -141,18 +107,10 @@ if not os.path.exists(backup_dir_rise):
 
 
 
-"""
-if os.path.exists(test_backup_dir):
-	shutil.rmtree(test_backup_dir)
-
-if not os.path.exists(test_backup_dir):
-	os.mkdir(test_backup_dir)	
-"""
-
 print "Deleting the existing spice decks before creating new ones!\n"
 os.system('rm -rf %s/spice_decks_*' %path)
 
-start_loop=1
+
 
 frand = open('%s/random_number_histogram.txt' %(path), 'w')
 
@@ -168,16 +126,6 @@ clk_period = (1.0/float(clk))*(0.000001) #for the MHz
 print "\nclk is ",clk
 print "\nClk_period: ", clk_period
 
-"""
-os.system('cat $PBS_NODEFILE > %s/nodes.txt' %path)
-print "PBS NODEFILE contents....written to nodes.txt\n"
-time.sleep(3)
-
-os.system('python %s/python_ssh_addr_yuva_65.py -p %s' %(path,path))
-os.system('cat %s/sshmachines.txt' %path)
-print "Check contents of sshmachines.txt file....\n"
-time.sleep(1)
-"""
 
 #Uncomment this for future designs. For decoder example, decoder folder has already been created on desktop
 #os.system('ssh nanditha@10.107.90.52 mkdir /home/nanditha/simulations/%s' %(design_folder))
@@ -202,21 +150,15 @@ print "\nnum of clocks is %d" %num_of_clks
 
 fg.close()
 
-
+"""
 #Fresh simulation
 for loop in range(start_loop, (num_of_loops+1)): 
 
-		
-	#time.sleep(2)
-	#os.system('cd /home/user1/simulations/decoder ; ls; pwd;ls | wc -l' )
-	#time.sleep(5)
-
 	print "Now, creating multiple spice decks in spice_decks folder in current directory on the remote machine\n"
 	
-	#os.system('python %s/python_repeat_deckgen_remote_seed.py -m %s -n %s -f %s -o %s -s %d' %(path,module,num_at_a_time,path,loop,seed_new))
 
 #########################################repeat_deckgen copied starting from here#######################################
-
+	"""
 	if os.path.isfile("%s/%s_reference_out/RTL.csv" %(path,module)):
 		print "****Removing the existing RTL.csv file in folder %s_reference_out ****\n" %(module)
 		os.remove("%s/%s_reference_out/RTL.csv" %(path,module))
@@ -283,13 +225,7 @@ for loop in range(start_loop, (num_of_loops+1)):
 #Arrival_time_part + initial_clk_part should add up to 1.5 clk periods
 #The clk starts from low to high and then low, before the 2nd rising edge starts. The input is changed in the high period and the glitch is expected to arrrive later on, and before the next rising edge (when the latch will open)
 		#In every iteration, a different random number needs to be picked. Hence, this is inside the for loop
-		"""		
-		initial_clk_part = 1.5 - arrival_clk_part
-		initial_clk_part_abs = initial_clk_part * clk_period
-#This means, glitch "can" occur before the input changes in the clk period as well. So, force the glitch to start only after input has changed
-		if (initial_clk_part_abs < end_PWL) : 
-			initial_clk_part = end_PWL/clk_period
-		"""		
+			
 
 #This formula is incorrect if we run the expt with large slack. 
 		#If slack is large, the glitch window gets reduced
@@ -335,7 +271,10 @@ for loop in range(start_loop, (num_of_loops+1)):
 
 	
 	print "Running GNU Parallel and ngspice on the created decks\n"
-	os.system('python %s/python_GNUparallel_ngspice_rise_local_mc_65.py -n %s -d %s -o %s -p %s' %(path,num_at_a_time,design_folder,loop,path))
+	os.system('python %s/python_GNUparallel_hspice_rise_local_mc_65.py -n %s -d %s -o %s -p %s' %(path,num_at_a_time,design_folder,loop,path))
+	
+
+	os.system('python %s/python_hspice_combine_csv_results.py -n %s -d %s -o %s -p %s' %(path,num_at_a_time,design_folder,loop,path))
 
 	seed_new= int(random.randrange(100000)*random.random())  #Used by compare script to backup random decks
 	#seed_new=seed*loop
@@ -350,7 +289,7 @@ for loop in range(start_loop, (num_of_loops+1)):
 	print "Comparing the RTL and spice outputs at the 2nd rising edge \n"
 	os.system('python %s/python_compare_2nd_rise_65.py -m %s -f %s -n %s -t %s -l %d' %(path,module,path,num_at_a_time,tech,loop))
 
-
+	"""
 #For testing out new glitch files (afterdeleting process if at each echo statement). comment this out in the final run, else it will copy ALL spice files and consume lot of disk space
 #destination directory should not already exist for copytree command to function
 	#shutil.copytree('%s/spice_decks_%s' %(path,loop), '%s/test_backup_spice_decks' %path )
@@ -368,6 +307,7 @@ for loop in range(start_loop, (num_of_loops+1)):
 ########################################End of loop########################################################
 
 print "Combining all rtl diff files\n"
+seed="8184035299501730039"
 os.system('python  %s/python_count_flips_2nd_3rd_rise_65.py -f %s  -n %s  --group %s -s %s' %(path,path,num,num_at_a_time,seed))  #To save the seed to results file
 
 
@@ -393,5 +333,4 @@ os.system('python  %s/python_FF_strike_taxonomy_65.py  -p %s -m %s' %(path,path,
 
 print "\nCombining the pdf reports\n"
 os.system('python %s/python_combine_pdfs_65.py -p %s/spice_results -m %s' %(path,path,module))
-
 

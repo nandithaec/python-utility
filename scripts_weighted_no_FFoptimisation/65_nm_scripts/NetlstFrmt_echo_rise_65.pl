@@ -4,7 +4,7 @@
 
 #clk frequency in MHz
 
-#Modifications:
+#Modifications:'#Option statements added for convergence: April 2014
 #rise and fall edge measurements limitedto 50ps duration. Else false values were being calculated: April 25 2014
 #.ic on net0148:F59 of the DFF to initialise correctly. This value should be the inverted value of what was supposed to be initialised originally.: April 2nd 2014
 #.ic square brackets being replaced by _ : feb 26 2014
@@ -581,7 +581,8 @@ if($i ne "clk")
   
       #print SIM ".ic v(X$module.$to_ff[$i]\_q\_reg:Q)= ##$new\_reference_1##\n";
       #print SIM ".ic v(X$module.X$to_ff[$i].R62)= ##$new\_reference_1_neg##\n";
-	print SIM ".ic v(X$module.X$to_ff[$i]\_q\_reg.net0148:F59)= ##$new\_reference_1_neg##\n";
+	#print SIM ".ic v(X$module.X$to_ff[$i]\_q\_reg.net0148:F59)= ##$new\_reference_1_neg##\n";
+     print SIM ".ic v(X$module.X$to_ff[$i].net0148:F59)= ##$new\_reference_1_neg##\n";
      # print SIM ".ic v(X$module.$to_ff[$i]:Q)= ##$new\_reference_1##\n";
    }
 
@@ -633,9 +634,9 @@ foreach $i(0 .. $#to_ff)
 
 
 #This will need to be commented for non-ISCAS benchmark circuits
- $measure_at_falling_edge.="meas tran ff_op_fall_$i MAX v(X$module.$to_ff[$i]\_q\_reg:Q) from=$fall_from"."s"." to=$fall_to"."s\n";
+ #$measure_at_falling_edge.="meas tran ff_op_fall_$i MAX v(X$module.$to_ff[$i]\_q\_reg:Q) from=$fall_from"."s"." to=$fall_to"."s\n";
  #This will need to be enabled for non-ISCAS benchmark circuits
-# $measure_at_falling_edge.="meas tran ff_op_fall_$i MAX v(X$module.$to_ff[$i]:Q) from=$fall_from"."s"." to=$fall_to"."s\n";
+ $measure_at_falling_edge.="meas tran ff_op_fall_$i MAX v(X$module.$to_ff[$i]:Q) from=$fall_from"."s"." to=$fall_to"."s\n";
  }
 
 
@@ -644,15 +645,16 @@ foreach $i(0 .. $#to_ff)
  {
 
 #This will need to be commented for non-ISCAS benchmark circuits
- $measure_at_rising_edge.="meas tran ff_op_rise_$i MAX v(X$module.$to_ff[$i]\_q\_reg:Q) from=$rise_from_2nd"."s"." to=$rise_to_2nd"."s\n";
+ #$measure_at_rising_edge.="meas tran ff_op_rise_$i MAX v(X$module.$to_ff[$i]\_q\_reg:Q) from=$rise_from_2nd"."s"." to=$rise_to_2nd"."s\n";
 
  #This will need to be enabled for non-ISCAS benchmark circuits
- #$measure_at_rising_edge.="meas tran ff_op_rise_$i MAX v(X$module.$to_ff[$i]:Q) from=$rise_from_2nd"."s"." to=$rise_to_2nd"."s\n";
+ $measure_at_rising_edge.="meas tran ff_op_rise_$i MAX v(X$module.$to_ff[$i]:Q) from=$rise_from_2nd"."s"." to=$rise_to_2nd"."s\n";
  }
  
  
 #Adding the control part
 print SIM "\n\n.control\n";
+print SIM "option rshunt = 1e12\noption itl4 = 100  reltol =0.005  trtol=8 pivtol=1e-11  abstol=1e-10\n";
 print SIM "tran 10ps ".$sim_time."s\n\n";
 print SIM "**Uncomment the following and run this spice file, if you need a waveform\n";
 print SIM "**write waveform_file.raw v(clk) v(input_dec_2_) v(input_dec_1_) v(input_dec_0_)  v(output_dec_3_) v(output_dec_1_) \n*+v.xdecoder_behav_pnr.xu11.vcharge#branch \n\n";

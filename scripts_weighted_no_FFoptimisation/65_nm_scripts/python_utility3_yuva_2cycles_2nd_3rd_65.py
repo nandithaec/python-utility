@@ -268,7 +268,7 @@ for loop in range(start_loop, (num_of_loops+1)):
 		rand_clk= int(random.randrange(10,num_of_clks))  
 		#print "Random clock cycle is: ",rand_clk
 		
-		os.system('perl %s/perl_calculate_drain_65.pl -s %s/reference_spice.sp -l1 %s/glitch_CORE65GPSVT_selected_lib.sp -r %s/%s_reference_out/tool_reference_out.txt -m %s -f %s -g %d ' %(path,path,path,path,module,module,path,rand_gate))
+		os.system('perl %s/perl_calculate_drain_65.pl -s %s/reference_spice.sp -l1 %s/glitch_CORE65GPSVT_selected_lib_vg.sp -r %s/%s_reference_out/tool_reference_out.txt -m %s -f %s -g %d ' %(path,path,path,path,module,module,path,rand_gate))
 
 		fg = open('%s/tmp_random.txt' %(path), 'r')
 		drain_data = [line.strip() for line in fg]
