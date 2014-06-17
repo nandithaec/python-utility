@@ -1,6 +1,6 @@
 #!/usr/bin/env python
-
-#Example usage: python python_hspice_mod.py -f /home/users/nanditha/Documents/utility/65nm/c432/spice_decks_1
+#Read in a RTL file, do synthesis and placement, route
+#Example usage: python python_hspice_mod.py -f /home/users/nanditha/Documents/utility/65nm/LFSR/spice_decks_1
 
 
 import optparse
@@ -19,7 +19,7 @@ parser.add_option("-f","--path", help='Enter the RTL (verilog or vhdl) file path
 (options, args) = parser.parse_args()
 
 path=options.filepath
-"""
+
 if os.path.exists('%s' %path):
 	os.chdir('%s' %path)
 	for f in glob.glob("hspice_deck_*.sp"):
@@ -56,8 +56,7 @@ print "Deck numbers", deck_num
 print "Num of files= %d" %num_of_files
 print "File names", file_names
 
-time.sleep (10)	
-		
+time.sleep (10)			
 #Modify each file to be hspice compatible
 fhspice=open('%s/hspice.bat' %(path),'w')
 	
@@ -80,8 +79,8 @@ for i in range(0,num_of_files):
 		elif ".control" in line:
 			line = line.replace(".control",".option list measdgt=5 measform=3")
 			fnew.write(line)
-		elif "tran 10ps" in line:
-			line = line.replace("tran 10ps",".tran 20ps")
+		elif "tran 20ps" in line:
+			line = line.replace("tran 20ps",".tran 20ps")
 			fnew.write(line)		
 		elif "meas tran " in line:
 			line = line.replace("meas tran ",".measure tran ")
@@ -111,14 +110,13 @@ fhspice.close()
 print "Done creating hspice decks\n"
 time.sleep (10)	
 
-
 #Run hspice simulations
 os.chdir("%s" %(path))
 os.system("bash %s/hspice.bat" %(path)) 
 print "Done running hspice\n"
 time.sleep (10)
 os.chdir("../")
-"""		
+		
 file_names=os.listdir('%s' %path)
 num_of_files = len(file_names)
 deck_num=[]
@@ -193,22 +191,22 @@ for i in range(0,num_of_csv):
 		
 	row_len=len(row)
 	half=row_len/2
-	#print "half is", half
+	print "half is", half
 	a=[]
 	b=[]
 	first_half=[]
 	second_half=[]
 	for h in range(0,half):
-		#print "appending first half:",row[h]
+		print "appending first half:",row[h]
 		a.append(row[h])
-		#print "list:",a
+		print "list:",a
 		b.append(row[h+half])
-		#print "list2:",b
+		print "list2:",b
 	print "***********\n"
 	first_half.append(a)
-	#print "list:",first_half
+	print "list:",first_half
 	second_half.append(b)	
-	#print "list2:",second_half
+	print "list2:",second_half
 		
 	writer.writerows(first_half)  #write csv
 	writer2.writerows(second_half)  #write csv
@@ -240,4 +238,3 @@ for i in range(0,num_of_csv):
 			sys.stdout.write(line) 
 	
 """
-

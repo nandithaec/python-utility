@@ -5,7 +5,7 @@
 #clk frequency in MHz
 
 #Modifications:
-#options for convergence added: April 2014
+#options for convergence added: Aprily 2014
 #rise and fall edge measurements limitedto 50ps duration. Else false values were being calculated: April 25 2014
 #.ic on net0148:F59 of the DFF to initialise correctly. This value should be the inverted value of what was supposed to be initialised originally.: April 2nd 2014
 #.ic square brackets being replaced by _ : feb 26 2014
