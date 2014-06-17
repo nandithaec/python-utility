@@ -10,7 +10,7 @@
 #This version of the script has the facility of selecting the gate based on the area of the gate. This version of the script uses another script python_weighted_gateselection.py to pick the random gate based on its area: Nov 17 2013
 #Glitch insertion window is within the 2.5 cycles, and not the 6.5 cycles that is required for the case with intermediate FFs
 
-#Example usage: python python_count_combine_only_65.py -m c432_clk_ipFF -p /home/nanditha/Documents/utility/design_cases_taxonomy/65nm/c432 -d c432 -t 65 -n 2224 --group 2224 --clk 300 
+#Example usage: python python_count_combine_only.py -m c432_clk_ipFF -p /home/nanditha/Documents/utility/design_cases_taxonomy/c432/2_cycles -d 2_cycles -t 180 -n 4000 --group 1000 --clk 200 --std_lib osu018_stdcells_correct_vdd_gnd.sp
 
 import optparse
 import re,os
@@ -30,6 +30,8 @@ parser.add_option("-p", "--path", dest="path",help="Enter the ENTIRE path to you
 parser.add_option("-d", "--design", dest="design_folder",help="Enter the name of your design folder")
 parser.add_option("-t", "--tech",dest='tech', help='Enter the technology node-for eg., For 180nm, enter 180')
 parser.add_option("--group",dest='group',  help='Enter the number of spice decks to be simulated at a time. For eg., if -n option is 10000, and say we want to run 100 at a time, then enter 100')
+#parser.add_option("--backup",dest='backup',  help='Enter the number of spice decks you want to backup/save per run. For ef., if you entered -n 1000 and --group 100, and if you want to save 2 decks per 100, enter 2 ')
+#parser.add_option("-s", "--seed",dest='seed', help='Enter the random seed')
 parser.add_option("-c", "--clk",dest='clk', help='Enter the clk freq in MHz')
 parser.add_option("-l", "--std_lib",dest='std_lib', help='Enter the file name of the standard cell library (sp file)')
 
@@ -45,7 +47,7 @@ num_at_a_time=options.group
 #backup_per_run=options.backup
 #seed=int(options.seed)
 clk=(options.clk)
-
+std_lib = options.std_lib
 
 
 clk_period = (1.0/float(clk))*(0.000001)
@@ -77,13 +79,13 @@ fb.close()
 print "\nDoing the taxonomy for gates\n"
 
 #Always run the gates first and then the FFs. FF script needs some outputs which are written out from the gates script.
-os.system('python  %s/python_gate_strike_taxonomy_65.py  -p %s -m %s' %(path,path,module)) 
+os.system('python  %s/python_gate_strike_taxonomy.py  -p %s -m %s' %(path,path,module)) 
 print "\nDoing the taxonomy for FFs\n"
 
-os.system('python  %s/python_FF_strike_taxonomy_65.py  -p %s -m %s' %(path,path,module)) 
+os.system('python  %s/python_FF_strike_taxonomy.py  -p %s -m %s' %(path,path,module)) 
 
 print "\nCombining the pdf reports\n"
-os.system('python %s/python_combine_pdfs_65.py -p %s/spice_results -m %s' %(path,path,module))
+os.system('python %s/python_combine_pdfs.py -p %s/spice_results -m %s' %(path,path,module))
 
 
 

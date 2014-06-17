@@ -5,7 +5,7 @@
 # Code modified to do post processing of the result files for the 2nd rising edge. Last section of the code is added : Feb 7 2014
 #Multiple spice decks that were generated using deckgen in the remote machine, will be run using ngspice and GNU Parallel on the cluster. We can also ssh to other machines which have GNU Parallel and ngspice installed. ssh-keygen should have been done so that it would not ask for ssh password everytime we ssh to the machines.
 
-#Example usage: python python_hspice_combine_csv_results.py -n 1000 -d LFSR -o 3 -p /home/external/iitb/nanditha/simulations/65nm/c432
+#Example usage: python python_hspice_combine_csv_results.py -n 1000 -d LFSR -o 3 -p /home/user1/simulations/65nm/LFSR
 
 
 import optparse
@@ -21,6 +21,7 @@ parser = OptionParser('This script will read in the path where multiple spice de
 
 
 parser.add_option("-n", "--num", type="int", dest="num_spice",help="Enter the number of spice decks to be simulated at a time")
+#parser.add_option("-s", "--ssh", dest="ssh_txt",help="Enter the path to the text file which contains the IP addresses of the machines to which we can ssh to run ngspice using GNU Parallel. Eg is provided in sshmachines.txt")
 parser.add_option("-p", "--path", dest="path",help="Enter the entire path to the design folder that is copied to remote machine")
 parser.add_option("-d", "--dir", dest="folder",help="Enter the name of the design folder that is copied to remote machine")
 parser.add_option("-o", "--outloop", dest="outloop",help="This is the number of times this script is executed in a loop. In case we have a lot of simulations, we can divide them into groups. For eg., if 10000 simulations need to be run, we can run only 1000 at a time. So we run this 10 times, and this becomes the outloop variable. This is passed from the top level script.")
@@ -72,6 +73,8 @@ start= ((outloop-1)*num_spice) + 1  # ((1-1)*10) +1 =1  , ((2-1)*10) +1 =11
 end = (num_spice)*outloop  #(10*1) = 10, (10*2)=20
 
 ########################################################################################################
+#Individual echo statements will lead to a process id at the end of each file. Deleteting them and getting transpose of all glitch_*.csv files
+#Loop over all existing csv files
 
 ###############Combine the results of all csv files into one file final_results_spice_outputs_ #############
 
@@ -119,6 +122,7 @@ for num in range(start,(end+1)):  #Always for loop takes max len + 1
 fw1_rise.close()
 fh.close()
 print "****Combined all csv files into a single file in the results folder along with the header****\n"
+
 
 
 

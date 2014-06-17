@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-
+#Modified RTL_2ndedge.csv to RTL_2ndedge<loop_var>.csv.. RTL_1.csv, RTL_2.csv: June 15 2014
 #Changed the #column iteration number from range(5) to range(6), since the drain number is also added: Feb 11 2014
 #Compare results of spice and RTL, creates difference files and validation files for each run. Compare the 2nd rising edge in Verilog with the 2nd falling edge in spice: Feb 7 2014
 
@@ -62,7 +62,7 @@ print "vdd value is ",vdd_val
 
 
 f = open('%s/spice_results/final_results_spice_outputs_rise_%d.csv' %(path,int(outloop)), 'rb')
-frtl = open('%s/%s_reference_out/RTL_2nd_edge.csv' %(path,module), 'rb')
+frtl = open('%s/%s_reference_out/RTL_2nd_edge_%d.csv' %(path,module,int(outloop)), 'rb')
 fout = open('%s/spice_results/spice_rtl_difference_2nd_edge_%d.csv' %(path,int(outloop)), 'wb')
 
 

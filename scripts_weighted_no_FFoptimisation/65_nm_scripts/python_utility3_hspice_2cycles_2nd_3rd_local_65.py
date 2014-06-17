@@ -10,7 +10,7 @@
 #This version of the script has the facility of selecting the gate based on the area of the gate. This version of the script uses another script python_weighted_gateselection.py to pick the random gate based on its area: Nov 17 2013
 #Glitch insertion window is within the 2.5 cycles, and not the 6.5 cycles that is required for the case with intermediate FFs
 
-#Example usage: python python_utility3_hspice_2cycles_2nd_3rd_local_65.py -m lfsr -p /home/user1/simulations/65nm/LFSR -d LFSR -t 65 -n 3000 --group 1000 --clk 400 
+#Example usage: python python_utility3_hspice_2cycles_2nd_3rd_local_65.py -m lfsr -p /home/user1/simulations/65nm/LFSR -d LFSR -t 65 -n 80 --group 40 --clk 400 
 
 import optparse
 import re,os
@@ -151,6 +151,16 @@ print "\nnum of clocks is %d" %num_of_clks
 fg.close()
 
 """
+
+if os.path.isfile("%s/%s_reference_out/RTL.csv" %(path,module)):
+	print "****Removing the existing RTL.csv file in folder %s_reference_out ****\n" %(module)
+	os.remove("%s/%s_reference_out/RTL.csv" %(path,module))
+
+if os.path.isfile("%s/%s_reference_out/RTL_2nd_edge.csv" %(path,module)):
+	print "****Removing the existing RTL_2nd_edge.csv file in folder %s_reference_out ****\n" %(module)
+	os.remove("%s/%s_reference_out/RTL_2nd_edge.csv" %(path,module))
+
+
 #Fresh simulation
 for loop in range(start_loop, (num_of_loops+1)): 
 
@@ -159,13 +169,6 @@ for loop in range(start_loop, (num_of_loops+1)):
 
 #########################################repeat_deckgen copied starting from here#######################################
 	"""
-	if os.path.isfile("%s/%s_reference_out/RTL.csv" %(path,module)):
-		print "****Removing the existing RTL.csv file in folder %s_reference_out ****\n" %(module)
-		os.remove("%s/%s_reference_out/RTL.csv" %(path,module))
-
-	if os.path.isfile("%s/%s_reference_out/RTL_2nd_edge.csv" %(path,module)):
-		print "****Removing the existing RTL_2nd_edge.csv file in folder %s_reference_out ****\n" %(module)
-		os.remove("%s/%s_reference_out/RTL_2nd_edge.csv" %(path,module))
 		
 		
 	#Now, we need the header in RTL.csv, so we create an RTL.csv and copy the headers from the RTL_backup.csv that we had saved from Netlstfrmt.pl
@@ -273,8 +276,9 @@ for loop in range(start_loop, (num_of_loops+1)):
 	print "Running GNU Parallel and ngspice on the created decks\n"
 	os.system('python %s/python_GNUparallel_hspice_rise_local_mc_65.py -n %s -d %s -o %s -p %s' %(path,num_at_a_time,design_folder,loop,path))
 	
-
+	"""
 	os.system('python %s/python_hspice_combine_csv_results.py -n %s -d %s -o %s -p %s' %(path,num_at_a_time,design_folder,loop,path))
+	
 
 	seed_new= int(random.randrange(100000)*random.random())  #Used by compare script to backup random decks
 	#seed_new=seed*loop
@@ -289,7 +293,7 @@ for loop in range(start_loop, (num_of_loops+1)):
 	print "Comparing the RTL and spice outputs at the 2nd rising edge \n"
 	os.system('python %s/python_compare_2nd_rise_65.py -m %s -f %s -n %s -t %s -l %d' %(path,module,path,num_at_a_time,tech,loop))
 
-	"""
+	
 #For testing out new glitch files (afterdeleting process if at each echo statement). comment this out in the final run, else it will copy ALL spice files and consume lot of disk space
 #destination directory should not already exist for copytree command to function
 	#shutil.copytree('%s/spice_decks_%s' %(path,loop), '%s/test_backup_spice_decks' %path )
@@ -307,7 +311,7 @@ for loop in range(start_loop, (num_of_loops+1)):
 ########################################End of loop########################################################
 
 print "Combining all rtl diff files\n"
-seed="8184035299501730039"
+seed="5402109851100356920"
 os.system('python  %s/python_count_flips_2nd_3rd_rise_65.py -f %s  -n %s  --group %s -s %s' %(path,path,num,num_at_a_time,seed))  #To save the seed to results file
 
 
@@ -333,4 +337,5 @@ os.system('python  %s/python_FF_strike_taxonomy_65.py  -p %s -m %s' %(path,path,
 
 print "\nCombining the pdf reports\n"
 os.system('python %s/python_combine_pdfs_65.py -p %s/spice_results -m %s' %(path,path,module))
+
 

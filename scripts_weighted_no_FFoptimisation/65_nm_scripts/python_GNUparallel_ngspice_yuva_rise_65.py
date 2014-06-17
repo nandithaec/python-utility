@@ -102,7 +102,7 @@ start= ((outloop-1)*num_spice) + 1  # ((1-1)*10) +1 =1  , ((2-1)*10) +1 =11
 end = (num_spice)*outloop  #(10*1) = 10, (10*2)=20
 
 ########################################################################################################
-#Individual echo statements will lead to a process id at the end of each file. Deleting them and getting transpose of all glitch_*.csv files
+#Individual echo statements will lead to a process id at the end of each file. Deleteting them and getting transpose of all glitch_*.csv files
 #Loop over all existing csv files
 print "****Deleting the process id at the end of each row in the result file and transposing the column to row****\n"
 time.sleep(5)
