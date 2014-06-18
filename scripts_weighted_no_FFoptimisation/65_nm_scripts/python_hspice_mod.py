@@ -99,7 +99,7 @@ for i in range(0,num_of_files):
 			line = line.replace("gnd gnds vdd vdds","gnd vdd")
 			fnew.write(line)
 		elif ".control" in line:
-			line = line.replace(".control",".option list measdgt=5 measform=3")
+			line = line.replace(".control",".option measdgt=5 measform=3")
 			fnew.write(line)
 		elif "tran 20ps" in line:
 			line = line.replace("tran 20ps",".tran 20ps")

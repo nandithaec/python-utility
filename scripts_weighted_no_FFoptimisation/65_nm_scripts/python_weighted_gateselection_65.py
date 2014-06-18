@@ -13,9 +13,9 @@ def weight_selection(path):
 	
 	import random,re
 
-	gates=["HS65_GSS_XOR2X6","HS65_GS_AND2X4","HS65_GS_AOI22X6","HS65_GS_BFX284","HS65_GS_DFPQX4","HS65_GS_IVX9","HS65_GS_NAND2X7","HS65_GS_NOR2X6","HS65_GS_NOR3X4","HS65_GS_AO212X4","HS65_GS_AO311X9  ", "HS65_GS_AOI12X2", "HS65_GS_AOI212X4", "HS65_GS_AOI311X4", "HS65_GS_AOI32X5", "HS65_GS_AOI33X5", "HS65_GS_NAND2AX7","HS65_GS_NAND3AX6", "HS65_GS_NAND3X5", "HS65_GS_NAND4ABX3", "HS65_GS_NOR3AX2", "HS65_GS_NOR4ABX2","HS65_GS_NOR4ABX4", "HS65_GS_OA12X9", "HS65_GS_OAI212X5", "HS65_GS_OAI21X3", "HS65_GS_OAI33X3", "HS65_GS_OR2X9","HS65_GSS_XNOR2X6", "HS65_GSS_XOR3X2","HS65_GS_AND2X27", "HS65_GS_AND3X4","HS65_GS_AO12X4","HS65_GS_AO31X9","HS65_GS_AOI21X2","HS65_GS_AOI222X2", "HS65_GS_AOI32X3", "HS65_GS_CBI4I1X5","HS65_GS_DFPQX9","HS65_GS_FA1X4", "HS65_GS_IVX2","HS65_GS_LDLQX9","HS65_GS_MX41X4","HS65_GS_NAND2X2","HS65_GS_NAND3AX3","HS65_GS_NOR2AX3","HS65_GS_NOR2X2", "HS65_GS_NOR3X1", "HS65_GS_OA112X4","HS65_GS_OA12X4","HS65_GS_OA212X4","HS65_GS_OA32X4","HS65_GS_OAI12X2", "HS65_GS_OAI13X1", "HS65_GS_OR2X4","HS65_GS_PAOI2X1","HS65_GS_AO22X9","HS65_GSS_XNOR3X2","HS65_GS_AND3X9"," HS65_GS_OAI32X5",'HS65_GS_AO112X9', 'HS65_GS_AO12X9', 'HS65_GS_CB4I1X9', 'HS65_GS_CBI4I6X5', 'HS65_GS_OAI211X5', 'HS65_GS_OAI22X6', 'HS65_GS_OAI31X5']
+	gates=["HS65_GSS_XOR2X6","HS65_GS_AND2X4","HS65_GS_AOI22X6","HS65_GS_BFX284","HS65_GS_DFPQX4","HS65_GS_IVX9","HS65_GS_NAND2X7","HS65_GS_NOR2X6","HS65_GS_NOR3X4","HS65_GS_AO212X4","HS65_GS_AO311X9  ", "HS65_GS_AOI12X2", "HS65_GS_AOI212X4", "HS65_GS_AOI311X4", "HS65_GS_AOI32X5", "HS65_GS_AOI33X5", "HS65_GS_NAND2AX7","HS65_GS_NAND3AX6", "HS65_GS_NAND3X5", "HS65_GS_NAND4ABX3", "HS65_GS_NOR3AX2", "HS65_GS_NOR4ABX2","HS65_GS_NOR4ABX4", "HS65_GS_OA12X9", "HS65_GS_OAI212X5", "HS65_GS_OAI21X3", "HS65_GS_OAI33X3", "HS65_GS_OR2X9","HS65_GSS_XNOR2X6", "HS65_GSS_XOR3X2","HS65_GS_AND2X27", "HS65_GS_AND3X4","HS65_GS_AO12X4","HS65_GS_AO31X9","HS65_GS_AOI21X2","HS65_GS_AOI222X2", "HS65_GS_AOI32X3", "HS65_GS_CBI4I1X5","HS65_GS_DFPQX9","HS65_GS_FA1X4", "HS65_GS_IVX2","HS65_GS_LDLQX9","HS65_GS_MX41X4","HS65_GS_NAND2X2","HS65_GS_NAND3AX3","HS65_GS_NOR2AX3","HS65_GS_NOR2X2", "HS65_GS_NOR3X1", "HS65_GS_OA112X4","HS65_GS_OA12X4","HS65_GS_OA212X4","HS65_GS_OA32X4","HS65_GS_OAI12X2", "HS65_GS_OAI13X1", "HS65_GS_OR2X4","HS65_GS_PAOI2X1","HS65_GS_AO22X9","HS65_GSS_XNOR3X2","HS65_GS_AND3X9","HS65_GS_OAI32X5","HS65_GS_AO112X9", "HS65_GS_AO12X9", "HS65_GS_CB4I1X9", "HS65_GS_CBI4I6X5", "HS65_GS_OAI211X5", "HS65_GS_OAI22X6", "HS65_GS_OAI31X5","HS65_GS_CBI4I6X5", "HS65_GS_NOR3AX4","HS65_GS_AND4X6", "HS65_GS_AO33X9", "HS65_GS_AOI13X5", "HS65_GS_NAND4X9", "HS65_GS_OAI311X5","HS65_GS_AO32X4", "HS65_GS_AOI112X4", "HS65_GS_AOI312X4", "HS65_GS_BFX9", "HS65_GS_MX41X7", "HS65_GS_OA22X9", "HS65_GS_OR3X9", "HS65_GS_PAO2X9"]
 
-	gate_areas=[4,3,4,30,8,2,2,2,3,5,5,3,4,4,4,5,3,4,3,4,3,4,4,4,4,3,5,3,4,7,5,4,3,4,2,5,4,4,8,9,2,7,8,2,4,3,2,3,4,4,5,5,2,4,3,4,4, 8,4,4,4, 3, 4, 3, 3, 3, 3]
+	gate_areas=[4,3,4,30,8,2,2,2,3,5,5,3,4,4,4,5,3,4,3,4,3,4,4,4,4,3,5,3,4,7,5,4,3,4,2,5,4,4,8,9,2,7,8,2,4,3,2,3,4,4,5,5,2,4,3,4,4, 8,4,4,4, 3, 4, 3, 3, 3, 3,3, 3,5, 5, 3, 5, 4,4, 3, 5, 2, 7, 4, 3, 4]
 	areas=gate_areas[:]; #copy list
 	#sorted_index= [i[0] for i in sorted(enumerate(gate_areas), key=lambda x:x[1])]
 
@@ -36,7 +36,7 @@ def weight_selection(path):
 	final_gate_index=[]
 	dff=0;
 
-	fg = open('/%s/reference_spice.sp' %path, 'r')
+	fg = open("/%s/reference_spice.sp" %path, "r")
 	data = [line.strip() for line in fg] #Get the lines in the spice file
 	length=len(data) #number of lines in the reference spice file
 	j=0
@@ -47,19 +47,19 @@ def weight_selection(path):
 		#If you come across ENDS, do not count any more X subckts because the top level subckt instance will also have X
 			if line == ".ENDS": 
 				stop=1;
-	#If the line is not empty and if the first letter in the line begins with a 'X', it is the subckt statement we are looking for
-	#Also, if the next line contains a '+', it is part of the same subckt too..
-			if line and line[0]=='X':  
+	#If the line is not empty and if the first letter in the line begins with a "X", it is the subckt statement we are looking for
+	#Also, if the next line contains a "+", it is part of the same subckt too..
+			if line and line[0]=="X":  
 				nextline= data[i+1]
-				if nextline[0]=='+':
+				if nextline[0]=="+":
 					a=line
-					next=nextline.split(' ',1)[1] #Split till the first instance of 'space'. Remove the '+'.
-					subckts.append(a+next) #Append the next line containing '+'
+					next=nextline.split(" ",1)[1] #Split till the first instance of "space". Remove the "+".
+					subckts.append(a+next) #Append the next line containing "+"
 				else:
 					subckts.append(line)
 	fg.close()
-	fw=open('/%s/subcktfile.sp' %path, 'w')
-	fa=open('/%s/subcktinstances.sp' %path, 'w') #gates
+	fw=open("/%s/subcktfile.sp" %path, "w")
+	fa=open("/%s/subcktinstances.sp" %path, "w") #gates
 	for line in subckts:
 		fw.write("%s\n" %line) #Write out subckt instances
 
@@ -68,7 +68,7 @@ def weight_selection(path):
 	#Grab the last word i.e., the gate..
 	#GATE NAMES OF EACH SUBCKT
 	for i in range(0,len(subckts)): 
-		instance.append(subckts[i].split()[-1]) #For each line, get the gate and append it to the 'instance' list
+		instance.append(subckts[i].split()[-1]) #For each line, get the gate and append it to the "instance" list
 		fa.write("%s\n" %subckts[i].split()[-1])
 		cur_gate=subckts[i].split()[-1];
 		if re.search("DF",cur_gate): #Look for FF anywhere in the string
@@ -83,7 +83,7 @@ def weight_selection(path):
 	
 	fw.close()
 	fa.close()
-	fa=open('/%s/subcktinstances.sp' %path, 'a+')
+	fa=open("/%s/subcktinstances.sp" %path, "a+")
 	#Compare each of the instances in the subckt with that of the standard gates and assign the weigths
 	for i in range(0,len(instance)):
 		for j in range(0,len(gates)):
@@ -140,8 +140,8 @@ num=weight_selection(path);
 print "Random subckt line=%d" %num
 
 
-fa=open('/%s/subcktinstances.sp' %path, 'r')
-fb=open('/%s/subcktinstances1.sp' %path, 'w')
+fa=open("/%s/subcktinstances.sp" %path, "r")
+fb=open("/%s/subcktinstances1.sp" %path, "w")
 read=fa.readlines()
 filelen=len(read)
 fb.writelines(read[filelen-3])

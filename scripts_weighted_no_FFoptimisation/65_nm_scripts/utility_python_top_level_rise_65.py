@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-#Example usage: python utility_python_top_level_rise_65.py --rtl=/home/users/nanditha/Documents/utility/65nm/c880/c880_clk_ipFF.v --mod=c880_clk_ipFF --test=/home/users/nanditha/Documents/utility/65nm/c880/test_c880.v --tb_mod=test_c880 --clk=350 --run=100us --design=c880 --tech=65 --num=5 --group 5 --path=/home/external/iitb/nanditha/simulations/65nm/c880  --proc_node 1 --ppn 5 --days 00 --hrs 00 --mins 10 --script python_utility3_yuva_2cycles_2nd_3rd_65.py
+#Example usage: python utility_python_top_level_rise_65.py --rtl=/home/users/nanditha/Documents/utility/65nm/c2670/c2670_clk_ipFF.v --mod=c2670_clk_ipFF --test=/home/users/nanditha/Documents/utility/65nm/c2670/test_c2670.v --tb_mod=test_c2670 --clk=350 --run=100us --design=c2670 --tech=65 --num=5 --group 5 --path=/home/external/iitb/nanditha/simulations/65nm/c2670  --proc_node 1 --ppn 5 --days 00 --hrs 00 --mins 10 --script python_utility3_yuva_2cycles_2nd_3rd_65.py
 
 #Calling python_gnd_gnds_dspf_modify.py: This script adds 'gnd,gnds,vdd,vdds' to the subckt instances and will show one instance per line (no + continuation of subckt): Mar 19 2014
 #dspf input to the Netlstfrmt will be pnr/op_data/%s_final_new.dspf which is created by the previous script python_gnd_gnds_dspf_modify.py. : Mar 19 2014
