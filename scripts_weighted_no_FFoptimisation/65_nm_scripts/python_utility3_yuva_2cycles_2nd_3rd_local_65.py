@@ -11,7 +11,7 @@
 #This version of the script has the facility of selecting the gate based on the area of the gate. This version of the script uses another script python_weighted_gateselection.py to pick the random gate based on its area: Nov 17 2013
 #Glitch insertion window is within the 2.5 cycles, and not the 6.5 cycles that is required for the case with intermediate FFs
 
-#Example usage: python python_utility3_yuva_2cycles_2nd_3rd_local_65.py -m lfsr -p /home/user1/simulations/65nm/LFSR -d LFSR -t 65 -n 80 --group 40 --clk 400 
+#Example usage: python python_utility3_yuva_2cycles_2nd_3rd_local_65.py -m b04 -p /home/users/nanditha/Documents/utility/65nm/b04 -d b04 -t 65 -n 4 --group 4 --clk 200 
 
 import optparse
 import re,os
@@ -176,12 +176,8 @@ for loop in range(start_loop, (num_of_loops+1)):
 
 	print "Now, creating multiple spice decks in spice_decks folder in current directory on the remote machine\n"
 	
-	#os.system('python %s/python_repeat_deckgen_remote_seed.py -m %s -n %s -f %s -o %s -s %d' %(path,module,num_at_a_time,path,loop,seed_new))
 
-#########################################repeat_deckgen copied starting from here#######################################
-
-	
-		
+####################################################################
 	#Now, we need the header in RTL.csv, so we create an RTL.csv and copy the headers from the RTL_backup.csv that we had saved from Netlstfrmt.pl
 	fout = open('%s/%s_reference_out/RTL_%d.csv' %(path,module,loop), 'w')
 	fin = open('%s/%s_reference_out/RTL_backup.csv' %(path,module), 'r')
@@ -263,7 +259,6 @@ for loop in range(start_loop, (num_of_loops+1)):
 		print "\nRandom gate: %d\nRandom drain: %d\nRandom clock cycle:%d\nRandom glitch location:%e\n " %(rand_gate,rand_drain,rand_clk,rand_glitch)
 		frand.write("%d, %d, %d,%e\n" %(rand_gate,rand_drain,rand_clk,rand_glitch))
 
-#perl deckgen_remote_seed.pl -s reference_spice.sp -l glitch_osu018_stdcells_correct_vdd_gnd.sp -r decoder_behav_pnr_reference_out/tool_reference_out.txt -n 1 -m decoder_behav_pnr -f /home/user1/simulations/decoder -g 27 -d 2 -c 10 -i 1.42061344093991e-09 -o 1 
 
 		#deckgen.pl will need to be remotely executed through python_repeat_deckgen.py multiple number of times
 		os.system('perl %s/deckgen_remote_seed_rise_65.pl -s %s/reference_spice.sp  -r %s/%s_reference_out/tool_reference_out.txt -n %d -m %s -f %s  -o %s -g %s -d %s -c %s -i %s' %(path,path,path,module,loop_var,module,path,loop,rand_gate,rand_drain,rand_clk,rand_glitch))
@@ -286,10 +281,6 @@ for loop in range(start_loop, (num_of_loops+1)):
 	print "Comparing the RTL and spice outputs at the 2nd rising edge \n"
 	os.system('python %s/python_compare_2nd_rise_65.py -m %s -f %s -n %s -t %s -l %d' %(path,module,path,num_at_a_time,tech,loop))
 
-
-#For testing out new glitch files (afterdeleting process if at each echo statement). comment this out in the final run, else it will copy ALL spice files and consume lot of disk space
-#destination directory should not already exist for copytree command to function
-	#shutil.copytree('%s/spice_decks_%s' %(path,loop), '%s/test_backup_spice_decks' %path )
 	
 ##########################################################
 #Comment this out to see the decks and the result files it generates. 	

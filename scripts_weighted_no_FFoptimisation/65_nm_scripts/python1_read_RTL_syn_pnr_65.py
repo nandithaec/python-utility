@@ -2,6 +2,8 @@
 #Read in a RTL file, do synthesis and placement, route
 #Example usage: python python1_read_RTL_syn_pnr_65.py -f /home/users/nanditha/Documents/utility/65nm/c432/c432_clk_ipFF.v -m c432_clk_ipFF -c 300
 
+#Eliminating clock gating: June 2014
+#65nm lib files added: Apr 2014
 #freq added to synthesis part: Nov 19 2013
 
 import optparse
@@ -33,7 +35,57 @@ os.system('rtl2gds -rtl=%s -rtl_top=%s -syn -frequency=%s' %(filepath,options.mo
 #os.system("rtl2gds -rtl={0} -rtl_top={1} -syn".format(options.filepath, options.module_name))
 #os.system("rtl2gds -rtl={options.filepath} -rtl_top={options.module_name} -syn".format(args=args))
 #subprocess.call(['rtl2gds', '-rtl=' + options.filepath, '-rtl_top=' + options.module_name, '-syn'])
+fcr = open('synthesis/scripts/compile_dc.tcl', 'r') ## This is the tcl file for synthesis
+data=fcr.readlines()
+#print data
+fcr.close()
 
+fcw = open('synthesis/scripts/compile_dc_backup.tcl', 'w') ## This is the tcl file for synthesis- backup
+fcw.writelines(data)
+fcw.close()
+
+os.remove('synthesis/scripts/compile_dc.tcl')
+
+fin = open('synthesis/scripts/compile_dc_backup.tcl', 'r') 
+fnew = open('synthesis/scripts/compile_dc.tcl', 'w') ## This is the new tcl file for synthesis
+
+
+#Replace a current line
+#with open('input') as fin, open('output','w') as fout:
+for line in fin:
+	if line == 'set_clock_gating_style  \\n':
+		fnew.write('#set_clock_gating_style  \\n')
+	elif line == 'insert_clock_gating > ../logs/insert_clock_gating.log\n':
+		fnew.write('#insert_clock_gating > ../logs/insert_clock_gating.log\n')
+	elif line == 'propagate_constraints -gate_clock\n':
+		fnew.write('#propagate_constraints -gate_clock\n')
+	elif line == 'identify_clock_gating\n':
+		fnew.write('#identify_clock_gating\n')
+	elif line == 'report_clock_gating -verbose > ../reports/clk_gate_verbose.rpt\n':
+		fnew.write('#report_clock_gating -verbose > ../reports/clk_gate_verbose.rpt\n')
+	else:
+		fnew.write(line)
+
+fnew.close()
+fin.close()
+
+fnew = open('synthesis/scripts/compile_dc.tcl', 'r') 
+newdata=fnew.readlines()
+#print (newdata)
+
+f1 = open('synthesis/scripts/compile_dc_backup.tcl', 'w') 
+#f1.writelines("This was the script compiled by the Design Compiler\n It gets overwritten in the pnr stepp. Hence saving a backup here\n\n")
+f1.writelines(newdata)
+
+f1.close()
+fnew.close()
+
+print "Done creating a new synthesis compile script \"synthesis/scripts/compile_dc.tcl\" \n"
+print "Eliminating clock gating\n"
+
+time.sleep(5)
+
+##################################################################################################
 fcr = open('synthesis/scripts/technology.tcl', 'r') ## This is the tcl file for synthesis
 data=fcr.readlines()
 #print data
@@ -81,7 +133,7 @@ os.chdir('../../')
 print "...Pause...Done synthesis with 65nm tech files.. Starting pnr"
 time.sleep(5)
 
-####################################################
+#########################Done synthesis#########################################
 #Run place and route
 
 os.system('rtl2gds -rtl=%s -rtl_top=%s -pnr -frequency=%s' %(filepath,options.module_name,clkfreq))	
@@ -175,7 +227,7 @@ time.sleep(5)
 
 with open("./pnr/reports/5.postRouteOpt_%s/%s_postRoute.slk" %(module,module),"r") as f:
 	words=map(str.split, f)
-
+"""
 line1=words[1] #2nd line after header
 slack_read=line1[2]
 print "\nSlack is: %s" %slack_read
@@ -191,7 +243,7 @@ else:
 	print "Slack is positive. Your design WILL function at the frequency %s MHz\n" %clkfreq
 	time.sleep(5)
 
-
+"""
 if '1\'b1' in open('./pnr/op_data/%s_final.v' %module).read():
 	print "\n*******************WARNING******************\n"
 	print "\n1'b1 is present in the verilog file and the corresponding nets should be manually tie it to vdd in the spice file\n"

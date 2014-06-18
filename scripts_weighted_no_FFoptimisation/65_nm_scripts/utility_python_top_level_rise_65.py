@@ -1,10 +1,6 @@
 #!/usr/bin/env python
 
-
-#Example usage: python utility_python_top_level_rise_65.py --rtl=/home/users/nanditha/Documents/utility/65nm/LFSR/lfsr.vhd --mod=lfsr --test=/home/users/nanditha/Documents/utility/65nm/LFSR/test_lfsr.vhd --tb_mod=lfsr_tb --clk=400 --run=100us --design=LFSR --tech=65 --num=10 --group 10 --path=/home/external/iitb/nanditha/simulations/65nm/b04  --proc_node 1 --ppn 5 --days 00 --hrs 00 --mins 10 --script python_utility3_yuva_2cycles_2nd_3rd_65.py
-
-
-#Example usage: python utility_python_top_level_rise_65.py --rtl=/home/users/nanditha/Documents/utility/65nm/b04/b04.vhd --mod=b04 --test=/home/users/nanditha/Documents/utility/65nm/b04/test_b04.vhd --tb_mod=test_b04 --clk=200 --run=100us --design=b04 --tech=65 --num=10 --group 10 --path=/home/external/iitb/nanditha/simulations/65nm/b04  --proc_node 1 --ppn 5 --days 00 --hrs 00 --mins 10 --script python_utility3_yuva_2cycles_2nd_3rd_65.py
+#Example usage: python utility_python_top_level_rise_65.py --rtl=/home/users/nanditha/Documents/utility/65nm/c880/c880_clk_ipFF.v --mod=c880_clk_ipFF --test=/home/users/nanditha/Documents/utility/65nm/c880/test_c880.v --tb_mod=test_c880 --clk=350 --run=100us --design=c880 --tech=65 --num=5 --group 5 --path=/home/external/iitb/nanditha/simulations/65nm/c880  --proc_node 1 --ppn 5 --days 00 --hrs 00 --mins 10 --script python_utility3_yuva_2cycles_2nd_3rd_65.py
 
 #Calling python_gnd_gnds_dspf_modify.py: This script adds 'gnd,gnds,vdd,vdds' to the subckt instances and will show one instance per line (no + continuation of subckt): Mar 19 2014
 #dspf input to the Netlstfrmt will be pnr/op_data/%s_final_new.dspf which is created by the previous script python_gnd_gnds_dspf_modify.py. : Mar 19 2014
@@ -131,26 +127,7 @@ os.system('perl NetlstFrmt_echo_rise_65.pl -v %s_modelsim.v  -s pnr/op_data/%s_f
 print "***Done modifying the spice file to make it simulatable. File available in current directory reference_spice.sp\n"
 time.sleep(5)
 
-os.system('python python_create_jobscript_65.py -m %s -p %s -d %s -t %s -n %s --group %s --clk %s --proc_node %s --ppn %s --days %s --hrs %s --mins %s --script %s' %(module,path_folder,design_folder,techn,num,group,clkfreq,nodes,ppn,days,hrs,mins,script))
-time.sleep(5)
-
-#Copy the entire Current directory to the machine where the simulations will be run in parallel. If running it on the 48-core cluster under the username: user1, password: user123 and copying to the folder /home/user1/simulations. Files will HAVE to be run from the remote machine,since the slave machines are connected only to the master and not to the outside world. So, these slave machines can ONLY be accessed by the master node.
-#print "\nCopying current working directory to remote cluster to run simulations parallely\n"
-#os.system('scp -r ../%s user1@10.107.105.201:/home/user1/simulations' %design_folder)
-
-#Copy to the Pune CDAC cluster
-"""
-os.system('scp -r ../%s nanditha@yuva.cdac.in:/home/external/iitb/nanditha/simulations' %design_folder)
-print "Done copying files\n"
-print "Now connecting to the remote machine. Once connected with your password, scripts at that location will be executed..\n"
-
-####################################################################################################################################################################
-
-print('Executing jobscript remotely on the pune cdac server machine\n')
-
-#os.system('ssh nanditha@yuva.cdac.in qsub /home/external/iitb/nanditha/simulations/%s/jobscript.txt' %(design_folder))
-"""
-
+#os.system('python python_create_jobscript_65.py -m %s -p %s -d %s -t %s -n %s --group %s --clk %s --proc_node %s --ppn %s --days %s --hrs %s --mins %s --script %s' %(module,path_folder,design_folder,techn,num,group,clkfreq,nodes,ppn,days,hrs,mins,script))
 
 
 

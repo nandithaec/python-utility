@@ -3,7 +3,6 @@
 #!/usr/bin/perl
 
 #Modifications:
-#Introduced comments on the line that contains ---.. else, error occurs in hspice: June 2014
 #Modified M to M* in   if($sub_ckt[$i]=~m/^M*\d* /) to match all transistors in the new 65nm lib file: Mar 18 2014
 #searching between subckt and ends modified to 'SUBCKT' and 'ENDS' : Mar 18 2014
 
@@ -112,7 +111,7 @@ $drain="";
 $sub_ckt_num=0;
 $index=0;
 $sub_ckt_name="";
-$info="\n\n**** SUBCIRCUIT\t\t|VERSION COUNT\n**-----------------------------------------\n";
+$info="\n\n**** SUBCIRCUIT\t\t|VERSION COUNT\n-----------------------------------------\n";
 
 #capturing the subcircuits from the library
 while(<NET>)

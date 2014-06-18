@@ -1,7 +1,6 @@
 #Example: perl deckgen_remote_seed_rise_65.pl -s reference_spice.sp  -r decoder_op_ip_reference_out/tool_reference_out.txt -n 1 -m decoder_op_ip -f /home/users/nanditha/Documents/utility/65nm/decoder_65nm -g 4 -d 2 -c 456 -i 4.91e-09 -o 1 
 
 #Modifications:
-#Using loop number to create multiple RTL files: June 15 2014
 #$vdd=1 is added. Else incorrect results were being obtained: April 2014
 #Removed the option of reading the $lib file : not needed, .ic for ref_minus1 added: Mar 19 2014
 #.ic substitution included as part of the code. This code existed but wasnt being used. Modified reference_minus1 to reference_1.: Feb 21 2014
@@ -420,9 +419,9 @@ if(($_=~m/\.ic/))
  }
 #Appending to the RTL reference output file, which contains outputs of those clk cycles, that were picked by this script randomly, at the 3rd rising edge of the clk
 #This will be used for the spice vs verilog simulation comparison
-open(IM,">>$folder/$module\_reference_out/RTL_$outloop.csv");
+open(IM,">>$folder/$module\_reference_out/RTL.csv");
 print IM "\n";
-print "Random drain..RTL_$outloop.csv  ----- $random_drain\n";
+print "Random drain..RTL.csv  ----- $random_drain\n";
 #A comma is needed at the end of the last entry
 print IM "$deck_num,$cycle,$glitch_location,$random_gate,$rand_gate,$random_drain,";
 @temp=split (" ",$next_2_cycle);
@@ -446,9 +445,9 @@ foreach $index( $start .. $#temp)
 
 #Appending to the RTL_2nd_edge reference output file, which contains outputs of those clk cycles, that were picked by this script randomly , at the 2nd rising edge of the clk
 #This will be used for the spice vs verilog simulation comparison
-open(IM,">>$folder/$module\_reference_out/RTL_2nd_edge_$outloop.csv");
+open(IM,">>$folder/$module\_reference_out/RTL_2nd_edge.csv");
 print IM "\n";
-print "Random drain..RTL_2nd_edge_$outloop.csv  ----- $random_drain\n";
+print "Random drain..RTL_2nd_edge.csv  ----- $random_drain\n";
 #A comma is needed at the end of the last entry
 print IM "$deck_num,$cycle,$glitch_location,$random_gate,$rand_gate,$random_drain,";
 @temp=split (" ",$next_cycle);
@@ -467,6 +466,7 @@ foreach $index( $start .. $#temp)
 	}
 
   }
+
 
 
 

@@ -1,7 +1,7 @@
 
 #!/usr/bin/env python
 #Read in a RTL file, do synthesis and placement, route
-#Example usage: python python_choose_subckts_library.py -m b01
+#Example usage: python python_choose_subckts_library.py -m b04
 
 
 import optparse
