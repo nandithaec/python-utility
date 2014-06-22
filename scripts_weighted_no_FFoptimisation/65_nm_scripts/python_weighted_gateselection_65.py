@@ -13,9 +13,9 @@ def weight_selection(path):
 	
 	import random,re
 
-	gates=["HS65_GSS_XOR2X6","HS65_GS_AND2X4","HS65_GS_AOI22X6","HS65_GS_BFX284","HS65_GS_DFPQX4","HS65_GS_IVX9","HS65_GS_NAND2X7","HS65_GS_NOR2X6","HS65_GS_NOR3X4","HS65_GS_AO212X4","HS65_GS_AO311X9  ", "HS65_GS_AOI12X2", "HS65_GS_AOI212X4", "HS65_GS_AOI311X4", "HS65_GS_AOI32X5", "HS65_GS_AOI33X5", "HS65_GS_NAND2AX7","HS65_GS_NAND3AX6", "HS65_GS_NAND3X5", "HS65_GS_NAND4ABX3", "HS65_GS_NOR3AX2", "HS65_GS_NOR4ABX2","HS65_GS_NOR4ABX4", "HS65_GS_OA12X9", "HS65_GS_OAI212X5", "HS65_GS_OAI21X3", "HS65_GS_OAI33X3", "HS65_GS_OR2X9","HS65_GSS_XNOR2X6", "HS65_GSS_XOR3X2","HS65_GS_AND2X27", "HS65_GS_AND3X4","HS65_GS_AO12X4","HS65_GS_AO31X9","HS65_GS_AOI21X2","HS65_GS_AOI222X2", "HS65_GS_AOI32X3", "HS65_GS_CBI4I1X5","HS65_GS_DFPQX9","HS65_GS_FA1X4", "HS65_GS_IVX2","HS65_GS_LDLQX9","HS65_GS_MX41X4","HS65_GS_NAND2X2","HS65_GS_NAND3AX3","HS65_GS_NOR2AX3","HS65_GS_NOR2X2", "HS65_GS_NOR3X1", "HS65_GS_OA112X4","HS65_GS_OA12X4","HS65_GS_OA212X4","HS65_GS_OA32X4","HS65_GS_OAI12X2", "HS65_GS_OAI13X1", "HS65_GS_OR2X4","HS65_GS_PAOI2X1","HS65_GS_AO22X9","HS65_GSS_XNOR3X2","HS65_GS_AND3X9","HS65_GS_OAI32X5","HS65_GS_AO112X9", "HS65_GS_AO12X9", "HS65_GS_CB4I1X9", "HS65_GS_CBI4I6X5", "HS65_GS_OAI211X5", "HS65_GS_OAI22X6", "HS65_GS_OAI31X5","HS65_GS_CBI4I6X5", "HS65_GS_NOR3AX4","HS65_GS_AND4X6", "HS65_GS_AO33X9", "HS65_GS_AOI13X5", "HS65_GS_NAND4X9", "HS65_GS_OAI311X5","HS65_GS_AO32X4", "HS65_GS_AOI112X4", "HS65_GS_AOI312X4", "HS65_GS_BFX9", "HS65_GS_MX41X7", "HS65_GS_OA22X9", "HS65_GS_OR3X9", "HS65_GS_PAO2X9"]
+	gates=["HS65_GSS_XOR2X6","HS65_GS_AND2X4","HS65_GS_AOI22X6","HS65_GS_BFX284","HS65_GS_DFPQX4","HS65_GS_IVX9","HS65_GS_NAND2X7","HS65_GS_NOR2X6","HS65_GS_NOR3X4","HS65_GS_AO212X4","HS65_GS_AO311X9  ", "HS65_GS_AOI12X2", "HS65_GS_AOI212X4", "HS65_GS_AOI311X4", "HS65_GS_AOI32X5", "HS65_GS_AOI33X5", "HS65_GS_NAND2AX7","HS65_GS_NAND3AX6", "HS65_GS_NAND3X5", "HS65_GS_NAND4ABX3", "HS65_GS_NOR3AX2", "HS65_GS_NOR4ABX2","HS65_GS_NOR4ABX4", "HS65_GS_OA12X9", "HS65_GS_OAI212X5", "HS65_GS_OAI21X3", "HS65_GS_OAI33X3", "HS65_GS_OR2X9","HS65_GSS_XNOR2X6", "HS65_GSS_XOR3X2","HS65_GS_AND2X27", "HS65_GS_AND3X4","HS65_GS_AO12X4","HS65_GS_AO31X9","HS65_GS_AOI21X2","HS65_GS_AOI222X2", "HS65_GS_AOI32X3", "HS65_GS_CBI4I1X5","HS65_GS_DFPQX9","HS65_GS_FA1X4", "HS65_GS_IVX2","HS65_GS_LDLQX9","HS65_GS_MX41X4","HS65_GS_NAND2X2","HS65_GS_NAND3AX3","HS65_GS_NOR2AX3","HS65_GS_NOR2X2", "HS65_GS_NOR3X1", "HS65_GS_OA112X4","HS65_GS_OA12X4","HS65_GS_OA212X4","HS65_GS_OA32X4","HS65_GS_OAI12X2", "HS65_GS_OAI13X1", "HS65_GS_OR2X4","HS65_GS_PAOI2X1","HS65_GS_AO22X9","HS65_GSS_XNOR3X2","HS65_GS_AND3X9"," HS65_GS_OAI32X5","HS65_GS_AO112X9", "HS65_GS_AO12X9", "HS65_GS_CB4I1X9", "HS65_GS_CBI4I6X5", "HS65_GS_OAI211X5", "HS65_GS_OAI22X6", "HS65_GS_OAI31X5", "HS65_GS_NOR3AX4","HS65_GS_AND4X6", "HS65_GS_AO33X9", "HS65_GS_AOI13X5", "HS65_GS_NAND4X9", "HS65_GS_OAI311X5"]
 
-	gate_areas=[4,3,4,30,8,2,2,2,3,5,5,3,4,4,4,5,3,4,3,4,3,4,4,4,4,3,5,3,4,7,5,4,3,4,2,5,4,4,8,9,2,7,8,2,4,3,2,3,4,4,5,5,2,4,3,4,4, 8,4,4,4, 3, 4, 3, 3, 3, 3,3, 3,5, 5, 3, 5, 4,4, 3, 5, 2, 7, 4, 3, 4]
+	gate_areas=[4,3,4,30,8,2,2,2,3,5,5,3,4,4,4,5,3,4,3,4,3,4,4,4,4,3,5,3,4,7,5,4,3,4,2,5,4,4,8,9,2,7,8,2,4,3,2,3,4,4,5,5,2,4,3,4,4, 8,4,4,4, 3, 4, 3, 3, 3, 3,3,5, 5, 3, 5, 4]
 	areas=gate_areas[:]; #copy list
 	#sorted_index= [i[0] for i in sorted(enumerate(gate_areas), key=lambda x:x[1])]
 
@@ -94,13 +94,13 @@ def weight_selection(path):
 
 	fa.write("\n\n\n")
 
-	print " gate weights array:", gate_weights
+	#print " gate weights array:", gate_weights
 
 	for j in range(0,len(gates)):
 		gateindex.append(j)
 
-	#Main gate index is:
-	print "Gate index:%s" %gateindex
+	#Main gate index is: .. commented out
+	#print "Gate index:%s" %gateindex
 
 	fa.write( "Gate index:%s\n" %gateindex)
 	fa.write("\n\n\n")	
@@ -115,9 +115,11 @@ def weight_selection(path):
 	
 	fa.write ("Final gate index:\n")	
 	fa.write("%s\n" %final_gate_index)	
-	#print("Final gate index%s\n" %final_gate_index)
-	
-	print "Length of the final gate array=%d" %len(final_gate_index)
+	#commented out
+	#print("Final gate index%s\n" %final_gate_index) 
+
+	#commented out
+	#print "Length of the final gate array=%d" %len(final_gate_index)
 	lengthgates=len(final_gate_index)
 	#Finally, we will pick a random number between 1 and the final length of this array. Say, it picked 5, The deckgen script will then go and pick the 5th subckt in the spice file	
 	

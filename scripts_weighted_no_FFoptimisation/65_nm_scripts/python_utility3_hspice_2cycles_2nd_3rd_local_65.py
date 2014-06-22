@@ -11,7 +11,7 @@
 #This version of the script has the facility of selecting the gate based on the area of the gate. This version of the script uses another script python_weighted_gateselection.py to pick the random gate based on its area: Nov 17 2013
 #Glitch insertion window is within the 2.5 cycles, and not the 6.5 cycles that is required for the case with intermediate FFs
 
-#Example usage: python python_utility3_hspice_2cycles_2nd_3rd_local_65.py -m c2670_clk_ipFF -p /home/users/nanditha/Documents/utility/65nm/c2670 -d c2670 -t 65 -n 4 --group 4 --clk 350 
+#Example usage: python python_utility3_hspice_2cycles_2nd_3rd_local_65.py -m c1908_clk_ipFF -p /home/users/nanditha/Documents/utility/65nm/c1908 -d c1908 -t 65 -n 2500 --group 500 --clk 350 
 
 import optparse
 import re,os
@@ -56,6 +56,7 @@ end_PWL= half_clk_period + change_time #in ns generally
 #At a time, only 1000 are generated and run- to save disk space. After collecting results, they are deleted
 num_of_loops=(int(num)/int(num_at_a_time))
 
+os.system('python %s/python_subckts_in_weight_script.py -m %s -p %s' %(path,module,path))
 
 if os.path.exists('%s/spice_results' %path):
 	os.chdir('%s/spice_results' %path)
@@ -260,7 +261,7 @@ for loop in range(start_loop, (num_of_loops+1)):
 	
 		
 	#The following script will run GNU Parallel and hspice 
-	os.system('python %s/python_subckts_in_weight_script.py -m %s -p %s' %(path,module,path))
+	
 	
 	os.system ('python %s/python_hspice_mod.py -p %s -n %s -d %s -o %d' %(path,path,num_at_a_time,design_folder,loop))
 	
@@ -285,18 +286,18 @@ for loop in range(start_loop, (num_of_loops+1)):
 	
 ##########################################################
 #Comment this out to see the decks and the result files it generates. 	
-"""
+
 	spice_dir = '%s/spice_decks_%s' %(path,loop)
 
 	
 	if os.path.exists(spice_dir):
 		shutil.rmtree(spice_dir)
 
-"""
+
 ########################################End of loop########################################################
 
 print "Combining all rtl diff files\n"
-seed="5402109851100356920"
+#seed="5402109851100356920"
 os.system('python  %s/python_count_flips_2nd_3rd_rise_65.py -f %s  -n %s  --group %s -s %s' %(path,path,num,num_at_a_time,seed))  #To save the seed to results file
 
 

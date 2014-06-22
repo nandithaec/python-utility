@@ -78,7 +78,7 @@ print "Deck numbers", deck_num
 print "Num of files= %d" %num_of_files
 print "File names", file_names
 
-time.sleep (3)			
+#time.sleep (3)			
 #Modify each file to be hspice compatible
 fhspice=open('%s/spice_decks_%d/hspice.bat' %(path,dir_num),'w')
 	
@@ -130,7 +130,7 @@ for i in range(0,num_of_files):
 	
 fhspice.close()
 print "Done creating hspice decks\n"
-time.sleep (3)	
+#time.sleep (3)	
 
 #Run hspice simulations
 #os.chdir("%s/spice_decks_%d/" %(path,dir_num))
@@ -138,7 +138,7 @@ time.sleep (3)
 
 os.system('python %s/python_GNUparallel_hspice_rise_local_mc_65.py -n %d -d %s -o %d -p %s' %(path,num,folder,dir_num,path))
 print "Done running hspice\n"
-time.sleep (3)
+#time.sleep (3)
 os.chdir("../")
 		
 file_names=os.listdir('%s/spice_decks_%d' %(path,dir_num))
@@ -147,7 +147,7 @@ deck_num=[]
 
 print "path of the script being run: ",os.path.dirname(os.path.abspath(__file__))
 print "current working dir: ",os.getcwd()
-time.sleep (3)
+#time.sleep (3)
 
 print "filenames: ",file_names
 
@@ -161,7 +161,7 @@ print "Deck numbers", deck_num
 num_of_csv=len(deck_num)
 print "Len of Deck numbers", num_of_csv
 
-time.sleep (3)
+#time.sleep (3)
 
 #Rename the csv output files
 for j in range(0,num_of_csv):
@@ -170,7 +170,7 @@ for j in range(0,num_of_csv):
 		os.rename('%s/spice_decks_%d/hspice_deck_%s.mt0.csv' %(path,dir_num,deck_num[j]),'%s/spice_decks_%d/glitch_report_outputs_%s.csv' %(path,dir_num,deck_num[j]))
 
 
-time.sleep (3)
+#time.sleep (3)
 #Modify the output csv files.. remove the headers etc..
 for i in range(0,num_of_csv):
 	print "opening file %s/glitch_report_outputs_%s.csv to modify, remove headers"  %(path,deck_num[i])

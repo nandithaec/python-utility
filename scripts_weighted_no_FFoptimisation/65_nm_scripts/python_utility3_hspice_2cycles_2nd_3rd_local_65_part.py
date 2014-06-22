@@ -11,7 +11,7 @@
 #This version of the script has the facility of selecting the gate based on the area of the gate. This version of the script uses another script python_weighted_gateselection.py to pick the random gate based on its area: Nov 17 2013
 #Glitch insertion window is within the 2.5 cycles, and not the 6.5 cycles that is required for the case with intermediate FFs
 
-#Example usage: python python_utility3_hspice_2cycles_2nd_3rd_local_65_part.py -m c2670_clk_ipFF -p /home/users/nanditha/Documents/utility/65nm/c2670 -d c2670 -t 65 -n 4 --group 4 --clk 350 
+#Example usage: python python_utility3_hspice_2cycles_2nd_3rd_local_65_part.py -m c880_clk_ipFF -p /home/users/nanditha/Documents/utility/65nm/c880 -d c880 -t 65 -n 4 --group 2 --clk 350 
 
 import optparse
 import re,os
@@ -55,8 +55,8 @@ end_PWL= half_clk_period + change_time #in ns generally
 #Whatever number of decks to be simulated- is assumed to be more than or equal to 1000.
 #At a time, only 1000 are generated and run- to save disk space. After collecting results, they are deleted
 num_of_loops=(int(num)/int(num_at_a_time))
-"""
 
+"""
 if os.path.exists('%s/spice_results' %path):
 	os.chdir('%s/spice_results' %path)
 	for f in glob.glob("count*.csv"):
@@ -160,8 +160,8 @@ if os.path.isfile("%s/%s_reference_out/RTL_2nd_edge*.csv" %(path,module)):
 	print "****Removing the existing RTL_2nd_edge.csv file in folder %s_reference_out ****\n" %(module)
 	os.remove("%s/%s_reference_out/RTL_2nd_edge*.csv" %(path,module))
 		
-
 """
+
 #Fresh simulation
 for loop in range(start_loop, (num_of_loops+1)): 
 
@@ -169,8 +169,8 @@ for loop in range(start_loop, (num_of_loops+1)):
 	
 
 #########################################repeat_deckgen copied starting from here#######################################
-	"""	
 		
+	"""	
 	#Now, we need the header in RTL.csv, so we create an RTL.csv and copy the headers from the RTL_backup.csv that we had saved from Netlstfrmt.pl
 	fout = open('%s/%s_reference_out/RTL_%d.csv' %(path,module,loop), 'w')
 	fin = open('%s/%s_reference_out/RTL_backup.csv' %(path,module), 'r')
@@ -258,10 +258,10 @@ for loop in range(start_loop, (num_of_loops+1)):
 
 ##################Script repeat_deckgen copied ends here####################################
 	
-		
+	"""	
 	#The following script will run GNU Parallel and hspice 
 	os.system('python %s/python_subckts_in_weight_script.py -m %s -p %s' %(path,module,path))
-	"""
+	
 	os.system ('python %s/python_hspice_mod.py -p %s -n %s -d %s -o %d' %(path,path,num_at_a_time,design_folder,loop))
 	
 	os.system('python %s/python_hspice_combine_csv_results.py -n %s -d %s -o %d -p %s' %(path,num_at_a_time,design_folder,loop,path))
