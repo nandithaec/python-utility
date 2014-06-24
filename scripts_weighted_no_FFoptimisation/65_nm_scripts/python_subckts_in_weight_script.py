@@ -146,5 +146,5 @@ print "Instances of each:\n",num
 print "Total area of the subckts to be added:\n",area
 print "Individual area of the subckts to be added:\n",ind_area
 print "Individual integer areas of the subckts to be added:\n",int_area
-time.sleep(5)		
+time.sleep(3)		
 

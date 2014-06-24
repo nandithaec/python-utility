@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 #Read in a RTL file, do synthesis and placement, route
-#Example usage: python python1_read_RTL_syn_pnr_65.py -f /home/users/nanditha/Documents/utility/65nm/LFSR/lfsr.vhd -m lfsr -c 400
+#Example usage: python python1_read_RTL_syn_pnr_65.py -f /home/users/nanditha/Documents/utility/65nm/c432/c432_clk_ipFF.v -m c432_clk_ipFF -c 300
 
-#Introduced -define_name_rules and -change_names for the created rules, to create case-insenstive net names.. i.e., to avoid same net names such as 'N1' and 'n1' in spice- which creates shorts. June 23 2014
 #Eliminating clock gating: June 2014
 #65nm lib files added: Apr 2014
 #freq added to synthesis part: Nov 19 2013
@@ -64,10 +63,6 @@ for line in fin:
 		fnew.write('#identify_clock_gating\n')
 	elif line == 'report_clock_gating -verbose > ../reports/clk_gate_verbose.rpt\n':
 		fnew.write('#report_clock_gating -verbose > ../reports/clk_gate_verbose.rpt\n')
-	elif line == 'change_names -rules verilog -hierarchy\n':
-		fnew.write('define_name_rules rules_name -check_internal_net_name -case_insensitive\n')
-		fnew.write('change_names -rules verilog -hierarchy\n')
-		fnew.write('change_names -rules rules_name -hierarchy\n')
 	else:
 		fnew.write(line)
 
@@ -86,7 +81,6 @@ f1.close()
 fnew.close()
 
 print "Done creating a new synthesis compile script \"synthesis/scripts/compile_dc.tcl\" \n"
-print "There are no duplicate node or net names in the design \n"
 print "Eliminating clock gating\n"
 
 time.sleep(5)

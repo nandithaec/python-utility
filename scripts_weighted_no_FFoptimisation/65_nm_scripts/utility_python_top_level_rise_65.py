@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-#Example usage: python utility_python_top_level_rise_65.py --rtl=/home/users/nanditha/Documents/utility/65nm/c880/c880_clk_ipFF.v --mod=c880_clk_ipFF --test=/home/users/nanditha/Documents/utility/65nm/c880/test_c880.v --tb_mod=test_c880 --clk=350 --run=100us --design=c880 --tech=65 --num=5 --group 5 --path=/home/external/iitb/nanditha/simulations/65nm/c880  --proc_node 1 --ppn 5 --days 00 --hrs 00 --mins 10 --script python_utility3_yuva_2cycles_2nd_3rd_65.py
+#Example usage: python utility_python_top_level_rise_65.py --rtl=/home/users/nanditha/Documents/utility/65nm/b12/b12.vhd --mod=b12 --test=/home/users/nanditha/Documents/utility/65nm/b12/test_b12.vhd --tb_mod=test_b12 --clk=300 --run=100us --design=b12 --tech=65 --num=10 --group 10 --path=/home/external/iitb/nanditha/simulations/65nm/b12  --proc_node 1 --ppn 5 --days 00 --hrs 00 --mins 10 --script python_utility3_yuva_2cycles_2nd_3rd_65.py
 
 #Calling python_gnd_gnds_dspf_modify.py: This script adds 'gnd,gnds,vdd,vdds' to the subckt instances and will show one instance per line (no + continuation of subckt): Mar 19 2014
 #dspf input to the Netlstfrmt will be pnr/op_data/%s_final_new.dspf which is created by the previous script python_gnd_gnds_dspf_modify.py. : Mar 19 2014
@@ -81,12 +81,6 @@ os.system('python python1_read_RTL_syn_pnr_65.py -f %s -m %s -c %s' %(rtl,module
 
 print('Done 1st script rtl+pnr\n')
 time.sleep(5)
-
-#Example usage: python python2_run_qrc_spice_extraction.py -m decoder_behav_pnr
-##Not using this for 65nm: os.system('python python2_run_qrc_spice_extraction.py -m %s' %module)
-
-#print('Done 2nd script QRC extracting spice\n')
-#time.sleep(5)
 
 
 #Example usage: perl perl2_outwrtr.pl -v pnr/op_data/decoder_behav_pnr_final.v -m decoder_behav_pnr

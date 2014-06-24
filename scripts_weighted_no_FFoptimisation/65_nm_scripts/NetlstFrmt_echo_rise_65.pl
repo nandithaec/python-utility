@@ -5,6 +5,8 @@
 #clk frequency in MHz
 
 #Modifications:
+
+#Initialisation node (net0139:F125) for HS65_GS_DFPQNX9 FF , net0139:F163 for DFPHQNX9 and net0238:F149 for DFPHQX9, is mentioned as a comment in the .ic section. NEed to manually change this in the reference.sp file, since we are not current differently identifying the different types of FFs: June 23 2014
 #rise and fall edge measurements limitedto 50ps duration. Else false values were being calculated: April 25 2014
 #.ic on net0148:F59 of the DFF to initialise correctly. This value should be the inverted value of what was supposed to be initialised originally.: April 2nd 2014
 #.ic square brackets being replaced by _ : feb 26 2014
@@ -578,12 +580,17 @@ foreach $i(0 .. $#to_ff)
    
 if($i ne "clk")
    {
-  
+     # print SIM ".ic v(X$module.$to_ff[$i]:Q)= ##$new\_reference_1##\n";  
       #print SIM ".ic v(X$module.$to_ff[$i]\_q\_reg:Q)= ##$new\_reference_1##\n";
       #print SIM ".ic v(X$module.X$to_ff[$i].R62)= ##$new\_reference_1_neg##\n";
-	print SIM ".ic v(X$module.X$to_ff[$i]\_q\_reg.net0148:F59)= ##$new\_reference_1_neg##\n";
-   #   print SIM ".ic v(X$module.X$to_ff[$i].net0148:F59)= ##$new\_reference_1_neg##\n";
-     # print SIM ".ic v(X$module.$to_ff[$i]:Q)= ##$new\_reference_1##\n";
+	#print SIM ".ic v(X$module.X$to_ff[$i]\_q\_reg.net0148:F59)= ##$new\_reference_1_neg##\n";
+   print SIM ".ic v(X$module.X$to_ff[$i].net0148:F59)= ##$new\_reference_1_neg##\n";
+   #The following is for DFQNX9 FF, which has a different initialisation node
+   #   print SIM ".ic v(X$module.X$to_ff[$i].net0139:F125)= ##$new\_reference_1_neg##\n";
+#The following for DFPHQNX9
+   #   print SIM ".ic v(X$module.X$to_ff[$i].net0139:F163)= ##$new\_reference_1_neg##\n";
+ #The following for DFPHQX9
+   #   print SIM ".ic v(X$module.X$to_ff[$i].net0238:F149)= ##$new\_reference_1_neg##\n";  
    }
 
    #$measure_at_falling_edge.="meas tran ff_op_$i MAX v(X$module.$to_ff[$i]:Q) from=$fall_from"."s"." to=$fall_to"."s\n";
@@ -634,9 +641,9 @@ foreach $i(0 .. $#to_ff)
 
 
 #This will need to be commented for non-ISCAS benchmark circuits
- $measure_at_falling_edge.="meas tran ff_op_fall_$i MAX v(X$module.$to_ff[$i]\_q\_reg:Q) from=$fall_from"."s"." to=$fall_to"."s\n";
+ #$measure_at_falling_edge.="meas tran ff_op_fall_$i MAX v(X$module.$to_ff[$i]\_q\_reg:Q) from=$fall_from"."s"." to=$fall_to"."s\n";
  #This will need to be enabled for non-ISCAS benchmark circuits
- #$measure_at_falling_edge.="meas tran ff_op_fall_$i MAX v(X$module.$to_ff[$i]:Q) from=$fall_from"."s"." to=$fall_to"."s\n";
+ $measure_at_falling_edge.="meas tran ff_op_fall_$i MAX v(X$module.$to_ff[$i]:Q) from=$fall_from"."s"." to=$fall_to"."s\n";
  }
 
 
@@ -645,10 +652,10 @@ foreach $i(0 .. $#to_ff)
  {
 
 #This will need to be commented for non-ISCAS benchmark circuits
- $measure_at_rising_edge.="meas tran ff_op_rise_$i MAX v(X$module.$to_ff[$i]\_q\_reg:Q) from=$rise_from_2nd"."s"." to=$rise_to_2nd"."s\n";
+ #$measure_at_rising_edge.="meas tran ff_op_rise_$i MAX v(X$module.$to_ff[$i]\_q\_reg:Q) from=$rise_from_2nd"."s"." to=$rise_to_2nd"."s\n";
 
  #This will need to be enabled for non-ISCAS benchmark circuits
- #$measure_at_rising_edge.="meas tran ff_op_rise_$i MAX v(X$module.$to_ff[$i]:Q) from=$rise_from_2nd"."s"." to=$rise_to_2nd"."s\n";
+ $measure_at_rising_edge.="meas tran ff_op_rise_$i MAX v(X$module.$to_ff[$i]:Q) from=$rise_from_2nd"."s"." to=$rise_to_2nd"."s\n";
  }
  
  
