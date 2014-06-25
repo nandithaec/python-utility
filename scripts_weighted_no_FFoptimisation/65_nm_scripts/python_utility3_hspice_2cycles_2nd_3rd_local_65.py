@@ -11,7 +11,7 @@
 #This version of the script has the facility of selecting the gate based on the area of the gate. This version of the script uses another script python_weighted_gateselection.py to pick the random gate based on its area: Nov 17 2013
 #Glitch insertion window is within the 2.5 cycles, and not the 6.5 cycles that is required for the case with intermediate FFs
 
-#Example usage: python python_utility3_hspice_2cycles_2nd_3rd_local_65.py -m b12 -p /home/users/nanditha/Documents/utility/65nm/b12 -t 65 -n 3 --group 3 --clk 300 
+#Example usage: python python_utility3_hspice_2cycles_2nd_3rd_local_65.py -m b10 -p /home/users/nanditha/Documents/utility/65nm/b10 -t 65 -n 3 --group 3 --clk 350 
 
 import optparse
 import re,os

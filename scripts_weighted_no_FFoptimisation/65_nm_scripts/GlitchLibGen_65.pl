@@ -1,8 +1,10 @@
-#Example: perl GlitchLibGen_65.pl -i CORE65GPSVT_selected_lib.sp
+#Example: perl GlitchLibGen_65.pl -p <path> -i <path>/CORE65GPSVT_selected_lib.sp
 
 #!/usr/bin/perl
 
 #Modifications:
+
+#Absolute paths introduced everywhere in the script, so that they can be run from one directory and no need of duplicating the scripts in all directories: June 25 2014
 #Introduced comments on the line that contains ---.. else, error occurs in hspice: June 2014
 #Modified M to M* in   if($sub_ckt[$i]=~m/^M*\d* /) to match all transistors in the new 65nm lib file: Mar 18 2014
 #searching between subckt and ends modified to 'SUBCKT' and 'ENDS' : Mar 18 2014
@@ -78,6 +80,7 @@ END
 
 GetOptions( #"o|output=s"=>\$glib,
             "i|input=s"=>\$library,
+            "p|path=s"=>\$path,
             "h|help"=>\$help
           );
       
@@ -86,7 +89,7 @@ if ($help) {
   exit(0);
 }
 $glib="glitch_".$library;
-if ($#ARGV >= 0 || $glib eq "" || $library eq "" ) {
+if ($#ARGV >= 0 || $glib eq "" || $library eq ""|| $path eq "" ) {
   print STDERR "-E- Found missing/excess arguments\n";
   printErrMessage();
   exit(1);
@@ -98,7 +101,7 @@ print "\t\t**********    Job started   at $date    **********\n";
 
 #opening the required files
 open(NET,"$library")||die("unable to open file : $!");
-open(out,">$glib");
+open(out,">$path/$glib");
 #open(logf,">$log");
 print  out "*"x10;
 print  out " Glitched induced version of LIBRARY : $library ";

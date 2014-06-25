@@ -1,7 +1,8 @@
 #!/usr/bin/perl
-#Example usage: perl modperl2_outwrtr_rise_65.pl -v pnr/op_data/c432_clk_ipFF_final.v -m c432_clk_ipFF
+#Example usage: perl modperl2_outwrtr_rise_65.pl -v %s/pnr/op_data/c432_clk_ipFF_final.v -m c432_clk_ipFF -p /home/users/nanditha/Documents/utility/65nm/b10
 
 #Modifications:
+#Absolute paths introduced everywhere in the script, so that they can be run from one directory and no need of duplicating the scripts in all directories: June 25 2014
 #Matching "DF" instead of "DFF" for the 65nm std cell library: Mar 19 2014
 #Appended the random_drain to the RTL*.csv header. This is needed to generate decks by just looking at the taxonomy.csv: Feb 11 2014
 #RTL_2nd_edge.csv header file created to store reference outputs at the 2nd rising edge : feb 7 2014
@@ -79,6 +80,7 @@ END
 
 GetOptions( "v|verilog=s"=>\$vlog,
 	    "m|module=s"=>\$module,
+	    "p|path=s"=>\$path,
             "h|help"=>\$help
           );
       
@@ -87,7 +89,7 @@ if ($help) {
   exit(0);
 }
 
-if ($#ARGV >= 0 || $vlog eq "" || $module eq "" ) {
+if ($#ARGV >= 0 || $vlog eq "" || $module eq "" || $path eq "") {
   print STDERR "-E- Found missing/excess arguments\n";
   printErrMessage();
   exit(1);
@@ -102,17 +104,17 @@ $flag=0;
 $op=$module."_modelsim.v";
 $in_main_module=0;
 $ref=$module."_reference_out";
-`mkdir $ref`;
+`mkdir $path/$ref`;
 #opening the required files
 open(VLOG,"$vlog")||die("unable to open file : $!");
-open(OPT,">$op")||die("unable to open file : $!");
+open(OPT,">$path/$op")||die("unable to open file : $!");
 #This file REF (our_reference.txt is just created. Nothing is written to through this script.
 #The modelsim.v file will write to this file when simulated
-open(REF,">./$ref/our_reference_out.txt")||die("unable to open file : $!");
-open(OUT_FF,">./$ref/ff_oppins.txt")||die("unable to open file : $!");
-open(TOOLREF,">./$ref/tool_reference_out.txt")||die("unable to open file : $!");
+open(REF,">$path/$ref/our_reference_out.txt")||die("unable to open file : $!");
+open(OUT_FF,">$path/$ref/ff_oppins.txt")||die("unable to open file : $!");
+open(TOOLREF,">$path/$ref/tool_reference_out.txt")||die("unable to open file : $!");
 use File::Path qw(mkpath);
-mkpath("spice_results");
+mkpath("$path/spice_results");
 
 #Parsing the post pnr verilog file
 while(<VLOG>)
@@ -209,8 +211,8 @@ while(<VLOG>)
 	print OPT 'integer clk_count1 = 0;'."\n";
 	print OPT 'initial'."\n";
 	print OPT 'begin'."\n"; 
-	print OPT 'fileout= $fopen("./'.$ref.'/our_reference_out.txt","a+");'."\n";
-	print OPT 'fileout1= $fopen("./'.$ref.'/tool_reference_out.txt","a+");'."\n";
+	print OPT 'fileout= $fopen("'.$path.'/'.$ref.'/our_reference_out.txt","a+");'."\n";
+	print OPT 'fileout1= $fopen("'.$path.'/'.$ref.'/tool_reference_out.txt","a+");'."\n";
 	print OPT 'end'."\n";
 	print OPT "//**************************************************\n";
 #Writing output of flip flop at negative edge
@@ -289,8 +291,8 @@ print "\t\t\t\t\t*                      *\n";
 print "\t\t\t\t\t*  !!RUN SUCCESSFUL!!  *\n";
 print "\t\t\t\t\t*                      *\n";
 print "\t\t\t\t\t************************\n";
-print "***MODELSIM simulatable file \" $op \" created in the current directory\n";
-print "***Reference output file ./$ref/tool_reference_out.txt and /$ref/our_reference_out.txt created sucessfully\n";
+print "***MODELSIM simulatable file \" $path/$op \" created \n";
+print "***Reference output file $path/$ref/tool_reference_out.txt and /$ref/our_reference_out.txt created sucessfully\n";
 
 #both the for loops do the same thing
 #foreach $pp(@ffopin)
@@ -309,7 +311,7 @@ foreach $i(0 .. $#ffopin)
 
 #creating the toplevel csv file - which contains the RTL headers
 #ffopin contains outputs of all DFFs
-open(IM,">./$module\_reference_out/RTL.csv");
+open(IM,">$path/$module\_reference_out/RTL.csv");
 print IM 'deck_num,clk,glitch,gate,subcktlinenum,drain,';
 foreach $i(0 .. $#ffopin)
 
@@ -340,7 +342,7 @@ close(IM);
 
 #creating the toplevel csv file - which contains the RTL headers
 #ffopin contains outputs of all DFFs
-open(IM3,">./$module\_reference_out/RTL_2nd_edge.csv");
+open(IM3,">$path/$module\_reference_out/RTL_2nd_edge.csv");
 print IM3 'deck_num,clk,glitch,gate,subcktlinenum,drain,';
 foreach $i(0 .. $#ffopin)
 
@@ -371,7 +373,7 @@ close(IM3);
 
 
 #Backup header file required later
-open(IM2,">./$module\_reference_out/RTL_backup.csv");
+open(IM2,">$path/$module\_reference_out/RTL_backup.csv");
 print IM2 'deck_num,clk,glitch,gate,subcktlinenum,drain,';
 foreach $i(0 .. $#ffopin)
  {
@@ -402,7 +404,7 @@ print "RTL headers RTL.csv, RTL_2nd_edge.csv and RTL_backup.csv created inside t
 
 ##Printing spice headers to the csv file in spice_results/
 #This is required when we combine the spice simulation outputs and write out to a single file with this header
-open(RES,">./spice_results/headers.csv")||die("unable to open file : $!"); 
+open(RES,">$path/spice_results/headers.csv")||die("unable to open file : $!"); 
 
 #foreach $i(0 .. $#to_ff)
 # {
@@ -431,7 +433,7 @@ foreach $i(0 .. $#ffopin)
 print RES "\n";
 
 close(RES);
-print "Spice header file spice_results/headers.csv created\n";
+print "Spice header file $path/spice_results/headers.csv created\n";
 
 
 close(VLOG);

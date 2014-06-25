@@ -1,8 +1,8 @@
 
 #!/usr/bin/env python
-#Read in a RTL file, do synthesis and placement, route
-#Example usage: python python_choose_subckts_library.py -m b04
 
+#Example usage: python python_choose_subckts_library.py -p <path> -m b04 
+#Absolute paths introduced everywhere in the script, so that they can be run from one directory and no need of duplicating the scripts in all directories: June 25 2014
 
 import optparse
 import re,os
@@ -11,21 +11,24 @@ from optparse import OptionParser
 
 parser = OptionParser('This script reads in the dspf file and adds \'gnd,gnds,vdd,vdds\' to the subckt instances and will show one instance per line (no + continuation of subckt): Mar 19 2014 .\n The output will be the same dspf with a "_new" suffix at the pnr/op_data location.\nAuthor:Nanditha Rao(nanditha@ee.iitb.ac.in)\n')
 
+parser.add_option("-p", "--path", dest="path",help="Enter the ENTIRE path to your design folder (your working dir)- /home/user1/simulations/<design_folder_name>")
 parser.add_option("-m","--mod", help='Enter the entity name(vhdl) or module name (verilog) to be synthesised',dest='module_name')
 
 
 #This is the most important line which will parse the cmd line arguments
 (options, args) = parser.parse_args()
 
+path=options.path
 module=options.module_name
 
+os.chdir("%s" %path)
 f=open("../CORE65GPSVT_all_vdd_gnd_bulk_node.sp" ,"r")
 #f=open("test.sp" ,"r")
-fnew=open("CORE65GPSVT_selected_lib_vg.sp" ,"w")
+fnew=open("%s/CORE65GPSVT_selected_lib_vg.sp" %path ,"w")
 
 lib_data=f.readlines()
 
-fsp=open("pnr/op_data/%s_final_new.dspf" %module ,"r")
+fsp=open("%s/pnr/op_data/%s_final_new.dspf" %(path,module) ,"r")
 data_dspf=fsp.readlines()
 
 subckt1=[]
@@ -68,7 +71,7 @@ print "Length of the unique subckt list:", len(subckt)
 ###########################################################################
 #Parse the library file, match for "subckt" keyword and search for the desired instance name
 
-fnew.writelines("\n***Library file consisting only the library cell instances in the /pnr/op_data/%s_final_new.dspf file\n\n" %module)
+fnew.writelines("\n***Library file consisting only the library cell instances in the %s/pnr/op_data/%s_final_new.dspf file\n\n" %(path,module))
 fnew.writelines("***Library cell instances: \n")
 fnew.writelines("***Total number of cell instances: %d\n" %(len(subckt)))
 for g in range(0,len(subckt)):

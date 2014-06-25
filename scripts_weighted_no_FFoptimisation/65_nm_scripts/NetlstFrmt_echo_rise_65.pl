@@ -1,11 +1,12 @@
 
-#Example: perl NetlstFrmt_echo_rise_65.pl -v decoder_op_ip_modelsim.v -s pnr/op_data/decoder_op_ip_final_new.dspf -c 400 -t 65 -m decoder_op_ip
+#Example: perl NetlstFrmt_echo_rise_65.pl -v %s/decoder_op_ip_modelsim.v -s %s/pnr/op_data/decoder_op_ip_final_new.dspf -c 400 -t 65 -m decoder_op_ip -p <path>
 
 
 #clk frequency in MHz
 
 #Modifications:
 
+#Absolute paths introduced everywhere in the script, so that they can be run from one directory and no need of duplicating the scripts in all directories: June 25 2014
 #Initialisation node (net0139:F125) for HS65_GS_DFPQNX9 FF , net0139:F163 for DFPHQNX9 and net0238:F149 for DFPHQX9, is mentioned as a comment in the .ic section. NEed to manually change this in the reference.sp file, since we are not current differently identifying the different types of FFs: June 23 2014
 #rise and fall edge measurements limitedto 50ps duration. Else false values were being calculated: April 25 2014
 #.ic on net0148:F59 of the DFF to initialise correctly. This value should be the inverted value of what was supposed to be initialised originally.: April 2nd 2014
@@ -108,7 +109,8 @@ GetOptions( "v|verilog=s"=>\$vlog,
 	    "c|clk=s"=>\$clk,
 	    "t|tech=s"=>\$tech,
 	    "m|module=s"=>\$module,
-            "h|help"=>\$help
+             "p|path=s"=>\$path,
+             "h|help"=>\$help
           );
       
 if ($help) {
@@ -116,7 +118,7 @@ if ($help) {
   exit(0);
 }
 
-if ($#ARGV >= 0 || $vlog eq "" || $spc eq ""|| $clk eq "" || $module eq "") {
+if ($#ARGV >= 0 || $vlog eq "" || $spc eq ""|| $clk eq "" || $module eq "" || $path eq "" ) {
   print STDERR "-E- Found missing/excess arguments\n";
   printErrMessage();
   exit(1);
@@ -136,13 +138,13 @@ $flag=0;
 $flag_sub =0;
 
 use File::Path qw(mkpath);
-mkpath("spice_results");
+mkpath("$path/spice_results");
 
 
 #opening the required files
 open(SPC,"$spc")||die("unable to open file : $!");
 open(VLOG,"$vlog")||die("unable to open file : $!");
-open(SIM,">$sim");
+open(SIM,">$path/$sim");
 
 
 

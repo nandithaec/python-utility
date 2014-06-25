@@ -2,6 +2,7 @@
 #Read in a RTL file, do synthesis and placement, route
 #Example usage: python python1_read_RTL_syn_pnr_65.py -f /home/users/nanditha/Documents/utility/65nm/LFSR/lfsr.vhd -m lfsr -c 400
 
+#Absolute paths introduced everywhere in the script, so that they can be run from one directory and no need of duplicating the scripts in all directories: June 25 2014
 #Introduced -define_name_rules and -change_names for the created rules, to create case-insenstive net names.. i.e., to avoid same net names such as 'N1' and 'n1' in spice- which creates shorts. June 23 2014
 #Eliminating clock gating: June 2014
 #65nm lib files added: Apr 2014
@@ -15,19 +16,21 @@ from optparse import OptionParser
 
 parser = OptionParser('This script reads in a vhdl or verilog file (RTL) and its test bench. It invokes rtl2gds utility to do synthesis and placement and route. The requirements of rtl2gds are the following tools: Design Compiler, SoC Encounter and Modelsim. The inputs to the script are listed as arguments below, which are all necessary arguments.\n The outputs of this script are same as the outputs of the rtl2gds utility. It creates varioous folders:man1, pnr, rtl, simulation, synthesis and template in the current working directory.\nThe files of interest to us are the following:\n1. pnr/op_data/$module_final.v - PNR verilog netlist\n2. pnr/op_data/$module_final.dspf - spice netlist \n3. pnr/reports/$module_summary.rpt - Cell area report - which will be used for optimisation later on.\nAuthor:Nanditha Rao(nanditha@ee.iitb.ac.in)\n')
 
-parser.add_option("-f","--path", help='Enter the RTL (verilog or vhdl) file path- THE ENTIRE PATH',dest='filepath')
+parser.add_option("-f","--rtl", help='Enter the RTL (verilog or vhdl) file path- THE ENTIRE PATH',dest='filepath')
 parser.add_option("-m","--mod", help='Enter the entity name(vhdl) or module name (verilog) to be synthesised',dest='module_name')
 parser.add_option("-c","--clk", help='Enter the clk frequency in MHz, for eg., if 900MHz, enter 900',dest='clkfreq')
-
+parser.add_option("-p", "--path", dest="path",help="Enter the ENTIRE path to your design folder (your working dir)- /home/user1/simulations/<design_folder_name>")
 #This is the most important line which will parse the cmd line arguments
 (options, args) = parser.parse_args()
 
 filepath=options.filepath
 clkfreq=options.clkfreq
 module=options.module_name
+path=options.path
 
 #Invoke rtl2gds and create directories in CURRENT WORKING DIRECTORY ONLY
-os.system("rtl2gds -genScr=.")
+os.chdir("%s" %path)
+os.system("rtl2gds -genScr=%s" %(path))
 
 #Run synthesis
 os.system('rtl2gds -rtl=%s -rtl_top=%s -syn -frequency=%s' %(filepath,options.module_name,clkfreq))	
@@ -36,19 +39,19 @@ os.system('rtl2gds -rtl=%s -rtl_top=%s -syn -frequency=%s' %(filepath,options.mo
 #os.system("rtl2gds -rtl={0} -rtl_top={1} -syn".format(options.filepath, options.module_name))
 #os.system("rtl2gds -rtl={options.filepath} -rtl_top={options.module_name} -syn".format(args=args))
 #subprocess.call(['rtl2gds', '-rtl=' + options.filepath, '-rtl_top=' + options.module_name, '-syn'])
-fcr = open('synthesis/scripts/compile_dc.tcl', 'r') ## This is the tcl file for synthesis
+fcr = open('%s/synthesis/scripts/compile_dc.tcl' %(path), 'r') ## This is the tcl file for synthesis
 data=fcr.readlines()
 #print data
 fcr.close()
 
-fcw = open('synthesis/scripts/compile_dc_backup.tcl', 'w') ## This is the tcl file for synthesis- backup
+fcw = open('%s/synthesis/scripts/compile_dc_backup.tcl' %(path), 'w') ## This is the tcl file for synthesis- backup
 fcw.writelines(data)
 fcw.close()
 
-os.remove('synthesis/scripts/compile_dc.tcl')
+os.remove('%s/synthesis/scripts/compile_dc.tcl' %(path))
 
-fin = open('synthesis/scripts/compile_dc_backup.tcl', 'r') 
-fnew = open('synthesis/scripts/compile_dc.tcl', 'w') ## This is the new tcl file for synthesis
+fin = open('%s/synthesis/scripts/compile_dc_backup.tcl' %(path), 'r') 
+fnew = open('%s/synthesis/scripts/compile_dc.tcl' %(path), 'w') ## This is the new tcl file for synthesis
 
 
 #Replace a current line
@@ -74,11 +77,11 @@ for line in fin:
 fnew.close()
 fin.close()
 
-fnew = open('synthesis/scripts/compile_dc.tcl', 'r') 
+fnew = open('%s/synthesis/scripts/compile_dc.tcl' %(path), 'r') 
 newdata=fnew.readlines()
 #print (newdata)
 
-f1 = open('synthesis/scripts/compile_dc_backup.tcl', 'w') 
+f1 = open('%s/synthesis/scripts/compile_dc_backup.tcl' %(path), 'w') 
 #f1.writelines("This was the script compiled by the Design Compiler\n It gets overwritten in the pnr stepp. Hence saving a backup here\n\n")
 f1.writelines(newdata)
 
@@ -92,19 +95,19 @@ print "Eliminating clock gating\n"
 time.sleep(5)
 
 ##################################################################################################
-fcr = open('synthesis/scripts/technology.tcl', 'r') ## This is the tcl file for synthesis
+fcr = open('%s/synthesis/scripts/technology.tcl' %(path), 'r') ## This is the tcl file for synthesis
 data=fcr.readlines()
 #print data
 fcr.close()
 
-fcw = open('synthesis/scripts/technology_backup.tcl', 'w') ## This is the tcl tech file for synthesis- backup
+fcw = open('%s/synthesis/scripts/technology_backup.tcl' %(path), 'w') ## This is the tcl tech file for synthesis- backup
 fcw.writelines(data)
 fcw.close()
 
-os.remove('synthesis/scripts/technology.tcl')
+os.remove('%s/synthesis/scripts/technology.tcl'%(path))
 
-fin = open('synthesis/scripts/technology_backup.tcl', 'r') 
-fnew = open('synthesis/scripts/technology.tcl', 'w') ## This is the new tcl file for synthesis
+fin = open('%s/synthesis/scripts/technology_backup.tcl' %(path), 'r') 
+fnew = open('%s/synthesis/scripts/technology.tcl' %(path), 'w') ## This is the new tcl file for synthesis
 
 
 fnew.writelines('set TLIB /home/projects1/ST_Models/cmos065_534/CORE65GPSVT_5.1/SYNOPSYS/PR/CORE65GPSVT/LM/CORE65GPSVT_nom_1.00V_25C.db\n')
@@ -117,11 +120,11 @@ for i in range(4,(len(data))):
 fnew.close()
 fin.close()
 
-fnew = open('synthesis/scripts/technology.tcl', 'r') 
+fnew = open('%s/synthesis/scripts/technology.tcl' %(path), 'r') 
 newdata=fnew.readlines()
 #print (newdata)
 
-f1 = open('synthesis/scripts/technology_backup.tcl', 'w') 
+f1 = open('%s/synthesis/scripts/technology_backup.tcl' %(path), 'w') 
 #f1.writelines("This was the script compiled by the Design Compiler\n It gets overwritten in the pnr stepp. Hence saving a backup here\n\n")
 f1.writelines(newdata)
 
@@ -131,9 +134,9 @@ fnew.close()
 print "Done creating a new technology script for synthesis \"synthesis/scripts/technology.tcl\" \n"
 
 
-if os.path.exists('synthesis/run/'):
-	os.chdir('synthesis/run/')
-	os.system('bash run_dc.bash')
+if os.path.exists('%s/synthesis/run/' %(path)):
+	os.chdir('%s/synthesis/run/' %(path))
+	os.system('bash %s/synthesis/run/run_dc.bash' %path)
 
 os.chdir('../../')
 print "...Pause...Done synthesis with 65nm tech files.. Starting pnr"
@@ -147,19 +150,19 @@ os.system('rtl2gds -rtl=%s -rtl_top=%s -pnr -frequency=%s' %(filepath,options.mo
 
 
 #Editing the scripts for 65nm
-fcr = open('pnr/conf/encounter.conf', 'r') ## This is the pnr conf script
+fcr = open('%s/pnr/conf/encounter.conf' %(path), 'r') ## This is the pnr conf script
 data=fcr.readlines()
 #print data
 fcr.close()
 
-fcw = open('pnr/conf/encounter_backup.conf', 'w') ## This is the pnr conf script- backup
+fcw = open('%s/pnr/conf/encounter_backup.conf' %(path), 'w') ## This is the pnr conf script- backup
 fcw.writelines(data)
 fcw.close()
 
-os.remove('pnr/conf/encounter.conf')
+os.remove('%s/pnr/conf/encounter.conf' %(path))
 
-fin = open('pnr/conf/encounter_backup.conf', 'r') 
-fnew = open('pnr/conf/encounter.conf', 'w') ## This is the new pnr conf script
+fin = open('%s/pnr/conf/encounter_backup.conf' %(path), 'r') 
+fnew = open('%s/pnr/conf/encounter.conf' %(path), 'w') ## This is the new pnr conf script
 
 
 #with open('input') as fin, open('output','w') as fout:
@@ -176,17 +179,17 @@ for line in fin:
 fnew.close()
 fin.close()
 
-fnew = open('pnr/conf/encounter.conf', 'r') 
+fnew = open('%s/pnr/conf/encounter.conf' %(path), 'r') 
 newdata=fnew.readlines()
 #print (newdata)
 
-f1 = open('pnr/conf/encounter_backup.conf', 'w') 
+f1 = open('%s/pnr/conf/encounter_backup.conf' %(path), 'w') 
 f1.writelines(newdata)
 
 f1.close()
 fnew.close()
 
-print "Done creating a new pnr conf script \"pnr/conf/encounter.conf\" \n"
+print "Done creating a new pnr conf script \"%s/pnr/conf/encounter.conf\" \n" %(path)
 time.sleep(5)
 
 
@@ -195,7 +198,7 @@ import fileinput
 import sys
 
 
-for line in fileinput.input('pnr/scripts/pnr.tcl', inplace=1):
+for line in fileinput.input('%s/pnr/scripts/pnr.tcl' %(path), inplace=1):
 	if "metal5" in line:
 		line = line.replace("metal5","M5")
 	if "metal6" in line:
@@ -211,9 +214,9 @@ for line in fileinput.input('pnr/scripts/pnr.tcl', inplace=1):
 		sys.stdout.write(line)  
 
 #####################################################################
-if os.path.exists('pnr/run/'):
-	os.chdir('pnr/run/')
-	os.system('bash run_pnr.bash')
+if os.path.exists('%s/pnr/run/' %(path)):
+	os.chdir('%s/pnr/run/' %(path))
+	os.system('bash %s/pnr/run/run_pnr.bash' %path)
 
 os.chdir('../../')
 print "...Pause...Done pnr with 65nm.."
@@ -224,14 +227,14 @@ time.sleep(5)
 print "\n***The worst case slack information for this frequency of operation (%s MHz) is given below:***\n" %clkfreq
 print "***Make sure that the slack is positive enough, so that it is guaranteed that the spice simulation will operate at this frequency\n"
 
-fo = open('./pnr/reports/5.postRouteOpt_%s/%s_postRoute.slk' %(module,module), 'r') 
+fo = open('%s/pnr/reports/5.postRouteOpt_%s/%s_postRoute.slk' %(path,module,module), 'r') 
 #Has slack information
 lines = fo.readlines()
 print "Slack information:\n%s %s\n" %(lines[0],lines[1])
 print "...Pause..."
 time.sleep(5)
 
-with open("./pnr/reports/5.postRouteOpt_%s/%s_postRoute.slk" %(module,module),"r") as f:
+with open("%s/pnr/reports/5.postRouteOpt_%s/%s_postRoute.slk" %(path,module,module),"r") as f:
 	words=map(str.split, f)
 """
 line1=words[1] #2nd line after header
@@ -249,8 +252,8 @@ else:
 	print "Slack is positive. Your design WILL function at the frequency %s MHz\n" %clkfreq
 	time.sleep(5)
 
-"""
-if '1\'b1' in open('./pnr/op_data/%s_final.v' %module).read():
+
+if '1\'b1' in open('%s/pnr/op_data/%s_final.v' %(path,module).read():
 	print "\n*******************WARNING******************\n"
 	print "\n1'b1 is present in the verilog file and the corresponding nets should be manually tie it to vdd in the spice file\n"
 	time.sleep(15)
@@ -258,7 +261,7 @@ else:
 	print "\n1'b1 is NOT present in the verilog file and there is no need to manually tie it to vdd in the spice file\n"
 	time.sleep(5)
 
-if '1\'b0' in open('./pnr/op_data/%s_final.v' %module).read():
+if '1\'b0' in open('%s/pnr/op_data/%s_final.v' %(path,module).read():
 	print "\n*******************WARNING******************\n"
 	print "\n1'b0 is present in the verilog file and the corresponding nets should be manually tie it to gnd in the spice file\n"
 	time.sleep(15)
@@ -266,3 +269,4 @@ else:
 	print "\n1'b0 is NOT present in the verilog file and there is no need to manually tie it to gnd in the spice file\n"
 	time.sleep(5)
 
+"""

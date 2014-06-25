@@ -156,13 +156,13 @@ for r in range(len(headers_rtl)):
 	match_flag=0	 ##Reset this every r loop only
 	for s in range(len(headers)):
 		if (match_flag==0): # If a header match is not found, loop through the spice headers, else if match found stop looping
-			#print "\n\nlooping !! \nHeader RTL: %s \nspice header: %s \n" %(headers_rtl[r],headers[s])
+			print "\n\nlooping !! \nHeader RTL: %s \nspice header: %s \n" %(headers_rtl[r],headers[s])
 	
 			if (headers_rtl[r] == headers[s]): ##That is, if the headers in spice file match with the rtl headers
 		#if (re.match(headers_rtl[r], headers[s]) != None): ##re.match which for the pattern at the beginning of the string. So IN_N1 and IN_N13 will say it matches
 		
 				k= [] ##Empty the temporary List before starting to append a new column
-				#print "\n\nMatch found!! \n spice Header: %s \n RTL header: %s\nspice column: %s \nRTL column: %s:\n" %(headers[s],headers_rtl[r],column[headers[s]],column_rtl[headers_rtl[r]])
+				print "\n\nMatch found!! \n spice Header: %s \n RTL header: %s\nspice column: %s \nRTL column: %s:\n" %(headers[s],headers_rtl[r],column[headers[s]],column_rtl[headers_rtl[r]])
 				match_flag=1 #match has been found. stop looping for this string pattern.
 				k.append('diff_rise_edge_'+headers_rtl[r]) #Append header
 
@@ -410,7 +410,7 @@ if len(more_than4_flips) != 0 :
 		if os.path.isfile('%s/spice_decks_%d/deck_%d.sp' %(path,loop,more_than4_flips[i])):
 			shutil.copy('%s/spice_decks_%d/deck_%d.sp' %(path,loop,more_than4_flips[i]), '%s/backup_spice_decks_2nd_edge/four_flip' %(path))
 			#shutil.copy('%s/spice_decks_%d/glitch_report_outputs_rise_%d.csv' %(path,loop,more_than4_flips[i]), '%s/backup_spice_decks_2nd_edge/four_flip' %(path))
-		elif os.path.isfile('%s/spice_decks_%d/hspice_deck_%d.sp' %(path,loop,more_than4_flips[i])):
+		if os.path.isfile('%s/spice_decks_%d/hspice_deck_%d.sp' %(path,loop,more_than4_flips[i])):
 			shutil.copy('%s/spice_decks_%d/hspice_deck_%d.sp' %(path,loop,more_than4_flips[i]), '%s/backup_spice_decks_2nd_edge/four_flip' %(path))
 
 
@@ -424,7 +424,7 @@ if len(four_flips) != 0 :
 		if os.path.isfile('%s/spice_decks_%d/deck_%d.sp' %(path,loop,four_flips[i])):
 			shutil.copy('%s/spice_decks_%d/deck_%d.sp' %(path,loop,four_flips[i]), '%s/backup_spice_decks_2nd_edge/four_flip' %(path))
 			#shutil.copy('%s/spice_decks_%d/glitch_report_outputs_rise_%d.csv' %(path,loop,four_flips[i]), '%s/backup_spice_decks_2nd_edge/four_flip' %(path))
-		elif os.path.isfile('%s/spice_decks_%d/hspice_deck_%d.sp' %(path,loop,four_flips[i])):
+		if os.path.isfile('%s/spice_decks_%d/hspice_deck_%d.sp' %(path,loop,four_flips[i])):
 			shutil.copy('%s/spice_decks_%d/hspice_deck_%d.sp' %(path,loop,four_flips[i]), '%s/backup_spice_decks_2nd_edge/four_flip' %(path))
 
 #Save decks in which 3 flips occured
@@ -437,7 +437,7 @@ if len(three_flips) != 0 :
 		if os.path.isfile('%s/spice_decks_%d/deck_%d.sp' %(path,loop,three_flips[i])):
 			shutil.copy('%s/spice_decks_%d/deck_%d.sp' %(path,loop,three_flips[i]), '%s/backup_spice_decks_2nd_edge/three_flip' %(path))
 			#shutil.copy('%s/spice_decks_%d/glitch_report_outputs_rise_%d.csv' %(path,loop,three_flips[i]), '%s/backup_spice_decks_2nd_edge/three_flip' %(path))
-		elif os.path.isfile('%s/spice_decks_%d/hspice_deck_%d.sp' %(path,loop,three_flips[i])):
+		if os.path.isfile('%s/spice_decks_%d/hspice_deck_%d.sp' %(path,loop,three_flips[i])):
 			shutil.copy('%s/spice_decks_%d/hspice_deck_%d.sp' %(path,loop,three_flips[i]), '%s/backup_spice_decks_2nd_edge/three_flip' %(path))
 
 #Save decks in which 2 flips occured
@@ -450,7 +450,7 @@ if len(two_flips) != 0 :
 		if os.path.isfile('%s/spice_decks_%d/deck_%d.sp' %(path,loop,two_flips[i])):
 			shutil.copy('%s/spice_decks_%d/deck_%d.sp' %(path,loop,two_flips[i]), '%s/backup_spice_decks_2nd_edge/two_flip' %(path))
 			#shutil.copy('%s/spice_decks_%d/glitch_report_outputs_rise_%d.csv' %(path,loop,two_flips[i]), '%s/backup_spice_decks_2nd_edge/two_flip' %(path))
-		elif os.path.isfile('%s/spice_decks_%d/hspice_deck_%d.sp' %(path,loop,two_flips[i])):
+		if os.path.isfile('%s/spice_decks_%d/hspice_deck_%d.sp' %(path,loop,two_flips[i])):
 			shutil.copy('%s/spice_decks_%d/hspice_deck_%d.sp' %(path,loop,two_flips[i]), '%s/backup_spice_decks_2nd_edge/two_flip' %(path))
 
 
@@ -471,7 +471,7 @@ if len(one_flip) != 0:
 		shutil.copy('%s/spice_decks_%d/deck_%d.sp' %(path,loop,one_flip[random_deck]), '%s/backup_spice_decks_2nd_edge/one_flip' %(path))
 		#shutil.copy('%s/spice_decks_%d/glitch_report_outputs_rise_%d.csv' %(path,loop,one_flip[random_deck]), '%s/backup_spice_decks_2nd_edge/one_flip' %(path))
 		#print "one flip deck saved=",one_flip[random_deck]
-	elif os.path.isfile('%s/spice_decks_%d/hspice_deck_%d.sp' %(path,loop,one_flip[random_deck])):
+	if os.path.isfile('%s/spice_decks_%d/hspice_deck_%d.sp' %(path,loop,one_flip[random_deck])):
 		shutil.copy('%s/spice_decks_%d/hspice_deck_%d.sp' %(path,loop,one_flip[random_deck]), '%s/backup_spice_decks_2nd_edge/one_flip' %(path))
 		
 		
@@ -489,7 +489,7 @@ if len(no_flip) != 0:
 		shutil.copy('%s/spice_decks_%d/deck_%d.sp' %(path,loop,no_flip[random_deck]), '%s/backup_spice_decks_2nd_edge/no_flip' %(path))
 		#shutil.copy('%s/spice_decks_%d/glitch_report_outputs_rise_%d.csv' %(path,loop,no_flip[random_deck]), '%s/backup_spice_decks_2nd_edge/no_flip' %(path))
 		#print "Zero flip deck saved=",no_flip[random_deck]
-	elif os.path.isfile('%s/spice_decks_%d/hspice_deck_%d.sp' %(path,loop,no_flip[random_deck])):
+	if os.path.isfile('%s/spice_decks_%d/hspice_deck_%d.sp' %(path,loop,no_flip[random_deck])):
 		shutil.copy('%s/spice_decks_%d/hspice_deck_%d.sp' %(path,loop,no_flip[random_deck]), '%s/backup_spice_decks_2nd_edge/no_flip' %(path))
 
 

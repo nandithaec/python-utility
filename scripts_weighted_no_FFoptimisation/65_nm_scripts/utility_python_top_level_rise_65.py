@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 
-#Example usage: python utility_python_top_level_rise_65.py --rtl=/home/users/nanditha/Documents/utility/65nm/b12/b12.vhd --mod=b12 --test=/home/users/nanditha/Documents/utility/65nm/b12/test_b12.vhd --tb_mod=test_b12 --clk=300 --run=100us --design=b12 --tech=65 --num=10 --group 10 --path=/home/external/iitb/nanditha/simulations/65nm/b12  --proc_node 1 --ppn 5 --days 00 --hrs 00 --mins 10 --script python_utility3_yuva_2cycles_2nd_3rd_65.py
+#Example usage: python utility_python_top_level_rise_65.py -p /home/users/nanditha/Documents/utility/65nm/b10 --rtl=/home/users/nanditha/Documents/utility/65nm/b10/b10.vhd --mod=b10 --test=/home/users/nanditha/Documents/utility/65nm/b10/test_b10.vhd --tb_mod=test_b10 --clk=350 --run=100us --design=b10 --tech=65 --num=10 --group 10 --extl=/home/external/iitb/nanditha/simulations/65nm/b10  --proc_node 1 --ppn 5 --days 00 --hrs 00 --mins 10 --script python_utility3_yuva_2cycles_2nd_3rd_65.py 
+
+#Modifications to the script:
+#Absolute paths introduced everywhere in the script, so that they can be run from one directory and no need of duplicating the scripts in all directories: June 25 2014
 
 #Calling python_gnd_gnds_dspf_modify.py: This script adds 'gnd,gnds,vdd,vdds' to the subckt instances and will show one instance per line (no + continuation of subckt): Mar 19 2014
 #dspf input to the Netlstfrmt will be pnr/op_data/%s_final_new.dspf which is created by the previous script python_gnd_gnds_dspf_modify.py. : Mar 19 2014
@@ -24,7 +27,7 @@ parser = OptionParser('This is the top level script for this utility which calcu
 parser.add_option("-v","--rtl", help='Enter the ENTIRE path of the RTL (verilog or vhdl) including the RTL file name',dest='rtl')
 parser.add_option("-m","--mod", help='Enter the entity name(vhdl) or module name (verilog)',dest='module')
 
-
+parser.add_option("-p","--pmain", help='Enter the entity name(vhdl) or module name (verilog)',dest='path')
 #########################################################################
 
 parser.add_option("-t","--test", help='Enter the path of the testbench (vhd/verilog) file for simulating the post layout RTL file, include the filename along with extension as part of this path',dest='test_path')
@@ -38,7 +41,7 @@ parser.add_option("-d", "--design", dest="design_folder",help="Enter the name of
 parser.add_option("--tech",dest='tech',  help='Enter the technology node that you want to simulate, for eg.,180 for 180nm')
 parser.add_option("-n", "--num",dest='num',  help='Enter the number of spice decks to be generated and simulated')
 parser.add_option("--group",dest='group',  help='Enter the number of spice decks to be simulated at a time. For eg., if -n option is 10000, and say we want to run 100 at a time, then enter 100')
-parser.add_option("-p", "--path", dest="folder",help="Enter the ENTIRE path to your design folder (your working dir)- either this machine or remote machine where simulations will be run. The name of the folder there should be the same as the name of the folder being copied from the current machine. IF remote machine, enter /home/user1/simulations/<design_folder_name>")
+parser.add_option("--extl", dest="extl_folder",help="Enter the ENTIRE path to your current design folder (your working dir)- either this machine or remote machine where simulations will be run. The name of the folder there should be the same as the name of the folder being copied from the current machine. IF remote machine, enter /home/user1/simulations/<design_folder_name>")
 #########################################################################
 parser.add_option("--proc_node",dest='nodes', help='Enter the number of processor nodes you would need')
 parser.add_option("--ppn",dest='ppn', help='Enter the number of cores per processor you would need (max 16 per processor)')
@@ -52,6 +55,7 @@ parser.add_option("--script",dest='script', help='Enter the name of the python s
 (options, args) = parser.parse_args()
 
 rtl=options.rtl
+main_path=options.path
 module=options.module
 clkfreq=options.clkfreq
 test_path=options.test_path
@@ -65,7 +69,7 @@ design_folder=options.design_folder
 techn=options.tech
 num=options.num
 ########################
-path_folder=options.folder
+extl_folder=options.extl_folder
 group=options.group
 ########################
 nodes=options.nodes
@@ -77,38 +81,38 @@ script=options.script
 
 
 #Example usage: python python1_read_RTL_syn_pnr.py -f decoder.vhd -m decoder_behav_pnr -clk 900
-os.system('python python1_read_RTL_syn_pnr_65.py -f %s -m %s -c %s' %(rtl,module,clkfreq))
+os.system('python python1_read_RTL_syn_pnr_65.py -f %s -m %s -c %s -p %s' %(rtl,module,clkfreq,main_path))
 
 print('Done 1st script rtl+pnr\n')
-time.sleep(5)
+#time.sleep(5)
 
 
 #Example usage: perl perl2_outwrtr.pl -v pnr/op_data/decoder_behav_pnr_final.v -m decoder_behav_pnr
-os.system('perl modperl2_outwrtr_rise_65.pl -v pnr/op_data/%s_final.v -m %s' %(module,module))
+os.system('perl modperl2_outwrtr_rise_65.pl -v %s/pnr/op_data/%s_final.v -m %s -p %s' %(main_path,module,module,main_path))
 
 print('Done creating modelsim simulation file\n')
-time.sleep(5)
+time.sleep(2)
 
 ##Example usage: python python3_create_simdo_vsim.py -rtl decoder_behav_pnr_modelsim.v -tb test_decoder_pnr.vhd -tb_mod t_decoder_pnr -time 1us
-os.system('python python3_create_simdo_vsim_65.py -v %s_modelsim.v -t %s -b %s -r %s' %(module,test_path,test_module,runtime))
+os.system('python python3_create_simdo_vsim_65.py -v %s/%s_modelsim.v -t %s -b %s -r %s -p %s' %(main_path,module,test_path,test_module,runtime,main_path))
 
 print('Done modelsim simulation\n')
-time.sleep(5)
+time.sleep(2)
 ####################################################################################################################################################################
 
 
 ##will show one instance per line (no + continuation of subckt)
-os.system('python python_gnd_gnds_dspf_modify.py -m %s' %(module))
+os.system('python python_gnd_gnds_dspf_modify.py -p %s -m %s' %(main_path,module))
 time.sleep(5)
 
 
-os.system('python python_choose_subckts_library.py -m %s' %(module))
+os.system('python python_choose_subckts_library.py -p %s -m %s' %(main_path,module))
 time.sleep(5)
 
 
 ##Example usage: perl GlitchLibGen.pl -i osu018_stdcells_correct_vdd_gnd.sp- this file will be provided by us for the 180nm technology
 #Create a glitched std cell library file 
-os.system('perl GlitchLibGen_65.pl -i CORE65GPSVT_selected_lib_vg.sp' )
+os.system('perl GlitchLibGen_65.pl -p %s -i %s/CORE65GPSVT_selected_lib_vg.sp' %(main_path,main_path))
 print "***Created glitch library..\n"
 time.sleep(5)
 
@@ -117,12 +121,11 @@ time.sleep(5)
 ##Generate a template simulatable spice netlist from the dspf file generated after pnr. This would include all .ic, Voltage sources, meas, tran, control, param etc
 #NetlistFormat.pl
 #perl NetlstFrmt.pl -v decoder_behav_pnr_modelsim.v -s pnr/op_data/decoder_behav_pnr_final.dspf -l glitch_osu018_stdcells_correct_allcells.sp -c 1e9 -t 180 -m decoder_behav_pnr
-os.system('perl NetlstFrmt_echo_rise_65.pl -v %s_modelsim.v  -s pnr/op_data/%s_final_new.dspf  -c %s -t %s -m %s' %(module,module,clkfreq,techn, module))
+os.system('perl NetlstFrmt_echo_rise_65.pl -v %s/%s_modelsim.v  -s %s/pnr/op_data/%s_final_new.dspf  -c %s -t %s -m %s  -p %s' %(main_path,module,main_path,module,clkfreq,techn, module,main_path))
 print "***Done modifying the spice file to make it simulatable. File available in current directory reference_spice.sp\n"
 time.sleep(5)
 
-#os.system('python python_create_jobscript_65.py -m %s -p %s -d %s -t %s -n %s --group %s --clk %s --proc_node %s --ppn %s --days %s --hrs %s --mins %s --script %s' %(module,path_folder,design_folder,techn,num,group,clkfreq,nodes,ppn,days,hrs,mins,script))
-
+#os.system('python python_create_jobscript_65.py -m %s -p %s -d %s -t %s -n %s --group %s --clk %s --proc_node %s --ppn %s --days %s --hrs %s --mins %s --script %s' %(module,extl_folder,design_folder,techn,num,group,clkfreq,nodes,ppn,days,hrs,mins,script))
 
 
 
