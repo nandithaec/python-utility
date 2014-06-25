@@ -61,7 +61,7 @@ fnew.close()
 
 ##############Find out the number of subckts in the weights script############
 flag=0
-f=open("%s/python_weighted_gateselection_65.py" %(path),"r")
+f=open("python_weighted_gateselection_65.py" ,"r")
 lines=f.readlines()
 
 

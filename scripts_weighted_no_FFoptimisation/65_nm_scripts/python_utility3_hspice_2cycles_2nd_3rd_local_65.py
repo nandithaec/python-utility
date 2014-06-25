@@ -11,7 +11,7 @@
 #This version of the script has the facility of selecting the gate based on the area of the gate. This version of the script uses another script python_weighted_gateselection.py to pick the random gate based on its area: Nov 17 2013
 #Glitch insertion window is within the 2.5 cycles, and not the 6.5 cycles that is required for the case with intermediate FFs
 
-#Example usage: python python_utility3_hspice_2cycles_2nd_3rd_local_65.py -m b10 -p /home/users/nanditha/Documents/utility/65nm/b10 -t 65 -n 3 --group 3 --clk 350 
+#Example usage: python python_utility3_hspice_2cycles_2nd_3rd_local_65.py -m b11 -p /home/users/nanditha/Documents/utility/65nm/b11 -t 65 -n 2 --group 2 --clk 350 
 
 import optparse
 import re,os
@@ -56,7 +56,12 @@ end_PWL= half_clk_period + change_time #in ns generally
 #At a time, only 1000 are generated and run- to save disk space. After collecting results, they are deleted
 num_of_loops=(int(num)/int(num_at_a_time))
 
-os.system('python %s/python_subckts_in_weight_script.py -m %s -p %s' %(path,module,path))
+print "path of the script being run: ",os.path.dirname(os.path.abspath(__file__))
+print "current working dir: ",os.getcwd()
+scripts_dir=os.getcwd()
+
+
+os.system('python python_subckts_in_weight_script.py -m %s -p %s' %(module,path))
 
 if os.path.exists('%s/spice_results' %path):
 	os.chdir('%s/spice_results' %path)
@@ -84,6 +89,10 @@ if os.path.exists('%s/spice_results' %path):
 		os.remove(f)
 
 
+os.chdir("%s" %scripts_dir)
+
+
+time.sleep(2)
 
 #Clear Back up directory
 
@@ -136,8 +145,9 @@ print "\nClk_period: ", clk_period
 ######################################################################################################
 #perl perl_calculate_gates_clk.pl -s reference_spice.sp -l glitch_osu018_stdcells_correct_vdd_gnd.sp -r decoder_behav_pnr_reference_out/tool_reference_out.txt -m decoder_behav_pnr -f /home/user1/simulations/decoder
 
-os.system('perl %s/perl_calculate_gates_clk_65.pl -s %s/reference_spice.sp  -r %s/%s_reference_out/tool_reference_out.txt -m %s -f %s ' %(path,path,path,module,module,path))
+os.system("perl perl_calculate_gates_clk_65.pl -s %s/reference_spice.sp  -r %s/%s_reference_out/tool_reference_out.txt -m %s -f %s" %(path,path,module,module,path))
 
+time.sleep(2)
 fg = open('%s/tmp_random.txt' %(path), 'r')
 gate_clk_data = [line.strip() for line in fg]
 
@@ -214,7 +224,7 @@ for loop in range(start_loop, (num_of_loops+1)):
 		rand_clk= int(random.randrange(10,num_of_clks))  
 		#print "Random clock cycle is: ",rand_clk
 		
-		os.system('perl %s/perl_calculate_drain_65.pl -s %s/reference_spice.sp -l1 %s/glitch_CORE65GPSVT_selected_lib_vg.sp -r %s/%s_reference_out/tool_reference_out.txt -m %s -f %s -g %d ' %(path,path,path,path,module,module,path,rand_gate))
+		os.system('perl perl_calculate_drain_65.pl -s %s/reference_spice.sp -l1 %s/glitch_CORE65GPSVT_selected_lib_vg.sp -r %s/%s_reference_out/tool_reference_out.txt -m %s -f %s -g %d ' %(path,path,path,module,module,path,rand_gate))
 
 		fg = open('%s/tmp_random.txt' %(path), 'r')
 		drain_data = [line.strip() for line in fg]
@@ -255,7 +265,7 @@ for loop in range(start_loop, (num_of_loops+1)):
 
 
 		#deckgen.pl will need to be remotely executed through python_repeat_deckgen.py multiple number of times
-		os.system('perl %s/deckgen_remote_seed_rise_65.pl -s %s/reference_spice.sp  -r %s/%s_reference_out/tool_reference_out.txt -n %d -m %s -f %s  -o %s -g %s -d %s -c %s -i %s' %(path,path,path,module,loop_var,module,path,loop,rand_gate,rand_drain,rand_clk,rand_glitch))
+		os.system('perl deckgen_remote_seed_rise_65.pl -s %s/reference_spice.sp  -r %s/%s_reference_out/tool_reference_out.txt -n %d -m %s -f %s  -o %s -g %s -d %s -c %s -i %s' %(path,path,module,loop_var,module,path,loop,rand_gate,rand_drain,rand_clk,rand_glitch))
 
 ##################Script repeat_deckgen copied ends here####################################
 	
@@ -263,11 +273,11 @@ for loop in range(start_loop, (num_of_loops+1)):
 	#The following script will run GNU Parallel and hspice 
 	
 	
-	os.system ('python %s/python_hspice_mod.py -p %s -n %s -d %s -o %d' %(path,path,num_at_a_time,design_folder,loop))
+	os.system ('python python_hspice_mod.py -p %s -n %s -d %s -o %d -c %s' %(path,num_at_a_time,design_folder,loop,scripts_dir))
 	
-	os.system('python %s/python_hspice_combine_csv_results.py -n %s -d %s -o %d -p %s' %(path,num_at_a_time,design_folder,loop,path))
+	os.system('python python_hspice_combine_csv_results.py -n %s -d %s -o %d -p %s' %(num_at_a_time,design_folder,loop,path))
 	
-
+	
 	seed_new= int(random.randrange(100000)*random.random())  #Used by compare script to backup random decks
 	#seed_new=seed*loop
 	print "New seed every outer loop is ", seed_new
@@ -276,10 +286,10 @@ for loop in range(start_loop, (num_of_loops+1)):
 	#Might need to execute these last 3 in a loop till the results are acceptable
 	
 	print "Comparing the RTL and spice outputs at the 2nd falling edge (3rd rising edge)\n"
-	os.system('python %s/python_compare_3rd_rise_65.py -m %s -f %s -n %s -t %s -l %d' %(path,module,path,num_at_a_time,tech,loop))
+	os.system('python python_compare_3rd_rise_65.py -m %s -f %s -n %s -t %s -l %d' %(module,path,num_at_a_time,tech,loop))
 
 	print "Comparing the RTL and spice outputs at the 2nd rising edge \n"
-	os.system('python %s/python_compare_2nd_rise_65.py -m %s -f %s -n %s -t %s -l %d' %(path,module,path,num_at_a_time,tech,loop))
+	os.system('python python_compare_2nd_rise_65.py -m %s -f %s -n %s -t %s -l %d' %(module,path,num_at_a_time,tech,loop))
 
 	
 #For testing out new glitch files (afterdeleting process if at each echo statement). comment this out in the final run, else it will copy ALL spice files and consume lot of disk space
@@ -298,12 +308,12 @@ for loop in range(start_loop, (num_of_loops+1)):
 
 print "Combining all rtl diff files\n"
 #seed="1644931266534706027"
-os.system('python  %s/python_count_flips_2nd_3rd_rise_65.py -f %s  -n %s  --group %s -s %s' %(path,path,num,num_at_a_time,seed))  #To save the seed to results file
+os.system('python  python_count_flips_2nd_3rd_rise_65.py -f %s  -n %s  --group %s -s %s' %(path,num,num_at_a_time,seed))  #To save the seed to results file
 
 
 #Add the details of number of DFFs
-fa=open('/%s/subcktinstances.sp' %path, 'r')
-fb=open('/%s/spice_results/count_flips_final_summary.csv' %path, 'a+')
+fa=open('%s/subcktinstances.sp' %path, 'r')
+fb=open('%s/spice_results/count_flips_final_summary.csv' %path, 'a+')
 read=fa.readlines()
 filelen=len(read)
 fb.writelines(read[filelen-3])
@@ -316,12 +326,12 @@ fb.close()
 print "\nDoing the taxonomy for gates\n"
 
 #Always run the gates first and then the FFs. FF script needs some outputs which are written out from the gates script.
-os.system('python  %s/python_gate_strike_taxonomy_65.py  -p %s -m %s' %(path,path,module)) 
+os.system('python  python_gate_strike_taxonomy_65.py  -p %s -m %s' %(path,module)) 
 print "\nDoing the taxonomy for FFs\n"
 
-os.system('python  %s/python_FF_strike_taxonomy_65.py  -p %s -m %s' %(path,path,module)) 
+os.system('python  python_FF_strike_taxonomy_65.py  -p %s -m %s' %(path,module)) 
 
 print "\nCombining the pdf reports\n"
-os.system('python %s/python_combine_pdfs_65.py -p %s/spice_results -m %s' %(path,path,module))
+os.system('python python_combine_pdfs_65.py -p %s/spice_results -m %s' %(path,module))
 
 

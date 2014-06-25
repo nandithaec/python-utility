@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-#Example usage: python utility_python_top_level_rise_65.py -p /home/users/nanditha/Documents/utility/65nm/b10 --rtl=/home/users/nanditha/Documents/utility/65nm/b10/b10.vhd --mod=b10 --test=/home/users/nanditha/Documents/utility/65nm/b10/test_b10.vhd --tb_mod=test_b10 --clk=350 --run=100us --design=b10 --tech=65 --num=10 --group 10 --extl=/home/external/iitb/nanditha/simulations/65nm/b10  --proc_node 1 --ppn 5 --days 00 --hrs 00 --mins 10 --script python_utility3_yuva_2cycles_2nd_3rd_65.py 
+#Example usage: python utility_python_top_level_rise_65.py -p /home/users/nanditha/Documents/utility/65nm/b11 --rtl=/home/users/nanditha/Documents/utility/65nm/b11/b11.vhd --mod=b11 --test=/home/users/nanditha/Documents/utility/65nm/b11/test_b11.vhd --tb_mod=test_b11 --clk=350 --run=100us --design=b11 --tech=65 --num=10 --group 10 --extl=/home/external/iitb/nanditha/simulations/65nm/b11  --proc_node 1 --ppn 5 --days 00 --hrs 00 --mins 10 --script python_utility3_yuva_2cycles_2nd_3rd_65.py 
 
 #Modifications to the script:
 #Absolute paths introduced everywhere in the script, so that they can be run from one directory and no need of duplicating the scripts in all directories: June 25 2014

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #Writing hspice_glitch_CORE65GPSVT_selected_lib_vg.sp: June 18 2014
 
-#Example usage: python python_hspice_mod.py -p /home/users/nanditha/Documents/utility/65nm/b04 -n 4 -d b04 -o 1
+#Example usage: python python_hspice_mod.py -p /home/users/nanditha/Documents/utility/65nm/b04 -n 4 -d b04 -o 1 -c <path_of_script>
 
 
 import optparse
@@ -17,7 +17,7 @@ parser.add_option("-p","--path", help='Enter the RTL (verilog or vhdl) file path
 parser.add_option("-n", "--num", type="int", dest="num_spice",help="Enter the number of spice decks to be simulated at a time")
 parser.add_option("-d", "--dir", dest="folder",help="Enter the name of the design folder that is copied to remote machine")
 parser.add_option("-o", "--dir_num", dest="dir_num",help="the number of the spice_decks_%d directory. Enter 1 if it is spice_Decks_1, Enter 2 if its spice_decks_2 etc")
-
+parser.add_option("-c", "--cwd", dest="scripts_dir",help="path_of_script")
 
 #This is the most important line which will parse the cmd line arguments
 (options, args) = parser.parse_args()
@@ -26,6 +26,7 @@ path=options.filepath
 num=int(options.num_spice)
 folder=options.folder
 dir_num=int(options.dir_num)
+scripts_dir=options.scripts_dir
 
 #Write hspice glitch file.. that does not have duplicate gnd and vdd nodes
 
@@ -136,7 +137,7 @@ print "Done creating hspice decks\n"
 #os.chdir("%s/spice_decks_%d/" %(path,dir_num))
 #os.system("bash %s/spice_decks_%d/hspice.bat" %(path,dir_num)) 
 
-os.system('python %s/python_GNUparallel_hspice_rise_local_mc_65.py -n %d -d %s -o %d -p %s' %(path,num,folder,dir_num,path))
+os.system('python %s/python_GNUparallel_hspice_rise_local_mc_65.py -n %d -d %s -o %d -p %s' %(scripts_dir,num,folder,dir_num,path))
 print "Done running hspice\n"
 #time.sleep (3)
 os.chdir("../")

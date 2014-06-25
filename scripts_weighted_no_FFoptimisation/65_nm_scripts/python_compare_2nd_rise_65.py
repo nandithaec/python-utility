@@ -156,13 +156,13 @@ for r in range(len(headers_rtl)):
 	match_flag=0	 ##Reset this every r loop only
 	for s in range(len(headers)):
 		if (match_flag==0): # If a header match is not found, loop through the spice headers, else if match found stop looping
-			print "\n\nlooping !! \nHeader RTL: %s \nspice header: %s \n" %(headers_rtl[r],headers[s])
+			#print "\n\nlooping !! \nHeader RTL: %s \nspice header: %s \n" %(headers_rtl[r],headers[s])
 	
 			if (headers_rtl[r] == headers[s]): ##That is, if the headers in spice file match with the rtl headers
 		#if (re.match(headers_rtl[r], headers[s]) != None): ##re.match which for the pattern at the beginning of the string. So IN_N1 and IN_N13 will say it matches
 		
 				k= [] ##Empty the temporary List before starting to append a new column
-				print "\n\nMatch found!! \n spice Header: %s \n RTL header: %s\nspice column: %s \nRTL column: %s:\n" %(headers[s],headers_rtl[r],column[headers[s]],column_rtl[headers_rtl[r]])
+				#print "\n\nMatch found!! \n spice Header: %s \n RTL header: %s\nspice column: %s \nRTL column: %s:\n" %(headers[s],headers_rtl[r],column[headers[s]],column_rtl[headers_rtl[r]])
 				match_flag=1 #match has been found. stop looping for this string pattern.
 				k.append('diff_rise_edge_'+headers_rtl[r]) #Append header
 
