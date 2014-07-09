@@ -102,12 +102,12 @@ print('Done modelsim simulation\n')
 time.sleep(2)
 ####################################################################################################################################################################
 
-"""
+
 ##will show one instance per line (no + continuation of subckt)
 os.system('python python_gnd_gnds_dspf_modify.py -p %s -m %s' %(main_path,module))
 time.sleep(5)
 
-
+"""
 os.system('python python_choose_subckts_library.py -p %s -m %s' %(main_path,module))
 #time.sleep(5)
 

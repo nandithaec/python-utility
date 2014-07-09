@@ -3,6 +3,7 @@
 
 #IMPORTANT: It is assumed that we are running parallel ngspice simulations on a remote 48-core cluster at 10.107.105.201. If this is not the case, you will need to modify this script to run it on this machine, by commenting out the scp and ssh commands.
 
+#Modified the GNU_Parallel_hspice file to check if any deck is simulated using 'pseudo-transient method' - July 9th 2014
 #Creating multiple RTL.csv and RTL_2ndedge.csv files- as many as there are number of outer loops: June 15 2014
 #Backup directories renamed to 'backup_spice_decks_3rd_edge' and 'backup_spice_decks_2nd_edge': feb 12 2014.
 #Calling the python_FF_strike_taxonomy.py and python_gate_strike_taxonomy.py scripts explicitly, since calling it through a function did not run on the yuva cluster: Feb 11 2014
@@ -11,7 +12,7 @@
 #This version of the script has the facility of selecting the gate based on the area of the gate. This version of the script uses another script python_weighted_gateselection.py to pick the random gate based on its area: Nov 17 2013
 #Glitch insertion window is within the 2.5 cycles, and not the 6.5 cycles that is required for the case with intermediate FFs
 
-#Example usage: python python_utility3_hspice_2cycles_2nd_3rd_local_65.py -m b11 -p /home/users/nanditha/Documents/utility/65nm/b11 -t 65 -n 10 --group 10 --clk 300 -d b11
+#Example usage: python python_utility3_hspice_2cycles_2nd_3rd_local_65.py -m b11 -p /home/users/nanditha/Documents/utility/65nm/b11 -t 65 -n 3 --group 3 --clk 300 -d b11
 
 import optparse
 import re,os
@@ -67,12 +68,22 @@ if os.path.exists('%s/spice_results' %path):
 	os.chdir('%s/spice_results' %path)
 	for f in glob.glob("count*.csv"):
 		os.remove(f)
-
+		
+if os.path.exists('%s/spice_results' %path):
+	os.chdir('%s/spice_results' %path)
+	for f in glob.glob("*.txt"):
+		os.remove(f)
+		
 if os.path.exists('%s/spice_results' %path):
 	os.chdir('%s/spice_results' %path)
 	for f in glob.glob("spice_rtl_*.csv"):
 		os.remove(f)
 
+if os.path.exists('%s/spice_results' %path):
+	os.chdir('%s/spice_results' %path)
+	for f in glob.glob("tax*.csv"):
+		os.remove(f)
+		
 if os.path.exists('%s/spice_results' %path):
 	os.chdir('%s/spice_results' %path)
 	for f in glob.glob("final_results_spice_outputs_*.csv"):
@@ -92,7 +103,7 @@ if os.path.exists('%s/spice_results' %path):
 os.chdir("%s" %scripts_dir)
 
 
-time.sleep(2)
+#time.sleep(2)
 
 #Clear Back up directory
 
@@ -295,13 +306,13 @@ for loop in range(start_loop, (num_of_loops+1)):
 	
 ##########################################################
 #Comment this out to see the decks and the result files it generates. 	
-"""
+
 	spice_dir = '%s/spice_decks_%s' %(path,loop)
 
 	
 	if os.path.exists(spice_dir):
 		shutil.rmtree(spice_dir)
-"""
+
 
 ########################################End of loop########################################################
 

@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+#Deleting the *.txt files in spice_decks folder : Jul 9 2014
 #Commented out lines that create hspice*.sp glitch file-- not needed. July 9 2014
 #Writing hspice_glitch_CORE65GPSVT_selected_lib_vg.sp: June 18 2014
 
@@ -51,6 +52,9 @@ if os.path.exists('%s' %path):
 		os.remove(f)
 		
 	for f in glob.glob("*.st0"):
+		os.remove(f)
+		
+	for f in glob.glob("*.txt"):
 		os.remove(f)
 	
 	for f in glob.glob("*.csv"):
@@ -160,9 +164,9 @@ for j in range(0,num_of_files):
 	if m:
 		deck_num.append(m.group(1))
 
-print "Deck numbers", deck_num
+#print "Deck numbers", deck_num
 num_of_csv=len(deck_num)
-print "Len of Deck numbers", num_of_csv
+#print "Len of Deck numbers", num_of_csv
 
 #time.sleep (3)
 
@@ -195,7 +199,7 @@ for i in range(0,num_of_csv):
 		#print row
 		del row[-1]
 		del row[-1]
-		print "new row:\n" , row
+		#print "new row:\n" , row
 		k.append(row)
 		#print "k is", k
 
@@ -213,27 +217,27 @@ for i in range(0,num_of_csv):
 	writer=  csv.writer(fout)
 	writer2= csv.writer(fout2)
 	
-	for row in reader:
-		print row
+	#for row in reader:
+		#print row
 		
 	row_len=len(row)
 	half=row_len/2
-	print "half is", half
+	#print "half is", half
 	a=[]
 	b=[]
 	first_half=[]
 	second_half=[]
 	for h in range(0,half):
-		print "appending first half:",row[h]
+		#print "appending first half:",row[h]
 		a.append(row[h])
-		print "list:",a
+		#print "list:",a
 		b.append(row[h+half])
-		print "list2:",b
+		#print "list2:",b
 	print "***********\n"
 	first_half.append(a)
-	print "list:",first_half
+	#print "list:",first_half
 	second_half.append(b)	
-	print "list2:",second_half
+	#print "list2:",second_half
 		
 	writer.writerows(first_half)  #write csv
 	writer2.writerows(second_half)  #write csv

@@ -2,6 +2,7 @@
 
 #ASSUMPTION: This will always be excecuted on the 48core cluster user1@10.107.105.201 and the design folder will be copied always to /home/user1/simulations folder and executed
 
+#Checking if any deck is simulated using 'pseudo-transient method' and logging such a case in spice_results/strange_file.txt- July 9th 2014
 # Code modified to do post processing of the result files for the 2nd rising edge. Last section of the code is added : Feb 7 2014
 #Multiple spice decks that were generated using deckgen in the remote machine, will be run using ngspice and GNU Parallel on the cluster. We can also ssh to other machines which have GNU Parallel and ngspice installed. ssh-keygen should have been done so that it would not ask for ssh password everytime we ssh to the machines.
 
@@ -52,6 +53,7 @@ os.chdir("../")
 print os.getcwd()
 
 time.sleep(5)	
+strange_file = open('%s/spice_results/strange_results.txt' %(path), 'a+')
 ####################### NGSPICE SIMULATION RUN#######################
 ##seq 1 n - run n decks in current folder
 # This is to execute GNU Parallel. +0 means utilise all cores in the processor.
@@ -64,15 +66,35 @@ start= ((outloop-1)*num_spice) + 1  # ((1-1)*10) +1 =1  , ((2-1)*10) +1 =11
 end = (num_spice)*outloop  #(10*1) = 10, (10*2)=20
 
 #ls | parallel --progress -j +0 -q bash -c "hspice {}"
-os.chdir("%s/spice_decks_%s" %(path,outloop))
+os.chdir("%s/spice_decks_%d" %(path,outloop))
 print "Changed to" , os.getcwd()
 time.sleep(2)
-os.system("ls hspice_*.sp | parallel --progress -j 4  -q bash -c 'hspice {};pwd;' " )
+#os.system("ls hspice_*.sp | parallel --progress -j 4  -q bash -c 'hspice {};pwd;' " )
+os.system("seq %d %d| parallel --progress -j 4  'pwd; hspice %s/spice_decks_%s/hspice_deck_{}.sp>log_{}.txt;' " % (start,end, path,outloop))
 
+
+for a in range(start,end+1):
+	print "A is %d\n" %(a)
+	flag=0
+	f=open("%s/spice_decks_%d/log_%d.txt" %(path,outloop,a),"r")
+	fnew=open("%s/spice_results/log_convergence_algo_%d.txt" %(path,outloop),"a+")
+	for line in f:
+		if 'damped pseudo-transient' in line:
+			fnew.writelines("hspice_deck_%d.sp" %(a))
+			fnew.writelines(line)
+			flag=1
+			strange_file.writelines("Warning!! Damped pseudo-transient used to simulate deck_%d.sp\n" %(a))
+		elif 'dc convergence' in line:
+			fnew.writelines("hspice_deck_%d.sp" %(a))
+			fnew.writelines(line)
+			flag=1
+	if flag==0:	
+		fnew.writelines("No pseudo transient - hspice_deck_%d.sp\n" %(a))
+		
 os.chdir("../")
 #time.sleep(2)
 print os.getcwd()
-
+strange_file.close()
 print "\n****Completed hspice simulations****\n"
 #print "****Resulting csv files are saved in the same folder in which the spice decks are****\n"
 

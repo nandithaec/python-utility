@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 #Modification summary:
+#Checking and flagging an error if there are multiple flips on 2nd edge. reporting it in a file spice_results/strange_file.txt - Jul 9 2014
 #Checking for DFP or DFF: to suit both 180nm and 65nm. 'DFPQX wont work for 65nm since there are FFs with 'DFPQNX', 'DFPHQNX' etc: June 27 2014
 #Modified DFFPOSX1 to DFPQX to suit the 65nm requirement: 25/4/2014
 #Changed the column iteration number for header from range(5) to range(6), since the drain number is also added: Feb 11 2014
@@ -45,7 +46,7 @@ if os.path.isfile("%s/spice_results/spice_rtl_difference_3rd_edge_count_flips.cs
 else:
 	print "No file to be deleted"
 
-
+strange_file = open('%s/spice_results/strange_results.txt' %(path), 'a+')
 
 #Do the following only if the directory has results in it.. 
 if (os.path.isdir('%s/spice_results' %(path))):
@@ -479,12 +480,12 @@ if (os.path.isdir('%s/spice_results' %(path))):
 		FF_at_3rd_rise= int(row3[inputFF_3rd_rise[0]]) + int(row3[outputFF_3rd_rise[0]])
 
 		if (FF_at_2nd_rise==0 and FF_at_3rd_rise==0):
-			print "case 1"
+			#print "case 1"
 			temp_row.append("No effect")
 			gate_no_effect=gate_no_effect+1
 		elif (FF_at_2nd_rise==0 and FF_at_3rd_rise>=1):
 			#row.append("Glitched and captured at FF(s)")
-			print "case 2"
+			#print "case 2"
 			gate_glitch_captured=gate_glitch_captured+1
 			if (FF_at_3rd_rise>1): #Calculating multiple flips
 				temp_row.append("Glitched and captured at multiple FFs")
@@ -495,23 +496,25 @@ if (os.path.isdir('%s/spice_results' %(path))):
 		
 		#If a strike happens on a gate, an input FF cannot flip!!
 		elif (FF_at_2nd_rise>=1 and FF_at_3rd_rise==0):
-			print "case 3"
-			temp_row.append("FN- Strange?!")
+			#print "case 3"
+			temp_row.append("FN-glitch within hold window")
 			gate_strange_FN=gate_strange_FN+1
 
-		elif (FF_at_2nd_rise>=1 and FF_at_3rd_rise>=1):
-			print "case 4"
-			temp_row.append("FF- Strange?!")
+		elif (FF_at_2nd_rise==1 and FF_at_3rd_rise>=1):
+			#print "case 4"
 			gate_strange_FF=gate_strange_FF+1
 
 			if (FF_at_3rd_rise>1): #Calculating multiple flips
-				temp_row.append("Cascaded, flipped at multiple FFs")
+				temp_row.append("Cascaded, flipped at multiple FFs. Strange?!")
 				gate_cascaded_multiple=gate_cascaded_multiple+1
 
 			elif(FF_at_3rd_rise==1):
-				temp_row.append("Cascaded, flipped at a single FF")
-
-		#print "temp_row final:", temp_row
+				temp_row.append("Cascaded, flipped at a single FF. Strange?!")
+				
+		elif (FF_at_2nd_rise>1):
+			#print "Strange!Check the results"
+			temp_row.append("Multiple at 2nd edge- Check the results")
+			strange_file.writelines("Multiple at 2nd edge- gate strike case- Check the results for deck number %s\n" %row[0])
 
 		gates_list_final.append(temp_row) #Append this to the list.. At the end of for loop, it would be a list of lists
 		#print "gates_list:", gates_list_final
@@ -568,7 +571,7 @@ if (os.path.isdir('%s/spice_results' %(path))):
 	fgate2.close()
 	fgate3.close()
 	fgate_final.close()
-
+	strange_file.close()
 
 	#Final output (taxonomy) written into a taxonomy_summary_<design>.csv file inside the respective results folders
 	fout = open('%s/spice_results/taxonomy_summary_gates_%s.csv' %(path,module), 'wb')

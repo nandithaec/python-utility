@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 #Modification summary:
+#Checking and flagging an error if there are multiple flips on 2nd edge. reporting it in a file spice_results/strange_file.txt - Jul 9 2014
 #Changed the cases and classification. At 2nd edge, any FF flip either input or output is considered as the same. Similarly for the 3rd edge. : feb 12 2014
 #Changed the column iteration number for header from range(5) to range(6), since the drain number is also added: Feb 11 2014
 
@@ -35,9 +36,12 @@ module=options.module
 print "Executing FF strike taxonomy\n"
 time.sleep(2)
 
+strange_file = open('%s/spice_results/strange_results.txt' %(path), 'a+')
+
 #Do the following only if the directory has results in it.. 
 if (os.path.isdir('%s/spice_results' %(path))):
 
+	
 	#Append the spice_rtl_diff summary with the flip count
 	f = open('%s/spice_results/count_flips_2nd_edge_summary.csv' %(path), 'rb')
 	reader = csv.reader(f)
@@ -292,11 +296,11 @@ if (os.path.isdir('%s/spice_results' %(path))):
 		FF_at_2nd_rise= int(row[inputFF_2nd_rise[0]]) + int(row[outputFF_2nd_rise[0]])
 		FF_at_3rd_rise= int(row3[inputFF_3rd_rise[0]]) + int(row3[outputFF_3rd_rise[0]])
 		if (FF_at_2nd_rise==0 and FF_at_3rd_rise==0):
-			print "case 1"
+			#print "case 1"
 			temp_row.append("No effect")
 			FF_no_effect=FF_no_effect+1
 		elif (FF_at_2nd_rise==0 and FF_at_3rd_rise >=1):
-			print "case 2"
+			#print "case 2"
 			FF_glitch_captured=FF_glitch_captured+1
 
 			if (FF_at_3rd_rise>1): #Calculating multiple flips
@@ -307,12 +311,12 @@ if (os.path.isdir('%s/spice_results' %(path))):
 			
 
 		elif (FF_at_2nd_rise>=1 and FF_at_3rd_rise==0):
-			print "case 3"
+			#print "case 3"
 			temp_row.append("Flipped and masked")
 			FF_flip_masked=FF_flip_masked+1
-		elif (FF_at_2nd_rise>=1 and FF_at_3rd_rise>=1):
+		elif (FF_at_2nd_rise==1 and FF_at_3rd_rise>=1):
 			#temp_row.append("Cascaded flip")
-			print "case 4"
+			#print "case4"
 			FF_cascaded_flip=FF_cascaded_flip+1
 	
 			if (FF_at_3rd_rise>1):
@@ -321,6 +325,12 @@ if (os.path.isdir('%s/spice_results' %(path))):
 
 			elif (FF_at_3rd_rise==1):
 				temp_row.append("Cascaded flip: Single flip at output")
+		elif (FF_at_2nd_rise>1):
+			#temp_row.append("Cascaded flip")
+			#print "Strange!Check the results"
+			temp_row.append("Multiple at 2nd edge- Check the results")
+			strange_file.writelines("Multiple at 2nd edge-FF strike case- Check the results for deck number %s\n" %row[0])
+			
 		"""
 		elif (int(row[outputFF_2nd_rise[0]])>=1):
 			#temp_row.append("Cascaded flip")
@@ -454,7 +464,7 @@ if (os.path.isdir('%s/spice_results' %(path))):
 	fout.write ("\nP(Multiple|FF): Conditional probability of multiple cascaded flips given atleast one flip, due to strike on FF is: %f" %prob_FF_cascaded_flip_multiple)
 	fout.close()
 
-
+	strange_file.close()
 	###########################Write out the results into a table in a pdf############################
 	from reportlab.lib import colors
 	from reportlab.lib.pagesizes import letter
