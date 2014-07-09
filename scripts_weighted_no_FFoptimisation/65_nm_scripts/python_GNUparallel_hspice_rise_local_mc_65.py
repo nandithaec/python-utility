@@ -67,7 +67,7 @@ end = (num_spice)*outloop  #(10*1) = 10, (10*2)=20
 os.chdir("%s/spice_decks_%s" %(path,outloop))
 print "Changed to" , os.getcwd()
 time.sleep(2)
-os.system("ls hspice_*.sp | parallel --progress -j 3  -q bash -c 'hspice {};pwd;' " )
+os.system("ls hspice_*.sp | parallel --progress -j 4  -q bash -c 'hspice {};pwd;' " )
 
 os.chdir("../")
 #time.sleep(2)

@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
-#Example usage: python utility_python_top_level_rise_65.py -p /home/users/nanditha/Documents/utility/65nm/b11 --rtl=/home/users/nanditha/Documents/utility/65nm/b11/b11.vhd --mod=b11 --test=/home/users/nanditha/Documents/utility/65nm/b11/test_b11.vhd --tb_mod=test_b11 --clk=350 --run=100us --design=b11 --tech=65 --num=10 --group 10 --extl=/home/external/iitb/nanditha/simulations/65nm/b11  --proc_node 1 --ppn 5 --days 00 --hrs 00 --mins 10 --script python_utility3_yuva_2cycles_2nd_3rd_65.py 
+#Example usage: python utility_python_top_level_rise_65.py -p /home/users/nanditha/Documents/utility/65nm/b13 --rtl=/home/users/nanditha/Documents/utility/65nm/b13/b13.vhd --mod=b13 --test=/home/users/nanditha/Documents/utility/65nm/b13/test_b13.vhd --tb_mod=test_b13 --clk=350 --run=100us --design=b13 --tech=65 --num=10 --group 10 --extl=/home/external/iitb/nanditha/simulations/65nm/b13  --proc_node 1 --ppn 5 --days 00 --hrs 00 --mins 10 --script python_utility3_yuva_2cycles_2nd_3rd_65.py 
+
+
 
 #Modifications to the script:
 #Absolute paths introduced everywhere in the script, so that they can be run from one directory and no need of duplicating the scripts in all directories: June 25 2014
@@ -79,7 +81,7 @@ hrs=options.hrs
 mins=options.mins
 script=options.script
 
-
+"""
 #Example usage: python python1_read_RTL_syn_pnr.py -f decoder.vhd -m decoder_behav_pnr -clk 900
 os.system('python python1_read_RTL_syn_pnr_65.py -f %s -m %s -c %s -p %s' %(rtl,module,clkfreq,main_path))
 
@@ -100,23 +102,23 @@ print('Done modelsim simulation\n')
 time.sleep(2)
 ####################################################################################################################################################################
 
-
+"""
 ##will show one instance per line (no + continuation of subckt)
 os.system('python python_gnd_gnds_dspf_modify.py -p %s -m %s' %(main_path,module))
 time.sleep(5)
 
 
 os.system('python python_choose_subckts_library.py -p %s -m %s' %(main_path,module))
-time.sleep(5)
+#time.sleep(5)
 
 
 ##Example usage: perl GlitchLibGen.pl -i osu018_stdcells_correct_vdd_gnd.sp- this file will be provided by us for the 180nm technology
 #Create a glitched std cell library file 
-os.system('perl GlitchLibGen_65.pl -p %s -i %s/CORE65GPSVT_selected_lib_vg.sp' %(main_path,main_path))
+os.system('perl GlitchLibGen_65.pl -p %s -i CORE65GPSVT_selected_lib_vg.sp' %(main_path))
 print "***Created glitch library..\n"
 time.sleep(5)
 
-
+"""
 
 ##Generate a template simulatable spice netlist from the dspf file generated after pnr. This would include all .ic, Voltage sources, meas, tran, control, param etc
 #NetlistFormat.pl
@@ -127,5 +129,5 @@ time.sleep(5)
 
 #os.system('python python_create_jobscript_65.py -m %s -p %s -d %s -t %s -n %s --group %s --clk %s --proc_node %s --ppn %s --days %s --hrs %s --mins %s --script %s' %(module,extl_folder,design_folder,techn,num,group,clkfreq,nodes,ppn,days,hrs,mins,script))
 
-
+"""
 

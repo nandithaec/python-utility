@@ -1,7 +1,9 @@
 #!/usr/bin/env python
+
+#Commented out lines that create hspice*.sp glitch file-- not needed. July 9 2014
 #Writing hspice_glitch_CORE65GPSVT_selected_lib_vg.sp: June 18 2014
 
-#Example usage: python python_hspice_mod.py -p /home/users/nanditha/Documents/utility/65nm/b04 -n 4 -d b04 -o 1 -c <path_of_script>
+#Example usage: python python_hspice_mod.py -p /home/users/nanditha/Documents/utility/65nm/b11 -n 4 -d b11 -o 1 -c /home/users/nanditha/Documents/utility/65nm/scripts_run
 
 
 import optparse
@@ -29,7 +31,7 @@ dir_num=int(options.dir_num)
 scripts_dir=options.scripts_dir
 
 #Write hspice glitch file.. that does not have duplicate gnd and vdd nodes
-
+"""
 fin = open('%s/glitch_CORE65GPSVT_selected_lib_vg.sp' %(path), 'r') 
 fnew= open('%s/hspice_glitch_CORE65GPSVT_selected_lib_vg.sp' %(path), 'w') 
 for line in fin:
@@ -41,7 +43,7 @@ for line in fin:
 
 fnew.close()
 fin.close()
-		
+"""		
 	
 if os.path.exists('%s' %path):
 	os.chdir('%s/spice_decks_%d' %(path,dir_num))
@@ -94,12 +96,12 @@ for i in range(0,num_of_files):
 	
 	print ("Creating %s/spice_decks_%d/hspice_deck_%s.sp\n" %(path,dir_num,deck_num[i]))	
 	for line in fin:
-		if line ==".include  ../glitch_CORE65GPSVT_selected_lib_vg.sp\n":
-			fnew.write (".include ../hspice_glitch_CORE65GPSVT_selected_lib_vg.sp\n")
-		elif "gnd gnds vdd vdds" in line:
-			line = line.replace("gnd gnds vdd vdds","gnd vdd")
-			fnew.write(line)
-		elif ".control" in line:
+		#if line ==".include  ../glitch_CORE65GPSVT_selected_lib_vg.sp\n":
+		#	fnew.write (".include ../hspice_glitch_CORE65GPSVT_selected_lib_vg.sp\n")
+		#if "gnd gnds vdd vdds" in line:
+		#	line = line.replace("gnd gnds vdd vdds","gnd vdd")
+		#	fnew.write(line)
+		if ".control" in line:
 			line = line.replace(".control",".option measdgt=5 measform=3")
 			fnew.write(line)
 		elif "tran 20ps" in line:

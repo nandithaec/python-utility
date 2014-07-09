@@ -9,7 +9,7 @@
 #Absolute paths introduced everywhere in the script, so that they can be run from one directory and no need of duplicating the scripts in all directories: June 25 2014
 #Initialisation node (net0139:F125) for HS65_GS_DFPQNX9 FF , net0139:F163 for DFPHQNX9 and net0238:F149 for DFPHQX9, is mentioned as a comment in the .ic section. NEed to manually change this in the reference.sp file, since we are not current differently identifying the different types of FFs: June 23 2014
 #rise and fall edge measurements limitedto 50ps duration. Else false values were being calculated: April 25 2014
-#.ic on net0148:F59 of the DFF to initialise correctly. This value should be the inverted value of what was supposed to be initialised originally.: April 2nd 2014
+#.ic on net0148:F59 of the DFPQX4 and DFPQX9 to initialise correctly. This value should be the inverted value of what was supposed to be initialised originally.: April 2nd 2014
 #.ic square brackets being replaced by _ : feb 26 2014
 #.ic statement being specified to all outputs of all FFs.. and are being initialised to the rising edge of the current clk cycle thats picked : Feb 21 2014
 #.ic for all primary outputs being deleted. changed the PWL. It doesnt change value before 1st clk rising edge (reverting back to the original PWL statement): feb 21 2014

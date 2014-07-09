@@ -11,7 +11,7 @@
 #This version of the script has the facility of selecting the gate based on the area of the gate. This version of the script uses another script python_weighted_gateselection.py to pick the random gate based on its area: Nov 17 2013
 #Glitch insertion window is within the 2.5 cycles, and not the 6.5 cycles that is required for the case with intermediate FFs
 
-#Example usage: python python_utility3_hspice_2cycles_2nd_3rd_local_65.py -m b11 -p /home/users/nanditha/Documents/utility/65nm/b11 -t 65 -n 2 --group 2 --clk 350 
+#Example usage: python python_utility3_hspice_2cycles_2nd_3rd_local_65.py -m b11 -p /home/users/nanditha/Documents/utility/65nm/b11 -t 65 -n 10 --group 10 --clk 300 -d b11
 
 import optparse
 import re,os
@@ -274,7 +274,6 @@ for loop in range(start_loop, (num_of_loops+1)):
 	
 	
 	os.system ('python python_hspice_mod.py -p %s -n %s -d %s -o %d -c %s' %(path,num_at_a_time,design_folder,loop,scripts_dir))
-	
 	os.system('python python_hspice_combine_csv_results.py -n %s -d %s -o %d -p %s' %(num_at_a_time,design_folder,loop,path))
 	
 	
@@ -302,8 +301,8 @@ for loop in range(start_loop, (num_of_loops+1)):
 	
 	if os.path.exists(spice_dir):
 		shutil.rmtree(spice_dir)
-
 """
+
 ########################################End of loop########################################################
 
 print "Combining all rtl diff files\n"

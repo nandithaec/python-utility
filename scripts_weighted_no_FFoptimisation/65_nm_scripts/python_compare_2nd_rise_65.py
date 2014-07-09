@@ -76,7 +76,7 @@ headers = reader.next() #Spice headers
 
 #print "\nSpice Headers:%s", headers
 del headers[-1]  #Deleting the process id at the end of the spice output csv file
-print "\nSpice Headers after removing the extra last header:", headers
+#print "\nSpice Headers after removing the extra last header:", headers
 #print "\nHeader len:\n", range(len(headers)) #[0, 1, 2, 3, 4, 5, 6, 7] 
 #print "\nHeader len:\n", (len(headers)) #length
 
@@ -102,7 +102,7 @@ for row in reader:
 ####################################################################################
 headers_rtl = reader_rtl.next() #RTL headers
 
-print "\nRTL Headers:\n", headers_rtl
+#print "\nRTL Headers:\n", headers_rtl
 #print "\nRTL Headers[0]:\n", headers_rtl[0]
 
 column_rtl = {}
@@ -144,7 +144,7 @@ for r in range(len(headers_rtl)):
 
 		for num_rows in range(0,int(num)): # 10 rows. This will be a user input
 			k1.append(rt[num_rows])
-			print "\n rtl contents inside no match header is:", rt[num_rows]
+			#print "\n rtl contents inside no match header is:", rt[num_rows]
 
 		km.append(k1) # appended to an empty list
 		#print "km is\n",km

@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 #Modification summary:
+#Checking for DFP or DFF: to suit both 180nm and 65nm. 'DFPQX wont work for 65nm since there are FFs with 'DFPQNX', 'DFPHQNX' etc: June 27 2014
 #Modified DFFPOSX1 to DFPQX to suit the 65nm requirement: 25/4/2014
 #Changed the column iteration number for header from range(5) to range(6), since the drain number is also added: Feb 11 2014
 
@@ -121,7 +122,7 @@ if (os.path.isdir('%s/spice_results' %(path))):
 
 	for row in reader:
 	#The gate name is the 4th element in the row. Classify the gates based on whether it was a DFF or not
-		if re.search("DFPQX",row[3]): 
+		if re.search("DFP|DFF",row[3]): 
 			FF_list.append(row)
 		else:
 			gate_list.append(row)
@@ -290,7 +291,7 @@ if (os.path.isdir('%s/spice_results' %(path))):
 
 	for row_3 in reader_3:
 	#The gate name is the 4th element in the row. Classify the gates based on whether it was a DFF or not
-		if re.search("DFPQX",row_3[3]): 
+		if re.search("DFP|DFF",row_3[3]): 
 			FF_list_3.append(row_3)
 		else:
 			gate_list_3.append(row_3)
@@ -450,6 +451,8 @@ if (os.path.isdir('%s/spice_results' %(path))):
 	gate_no_effect=0
 	gate_strange_FF=0
 	gate_strange_FN=0
+	gate_cascaded_multiple=0
+
 	for row in gate_read2:
 	
 		temp_row=[]
@@ -493,13 +496,21 @@ if (os.path.isdir('%s/spice_results' %(path))):
 		#If a strike happens on a gate, an input FF cannot flip!!
 		elif (FF_at_2nd_rise>=1 and FF_at_3rd_rise==0):
 			print "case 3"
-			temp_row.append("Strange!")
+			temp_row.append("FN- Strange?!")
 			gate_strange_FN=gate_strange_FN+1
 
 		elif (FF_at_2nd_rise>=1 and FF_at_3rd_rise>=1):
 			print "case 4"
-			temp_row.append("Strange!")
+			temp_row.append("FF- Strange?!")
 			gate_strange_FF=gate_strange_FF+1
+
+			if (FF_at_3rd_rise>1): #Calculating multiple flips
+				temp_row.append("Cascaded, flipped at multiple FFs")
+				gate_cascaded_multiple=gate_cascaded_multiple+1
+
+			elif(FF_at_3rd_rise==1):
+				temp_row.append("Cascaded, flipped at a single FF")
+
 		#print "temp_row final:", temp_row
 
 		gates_list_final.append(temp_row) #Append this to the list.. At the end of for loop, it would be a list of lists
@@ -534,6 +545,10 @@ if (os.path.isdir('%s/spice_results' %(path))):
 	else:
 		prob_gate_glitch_captured_multiple=0.0
 
+	if gate_strange_FF >0: #Calculating conditional probability
+		prob_gate_cascaded_multiple=(float(gate_cascaded_multiple)/float(gate_strange_FF))
+	else:
+		prob_gate_cascaded_multiple=0.0
 
 	print"\n*************************************************************"
 	print"\nProbability of a gate strike amongst total cases is:",prob_gate_strike
@@ -574,6 +589,7 @@ if (os.path.isdir('%s/spice_results' %(path))):
 	fout.write ("\nP(multiple|NF): Conditional Probability of multiple captured flips given NF : %f" %prob_gate_glitch_captured_multiple)
 	fout.write ("\nProbability of FN(flip in 2nd cycle, no flip in 3rd cycle), due to gate strike is: %f" %prob_gate_FN)
 	fout.write ("\nProbability of FF(flip in 2nd cycle and flip in 3rd cycle), due to gate strike is: %f" %prob_gate_FF)
+	fout.write ("\nP(multiple|FF): Conditional Probability of multiple captured flips given FF : %f" %prob_gate_cascaded_multiple)
 	fout.close()
 
 	###########################Write out the results into a table in a pdf############################
@@ -612,7 +628,8 @@ if (os.path.isdir('%s/spice_results' %(path))):
 	       ['NF(Glitch- Propagated and captured)', prob_gate_glitch_captured],
 	       ['P(multiple flips at output | NF)', prob_gate_glitch_captured_multiple],
 		['FN (flip in 2nd cycle, no flip in 3rd cycle)', prob_gate_FN],
-		 ['FF (cascaded flip)', prob_gate_FF]]
+		 ['FF (cascaded flip)', prob_gate_FF],
+		['P(multiple flips at output | FF)', prob_gate_cascaded_multiple]]
 	t=Table(data_gate)
 	t.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,-1),colors.white),
 			       ('TEXTCOLOR',(0,0),(1,0),colors.blue),  #(columns,rows) or (0,0,(-1,-4)
@@ -628,7 +645,6 @@ if (os.path.isdir('%s/spice_results' %(path))):
 	print "\n**Completed executing the gate_strike_taxonomy script***\n"
 	print "%s/spice_results/taxonomy_report_gates_%s.pdf has the results." %(path,module)
 	doc1.build(elements)
-
 
 
 

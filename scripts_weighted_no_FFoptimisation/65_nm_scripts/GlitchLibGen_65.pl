@@ -1,6 +1,7 @@
-#Example: perl GlitchLibGen_65.pl -p <path> -i <path>/CORE65GPSVT_selected_lib.sp
+#Example: perl GlitchLibGen_65.pl -p /home/users/nanditha/Documents/utility/65nm/b11 -i CORE65GPSVT_selected_lib_vg.sp
 
 #!/usr/bin/perl
+
 
 #Modifications:
 
@@ -10,6 +11,7 @@
 #searching between subckt and ends modified to 'SUBCKT' and 'ENDS' : Mar 18 2014
 
 use Getopt::Long;
+use Cwd;
 #####################################################################
 #
 # Author        : Shahbaz Sarik
@@ -89,6 +91,7 @@ if ($help) {
   exit(0);
 }
 $glib="glitch_".$library;
+print "Glib is $glib\n\n";
 if ($#ARGV >= 0 || $glib eq "" || $library eq ""|| $path eq "" ) {
   print STDERR "-E- Found missing/excess arguments\n";
   printErrMessage();
@@ -100,7 +103,11 @@ chomp($date=`date`);
 print "\t\t**********    Job started   at $date    **********\n";
 
 #opening the required files
-open(NET,"$library")||die("unable to open file : $!");
+my $pwd = cwd();
+print "CWD is $pwd\n\n";
+
+print "Path is $path/$library";
+open(NET,"$path/$library")||die("unable to open file : $!");
 open(out,">$path/$glib");
 #open(logf,">$log");
 print  out "*"x10;
@@ -196,7 +203,7 @@ chomp($date=`date`);
 print "\t\t**********    Job completed at $date    **********\n";
 print "\t\t\t*************** !! RUN SUCESSFULL !! ****************\n";
 chomp($path = `pwd`);
-print "*********Glitch intoduced library '$glib' created at $path/$glib\n";
+print "*********Glitch introduced library '$glib' created at $path/$glib\n\n\nDONE\n\n";
 print out "\t\t**************************************** LIBRARAY INFORMATION ****************************************\n";
 print out " **** This Library contains $sub_ckt_num glitch free Subcircuits \n";
 print out " **** This Library contains $count glitch affected Subcircuits \n";

@@ -1,6 +1,7 @@
 
 #!/usr/bin/env python
 
+#Original file is chosen to be the one which has R & C included. - July 9 2014
 #Example usage: python python_choose_subckts_library.py -p <path> -m b04 
 #Absolute paths introduced everywhere in the script, so that they can be run from one directory and no need of duplicating the scripts in all directories: June 25 2014
 
@@ -22,7 +23,9 @@ path=options.path
 module=options.module_name
 
 os.chdir("%s" %path)
-f=open("../CORE65GPSVT_all_vdd_gnd_bulk_node.sp" ,"r")
+#f=open("../CORE65GPSVT_all_vdd_gnd_bulk_node.sp" ,"r")
+#f=open("../CORE65GPSVT_all_onlyC.sp" ,"r")
+f=open("../CORE65GPSVT_RC_all.sp" ,"r")
 #f=open("test.sp" ,"r")
 fnew=open("%s/CORE65GPSVT_selected_lib_vg.sp" %path ,"w")
 
