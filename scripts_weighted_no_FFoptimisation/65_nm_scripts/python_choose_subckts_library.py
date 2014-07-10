@@ -23,10 +23,11 @@ path=options.path
 module=options.module_name
 
 os.chdir("%s" %path)
-#f=open("../CORE65GPSVT_all_vdd_gnd_bulk_node.sp" ,"r")
+f=open("../CORE65GPSVT_all_vdd_gnd_bulk_node.sp" ,"r")
 #f=open("../CORE65GPSVT_all_onlyC.sp" ,"r")
-f=open("../CORE65GPSVT_RC_all.sp" ,"r")
+#f=open("../CORE65GPSVT_RC_all.sp" ,"r") #includes R and C 
 #f=open("test.sp" ,"r")
+#fnew=open("%s/CORE65GPSVT_selected_lib_vgRC.sp" %path ,"w")
 fnew=open("%s/CORE65GPSVT_selected_lib_vg.sp" %path ,"w")
 
 lib_data=f.readlines()

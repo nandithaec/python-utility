@@ -2,6 +2,7 @@
 #Example usage: perl modperl2_outwrtr_rise_65.pl -v %s/pnr/op_data/c432_clk_ipFF_final.v -m c432_clk_ipFF -p /home/users/nanditha/Documents/utility/65nm/b10
 
 #Modifications:
+#Created the time=0 RTL file, and its header - Jul 10 2014
 #Absolute paths introduced everywhere in the script, so that they can be run from one directory and no need of duplicating the scripts in all directories: June 25 2014
 #Matching "DF" instead of "DFF" for the 65nm std cell library: Mar 19 2014
 #Appended the random_drain to the RTL*.csv header. This is needed to generate decks by just looking at the taxonomy.csv: Feb 11 2014
@@ -307,7 +308,7 @@ foreach $i(0 .. $#ffopin)
   print OUT_FF "$new1".",";
 
 }
-
+##################################################################
 
 #creating the toplevel csv file - which contains the RTL headers
 #ffopin contains outputs of all DFFs
@@ -338,7 +339,7 @@ foreach $i(0 .. $#ffopin)
 ## Not sure if this is needed
 print IM "\n";
 close(IM);
-
+##################################################################
 
 #creating the toplevel csv file - which contains the RTL headers
 #ffopin contains outputs of all DFFs
@@ -369,8 +370,38 @@ foreach $i(0 .. $#ffopin)
 ## Not sure if this is needed
 print IM3 "\n";
 close(IM3);
+##################################################################
 
+#creating the toplevel csv file - which contains the RTL headers
+#ffopin contains outputs of all DFFs at t=0
+open(IM0,">$path/$module\_reference_out/RTL_time0.csv");
+print IM0 'deck_num,clk,glitch,gate,subcktlinenum,drain,';
+foreach $i(0 .. $#ffopin)
 
+ {
+   $new1=$ffopin[$i];
+   $new1=~s/\[/_/g;
+   $new1=~s/\]/_/g;
+   $new1=~s/\//_/g;
+   if($new1 ne "clk")
+   {
+      if ($i == $#ffopin) 
+	{
+	print IM0 "$new1";
+	} 
+	else 
+	{
+	print IM0 "$new1".",";
+	}
+
+	
+   }
+}
+
+## Not sure if this is needed
+print IM0 "\n";
+close(IM0);
+##############################################################
 
 #Backup header file required later
 open(IM2,">$path/$module\_reference_out/RTL_backup.csv");
@@ -401,7 +432,7 @@ print IM2 "\n";
 close(IM2);
 print "RTL headers RTL.csv, RTL_2nd_edge.csv and RTL_backup.csv created inside the $module_reference_out directory\n";
 
-
+####################################################################################################################################
 ##Printing spice headers to the csv file in spice_results/
 #This is required when we combine the spice simulation outputs and write out to a single file with this header
 open(RES,">$path/spice_results/headers.csv")||die("unable to open file : $!"); 

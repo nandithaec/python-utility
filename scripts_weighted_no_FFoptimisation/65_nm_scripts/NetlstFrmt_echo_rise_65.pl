@@ -5,11 +5,13 @@
 #clk frequency in MHz
 
 #Modifications:
-
+#.ic on net0148:F65 for DFPQX9 - Jul 10 2014
+#Added time=0 measure and echo statements to test the initial conditions - Jul 9 2014
+#Include glitch_CORE65GPSVT_selected_lib_vgRC.sp instead of glitch_CORE65GPSVT_selected_lib_vg.sp - includes R & C to solve the pseudo=tran method convergence issue- Jul 9 2014
 #Absolute paths introduced everywhere in the script, so that they can be run from one directory and no need of duplicating the scripts in all directories: June 25 2014
 #Initialisation node (net0139:F125) for HS65_GS_DFPQNX9 FF , net0139:F163 for DFPHQNX9 and net0238:F149 for DFPHQX9, is mentioned as a comment in the .ic section. NEed to manually change this in the reference.sp file, since we are not current differently identifying the different types of FFs: June 23 2014
 #rise and fall edge measurements limitedto 50ps duration. Else false values were being calculated: April 25 2014
-#.ic on net0148:F59 of the DFPQX4 and DFPQX9 to initialise correctly. This value should be the inverted value of what was supposed to be initialised originally.: April 2nd 2014
+#.ic on net0148:F59 and net0148:F65 of the DFPQX4 and DFPQX9 to initialise correctly. This value should be the inverted value of what was supposed to be initialised originally.: April 2nd 2014
 #.ic square brackets being replaced by _ : feb 26 2014
 #.ic statement being specified to all outputs of all FFs.. and are being initialised to the rising edge of the current clk cycle thats picked : Feb 21 2014
 #.ic for all primary outputs being deleted. changed the PWL. It doesnt change value before 1st clk rising edge (reverting back to the original PWL statement): feb 21 2014
@@ -190,7 +192,7 @@ elsif($tech==22)
 
 #including the library files
 print SIM "****Template spice file***"."\n\n";
-print SIM ".include  ../glitch_CORE65GPSVT_selected_lib_vg.sp"."\n";
+print SIM ".include  ../hspice_glitch_CORE65GPSVT_selected_lib_vg.sp"."\n";
 print SIM '.include ../hspice_65nm_models/diodeiso_typ.txt'."\n";
 print SIM '.include ../hspice_65nm_models/ptm_nmos_65_no_X.txt'."\n";
 print SIM '.include ../hspice_65nm_models/ptm_pmos_65_no_X.txt'."\n";
@@ -586,7 +588,9 @@ if($i ne "clk")
       #print SIM ".ic v(X$module.$to_ff[$i]\_q\_reg:Q)= ##$new\_reference_1##\n";
       #print SIM ".ic v(X$module.X$to_ff[$i].R62)= ##$new\_reference_1_neg##\n";
 	#print SIM ".ic v(X$module.X$to_ff[$i]\_q\_reg.net0148:F59)= ##$new\_reference_1_neg##\n";
+  #The following for DFPQX9
    print SIM ".ic v(X$module.X$to_ff[$i].net0148:F59)= ##$new\_reference_1_neg##\n";
+   print SIM ".ic v(X$module.X$to_ff[$i].net0148:F65)= ##$new\_reference_1_neg##\n\n";
    #The following is for DFQNX9 FF, which has a different initialisation node
    #   print SIM ".ic v(X$module.X$to_ff[$i].net0139:F125)= ##$new\_reference_1_neg##\n";
 #The following for DFPHQNX9
@@ -617,7 +621,7 @@ foreach $i(0 .. $#opins)
 
 
 
-
+$measure_at_time0="";
 $measure_at_falling_edge="";
 $measure_at_rising_edge="";
 #to_ff consists of primary outputs also. So, the following part is not needed. This part contains only output ports.
@@ -660,10 +664,19 @@ foreach $i(0 .. $#to_ff)
  $measure_at_rising_edge.="meas tran ff_op_rise_$i MAX v(X$module.$to_ff[$i]:Q) from=$rise_from_2nd"."s"." to=$rise_to_2nd"."s\n";
  }
  
+#To test if the initial conditions are set correctly
+foreach $i(0 .. $#to_ff)
+ {
+
+#This will need to be enabled for ISCAS benchmark circuits
+ #$measure_at_falling_edge.="meas tran ff_op_fall_$i MAX v(X$module.$to_ff[$i]\_q\_reg:Q) from=$fall_from"."s"." to=$fall_to"."s\n";
+ #This will need to be enabled for non-ISCAS benchmark circuits
+ $measure_at_time0.="meas tran ff_op_time0_$i MAX v(X$module.$to_ff[$i]:Q) from=0.01e-9"."s"." to=0.05e-9"."s\n";
+ }
  
 #Adding the control part
 print SIM "\n\n.control\n";
-print SIM "option rshunt = 1e12\noption itl4 = 100  reltol =0.005  trtol=8 pivtol=1e-11  abstol=1e-10\n";
+print SIM "option rshunt = 1e12\noption itl4 = 100  reltol =0.005  trtol=8 pivtol=1e-11  abstol=1e-10 \n**option CONVERGE=-1\n";
 print SIM "tran 20ps ".$sim_time."s\n\n";
 print SIM "**Uncomment the following and run this spice file, if you need a waveform\n";
 print SIM "**write waveform_file.raw v(clk) v(input_dec_2_) v(input_dec_1_) v(input_dec_0_)  v(output_dec_3_) v(output_dec_1_) \n*+v.xdecoder_behav_pnr.xu11.vcharge#branch \n\n";
@@ -680,7 +693,11 @@ $measure_at_rising_edge=~s/\]/_/g;
 $measure_at_rising_edge=~s/\//_/g;
 print SIM $measure_at_rising_edge;
 
-
+print SIM "\n\n**************************** Measuring Flip Flop output t=0 *************************************************\n";
+$measure_at_time0=~s/\[/_/g;
+$measure_at_time0=~s/\]/_/g;
+$measure_at_time0=~s/\//_/g;
+print SIM $measure_at_time0;
 
 #print SIM "echo deck_##deck_num## , ";
 #print SIM "echo ";
@@ -747,6 +764,26 @@ foreach $i(0 .. $#to_ff)
    
    print SIM 'echo "$&'.$new."\" , ";
    print SIM '>> glitch_report_outputs_rise_'."##deck_num##.csv".'  $$Appending to the file'."\n"
+  }
+ }
+ 
+
+print SIM "\n\n***************** saving the outputs at time=0 ****************\n";
+
+foreach $i(0 .. $#to_ff)
+ {
+ $new="ff_op_time0_".$i;
+
+ if ($i == 0) 
+  {
+   print SIM 'echo "$&'.$new."\" , ";
+   print SIM '> glitch_report_outputs_time0_'."##deck_num##.csv".'  $$New file'."\n"
+   } 
+  else  
+  {
+   
+   print SIM 'echo "$&'.$new."\" , ";
+   print SIM '>> glitch_report_outputs_time0_'."##deck_num##.csv".'  $$Appending to the file'."\n"
   }
  }
  

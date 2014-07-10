@@ -5,7 +5,7 @@
 #Changed the column iteration number for header from range(5) to range(6), since the drain number is also added: Feb 11 2014
 #This script will count flips on the 2nd rising edge: Feb 7 2014
 
-#Example usage: python python_count_flips_2nd_3rd_rise.py -f /home/external/iitb/nanditha/simulations/decoder_ip_opFF_rise  -n 10 --group 10 -s 2594275917096658334
+#Example usage: python python_count_flips_2nd_3rd_rise_65.py -f /home/users/nanditha/Documents/utility/65nm/b12/ -n 2000 --group 1000 -s 2594275917096658334
 
 import optparse
 import re,os
@@ -106,7 +106,7 @@ summary_writer.writerows(summary)
 
 fw2.close()
 
-################################# Count the number of flips in 2nd edge ###################################################
+################################# Count the number of flips in 2nd and 3rd edge ###################################################
 #The final file which will have the count for multiple flips
 fflip_2nd = open('%s/spice_results/count_flips_2nd_edge_summary.csv' %path, 'wb')
 fflip_3rd = open('%s/spice_results/count_flips_3rd_edge_summary.csv' %path, 'wb')

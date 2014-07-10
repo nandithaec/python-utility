@@ -2,6 +2,7 @@
 
 #ASSUMPTION: This will always be excecuted on the 48core cluster user1@10.107.105.201 and the design folder will be copied always to /home/user1/simulations folder and executed
 
+#Added time=0 measurements= Jul 9 2014
 # Code modified to do post processing of the result files for the 2nd rising edge. Last section of the code is added : Feb 7 2014
 #Multiple spice decks that were generated using deckgen in the remote machine, will be run using ngspice and GNU Parallel on the cluster. We can also ssh to other machines which have GNU Parallel and ngspice installed. ssh-keygen should have been done so that it would not ask for ssh password everytime we ssh to the machines.
 
@@ -57,7 +58,7 @@ print "\n****Completed ngspice simulations on all machines****\n"
 #print "****Resulting csv files are saved in the same folder in which the spice decks are****\n"
 
 ###################################################################################################################
-#######################Now do the post processing of the result files#######################
+#######################Now do the post processing of the result files for fall edge#######################
 
 #Combine all the csv results files and place the resulting file in the results folder
 #Creating results folder is done way back in the modperl2_outwrtr_new.pl script. The spice headers are also written out in that script.
@@ -72,11 +73,11 @@ fw1.write(header)
 start= ((outloop-1)*num_spice) + 1  # ((1-1)*10) +1 =1  , ((2-1)*10) +1 =11
 end = (num_spice)*outloop  #(10*1) = 10, (10*2)=20
 
-########################################################################################################
+
 #Individual echo statements will lead to a process id at the end of each file. Deleteting them and getting transpose of all glitch_*.csv files
 #Loop over all existing csv files
 
-###############Combine the results of all csv files into one file final_results_spice_outputs_ #############
+#######Combine the results of all csv files into one file final_results_spice_outputs_ ####
 
 for num in range(start,(end+1)):  #Always for loop takes max len + 1
 	fr = open("%s/spice_decks_%s/glitch_report_outputs_new_%d.csv" %(path,outloop,num), "r")
@@ -86,7 +87,7 @@ for num in range(start,(end+1)):  #Always for loop takes max len + 1
 
 fw1.close()
 fh.close()
-print "****Combined all csv files into a single file in the results folder along with the header****\n"
+print "****Combined all fall csv files into a single file in the results folder along with the header****\n"
 
 
 ###################################################################################################################
@@ -108,10 +109,10 @@ fw1_rise.write(header)
 start= ((outloop-1)*num_spice) + 1  # ((1-1)*10) +1 =1  , ((2-1)*10) +1 =11
 end = (num_spice)*outloop  #(10*1) = 10, (10*2)=20
 
-########################################################################################################
+
 #Individual echo statements will lead to a process id at the end of each file. Deleteting them and getting transpose of all glitch_*.csv files
 #Loop over all existing csv files
-###############Combine the results of all csv files into one file final_results_spice_outputs_rise_ #############
+######Combine the results of all csv files into one file final_results_spice_outputs_rise_ #####
 
 for num in range(start,(end+1)):  #Always for loop takes max len + 1
 	fr = open("%s/spice_decks_%s/glitch_report_outputs_rise_new_%d.csv" %(path,outloop,num), "r")
@@ -121,11 +122,42 @@ for num in range(start,(end+1)):  #Always for loop takes max len + 1
 
 fw1_rise.close()
 fh.close()
-print "****Combined all csv files into a single file in the results folder along with the header****\n"
+print "****Combined all rise csv files into a single file in the results folder along with the header****\n"
 
 
 
+###################################################################################################################
+#######################Now do the post processing of the result files for time=0 #######################
 
+#Combine all the csv results files and place the resulting file in the results folder
+#Creating results folder is done way back in the modperl2_outwrtr_new.pl script. The spice headers are also written out in that script.
+
+fh = open("%s/spice_results/headers.csv" %(path),"r")
+header=fh.read()
+
+
+fw1_0 = open("%s/spice_results/final_results_spice_outputs_time0_%d.csv" %(path,outloop),"w")
+#Write the header first and then write the csv outputs of the rest of the files
+fw1_0.write(header)
+
+
+start= ((outloop-1)*num_spice) + 1  # ((1-1)*10) +1 =1  , ((2-1)*10) +1 =11
+end = (num_spice)*outloop  #(10*1) = 10, (10*2)=20
+
+
+#Individual echo statements will lead to a process id at the end of each file. Deleteting them and getting transpose of all glitch_*.csv files
+#Loop over all existing csv files
+######Combine the results of all csv files into one file final_results_spice_outputs_rise_ #####
+
+for num in range(start,(end+1)):  #Always for loop takes max len + 1
+	fr = open("%s/spice_decks_%s/glitch_report_outputs_time0_%d.csv" %(path,outloop,num), "r")
+	data=fr.read()
+	fw1_0.write(data)
+	fr.close()
+
+fw1_0.close()
+fh.close()
+print "****Combined all time=0 csv files into a single file in the results folder along with the header****\n"
 
 
 

@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
-#Example usage: python utility_python_top_level_rise_65.py -p /home/users/nanditha/Documents/utility/65nm/b13 --rtl=/home/users/nanditha/Documents/utility/65nm/b13/b13.vhd --mod=b13 --test=/home/users/nanditha/Documents/utility/65nm/b13/test_b13.vhd --tb_mod=test_b13 --clk=350 --run=100us --design=b13 --tech=65 --num=10 --group 10 --extl=/home/external/iitb/nanditha/simulations/65nm/b13  --proc_node 1 --ppn 5 --days 00 --hrs 00 --mins 10 --script python_utility3_yuva_2cycles_2nd_3rd_65.py 
+#Example usage: python utility_python_top_level_rise_65.py -p /home/users/nanditha/Documents/utility/65nm/b11 --rtl=/home/users/nanditha/Documents/utility/65nm/b11/b11.vhd --mod=b11 --test=/home/users/nanditha/Documents/utility/65nm/b11/test_b11.vhd --tb_mod=test_b11 --clk=300 --run=100us --design=b11 --tech=65 --num=10 --group 10 --extl=/home/external/iitb/nanditha/simulations/65nm/b11  --proc_node 1 --ppn 5 --days 00 --hrs 00 --mins 10 --script python_utility3_yuva_2cycles_2nd_3rd_65.py 
 
+#Example usage: python utility_python_top_level_rise_65.py --rtl=/home/users/nanditha/Documents/utility/65nm/c432/c432_clk_ipFF.v --mod=c432_clk_ipFF --test=/home/users/nanditha/Documents/utility/65nm/c432/test_c432.v --tb_mod=test_c432 --clk=300 --run=100us --design=c432 --tech=65 --num=10 --group 10 --path=/home/external/iitb/nanditha/simulations/65nm/c432  --proc_node 1 --ppn 5 --days 00 --hrs 00 --mins 3 --script python_utility3_yuva_2cycles_2nd_3rd_65.py
 
 
 #Modifications to the script:
@@ -81,7 +82,7 @@ hrs=options.hrs
 mins=options.mins
 script=options.script
 
-"""
+
 #Example usage: python python1_read_RTL_syn_pnr.py -f decoder.vhd -m decoder_behav_pnr -clk 900
 os.system('python python1_read_RTL_syn_pnr_65.py -f %s -m %s -c %s -p %s' %(rtl,module,clkfreq,main_path))
 
@@ -107,7 +108,7 @@ time.sleep(2)
 os.system('python python_gnd_gnds_dspf_modify.py -p %s -m %s' %(main_path,module))
 time.sleep(5)
 
-"""
+
 os.system('python python_choose_subckts_library.py -p %s -m %s' %(main_path,module))
 #time.sleep(5)
 
@@ -118,7 +119,7 @@ os.system('perl GlitchLibGen_65.pl -p %s -i CORE65GPSVT_selected_lib_vg.sp' %(ma
 print "***Created glitch library..\n"
 time.sleep(5)
 
-"""
+
 
 ##Generate a template simulatable spice netlist from the dspf file generated after pnr. This would include all .ic, Voltage sources, meas, tran, control, param etc
 #NetlistFormat.pl
@@ -128,6 +129,4 @@ print "***Done modifying the spice file to make it simulatable. File available i
 time.sleep(5)
 
 #os.system('python python_create_jobscript_65.py -m %s -p %s -d %s -t %s -n %s --group %s --clk %s --proc_node %s --ppn %s --days %s --hrs %s --mins %s --script %s' %(module,extl_folder,design_folder,techn,num,group,clkfreq,nodes,ppn,days,hrs,mins,script))
-
-"""
 

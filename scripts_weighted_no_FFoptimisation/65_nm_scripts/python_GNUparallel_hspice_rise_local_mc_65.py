@@ -79,7 +79,7 @@ for a in range(start,end+1):
 	f=open("%s/spice_decks_%d/log_%d.txt" %(path,outloop,a),"r")
 	fnew=open("%s/spice_results/log_convergence_algo_%d.txt" %(path,outloop),"a+")
 	for line in f:
-		if 'damped pseudo-transient' in line:
+		if 'damped pseudo' in line:
 			fnew.writelines("hspice_deck_%d.sp" %(a))
 			fnew.writelines(line)
 			flag=1
@@ -88,8 +88,14 @@ for a in range(start,end+1):
 			fnew.writelines("hspice_deck_%d.sp" %(a))
 			fnew.writelines(line)
 			flag=1
+		elif 'op convergence' in line:
+			fnew.writelines("hspice_deck_%d.sp" %(a))
+			fnew.writelines(line)
+			flag=1
+			
 	if flag==0:	
-		fnew.writelines("No pseudo transient - hspice_deck_%d.sp\n" %(a))
+		fnew.writelines("No pseudo transient - hspice_deck_%d.sp" %(a))
+
 		
 os.chdir("../")
 #time.sleep(2)

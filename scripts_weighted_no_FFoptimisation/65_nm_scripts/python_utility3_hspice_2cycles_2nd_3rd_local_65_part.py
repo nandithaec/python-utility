@@ -351,4 +351,3 @@ os.system('python  python_FF_strike_taxonomy_65.py  -p %s -m %s' %(path,module))
 print "\nCombining the pdf reports\n"
 os.system('python python_combine_pdfs_65.py -p %s/spice_results -m %s' %(path,module))
 
-

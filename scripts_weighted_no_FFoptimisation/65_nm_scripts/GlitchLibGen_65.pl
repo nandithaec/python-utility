@@ -5,6 +5,7 @@
 
 #Modifications:
 
+#Writing glitch_CORE65GPSVT_selected_lib_vgRC.sp instead of glitch_CORE65GPSVT_selected_lib_vg.sp - Jul 9 2014
 #Absolute paths introduced everywhere in the script, so that they can be run from one directory and no need of duplicating the scripts in all directories: June 25 2014
 #Introduced comments on the line that contains ---.. else, error occurs in hspice: June 2014
 #Modified M to M* in   if($sub_ckt[$i]=~m/^M*\d* /) to match all transistors in the new 65nm lib file: Mar 18 2014

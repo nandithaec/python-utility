@@ -1,6 +1,7 @@
 #Example: perl deckgen_remote_seed_rise_65.pl -s reference_spice.sp  -r decoder_op_ip_reference_out/tool_reference_out.txt -n 1 -m decoder_op_ip -f /home/users/nanditha/Documents/utility/65nm/decoder_65nm -g 4 -d 2 -c 456 -i 4.91e-09 -o 1 
 
 #Modifications:
+#time=0 RTL value selection - Jul 10 2014
 #Using loop number to create multiple RTL files: June 15 2014
 #$vdd=1 is added. Else incorrect results were being obtained: April 2014
 #Removed the option of reading the $lib file : not needed, .ic for ref_minus1 added: Mar 19 2014
@@ -373,10 +374,7 @@ while(<SPC>)
      
  
 
-##################### Although this part is used, the corresponding .ic statments in the spice file
-####################have been commented out as initialising the inputs did not work
-
-#This part of the code is not being used
+#This part of the code is used
 if(($_=~m/\.ic/))
         {
 	   ($junk1,$temp1,$pinname)=split(" ",$_);
@@ -418,6 +416,35 @@ if(($_=~m/\.ic/))
         }
 
  }
+ 
+ 
+ 
+ #Appending to the RTL_2nd_edge reference output file, which contains outputs of those clk cycles, that were picked by this script randomly , at the 2nd rising edge of the clk
+#This will be used for the spice vs verilog simulation comparison
+open(IM,">>$folder/$module\_reference_out/RTL_2nd_edge_$outloop.csv");
+print IM "\n";
+print "Random drain..RTL_2nd_edge_$outloop.csv  ----- $random_drain\n";
+#A comma is needed at the end of the last entry
+print IM "$deck_num,$cycle,$glitch_location,$random_gate,$rand_gate,$random_drain,";
+@temp=split (" ",$next_cycle);
+$start=$#temp-$num_opt+1;
+#$start=$#temp-$num_opt;
+foreach $index( $start .. $#temp)
+  {
+     
+       if ($index == $#temp) 
+	{
+	print IM "$temp[$index]";
+	} 
+	else 
+	{
+	print IM "$temp[$index],";
+	}
+
+  }
+
+
+
 #Appending to the RTL reference output file, which contains outputs of those clk cycles, that were picked by this script randomly, at the 3rd rising edge of the clk
 #This will be used for the spice vs verilog simulation comparison
 open(IM,">>$folder/$module\_reference_out/RTL_$outloop.csv");
@@ -444,14 +471,15 @@ foreach $index( $start .. $#temp)
 
 
 
-#Appending to the RTL_2nd_edge reference output file, which contains outputs of those clk cycles, that were picked by this script randomly , at the 2nd rising edge of the clk
+
+#Appending to the RTL_time0 reference output file, which contains outputs of those clk cycles, that were picked by this script randomly , at time=0
 #This will be used for the spice vs verilog simulation comparison
-open(IM,">>$folder/$module\_reference_out/RTL_2nd_edge_$outloop.csv");
-print IM "\n";
-print "Random drain..RTL_2nd_edge_$outloop.csv  ----- $random_drain\n";
+open(IM0,">>$folder/$module\_reference_out/RTL_time0_$outloop.csv");
+print IM0 "\n";
+print "Random drain..RTL_time0_$outloop.csv  ----- $random_drain\n";
 #A comma is needed at the end of the last entry
-print IM "$deck_num,$cycle,$glitch_location,$random_gate,$rand_gate,$random_drain,";
-@temp=split (" ",$next_cycle);
+print IM0 "$deck_num,$cycle,$glitch_location,$random_gate,$rand_gate,$random_drain,";
+@temp=split (" ",$current_cycle);
 $start=$#temp-$num_opt+1;
 #$start=$#temp-$num_opt;
 foreach $index( $start .. $#temp)
@@ -459,16 +487,14 @@ foreach $index( $start .. $#temp)
      
        if ($index == $#temp) 
 	{
-	print IM "$temp[$index]";
+	print IM0 "$temp[$index]";
 	} 
 	else 
 	{
-	print IM "$temp[$index],";
+	print IM0 "$temp[$index],";
 	}
 
   }
-
-
 
 
 
