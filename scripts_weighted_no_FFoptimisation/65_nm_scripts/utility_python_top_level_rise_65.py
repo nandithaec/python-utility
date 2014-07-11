@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 
-#Example usage: python utility_python_top_level_rise_65.py -p /home/users/nanditha/Documents/utility/65nm/b11 --rtl=/home/users/nanditha/Documents/utility/65nm/b11/b11.vhd --mod=b11 --test=/home/users/nanditha/Documents/utility/65nm/b11/test_b11.vhd --tb_mod=test_b11 --clk=300 --run=100us --design=b11 --tech=65 --num=10 --group 10 --extl=/home/external/iitb/nanditha/simulations/65nm/b11  --proc_node 1 --ppn 5 --days 00 --hrs 00 --mins 10 --script python_utility3_yuva_2cycles_2nd_3rd_65.py 
+#Example usage: python utility_python_top_level_rise_65.py -p /home/users/nanditha/Documents/utility/65nm/b04 --rtl=/home/users/nanditha/Documents/utility/65nm/b04/b04.vhd --mod=b04 --test=/home/users/nanditha/Documents/utility/65nm/b04/test_b04.vhd --tb_mod=test_b04 --clk=300 --run=100us --design=b04 --tech=65 --num=10 --group 10 --extl=/home/external/iitb/nanditha/simulations/65nm/b04  --proc_node 1 --ppn 5 --days 00 --hrs 00 --mins 10 --script python_utility3_yuva_2cycles_2nd_3rd_65.py 
 
-#Example usage: python utility_python_top_level_rise_65.py --rtl=/home/users/nanditha/Documents/utility/65nm/c432/c432_clk_ipFF.v --mod=c432_clk_ipFF --test=/home/users/nanditha/Documents/utility/65nm/c432/test_c432.v --tb_mod=test_c432 --clk=300 --run=100us --design=c432 --tech=65 --num=10 --group 10 --path=/home/external/iitb/nanditha/simulations/65nm/c432  --proc_node 1 --ppn 5 --days 00 --hrs 00 --mins 3 --script python_utility3_yuva_2cycles_2nd_3rd_65.py
+
+#Example usage: python utility_python_top_level_rise_65.py -p /home/users/nanditha/Documents/utility/65nm/c432 --rtl=/home/users/nanditha/Documents/utility/65nm/c432/c432_clk_ipFF.v --mod=c432_clk_ipFF --test=/home/users/nanditha/Documents/utility/65nm/c432/test_c432.v --tb_mod=test_c432 --clk=350 --run=100us --design=c432 --tech=65 --num=10 --group 10 --extl=/home/external/iitb/nanditha/simulations/65nm/c432  --proc_node 1 --ppn 5 --days 00 --hrs 00 --mins 3 --script python_utility3_yuva_2cycles_2nd_3rd_65.py
 
 
 #Modifications to the script:

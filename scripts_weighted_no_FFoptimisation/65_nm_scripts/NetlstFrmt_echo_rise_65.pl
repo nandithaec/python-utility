@@ -9,7 +9,9 @@
 #Added time=0 measure and echo statements to test the initial conditions - Jul 9 2014
 #Include glitch_CORE65GPSVT_selected_lib_vgRC.sp instead of glitch_CORE65GPSVT_selected_lib_vg.sp - includes R & C to solve the pseudo=tran method convergence issue- Jul 9 2014
 #Absolute paths introduced everywhere in the script, so that they can be run from one directory and no need of duplicating the scripts in all directories: June 25 2014
-#Initialisation node (net0139:F125) for HS65_GS_DFPQNX9 FF , net0139:F163 for DFPHQNX9 and net0238:F149 for DFPHQX9, is mentioned as a comment in the .ic section. NEed to manually change this in the reference.sp file, since we are not current differently identifying the different types of FFs: June 23 2014
+#Initialisation node (net0139:F125)-M28 drain and M31 drain for HS65_GS_DFPQNX9 FF ,
+# net0139:F163 (M28 drain) and net0139:F95 (M31 drain) for DFPHQNX9 and 
+# net0238:F149 (M24 source) for DFPHQX9, is mentioned as a comment in the .ic section. NEed to manually change this in the reference.sp file, since we are not current differently identifying the different types of FFs: June 23 2014
 #rise and fall edge measurements limitedto 50ps duration. Else false values were being calculated: April 25 2014
 #.ic on net0148:F59 and net0148:F65 of the DFPQX4 and DFPQX9 to initialise correctly. This value should be the inverted value of what was supposed to be initialised originally.: April 2nd 2014
 #.ic square brackets being replaced by _ : feb 26 2014
@@ -588,7 +590,8 @@ if($i ne "clk")
       #print SIM ".ic v(X$module.$to_ff[$i]\_q\_reg:Q)= ##$new\_reference_1##\n";
       #print SIM ".ic v(X$module.X$to_ff[$i].R62)= ##$new\_reference_1_neg##\n";
 	#print SIM ".ic v(X$module.X$to_ff[$i]\_q\_reg.net0148:F59)= ##$new\_reference_1_neg##\n";
-  #The following for DFPQX9
+
+  #The following is for DFPQX4 and DFPQX9
    print SIM ".ic v(X$module.X$to_ff[$i].net0148:F59)= ##$new\_reference_1_neg##\n";
    print SIM ".ic v(X$module.X$to_ff[$i].net0148:F65)= ##$new\_reference_1_neg##\n\n";
    #The following is for DFQNX9 FF, which has a different initialisation node

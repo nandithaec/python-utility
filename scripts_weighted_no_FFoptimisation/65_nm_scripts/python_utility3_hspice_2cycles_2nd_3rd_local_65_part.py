@@ -12,7 +12,7 @@
 #This version of the script has the facility of selecting the gate based on the area of the gate. This version of the script uses another script python_weighted_gateselection.py to pick the random gate based on its area: Nov 17 2013
 #Glitch insertion window is within the 2.5 cycles, and not the 6.5 cycles that is required for the case with intermediate FFs
 
-#Example usage: python python_utility3_hspice_2cycles_2nd_3rd_local_65_part.py -m b11 -p /home/users/nanditha/Documents/utility/65nm/b11 -t 65 -n 30 --group 30 --clk 300 -d b11
+#Example usage: python python_utility3_hspice_2cycles_2nd_3rd_local_65_part.py -m b11 -p /home/users/nanditha/Documents/utility/65nm/b11 -t 65 -n 2000 --group 1000 --clk 300 -d b11
 
 import optparse
 import re,os
@@ -60,13 +60,13 @@ num_of_loops=(int(num)/int(num_at_a_time))
 print "path of the script being run: ",os.path.dirname(os.path.abspath(__file__))
 print "current working dir: ",os.getcwd()
 scripts_dir=os.getcwd()
-
+"""
 if os.path.exists('%s/spice_results' %path):
 	os.chdir('%s/spice_results' %path)
 	for f in glob.glob("*.txt"):
 		os.remove(f)
 		
-"""
+
 
 os.system('python python_subckts_in_weight_script.py -m %s -p %s' %(module,path))
 
@@ -289,7 +289,7 @@ for loop in range(start_loop, (num_of_loops+1)):
 	
 		
 	#The following script will run GNU Parallel and hspice 
-	"""
+	
 	
 	os.system ('python python_hspice_mod.py -p %s -n %s -d %s -o %d -c %s' %(path,num_at_a_time,design_folder,loop,scripts_dir))
 	os.system('python python_hspice_combine_csv_results.py -n %s -d %s -o %d -p %s' %(num_at_a_time,design_folder,loop,path))
@@ -308,7 +308,7 @@ for loop in range(start_loop, (num_of_loops+1)):
 	print "Comparing the RTL and spice outputs at the 2nd rising edge \n"
 	os.system('python python_compare_2nd_rise_65.py -m %s -f %s -n %s -t %s -l %d' %(module,path,num_at_a_time,tech,loop))
 
-	
+	"""
 #For testing out new glitch files (afterdeleting process if at each echo statement). comment this out in the final run, else it will copy ALL spice files and consume lot of disk space
 	
 ##########################################################
