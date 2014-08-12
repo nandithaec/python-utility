@@ -1,8 +1,8 @@
 
 #!/usr/bin/env python
 
-#IMPORTANT: It is assumed that we are running parallel ngspice simulations on a remote 48-core cluster at 10.107.105.201. If this is not the case, you will need to modify this script to run it on this machine, by commenting out the scp and ssh commands.
 
+#Created a time0 spice_rtl_difference file will check the initial condition that is obtained vs expected- so that we can check if there is some error - July 2014
 #Modified the GNU_Parallel_hspice file to check if any deck is simulated using 'pseudo-transient method' - July 9th 2014
 #Creating multiple RTL.csv and RTL_2ndedge.csv files- as many as there are number of outer loops: June 15 2014
 #Backup directories renamed to 'backup_spice_decks_3rd_edge' and 'backup_spice_decks_2nd_edge': feb 12 2014.
@@ -12,7 +12,7 @@
 #This version of the script has the facility of selecting the gate based on the area of the gate. This version of the script uses another script python_weighted_gateselection.py to pick the random gate based on its area: Nov 17 2013
 #Glitch insertion window is within the 2.5 cycles, and not the 6.5 cycles that is required for the case with intermediate FFs
 
-#Example usage: python python_utility3_hspice_2cycles_time0_65.py -m b13 -p /home/users/nanditha/Documents/utility/65nm/b13 -t 65 -n 3 --group 3 --clk 350 -d b13
+#Example usage: python python_utility3_hspice_2cycles_time0_65.py -m c880_clk_opFF -p /home/users/nanditha/Documents/utility/65nm/FF_optimisation/c880 -t 65 -n 4 --group 4 --clk 500 -d c880
 
 import optparse
 import re,os
@@ -280,14 +280,14 @@ for loop in range(start_loop, (num_of_loops+1)):
 		#unif=random.uniform(0,arrival_clk_part*clk_period)
 		#rand_glitch= (initial_clk_part*clk_period) +  unif  #A random glitch picked
 		
-		#glitch is being inserted at the 5th clk cycle
-		#unif=random.uniform(0,0.85*clk_period) 
-		#rand_glitch= (4.67*clk_period) +  unif #arrival_clk + initial_clk should add up to 4.5+0.15=4.65. 1 period-0.15=0.85
-		
+				
 		#glitch in the 2nd cycle
 		unif=random.uniform(0,0.95*clk_period) 
 		rand_glitch= (0.55*clk_period) +  unif 
 
+		#unif = random.uniform(0,1.0*clk_period) 
+		#rand_glitch= (0.5*clk_period) +  unif 
+		
 		#glitch in the 3rd cycle
 		#unif=random.uniform(0,0.95*clk_period) 
 		#rand_glitch= (1.55*clk_period) +  unif 
@@ -332,13 +332,13 @@ for loop in range(start_loop, (num_of_loops+1)):
 	
 ##########################################################
 #Comment this out to see the decks and the result files it generates. 	
-
+"""
 	spice_dir = '%s/spice_decks_%s' %(path,loop)
 
 	
 	if os.path.exists(spice_dir):
 		shutil.rmtree(spice_dir)
-
+"""
 
 ########################################End of loop########################################################
 

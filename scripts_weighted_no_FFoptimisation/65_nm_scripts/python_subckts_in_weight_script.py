@@ -32,6 +32,7 @@ flag=0
 subckt_list=[]
 num_of_instances=[]
 total_area=[]
+#Identify the lines in between "Cell Type" and #Pads
 for i in range(0,len(lines)):
 	#Get each line
 	current_line=lines[i]

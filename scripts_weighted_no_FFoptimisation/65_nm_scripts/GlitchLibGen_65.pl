@@ -1,15 +1,16 @@
-#Example: perl GlitchLibGen_65.pl -p /home/users/nanditha/Documents/utility/65nm/b11 -i CORE65GPSVT_selected_lib_vg.sp
+#Example: perl GlitchLibGen_65.pl -p /home/users/nanditha/Documents/utility/65nm/scripts_run -i test_lib.sp
 
 #!/usr/bin/perl
 
 
 #Modifications:
 
+#Modified the script to inject +ve current for PMOS and -ve current for NMOS. Also, PMOS current magnitude will be 1/3rd as that of NMOS: Aug 12 2014
 #Writing glitch_CORE65GPSVT_selected_lib_vgRC.sp instead of glitch_CORE65GPSVT_selected_lib_vg.sp - Jul 9 2014
 #Absolute paths introduced everywhere in the script, so that they can be run from one directory and no need of duplicating the scripts in all directories: June 25 2014
 #Introduced comments on the line that contains ---.. else, error occurs in hspice: June 2014
 #Modified M to M* in   if($sub_ckt[$i]=~m/^M*\d* /) to match all transistors in the new 65nm lib file: Mar 18 2014
-#searching between subckt and ends modified to 'SUBCKT' and 'ENDS' : Mar 18 2014
+#searching between subckt and ends modified to 'SUBCKT' and 'ENDS' to suit the 65nm lib requirements : Mar 18 2014
 
 use Getopt::Long;
 use Cwd;
@@ -133,8 +134,11 @@ while(<NET>)
      
        $sub_ckt[$index++]=$_;
        if($_=~m/.SUBCKT/)
-         { #print "Inside if\n";
-	   ($temp,$sub_ckt_name)=split(" ",$_);  
+         { print "Inside if\n";
+	   ($temp,$sub_ckt_name)=split(" ",$_);
+	   print "temp is $temp \n";
+   	   print "subckt name is $sub_ckt_name \n";  
+   	   $nth= (split " ", $_)[3]; 
 	 }
      }
 #creating the glitched version of a subcircuit and writing it to output file
@@ -145,7 +149,7 @@ while(<NET>)
 	   $index=0;
 	   $sub_ckt_num++;
 	   print out "\n******************************* ORIGINAL SUBCIRCUIT : $sub_ckt_name ******************************* \n\n";
-   	  #print "orig subckt\n";
+   	  	print "orig subckt\n";
 	   print out join("",@sub_ckt);
 	   $head=shift (@sub_ckt);
            $tail=pop (@sub_ckt);  
@@ -156,10 +160,15 @@ while(<NET>)
 	     #  print "inside for of the subckt\n";
 	       $glitch_sub_ckt=join("",@sub_ckt);
 	       #print "subckt[i] is: $sub_ckt[$i]\n";
-	       if($sub_ckt[$i]=~m/^M+/)
+	       if($sub_ckt[$i]=~m/^M+/)  #If the line is starting witt "M"
 	         {
 		  #  print "obtaining drains of the subckt\n";
 		    ($temp,$drain)=split(' ',$sub_ckt[$i]);
+		    
+		  #  print "temp is $temp \n"; #this is the matched word- beginning with M
+   		    print "drain is $drain \n";  #This is the split word- the drain- the 1st word
+	   	   $pmos= (split " ", $sub_ckt[$i])[5]; 
+  	   		print "5th word is pmos or nmos: $pmos \n";
 	             
 		     if(!(($dlist=~m/$drain/)||($drain=~m/gnd/)||($drain=~m/vdd/i)))
 		       {			                   
@@ -174,8 +183,21 @@ while(<NET>)
                          }			
 			$tail=~s/$sub_ckt_name.*/$sub_ckt_name\_$drain_num/;
 			chomp($drain);
-#introducing glitch into the selected drain
-                        $i="Icharge 0 $drain EXP (0 current_magnitude rise_delay rise_time_constant fall_delay fall_time_constant)\n";
+			#introducing glitch into the selected drain depending on whether it is NMOS or PMOS
+			if ($pmos =~ /NSVTGP/)
+			{ 
+			#-ve current for the NMOS drain
+			$i="**NMOS current injection\nIcharge $drain 0 EXP (0 current_magnitude rise_delay rise_time_constant fall_delay fall_time_constant)\n\n";
+			print "We're talking about NMOS\n\n";
+			}
+			else
+			{
+			#+ve current for the PMOS drain with a current magnitude that is 1/3rd of that of NMOS
+			$i="**PMOS current injection\nIcharge 0 $drain EXP (0 current_magnitude/3 rise_delay rise_time_constant fall_delay fall_time_constant)\n\n";
+			print "We're talking about PMOS\n\n";
+			}
+
+                       # $i="Icharge 0 $drain EXP (0 current_magnitude rise_delay rise_time_constant fall_delay fall_time_constant)\n";
 			$glitch_sub_ckt=$head.$i.$glitch_sub_ckt.$tail;
 #writing the glitch introduced subcircuit to output file
 			print out "\n****** $sub_ckt_name : Glitched version $drain_num : glitch at $drain ******\n";                      

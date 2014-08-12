@@ -3,7 +3,6 @@
 
 #IMPORTANT: It is assumed that we are running parallel ngspice simulations on a remote 48-core cluster at 10.107.105.201. If this is not the case, you will need to modify this script to run it on this machine, by commenting out the scp and ssh commands.
 
-#Modified the GNU_Parallel_hspice file to check if any deck is simulated using 'pseudo-transient method' - July 9th 2014
 #Creating multiple RTL.csv and RTL_2ndedge.csv files- as many as there are number of outer loops: June 15 2014
 #Backup directories renamed to 'backup_spice_decks_3rd_edge' and 'backup_spice_decks_2nd_edge': feb 12 2014.
 #Calling the python_FF_strike_taxonomy.py and python_gate_strike_taxonomy.py scripts explicitly, since calling it through a function did not run on the yuva cluster: Feb 11 2014
@@ -12,7 +11,7 @@
 #This version of the script has the facility of selecting the gate based on the area of the gate. This version of the script uses another script python_weighted_gateselection.py to pick the random gate based on its area: Nov 17 2013
 #Glitch insertion window is within the 2.5 cycles, and not the 6.5 cycles that is required for the case with intermediate FFs
 
-#Example usage: python python_utility3_hspice_2cycles_2nd_3rd_local_65_part.py -m b11 -p /home/users/nanditha/Documents/utility/65nm/b11 -t 65 -n 2000 --group 1000 --clk 300 -d b11
+#Example usage: python python_utility3_yuva_2cycles_2nd_3rd_local_65.py -m b04 -p /home/users/nanditha/Documents/utility/65nm/b04 -d b04 -t 65 -n 4 --group 4 --clk 200 
 
 import optparse
 import re,os
@@ -46,50 +45,34 @@ tech=options.tech
 num_at_a_time=options.group
 clk=(options.clk)
 
-start_loop=1
+
 
 clk_period = (1.0/float(clk))*(0.000001)
 half_clk_period = clk_period/2.0
 change_time= half_clk_period/3.0
 end_PWL= half_clk_period + change_time #in ns generally
 
+#To determine when the glitch needs to be introduced, depends on the slack information
+
+with open("%s/pnr/reports/5.postRouteOpt_%s/%s_postRoute.slk" %(path,module,module),"r") as f:
+	words=map(str.split, f)
+
+
 #Whatever number of decks to be simulated- is assumed to be more than or equal to 1000.
 #At a time, only 1000 are generated and run- to save disk space. After collecting results, they are deleted
 num_of_loops=(int(num)/int(num_at_a_time))
 
-print "path of the script being run: ",os.path.dirname(os.path.abspath(__file__))
-print "current working dir: ",os.getcwd()
-scripts_dir=os.getcwd()
-"""
-if os.path.exists('%s/spice_results' %path):
-	os.chdir('%s/spice_results' %path)
-	for f in glob.glob("*.txt"):
-		os.remove(f)
-		
-
-
-os.system('python python_subckts_in_weight_script.py -m %s -p %s' %(module,path))
 
 if os.path.exists('%s/spice_results' %path):
 	os.chdir('%s/spice_results' %path)
 	for f in glob.glob("count*.csv"):
 		os.remove(f)
-		
-if os.path.exists('%s/spice_results' %path):
-	os.chdir('%s/spice_results' %path)
-	for f in glob.glob("*.txt"):
-		os.remove(f)
-		
+
 if os.path.exists('%s/spice_results' %path):
 	os.chdir('%s/spice_results' %path)
 	for f in glob.glob("spice_rtl_*.csv"):
 		os.remove(f)
 
-if os.path.exists('%s/spice_results' %path):
-	os.chdir('%s/spice_results' %path)
-	for f in glob.glob("tax*.csv"):
-		os.remove(f)
-		
 if os.path.exists('%s/spice_results' %path):
 	os.chdir('%s/spice_results' %path)
 	for f in glob.glob("final_results_spice_outputs_*.csv"):
@@ -105,14 +88,9 @@ if os.path.exists('%s/spice_results' %path):
 	for f in glob.glob("*.pdf"):
 		os.remove(f)
 
-"""
-os.chdir("%s" %scripts_dir)
-
-
-#time.sleep(2)
 
 #Clear Back up directory
-"""
+
 backup_dir = '%s/backup_spice_decks_3rd_edge' %(path)
 
 
@@ -138,7 +116,7 @@ if not os.path.exists(backup_dir_rise):
 print "Deleting the existing spice decks before creating new ones!\n"
 os.system('rm -rf %s/spice_decks_*' %path)
 
-
+start_loop=1
 
 frand = open('%s/random_number_histogram.txt' %(path), 'w')
 
@@ -162,9 +140,8 @@ print "\nClk_period: ", clk_period
 ######################################################################################################
 #perl perl_calculate_gates_clk.pl -s reference_spice.sp -l glitch_osu018_stdcells_correct_vdd_gnd.sp -r decoder_behav_pnr_reference_out/tool_reference_out.txt -m decoder_behav_pnr -f /home/user1/simulations/decoder
 
-os.system("perl perl_calculate_gates_clk_65.pl -s %s/reference_spice.sp  -r %s/%s_reference_out/tool_reference_out.txt -m %s -f %s" %(path,path,module,module,path))
+os.system('perl %s/perl_calculate_gates_clk_65.pl -s %s/reference_spice.sp  -r %s/%s_reference_out/tool_reference_out.txt -m %s -f %s ' %(path,path,path,module,module,path))
 
-time.sleep(2)
 fg = open('%s/tmp_random.txt' %(path), 'r')
 gate_clk_data = [line.strip() for line in fg]
 
@@ -179,7 +156,6 @@ print "\nnum of clocks is %d" %num_of_clks
 
 fg.close()
 
-
 if os.path.isfile("%s/%s_reference_out/RTL*.csv" %(path,module)):
 	print "****Removing the existing RTL.csv file in folder %s_reference_out ****\n" %(module)
 	os.remove("%s/%s_reference_out/RTL*.csv" %(path,module))
@@ -188,18 +164,20 @@ if os.path.isfile("%s/%s_reference_out/RTL_2nd_edge*.csv" %(path,module)):
 	print "****Removing the existing RTL_2nd_edge.csv file in folder %s_reference_out ****\n" %(module)
 	os.remove("%s/%s_reference_out/RTL_2nd_edge*.csv" %(path,module))
 		
-"""
+
 
 #Fresh simulation
 for loop in range(start_loop, (num_of_loops+1)): 
 
+		
+	#time.sleep(2)
+	#os.system('cd /home/user1/simulations/decoder ; ls; pwd;ls | wc -l' )
+	#time.sleep(5)
+
 	print "Now, creating multiple spice decks in spice_decks folder in current directory on the remote machine\n"
 	
-			
-	"""
-#########################################repeat_deckgen copied starting from here#######################################
-		
-		
+
+####################################################################
 	#Now, we need the header in RTL.csv, so we create an RTL.csv and copy the headers from the RTL_backup.csv that we had saved from Netlstfrmt.pl
 	fout = open('%s/%s_reference_out/RTL_%d.csv' %(path,module,loop), 'w')
 	fin = open('%s/%s_reference_out/RTL_backup.csv' %(path,module), 'r')
@@ -211,7 +189,7 @@ for loop in range(start_loop, (num_of_loops+1)):
 	fin.close()
 
 
-		#Now, we need the header in RTL_2nd_edge.csv, so we create an RTL.csv and copy the headers from the RTL_backup.csv that we had saved from Netlstfrmt.pl
+	#Now, we need the header in RTL_2nd_edge.csv, so we create an RTL.csv and copy the headers from the RTL_backup.csv that we had saved from Netlstfrmt.pl
 	fout = open('%s/%s_reference_out/RTL_2nd_edge_%d.csv' %(path,module,loop), 'w')
 	fin = open('%s/%s_reference_out/RTL_backup.csv' %(path,module), 'r')
 
@@ -242,7 +220,7 @@ for loop in range(start_loop, (num_of_loops+1)):
 		rand_clk= int(random.randrange(10,num_of_clks))  
 		#print "Random clock cycle is: ",rand_clk
 		
-		os.system('perl perl_calculate_drain_65.pl -s %s/reference_spice.sp -l1 %s/glitch_CORE65GPSVT_selected_lib_vg.sp -r %s/%s_reference_out/tool_reference_out.txt -m %s -f %s -g %d ' %(path,path,path,module,module,path,rand_gate))
+		os.system('perl %s/perl_calculate_drain_65.pl -s %s/reference_spice.sp -l1 %s/glitch_CORE65GPSVT_selected_lib_vg.sp -r %s/%s_reference_out/tool_reference_out.txt -m %s -f %s -g %d ' %(path,path,path,path,module,module,path,rand_gate))
 
 		fg = open('%s/tmp_random.txt' %(path), 'r')
 		drain_data = [line.strip() for line in fg]
@@ -283,18 +261,13 @@ for loop in range(start_loop, (num_of_loops+1)):
 
 
 		#deckgen.pl will need to be remotely executed through python_repeat_deckgen.py multiple number of times
-		os.system('perl deckgen_remote_seed_rise_65.pl -s %s/reference_spice.sp  -r %s/%s_reference_out/tool_reference_out.txt -n %d -m %s -f %s  -o %s -g %s -d %s -c %s -i %s' %(path,path,module,loop_var,module,path,loop,rand_gate,rand_drain,rand_clk,rand_glitch))
+		os.system('perl %s/deckgen_remote_seed_rise_65.pl -s %s/reference_spice.sp  -r %s/%s_reference_out/tool_reference_out.txt -n %d -m %s -f %s  -o %s -g %s -d %s -c %s -i %s' %(path,path,path,module,loop_var,module,path,loop,rand_gate,rand_drain,rand_clk,rand_glitch))
 
 ##################Script repeat_deckgen copied ends here####################################
 	
-		
-	#The following script will run GNU Parallel and hspice 
-	
-	"""
-	os.system ('python python_hspice_mod.py -p %s -n %s -d %s -o %d -c %s' %(path,num_at_a_time,design_folder,loop,scripts_dir))
-	os.system('python python_hspice_combine_csv_results.py -n %s -d %s -o %d -p %s' %(num_at_a_time,design_folder,loop,path))
-	
-	
+	print "Running GNU Parallel and ngspice on the created decks\n"
+	os.system('python %s/python_GNUparallel_ngspice_rise_local_mc_65.py -n %s -d %s -o %s -p %s' %(path,num_at_a_time,design_folder,loop,path))
+
 	seed_new= int(random.randrange(100000)*random.random())  #Used by compare script to backup random decks
 	#seed_new=seed*loop
 	print "New seed every outer loop is ", seed_new
@@ -303,13 +276,11 @@ for loop in range(start_loop, (num_of_loops+1)):
 	#Might need to execute these last 3 in a loop till the results are acceptable
 	
 	print "Comparing the RTL and spice outputs at the 2nd falling edge (3rd rising edge)\n"
-	os.system('python python_compare_3rd_rise_65.py -m %s -f %s -n %s -t %s -l %d' %(module,path,num_at_a_time,tech,loop))
+	os.system('python %s/python_compare_3rd_rise_65.py -m %s -f %s -n %s -t %s -l %d' %(path,module,path,num_at_a_time,tech,loop))
 
 	print "Comparing the RTL and spice outputs at the 2nd rising edge \n"
-	os.system('python python_compare_2nd_rise_65.py -m %s -f %s -n %s -t %s -l %d' %(module,path,num_at_a_time,tech,loop))
+	os.system('python %s/python_compare_2nd_rise_65.py -m %s -f %s -n %s -t %s -l %d' %(path,module,path,num_at_a_time,tech,loop))
 
-	
-#For testing out new glitch files (afterdeleting process if at each echo statement). comment this out in the final run, else it will copy ALL spice files and consume lot of disk space
 	
 ##########################################################
 #Comment this out to see the decks and the result files it generates. 	
@@ -319,18 +290,17 @@ for loop in range(start_loop, (num_of_loops+1)):
 	
 	if os.path.exists(spice_dir):
 		shutil.rmtree(spice_dir)
-"""
 
+"""
 ########################################End of loop########################################################
 
 print "Combining all rtl diff files\n"
-seed="1644931266534706027"
-os.system('python  python_count_flips_2nd_3rd_rise_65.py -f %s  -n %s  --group %s -s %s' %(path,num,num_at_a_time,seed))  #To save the seed to results file
+os.system('python  %s/python_count_flips_2nd_3rd_rise_65.py -f %s  -n %s  --group %s -s %s' %(path,path,num,num_at_a_time,seed))  #To save the seed to results file
 
 
 #Add the details of number of DFFs
-fa=open('%s/subcktinstances.sp' %path, 'r')
-fb=open('%s/spice_results/count_flips_final_summary.csv' %path, 'a+')
+fa=open('/%s/subcktinstances.sp' %path, 'r')
+fb=open('/%s/spice_results/count_flips_final_summary.csv' %path, 'a+')
 read=fa.readlines()
 filelen=len(read)
 fb.writelines(read[filelen-3])
@@ -343,11 +313,12 @@ fb.close()
 print "\nDoing the taxonomy for gates\n"
 
 #Always run the gates first and then the FFs. FF script needs some outputs which are written out from the gates script.
-os.system('python  python_gate_strike_taxonomy_65.py  -p %s -m %s' %(path,module)) 
+os.system('python  %s/python_gate_strike_taxonomy_65.py  -p %s -m %s' %(path,path,module)) 
 print "\nDoing the taxonomy for FFs\n"
 
-os.system('python  python_FF_strike_taxonomy_65.py  -p %s -m %s' %(path,module)) 
+os.system('python  %s/python_FF_strike_taxonomy_65.py  -p %s -m %s' %(path,path,module)) 
 
 print "\nCombining the pdf reports\n"
-os.system('python python_combine_pdfs_65.py -p %s/spice_results -m %s' %(path,module))
+os.system('python %s/python_combine_pdfs_65.py -p %s/spice_results -m %s' %(path,path,module))
+
 

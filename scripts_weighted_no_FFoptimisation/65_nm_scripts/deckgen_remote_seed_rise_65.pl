@@ -1,4 +1,4 @@
-#Example: perl deckgen_remote_seed_rise_65.pl -s reference_spice.sp  -r decoder_op_ip_reference_out/tool_reference_out.txt -n 1 -m decoder_op_ip -f /home/users/nanditha/Documents/utility/65nm/decoder_65nm -g 4 -d 2 -c 456 -i 4.91e-09 -o 1 
+#Example: perl deckgen_remote_seed_rise_65.pl -s /home/users/nanditha/Documents/utility/65nm/FF_optimisation/c432/reference_spice.sp  -r /home/users/nanditha/Documents/utility/65nm/FF_optimisation/c432/c432_clk_opFF_reference_out/tool_reference_out.txt -n 1 -m c432_clk_opFF -f /home/users/nanditha/Documents/utility/65nm/FF_optimisation/c432/ -g 105 -d 1 -c 3414 -i 1.001063e-09 -o 1 
 
 #Modifications:
 #time=0 RTL value selection - Jul 10 2014

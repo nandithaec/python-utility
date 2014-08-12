@@ -2,7 +2,7 @@
 #!/usr/bin/env python
 
 #Original file is chosen to be the one which has R & C included. - July 9 2014
-#Example usage: python python_choose_subckts_library.py -p <path> -m b04 
+#Example usage: python python_choose_subckts_library.py -p /home/users/nanditha/Documents/utility/65nm/FF_optimisation/c432 -m c432_clk_opFF 
 #Absolute paths introduced everywhere in the script, so that they can be run from one directory and no need of duplicating the scripts in all directories: June 25 2014
 
 import optparse
@@ -10,7 +10,7 @@ import re,os
 import time
 from optparse import OptionParser
 
-parser = OptionParser('This script reads in the dspf file and adds \'gnd,gnds,vdd,vdds\' to the subckt instances and will show one instance per line (no + continuation of subckt): Mar 19 2014 .\n The output will be the same dspf with a "_new" suffix at the pnr/op_data location.\nAuthor:Nanditha Rao(nanditha@ee.iitb.ac.in)\n')
+parser = OptionParser('This script collect the subckt instance names in the current design and writes a library file with only those cells.\nAuthor:Nanditha Rao(nanditha@ee.iitb.ac.in)\n')
 
 parser.add_option("-p", "--path", dest="path",help="Enter the ENTIRE path to your design folder (your working dir)- /home/user1/simulations/<design_folder_name>")
 parser.add_option("-m","--mod", help='Enter the entity name(vhdl) or module name (verilog) to be synthesised',dest='module_name')
@@ -22,12 +22,13 @@ parser.add_option("-m","--mod", help='Enter the entity name(vhdl) or module name
 path=options.path
 module=options.module_name
 
-os.chdir("%s" %path)
+
 f=open("../CORE65GPSVT_all_vdd_gnd_bulk_node.sp" ,"r")
 #f=open("../CORE65GPSVT_all_onlyC.sp" ,"r")
 #f=open("../CORE65GPSVT_RC_all.sp" ,"r") #includes R and C 
 #f=open("test.sp" ,"r")
 #fnew=open("%s/CORE65GPSVT_selected_lib_vgRC.sp" %path ,"w")
+os.chdir("%s" %path)
 fnew=open("%s/CORE65GPSVT_selected_lib_vg.sp" %path ,"w")
 
 lib_data=f.readlines()

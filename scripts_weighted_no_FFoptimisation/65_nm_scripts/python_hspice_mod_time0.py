@@ -6,7 +6,7 @@
 #Commented out lines that create hspice*.sp glitch file-- not needed. July 9 2014
 #Writing hspice_glitch_CORE65GPSVT_selected_lib_vg.sp: June 18 2014
 
-#Example usage: python python_hspice_mod_time0.py -p /home/users/nanditha/Documents/utility/65nm/b11 -n 4 -d b11 -o 1 -c /home/users/nanditha/Documents/utility/65nm/scripts_run
+#Example usage: python python_hspice_mod_time0.py -p /home/users/nanditha/Documents/utility/65nm/FF_optimisation/c432 -n 1 -d c432 -o 1 -c /home/users/nanditha/Documents/utility/65nm/scripts_run
 
 
 import optparse
@@ -253,7 +253,7 @@ for i in range(0,num_of_csv):
 	fout.close()
 	fout2.close()		
 	fout0.close()
-	
+
 #Alternate way of coding inline .. need not be used now..
 """
 	for line in fileinput.input('%s/spice_decks_%d/%s' %(path,dir_num,file_names[i]), inplace=1):

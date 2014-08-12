@@ -3,6 +3,7 @@
 
 #IMPORTANT: It is assumed that we are running parallel ngspice simulations on a remote 48-core cluster at 10.107.105.201. If this is not the case, you will need to modify this script to run it on this machine, by commenting out the scp and ssh commands.
 
+#Created a time0 spice_rtl_difference file will check the initial condition that is obtained vs expected- so that we can check if there is some error - July 2014
 #Modified the GNU_Parallel_hspice file to check if any deck is simulated using 'pseudo-transient method' - July 9th 2014
 #Creating multiple RTL.csv and RTL_2ndedge.csv files- as many as there are number of outer loops: June 15 2014
 #Backup directories renamed to 'backup_spice_decks_3rd_edge' and 'backup_spice_decks_2nd_edge': feb 12 2014.
@@ -12,7 +13,7 @@
 #This version of the script has the facility of selecting the gate based on the area of the gate. This version of the script uses another script python_weighted_gateselection.py to pick the random gate based on its area: Nov 17 2013
 #Glitch insertion window is within the 2.5 cycles, and not the 6.5 cycles that is required for the case with intermediate FFs
 
-#Example usage: python python_utility3_hspice_2cycles_2nd_3rd_local_65_part.py -m b11 -p /home/users/nanditha/Documents/utility/65nm/b11 -t 65 -n 2000 --group 1000 --clk 300 -d b11
+#Example usage: python python_utility3_hspice_2cycles_time0_65_part.py -m c880_clk_opFF -p /home/users/nanditha/Documents/utility/65nm/FF_optimisation/c880 -t 65 -n 4 --group 4 --clk 500 -d c880
 
 import optparse
 import re,os
@@ -60,14 +61,8 @@ num_of_loops=(int(num)/int(num_at_a_time))
 print "path of the script being run: ",os.path.dirname(os.path.abspath(__file__))
 print "current working dir: ",os.getcwd()
 scripts_dir=os.getcwd()
+
 """
-if os.path.exists('%s/spice_results' %path):
-	os.chdir('%s/spice_results' %path)
-	for f in glob.glob("*.txt"):
-		os.remove(f)
-		
-
-
 os.system('python python_subckts_in_weight_script.py -m %s -p %s' %(module,path))
 
 if os.path.exists('%s/spice_results' %path):
@@ -133,6 +128,15 @@ if os.path.exists(backup_dir_rise):
 if not os.path.exists(backup_dir_rise):
 	os.mkdir(backup_dir_rise)	
 
+#Clear Back up directory for the rise edge case
+
+backup_dir_rise = '%s/backup_spice_decks_time0' %(path)
+
+if os.path.exists(backup_dir_rise):
+	shutil.rmtree(backup_dir_rise)
+
+if not os.path.exists(backup_dir_rise):
+	os.mkdir(backup_dir_rise)	
 
 
 print "Deleting the existing spice decks before creating new ones!\n"
@@ -188,17 +192,19 @@ if os.path.isfile("%s/%s_reference_out/RTL_2nd_edge*.csv" %(path,module)):
 	print "****Removing the existing RTL_2nd_edge.csv file in folder %s_reference_out ****\n" %(module)
 	os.remove("%s/%s_reference_out/RTL_2nd_edge*.csv" %(path,module))
 		
-"""
+if os.path.isfile("%s/%s_reference_out/RTL_time0*.csv" %(path,module)):
+	print "****Removing the existing RTL_time0.csv file in folder %s_reference_out ****\n" %(module)
+	os.remove("%s/%s_reference_out/RTL_time0*.csv" %(path,module))
 
+"""
 #Fresh simulation
 for loop in range(start_loop, (num_of_loops+1)): 
 
 	print "Now, creating multiple spice decks in spice_decks folder in current directory on the remote machine\n"
 	
-			
-	"""
+	
 #########################################repeat_deckgen copied starting from here#######################################
-		
+	"""	
 		
 	#Now, we need the header in RTL.csv, so we create an RTL.csv and copy the headers from the RTL_backup.csv that we had saved from Netlstfrmt.pl
 	fout = open('%s/%s_reference_out/RTL_%d.csv' %(path,module,loop), 'w')
@@ -211,7 +217,7 @@ for loop in range(start_loop, (num_of_loops+1)):
 	fin.close()
 
 
-		#Now, we need the header in RTL_2nd_edge.csv, so we create an RTL.csv and copy the headers from the RTL_backup.csv that we had saved from Netlstfrmt.pl
+	#Now, we need the header in RTL_2nd_edge.csv, so we create an RTL.csv and copy the headers from the RTL_backup.csv that we had saved from Netlstfrmt.pl
 	fout = open('%s/%s_reference_out/RTL_2nd_edge_%d.csv' %(path,module,loop), 'w')
 	fin = open('%s/%s_reference_out/RTL_backup.csv' %(path,module), 'r')
 
@@ -220,6 +226,17 @@ for loop in range(start_loop, (num_of_loops+1)):
 
 	fout.close()
 	fin.close()
+	
+	#Now, we need the header in RTL_time0.csv, so we create an RTL.csv and copy the headers from the RTL_backup.csv that we had saved from Netlstfrmt.pl
+	fout = open('%s/%s_reference_out/RTL_time0_%d.csv' %(path,module,loop), 'w')
+	fin = open('%s/%s_reference_out/RTL_backup.csv' %(path,module), 'r')
+
+	in_data=fin.read()
+	fout.write(in_data)
+
+	fout.close()
+	fin.close()
+	
 	
 	
 	if not os.path.exists('%s/spice_decks_%s' %(path,loop)):
@@ -270,9 +287,12 @@ for loop in range(start_loop, (num_of_loops+1)):
 		#rand_glitch= (4.67*clk_period) +  unif #arrival_clk + initial_clk should add up to 4.5+0.15=4.65. 1 period-0.15=0.85
 		
 		#glitch in the 2nd cycle
-		unif=random.uniform(0,0.95*clk_period) 
-		rand_glitch= (0.55*clk_period) +  unif 
+		#unif=random.uniform(0,0.95*clk_period) 
+		#rand_glitch= (0.55*clk_period) +  unif 
 
+		unif = random.uniform(0,1.0*clk_period) 
+		rand_glitch= (0.5*clk_period) +  unif 
+		
 		#glitch in the 3rd cycle
 		#unif=random.uniform(0,0.95*clk_period) 
 		#rand_glitch= (1.55*clk_period) +  unif 
@@ -291,7 +311,8 @@ for loop in range(start_loop, (num_of_loops+1)):
 	#The following script will run GNU Parallel and hspice 
 	
 	"""
-	os.system ('python python_hspice_mod.py -p %s -n %s -d %s -o %d -c %s' %(path,num_at_a_time,design_folder,loop,scripts_dir))
+	os.system ('python python_hspice_mod_time0.py -p %s -n %s -d %s -o %d -c %s' %(path,num_at_a_time,design_folder,loop,scripts_dir))
+	
 	os.system('python python_hspice_combine_csv_results.py -n %s -d %s -o %d -p %s' %(num_at_a_time,design_folder,loop,path))
 	
 	
@@ -307,6 +328,9 @@ for loop in range(start_loop, (num_of_loops+1)):
 
 	print "Comparing the RTL and spice outputs at the 2nd rising edge \n"
 	os.system('python python_compare_2nd_rise_65.py -m %s -f %s -n %s -t %s -l %d' %(module,path,num_at_a_time,tech,loop))
+	
+	print "Comparing the RTL and spice outputs at the time=0 \n"
+	os.system('python python_compare_time0_65.py -m %s -f %s -n %s -t %s -l %d' %(module,path,num_at_a_time,tech,loop))
 
 	
 #For testing out new glitch files (afterdeleting process if at each echo statement). comment this out in the final run, else it will copy ALL spice files and consume lot of disk space
@@ -319,12 +343,12 @@ for loop in range(start_loop, (num_of_loops+1)):
 	
 	if os.path.exists(spice_dir):
 		shutil.rmtree(spice_dir)
-"""
 
+"""
 ########################################End of loop########################################################
 
 print "Combining all rtl diff files\n"
-seed="1644931266534706027"
+seed="6706859636230149944"
 os.system('python  python_count_flips_2nd_3rd_rise_65.py -f %s  -n %s  --group %s -s %s' %(path,num,num_at_a_time,seed))  #To save the seed to results file
 
 

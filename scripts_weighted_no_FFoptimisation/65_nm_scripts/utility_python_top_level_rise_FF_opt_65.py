@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 
-#Example usage: python utility_python_top_level_rise_65.py -p /home/users/nanditha/Documents/utility/65nm/b04 --rtl=/home/users/nanditha/Documents/utility/65nm/b04/b04.vhd --mod=b04 --test=/home/users/nanditha/Documents/utility/65nm/b04/test_b04.vhd --tb_mod=test_b04 --clk=300 --run=100us --design=b04 --tech=65 --num=10 --group 10 --extl=/home/external/iitb/nanditha/simulations/65nm/b04  --proc_node 1 --ppn 5 --days 00 --hrs 00 --mins 10 --script python_utility3_yuva_2cycles_2nd_3rd_65.py 
 
-
-#Example usage: python utility_python_top_level_rise_65.py -p /home/users/nanditha/Documents/utility/65nm/c432 --rtl=/home/users/nanditha/Documents/utility/65nm/c432/c432_clk_ipFF.v --mod=c432_clk_ipFF --test=/home/users/nanditha/Documents/utility/65nm/c432/test_c432.v --tb_mod=test_c432 --clk=350 --run=100us --design=c432 --tech=65 --num=10 --group 10 --extl=/home/external/iitb/nanditha/simulations/65nm/c432  --proc_node 1 --ppn 5 --days 00 --hrs 00 --mins 3 --script python_utility3_yuva_2cycles_2nd_3rd_65.py
+#ISCAS
+#Example usage: python utility_python_top_level_rise_FF_opt_65.py -p /home/users/nanditha/Documents/utility/65nm/FF_optimisation/decoder --rtl=/home/users/nanditha/Documents/utility/65nm/FF_optimisation/decoder/decoder_op_ip_ffopt.vhd --mod=decoder_op_ip_ffopt --test=/home/users/nanditha/Documents/utility/65nm/FF_optimisation/decoder/test_decoder_opFF.vhd --tb_mod=test_decoder_op_ip_ffopt --clk=550 --run=100us --design=decoder --tech=65 --num=10 --group 10 --extl=/home/external/iitb/nanditha/simulations/65nm/decoder  --proc_node 1 --ppn 5 --days 00 --hrs 00 --mins 3 --script python_utility3_yuva_2cycles_2nd_3rd_65.py --idelay 0.8 --odelay 0.6 --ipff in --opff output
 
 
 #Modifications to the script:
+#2.5 cycle simulation- FF optimisation with intermediate FFs for 65nm- Aug 6 2014
 #Absolute paths introduced everywhere in the script, so that they can be run from one directory and no need of duplicating the scripts in all directories: June 25 2014
 
 #Calling python_gnd_gnds_dspf_modify.py: This script adds 'gnd,gnds,vdd,vdds' to the subckt instances and will show one instance per line (no + continuation of subckt): Mar 19 2014
@@ -32,6 +32,12 @@ parser.add_option("-v","--rtl", help='Enter the ENTIRE path of the RTL (verilog 
 parser.add_option("-m","--mod", help='Enter the entity name(vhdl) or module name (verilog)',dest='module')
 
 parser.add_option("-p","--pmain", help='Enter the entity name(vhdl) or module name (verilog)',dest='path')
+
+#########################################################################
+parser.add_option("--idelay", help='Enter the I/O input delay in nanoseconds(as defined by Synopsys design compiler). See Synopsys Timing constraints and optimisation user guide, for eg., if clk period=2ns, and setup time is 0.8ns, set_input_delay=1.2ns.. leave some guardband.. so set it as 1ns. ',dest='input_delay')
+parser.add_option("--odelay", help='Enter the I/O output delay in nanoseconds(as defined by Synopsys design compiler) set_output_delay',dest='output_delay')
+parser.add_option("--ipff", dest='ip_FF', help='Enter the instance name of input FFs from the input RTL(verilog/vhd) file).')
+parser.add_option("--opff", dest='op_FF', help='Enter the instance name of output FFs from the input RTL(verilog/vhd) file).')
 #########################################################################
 
 parser.add_option("-t","--test", help='Enter the path of the testbench (vhd/verilog) file for simulating the post layout RTL file, include the filename along with extension as part of this path',dest='test_path')
@@ -67,6 +73,10 @@ test_module=options.test_module
 runtime=options.runtime
 ########################
 
+io_input_delay= options.input_delay
+io_output_delay=options.output_delay
+ip_FF=options.ip_FF
+op_FF=options.op_FF
 
 ########################
 design_folder=options.design_folder
@@ -83,9 +93,9 @@ hrs=options.hrs
 mins=options.mins
 script=options.script
 
-"""
+
 #Example usage: python python1_read_RTL_syn_pnr.py -f decoder.vhd -m decoder_behav_pnr -clk 900
-os.system('python python1_read_RTL_syn_pnr_65.py -f %s -m %s -c %s -p %s' %(rtl,module,clkfreq,main_path))
+os.system('python python1_read_RTL_syn_pnr_FF_opt_65.py -f %s -m %s -c %s -p %s --idelay %s --odelay %s --ipff %s --opff %s' %(rtl,module,clkfreq,main_path,io_input_delay,io_output_delay,ip_FF,op_FF))
 
 print('Done 1st script rtl+pnr\n')
 #time.sleep(5)
@@ -120,7 +130,7 @@ os.system('perl GlitchLibGen_65.pl -p %s -i CORE65GPSVT_selected_lib_vg.sp' %(ma
 print "***Created glitch library..\n"
 time.sleep(5)
 
-"""
+
 
 ##Generate a template simulatable spice netlist from the dspf file generated after pnr. This would include all .ic, Voltage sources, meas, tran, control, param etc
 #NetlistFormat.pl

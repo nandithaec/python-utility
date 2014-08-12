@@ -5,7 +5,7 @@
 #clk frequency in MHz
 
 #Modifications:
-#.ic on net0148:F65 for DFPQX9 - Jul 10 2014
+#.ic on net0148:F59 and net0148:F65 for DFPQX4 and DFPQX9 - Jul 10 2014
 #Added time=0 measure and echo statements to test the initial conditions - Jul 9 2014
 #Include glitch_CORE65GPSVT_selected_lib_vgRC.sp instead of glitch_CORE65GPSVT_selected_lib_vg.sp - includes R & C to solve the pseudo=tran method convergence issue- Jul 9 2014
 #Absolute paths introduced everywhere in the script, so that they can be run from one directory and no need of duplicating the scripts in all directories: June 25 2014
@@ -195,9 +195,9 @@ elsif($tech==22)
 #including the library files
 print SIM "****Template spice file***"."\n\n";
 print SIM ".include  ../hspice_glitch_CORE65GPSVT_selected_lib_vg.sp"."\n";
-print SIM '.include ../hspice_65nm_models/diodeiso_typ.txt'."\n";
-print SIM '.include ../hspice_65nm_models/ptm_nmos_65_no_X.txt'."\n";
-print SIM '.include ../hspice_65nm_models/ptm_pmos_65_no_X.txt'."\n";
+print SIM '.include /home/users/nanditha/Documents/utility/65nm/hspice_65nm_models/diodeiso_typ.txt'."\n";
+print SIM '.include /home/users/nanditha/Documents/utility/65nm/hspice_65nm_models/ptm_nmos_65_no_X.txt'."\n";
+print SIM '.include /home/users/nanditha/Documents/utility/65nm/hspice_65nm_models/ptm_pmos_65_no_X.txt'."\n";
 print "\t******Giltched version of the library file and technology file included in the spice file\n";
 $loop_var=0;
 
@@ -589,11 +589,15 @@ if($i ne "clk")
      # print SIM ".ic v(X$module.$to_ff[$i]:Q)= ##$new\_reference_1##\n";  
       #print SIM ".ic v(X$module.$to_ff[$i]\_q\_reg:Q)= ##$new\_reference_1##\n";
       #print SIM ".ic v(X$module.X$to_ff[$i].R62)= ##$new\_reference_1_neg##\n";
-	#print SIM ".ic v(X$module.X$to_ff[$i]\_q\_reg.net0148:F59)= ##$new\_reference_1_neg##\n";
+      
+  #The following is for DFPQX4 and DFPQX9
+ # print SIM ".ic v(X$module.X$to_ff[$i]\_q\_reg.net0148:F59)= ##$new\_reference_1_neg##\n";
+ # print SIM ".ic v(X$module.X$to_ff[$i]\_q\_reg.net0148:F65)= ##$new\_reference_1_neg##\n\n";
 
   #The following is for DFPQX4 and DFPQX9
    print SIM ".ic v(X$module.X$to_ff[$i].net0148:F59)= ##$new\_reference_1_neg##\n";
    print SIM ".ic v(X$module.X$to_ff[$i].net0148:F65)= ##$new\_reference_1_neg##\n\n";
+
    #The following is for DFQNX9 FF, which has a different initialisation node
    #   print SIM ".ic v(X$module.X$to_ff[$i].net0139:F125)= ##$new\_reference_1_neg##\n";
 #The following for DFPHQNX9
@@ -672,7 +676,7 @@ foreach $i(0 .. $#to_ff)
  {
 
 #This will need to be enabled for ISCAS benchmark circuits
- #$measure_at_falling_edge.="meas tran ff_op_fall_$i MAX v(X$module.$to_ff[$i]\_q\_reg:Q) from=$fall_from"."s"." to=$fall_to"."s\n";
+#$measure_at_time0.="meas tran ff_op_time0_$i MAX v(X$module.$to_ff[$i]\_q\_reg:Q) from=0.01e-9"."s"." to=0.05e-9"."s\n"
  #This will need to be enabled for non-ISCAS benchmark circuits
  $measure_at_time0.="meas tran ff_op_time0_$i MAX v(X$module.$to_ff[$i]:Q) from=0.01e-9"."s"." to=0.05e-9"."s\n";
  }
