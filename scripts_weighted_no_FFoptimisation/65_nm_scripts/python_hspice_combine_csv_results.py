@@ -18,7 +18,7 @@ import time,csv
 
 from optparse import OptionParser
 
-parser = OptionParser('This script will read in the path where multiple spice decks are present. This will generaloly be <path>/<spice_decks>. It reads in the total number of files to be simulated. It runs ngspice parallely on the multiple spice decks on the 48-core cluster machine, using an utility called GNU parallel. sshmachines.txt contains the IP Addresses of the machines to which you want to ssh and run parallel simulations\n#ASSUMPTION: This will always be excecuted on the 48core cluster user1@10.107.105.201 and the design folder will be copied always to <path> folder and executed\nMultiple spice decks that were generated using deckgen in the remote machine, will be run using ngspice and GNU Parallel on the cluster. We can also ssh to other machines which have GNU Parallel and ngspice installed. ssh-keygen should have been done so that it would not ask for ssh password everytime we ssh to the machines. IN case you want to add other machines, uncomment the commented part "Comment this out if not using desktop to run simulations" and include the machine names in the sshmachines.txt\n Once simulations are complete, the spice_decks folder contains glitch_report_outputs_%d.csv files which will all be combined into one output file:<path>/spice_results/final_results_spice_outputs_%d.csv, where %d will be the outloop variable\n Author:Nanditha Rao(nanditha@ee.iitb.ac.in)\n')
+parser = OptionParser('Once simulations are complete, the spice_decks folder contains glitch_report_outputs_%d.csv files which will all be combined into one output file in this script:<path>/spice_results/final_results_spice_outputs_%d.csv, where %d will be the outloop variable. 3 different summary files are created: 1. Containing flip-flop output values at 2nd rising edge - final_results_spice_output_rise.csv,\n 2. Containing flip-flop output values at 3rd rising edge- final_results_spice_output.csv.\n 3. Containing flip-flop output values at time=0 - final_results_spice_output_time0.csv- to check if the initial conditions are being set correctly.\n Author:Nanditha Rao(nanditha@ee.iitb.ac.in)\n')
 
 
 parser.add_option("-n", "--num", type="int", dest="num_spice",help="Enter the number of spice decks to be simulated at a time")
@@ -44,7 +44,6 @@ outloop=int(options.outloop)
 #--sshloginfile file.txt uses the IP addresses of machines given the file.txt to ssh to them and run simulations. 
 #THESE MACHINES SHOULD HAVE 'GNU Parallel' AND NGSPICE INSTALLED IN THEM. AND ALSO, SSH-KEY-GEN SHOULD BE DONE TO DO A PASSWORD-LESS LOGIN
 
-print "\n****Launching GNU Parallel to run ngspice simulations****\n"
 
 start= ((outloop-1)*num_spice) + 1  # ((1-1)*10) +1 =1  , ((2-1)*10) +1 =11
 end = (num_spice)*outloop  #(10*1) = 10, (10*2)=20
@@ -54,11 +53,10 @@ end = (num_spice)*outloop  #(10*1) = 10, (10*2)=20
 
 #time.sleep(2)
 
-print "\n****Completed ngspice simulations on all machines****\n"
 #print "****Resulting csv files are saved in the same folder in which the spice decks are****\n"
 
 ###################################################################################################################
-#######################Now do the post processing of the result files for fall edge#######################
+#######################Now do the post processing of the result files for 3rd rise edge (2nd fall edge)#######################
 
 #Combine all the csv results files and place the resulting file in the results folder
 #Creating results folder is done way back in the modperl2_outwrtr_new.pl script. The spice headers are also written out in that script.
@@ -92,7 +90,7 @@ print "****Combined all fall csv files into a single file in the results folder 
 
 ###################################################################################################################
 ###################################################################################################################
-#######################Now do the post processing of the result files for the rise edge #######################
+#######################Now do the post processing of the result files for the 2nd rise edge #######################
 
 #Combine all the csv results files and place the resulting file in the results folder
 #Creating results folder is done way back in the modperl2_outwrtr_new.pl script. The spice headers are also written out in that script.

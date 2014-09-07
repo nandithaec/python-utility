@@ -6,7 +6,7 @@
 #Changed the #column iteration number from range(5) to range(6), since the drain number is also added: Feb 11 2014
 #Compare results of spice and RTL, creates difference files and validation files for each run. Compare the 3rd rising edge in Verilog with the 2nd falling edge in spice (just an optimisation in spice, to save simulating another extra half cycle)
 
-#Example usage: python python_compare_3rd_rise.py -m decoder_op_ip -f /home/external/iitb/nanditha/simulations/decoder_ip_opFF_rise -n 10 -t 180 -l 1
+#Example usage: python python_compare_time0_65.py -m decoder_op_ip -f /home/external/iitb/nanditha/simulations/decoder_ip_opFF_rise -n 10 -t 180 -l 1
 
 import optparse
 import re,os
@@ -19,7 +19,7 @@ from optparse import OptionParser
 
 
 #def main(): #Defining a main function
-parser = OptionParser('This script reads in the <path>/spice_results/final_results_spice_outputs_%d.csv (spice output Flip-flop values) and <path>/<module>_reference_out/RTL.csv (RTL reference output values) to compare the spice simulation (with glitch) output with the original RTL simulation (no glitch) output. Two files are written out:\n1. <path>/spice_results/spice_rtl_difference_%d.csv and\n2.<path>/spice_results/spice_rtl_diff_testing_%d.csv.\n Both contain essentially same data but the _testing file has both spice and RTL outputs so that the result in the other file can be verified by us.\nIt then counts the number of flips- single/double etc., each time this script is executed (for a group of simulations) and then backs up few decks randomly for each case- no_flip case, single,double flip and triple flip case. These decks are saved in backup_spice_decks_3rd_edge folder and a separate folder is created for each of the no flip, single, double flips etc.,\nAuthor:Nanditha Rao(nanditha@ee.iitb.ac.in)\n')
+parser = OptionParser('This script reads in the <path>/spice_results/final_results_spice_outputs_time0_%d.csv (spice output Flip-flop values at time=0- initial condition) and <path>/<module>_reference_out/RTL_time0.csv (RTL reference output values) to compare the spice simulation (with glitch) output with the original RTL simulation (no glitch) output. Two files are written out:\n1. <path>/spice_results/spice_rtl_difference_time0_%d.csv and\n2.<path>/spice_results/spice_rtl_diff_testing_time0_%d.csv.\n Both contain essentially same data but the _testing file has both spice and RTL outputs so that the result in the other file can be verified by us.\nIt then counts the number of flips- single/double etc., each time this script is executed (for a group of simulations) and then backs up few decks randomly for each case- no_flip case, single,double flip and triple flip case. These decks are saved in backup_spice_decks_time0 folder and a separate folder is created for each of the no flip, single, double flips etc.,\nAuthor:Nanditha Rao(nanditha@ee.iitb.ac.in)\n')
 
 parser.add_option("-m", "--mod",dest='module', help='Enter the entity name(vhdl) or module name (verilog)')
 parser.add_option("-f", "--folder", dest="path",help="Enter the ENTIRE path to your design folder(your working dir)- either on this machine or remote machine ")

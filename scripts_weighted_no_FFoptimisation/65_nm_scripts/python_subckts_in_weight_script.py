@@ -10,7 +10,7 @@ import re,os
 import time
 from optparse import OptionParser
 
-parser = OptionParser('This script will identify the subckts that are not added in the weights script and which need to be added.\nAuthor:Nanditha Rao(nanditha@ee.iitb.ac.in)\n')
+parser = OptionParser('A list of gates/flip-flops and their areas, is maintained in a database in another script. This current script will scan through the gates/flip-flops that are in the design, which have not been added in the database and warn the user. If the gate is not present, the user will need to add it to the database manually in python_weighted_gateselection_65.py \nAuthor:Nanditha Rao(nanditha@ee.iitb.ac.in)\n')
 
 parser.add_option("-p","--path", help='Enter the path',dest='path')
 parser.add_option("-m","--mod", help='Enter the entity name(vhdl) or module name (verilog) to be synthesised',dest='module_name')

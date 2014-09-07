@@ -3,7 +3,7 @@
 
 #Example usage: python python_weighted_gateselection.py 
 
-#This script picks the random gate based on the gate area. The gate with the largest area has a higher probability of getting picked.
+#This script picks the random gate on which the glitch needs to be injected, based on the gate area. The gate with the largest area has a higher probability of getting picked. It has a database/array of the STMicro 65nm gates and their areas. This database will need to be modified for other  technology nodes as per its library and gate area. The rest of the script can be reused. This script is called as a function-call from the main script. The random gate is returned from the function. For eg., if the spice file contains AND, OR and XOR gates in that order, and if OR gate has the highest area, the index of OR gate, that is 1, is returned (indexing starts from 0)
 #Nanditha Rao
 
 #Modifications:
@@ -27,7 +27,7 @@ def weight_selection(path):
 	one=gate_areas[0] #The minimum sized gate is the first in the list
 	relative_weight=gate_areas[:] #initialise the output list
 
-	#Get the weights of each gate relative to the smallest gate
+	#Get the weights of each gate in the database, relative to the smallest gate
 	for i in range(0,len(areas)):
 		relative_weight[i]=areas[i]/one
 
@@ -44,6 +44,7 @@ def weight_selection(path):
 	length=len(data) #number of lines in the reference spice file
 	j=0
 	stop=0;
+	#Write out the subcircuit instances in a separate file
 	for i in range(0,length):
 		line=data[i]
 		if stop == 0:	
@@ -66,7 +67,7 @@ def weight_selection(path):
 	for line in subckts:
 		fw.write("%s\n" %line) #Write out subckt instances
 
-	print "Number of subckts is:", len(subckts)
+	print "Number of subckts is:", len(subckts) #How many subckt instances are there?
 
 	#Grab the last word i.e., the gate..
 	#GATE NAMES OF EACH SUBCKT
@@ -74,7 +75,7 @@ def weight_selection(path):
 		instance.append(subckts[i].split()[-1]) #For each line, get the gate and append it to the "instance" list
 		fa.write("%s\n" %subckts[i].split()[-1])
 		cur_gate=subckts[i].split()[-1];
-		if re.search("DF",cur_gate): #Look for FF anywhere in the string
+		if re.search("DF",cur_gate): #Look for Flip-flop anywhere in the string
 			dff=dff+1; #Count the number of DFFPOS
 
 
@@ -91,7 +92,7 @@ def weight_selection(path):
 	for i in range(0,len(instance)):
 		for j in range(0,len(gates)):
 			if instance[i]==gates[j]:
-				gate_weights.append(relative_weight[j]) #Store the weights of the gates
+				gate_weights.append(relative_weight[j]) #Store the relative weights of the gates
 			
 	fa.write("Gate weigths is %s\n" %gate_weights)
 
@@ -137,7 +138,7 @@ def weight_selection(path):
 	fa.write ( "\nNumber of DFF instances is: %s" %dff)
 	fa.write ("\nPercentage of DFF instances is: %f" %(float(dff)/float(len(instance))*100.0))
 
-	return subckt_index;
+	return (subckt_index,original_gate)
 
 """
 path="/home/nanditha/Documents/iitb/utility/c432_priority_opFF";

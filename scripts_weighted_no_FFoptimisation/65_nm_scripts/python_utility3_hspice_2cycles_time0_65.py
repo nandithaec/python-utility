@@ -12,7 +12,7 @@
 #This version of the script has the facility of selecting the gate based on the area of the gate. This version of the script uses another script python_weighted_gateselection.py to pick the random gate based on its area: Nov 17 2013
 #Glitch insertion window is within the 2.5 cycles, and not the 6.5 cycles that is required for the case with intermediate FFs
 
-#Example usage: python python_utility3_hspice_2cycles_time0_65.py -m c880_clk_opFF -p /home/users/nanditha/Documents/utility/65nm/FF_optimisation/c880 -t 65 -n 4 --group 4 --clk 500 -d c880
+#Example usage: python python_utility3_hspice_2cycles_time0_65.py -m decoder_op_ip -p /home/users/nanditha/Documents/utility/65nm/decoder_65nm -t 65 -n 4 --group 4 --clk 500 -d decoder_65nm
 
 import optparse
 import re,os
@@ -21,10 +21,11 @@ import random
 import subprocess, time
 import random,sys
 from  python_weighted_gateselection_65 import weight_selection
+from  python_drain_selection_65 import drain_selection
 
 from optparse import OptionParser
 
-parser = OptionParser('This script reads in the template spice file and the inputs to the script are listed as arguments below, which are all necessary arguments.\nAfter a previous script has copied the current working directory to a remote cluster, this script invokes several scripts inturn:\n1.perl_calculate_gates_clk.pl\n2.perl_calculate_drain.pl\n3.deckgen_remote_seed.pl\n4.python_GNUparallel_ngspice_remote.py\n5.python_compare_remote_seed.py\n6.python_count_flips_remote_seed.py\n\nThe tasks of these scripts will be described in the help section of the respective scripts. The current script needs pnr/reports/5.postRouteOpt_mult/mult_postRoute.slk as an input. The current script will calculate the number of gates in the design(spice) file, pick a random gate, calculate the number of distinct drains for this gate and pick a drain to introduce glitch it.The location of the glitch is calculated based on the timing/slack information from the SoC encounter output: (pnr/reports/5.postRouteOpt_mult/mult_postRoute.slk) for the particular design, so that we introduce glitch only after the input has changed in the clk period, and before the next rising edge of the clk (when the latch is open). It then invokes deckgen.pl to modify the template spice file to introduce the glitched version of the gate in the spice file. The deckgen creates multiple spice files which will contain different input conditions since they are generated at different clk cycles.\nThe python_GNUparallel_ngspice_remote.py will then distribute these spice files across the different machines in the cluster and simulate these decks using ngspice. The results are csv files which contain output node values after spice simulation.\nThe results are then concatenated into one file and compared against the expected reference outputs that were obtained by the RTL simulation. If the results match, then it means that there was no bit-flip, so a 0 is reported, else a 1 is reported for a bit-flip. The number of flips in a single simulation is counted. Finally, if there are multiple flips given atleast one flip, it is reported as a percentage.\nAuthor:Nanditha Rao(nanditha@ee.iitb.ac.in)\n')
+parser = OptionParser('This script reads in the template spice file and the inputs to the script are listed as arguments below, which are all necessary arguments.\nAfter a previous script has copied the current working directory to a remote cluster, this script invokes several scripts inturn:\n1.perl_calculate_gates_clk.pl\n2.perl_calculate_drain.pl\n3.deckgen_remote_seed.pl\n4.python_GNUparallel_ngspice_remote.py\n5.python_compare_remote_seed.py\n6.python_count_flips_remote_seed.py\n\nThe tasks of these scripts will be described in the help section of the respective scripts. The current script needs pnr/reports/5.postRouteOpt_mult/mult_postRoute.slk as an input. The current script will calculate the number of gates in the design(spice) file, pick a random gate, calculate the number of distinct drains for this gate and pick a drain to introduce glitch it. It then invokes deckgen.pl to modify the template spice file to introduce the glitched version of the gate in the spice file. The deckgen creates multiple spice files which will contain different input conditions since they are generated at different clk cycles.\nThe python_GNUparallel_ngspice_remote.py will then distribute these spice files across the different machines in the cluster and simulate these decks using ngspice. The results are csv files which contain output node values after spice simulation.\nThe results are then concatenated into one file and compared against the expected reference outputs that were obtained by the RTL simulation. If the results match, then it means that there was no bit-flip, so a 0 is reported, else a 1 is reported for a bit-flip. The number of flips in a single simulation is counted. Finally, if there are multiple flips given atleast one flip, it is reported as a percentage.\nAuthor:Nanditha Rao(nanditha@ee.iitb.ac.in)\n')
 
 parser.add_option("-m", "--mod",dest='module', help='Enter the entity name(vhdl) or module name (verilog)')
 parser.add_option("-n", "--num",dest='num',  help='Enter the number of spice decks to be generated and simulated')
@@ -249,14 +250,12 @@ for loop in range(start_loop, (num_of_loops+1)):
 		
 		#rand_gate= int(random.randrange(num_of_gates))  #A random gate picked. not used, because the below function will return the random weighted gate
 		#This is called through a function written in python_weighted_gateselection.py
-		rand_gate=  weight_selection(path);
+		rand_gate, rand_gate_name =  weight_selection(path);
 		print "Random subckt line=%d" %rand_gate
-		print "Random gate is: ",rand_gate
+		print "Random gate is: ",rand_gate_name
 
-		#A random clk picked. dont pick the 1st 10 clock cycles. 1st 3 have dont care outputs at the FFs. ANd we are simulating 6 clk cycles, so, initialisation is 4 clk cycles. so, leave a guardband by ignoring the 1st 10 clk cycles
-		rand_clk= int(random.randrange(10,num_of_clks))  
-		#print "Random clock cycle is: ",rand_clk
 		
+		#Calculates number of drains
 		os.system('perl perl_calculate_drain_65.pl -s %s/reference_spice.sp -l1 %s/glitch_CORE65GPSVT_selected_lib_vg.sp -r %s/%s_reference_out/tool_reference_out.txt -m %s -f %s -g %d ' %(path,path,path,module,module,path,rand_gate))
 
 		fg = open('%s/tmp_random.txt' %(path), 'r')
@@ -267,8 +266,15 @@ for loop in range(start_loop, (num_of_loops+1)):
 
 		fg.close()
 #If num of drains is 2, randrange(2) returns 0 or 1,where as we want drain number 1 or drain number 2. so, doing +1
-		rand_drain= int(random.randrange(num_of_drains))+1  #A random drain picked. 
-
+		#rand_drain= int(random.randrange(num_of_drains))+1  #A random drain picked. 
+		
+		#Pick random drain as per its area:
+		rand_drain =  drain_selection(path,rand_gate_name);
+		print "In main script-Random drain: %d" %rand_drain
+		#A random clk picked. dont pick the 1st 10 clock cycles. 1st 3 have dont care outputs at the FFs. ANd we are simulating 6 clk cycles, so, initialisation is 4 clk cycles. so, leave a guardband by ignoring the 1st 10 clk cycles
+		rand_clk= int(random.randrange(10,num_of_clks))  
+		#print "Random clock cycle is: ",rand_clk
+		
 #Arrival_time_part + initial_clk_part should add up to 1.5 clk periods
 #The clk starts from low to high and then low, before the 2nd rising edge starts. The input is changed in the high period and the glitch is expected to arrrive later on, and before the next rising edge (when the latch will open)
 		#In every iteration, a different random number needs to be picked. Hence, this is inside the for loop
@@ -279,7 +285,7 @@ for loop in range(start_loop, (num_of_loops+1)):
 
 		#unif=random.uniform(0,arrival_clk_part*clk_period)
 		#rand_glitch= (initial_clk_part*clk_period) +  unif  #A random glitch picked
-		
+		"""
 				
 		#glitch in the 2nd cycle
 		unif=random.uniform(0,0.95*clk_period) 
@@ -298,15 +304,13 @@ for loop in range(start_loop, (num_of_loops+1)):
 
 
 		#deckgen.pl will need to be remotely executed through python_repeat_deckgen.py multiple number of times
-		os.system('perl deckgen_remote_seed_rise_65.pl -s %s/reference_spice.sp  -r %s/%s_reference_out/tool_reference_out.txt -n %d -m %s -f %s  -o %s -g %s -d %s -c %s -i %s' %(path,path,module,loop_var,module,path,loop,rand_gate,rand_drain,rand_clk,rand_glitch))
-
+		os.system('perl perl_deckgen_65.pl -s %s/reference_spice.sp  -r %s/%s_reference_out/tool_reference_out.txt -n %d -m %s -f %s  -o %s -g %s -d %s -c %s -i %s' %(path,path,module,loop_var,module,path,loop,rand_gate,rand_drain,rand_clk,rand_glitch))
+		"""
 ##################Script repeat_deckgen copied ends here####################################
-	
+	"""
 		
 	#The following script will run GNU Parallel and hspice 
-	
-	
-	os.system ('python python_hspice_mod_time0.py -p %s -n %s -d %s -o %d -c %s' %(path,num_at_a_time,design_folder,loop,scripts_dir))
+	os.system ('python python_hspice_mod_check_ic.py -p %s -n %s -d %s -o %d -c %s' %(path,num_at_a_time,design_folder,loop,scripts_dir))
 	
 	os.system('python python_hspice_combine_csv_results.py -n %s -d %s -o %d -p %s' %(num_at_a_time,design_folder,loop,path))
 	
@@ -319,17 +323,17 @@ for loop in range(start_loop, (num_of_loops+1)):
 	#Might need to execute these last 3 in a loop till the results are acceptable
 	
 	print "Comparing the RTL and spice outputs at the 2nd falling edge (3rd rising edge)\n"
-	os.system('python python_compare_3rd_rise_65.py -m %s -f %s -n %s -t %s -l %d' %(module,path,num_at_a_time,tech,loop))
+	os.system('python python_compare_3rd_edge_65.py -m %s -f %s -n %s -t %s -l %d' %(module,path,num_at_a_time,tech,loop))
 
 	print "Comparing the RTL and spice outputs at the 2nd rising edge \n"
-	os.system('python python_compare_2nd_rise_65.py -m %s -f %s -n %s -t %s -l %d' %(module,path,num_at_a_time,tech,loop))
+	os.system('python python_compare_2nd_edge_65.py -m %s -f %s -n %s -t %s -l %d' %(module,path,num_at_a_time,tech,loop))
 	
 	print "Comparing the RTL and spice outputs at the time=0 \n"
 	os.system('python python_compare_time0_65.py -m %s -f %s -n %s -t %s -l %d' %(module,path,num_at_a_time,tech,loop))
 
 	
 #For testing out new glitch files (afterdeleting process if at each echo statement). comment this out in the final run, else it will copy ALL spice files and consume lot of disk space
-	
+	"""
 ##########################################################
 #Comment this out to see the decks and the result files it generates. 	
 """
@@ -341,10 +345,10 @@ for loop in range(start_loop, (num_of_loops+1)):
 """
 
 ########################################End of loop########################################################
-
+"""
 print "Combining all rtl diff files\n"
 #seed="1644931266534706027"
-os.system('python  python_count_flips_2nd_3rd_rise_65.py -f %s  -n %s  --group %s -s %s' %(path,num,num_at_a_time,seed))  #To save the seed to results file
+os.system('python  python_count_flips_2nd_3rd_edge_65.py -f %s  -n %s  --group %s -s %s' %(path,num,num_at_a_time,seed))  #To save the seed to results file
 
 
 #Add the details of number of DFFs
@@ -369,4 +373,4 @@ os.system('python  python_FF_strike_taxonomy_65.py  -p %s -m %s' %(path,module))
 
 print "\nCombining the pdf reports\n"
 os.system('python python_combine_pdfs_65.py -p %s/spice_results -m %s' %(path,module))
-
+"""

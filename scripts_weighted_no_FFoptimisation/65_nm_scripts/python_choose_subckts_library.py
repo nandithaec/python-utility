@@ -10,7 +10,7 @@ import re,os
 import time
 from optparse import OptionParser
 
-parser = OptionParser('This script collect the subckt instance names in the current design and writes a library file with only those cells.\nAuthor:Nanditha Rao(nanditha@ee.iitb.ac.in)\n')
+parser = OptionParser('This script collects the subckt instance names in the current design (from the pnr post layout dspf/spice file) and writes a library file with only those cells. This is done to reduce the lib file size .This reduces the simulation time in spice when it loads the file. Input is CORE65GPSVT_all_vdd_gnd_bulk_node.sp which needs to be supplied and the output is CORE65GPSVT_selected_lib_vg.sp which gets created in the design folder\nAuthor:Nanditha Rao(nanditha@ee.iitb.ac.in)\n')
 
 parser.add_option("-p", "--path", dest="path",help="Enter the ENTIRE path to your design folder (your working dir)- /home/user1/simulations/<design_folder_name>")
 parser.add_option("-m","--mod", help='Enter the entity name(vhdl) or module name (verilog) to be synthesised',dest='module_name')

@@ -82,7 +82,7 @@ print "length of lines",len(lines)
 
 
 
-#short the caps and rename all those nodes that are connected to cap with the new name
+#short the resistors and rename all those nodes that are connected to cap with the new name
 for i in range(0,len(lines)):
 	#Get each line
 	current_line=lines[i]
@@ -91,7 +91,7 @@ for i in range(0,len(lines)):
 	print "Current line:",current_line
 
 
-	if re.match("R",current_line): #starts with a 'C'
+	if re.match("R",current_line): #starts with a 'R'
 
 		words=current_line.split()
 		cap1=" "+words[1]+" "

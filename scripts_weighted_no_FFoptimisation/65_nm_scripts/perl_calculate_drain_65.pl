@@ -39,7 +39,7 @@ calculate_drain [reference_spice_file,glitch_lib,tool_reference_output,module_na
 
 DESCRIPTION
 
-calculate_drain utility reads in the random gate number passed from the main script. It uses the spice library to pick the number of uniquye drains for this gate and writes this numbver back to the tmp_random.txt. This number is used by the main script to pick one random drain out of these drains.
+calculate_drain script reads in the random gate number passed from the main script. It checks the reference_spice file and identifies the gate corresponding to this gate number. For eg., if there are 3 gate instances-AND,OR and XOR. If the number is 2, it identifies it as XOR (starting index being 0). It searches for XOR in the glitched spice library to pick the number of unique drains for this gate and writes this number back to the tmp_random.txt. This number is used by the main script to pick one random drain out of these drains.
 
 OPTIONS
 
