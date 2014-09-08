@@ -1,0 +1,1196 @@
+* emotion  version 1.5 of Fri Feb 12 10:58:42 CET 2010 (crx586)
+* emotion -va -hstat -o h 
+* Executed by haddougm Wed Mar 31 12:18:16 2010
+
+
+* Device release :
+*	npniso25 : 2.0
+*	npniso4 : 2.0
+* ----------------------------------------------------------------------
+*  SPECS    : finaldds.t.rca 1.7 Mon Nov 2 15:30:33 2009  
+*  REVISION : drH_dk5_3_4
+*	pnps25 : 2.0
+*	pnps4 : 2.0
+* ----------------------------------------------------------------------
+*  SPECS    : finaldds.t.rca 1.7 Mon Nov 2 15:30:33 2009  
+*  REVISION : drH_dk5_3_4
+* ----------------------------------------------------------------------
+*                            Process Variations
+* ----------------------------------------------------------------------
+*  TEMPLATE   : process_eldo.t.rca 1.1 Thu Jan 15 16:23:28 2009
+*  PARAMETERS : process_statistic.dds,v 1.102 2010/02/12 13:40:26
+*  PARAMETERS : process.dds,v 1.111 2010/02/12 13:41:00
+*  TRANSLATOR : dds 3.1.2 ("ddspp.tcl.rca 1.5 Tue Nov 17 14:16:09 2009" )
+*  Translated by haddougm on March 31, 2010
+*  PACKAGE    : "modelString.tcl.rca 1.1 Thu Jan 15 16:17:30 2009" 
+*  PACKAGE    : "processPackage.tcl.rca 1.5 Tue Nov 17 14:15:52 2009" 
+* 
+*   RELEASE : "release.dds,v 1.307 2010/03/01 13:43:26" 
+* ----------------------------------------------------------------------
+*  ----------------------------------------------------------------------
+*  (C) Copyright STMicroelectronics (2010)
+*      Unauthorized Reproduction and Communication Strictly Prohibited.
+*  ----------------------------------------------------------------------
+* ----------------------------------------------------------------------
+* ----------------------------------------------------------------------
+*                            Bipolar
+* ----------------------------------------------------------------------
+*  TEMPLATE   : bipolar_eldo.t,v 1.20 2010/01/05 14:16:07
+*  PARAMETERS : bipolar.dds,v 1.27 2010/02/22 12:22:07
+*  PARAMETERS : instparamdef.dds,v 1.4 2010/01/19 10:43:56
+*  TRANSLATOR : dds 3.1.2 ("ddspp.tcl.rca 1.5 Tue Nov 17 14:16:09 2009" )
+*  Translated by haddougm on March 31, 2010
+*  PACKAGE    : "modelString.tcl.rca 1.1 Thu Jan 15 16:17:30 2009" 
+*  PACKAGE    : "processPackage.tcl.rca 1.5 Tue Nov 17 14:15:52 2009" 
+* 
+*   RELEASE : "release.dds,v 1.307 2010/03/01 13:43:26" 
+* ----------------------------------------------------------------------
+*  ----------------------------------------------------------------------
+*  (C) Copyright STMicroelectronics (2010)
+*      Unauthorized Reproduction and Communication Strictly Prohibited.
+*  ----------------------------------------------------------------------
+* ----------------------------------------------------------------------
+
+.param process_stat_npnv_cmos065 = 1
+.param nsigma_npnv_wed_cmos065 = 0
+.param nsigma_npnv_disvar_cmos065 = 0
+.param nsigma_npnv_dise_cmos065 = 0
+.param nsigma_npnv_disf_cmos065 = 0
+.param nsigma_npnv_drb_cmos065 = 0
+.param nsigma_npnv_drbm_cmos065 = 0
+.param nsigma_npnv_nsub_cmos065 = 0
+.param nsigma_npnv_dcje_cmos065 = 0
+.param nsigma_npnv_dcjc_cmos065 = 0
+.param nsigma_npnv_degxti_cmos065 = 0
+.param nsigma_npnv_dxtb_cmos065 = 0
+
+
+
+
+
+
+
+
+
+
+
+
+.param process_stat_npnv_cmos065 = 0
+.param nsigma_npnv_wed_cmos065 = '1*min(3,max(-3,npnv_user_cmos065))'
+.param nsigma_npnv_disvar_cmos065 = '1*min(3,max(-3,npnv_user_cmos065))'
+.param nsigma_npnv_dise_cmos065 = '1*min(3,max(-3,npnv_user_cmos065))'
+.param nsigma_npnv_disf_cmos065 = '-1*min(3,max(-3,npnv_user_cmos065))'
+.param nsigma_npnv_drb_cmos065 = '1*min(3,max(-3,npnv_user_cmos065))'
+.param nsigma_npnv_drbm_cmos065 = '1*min(3,max(-3,npnv_user_cmos065))'
+.param nsigma_npnv_nsub_cmos065 = '1*min(3,max(-3,npnv_user_cmos065))'
+.param nsigma_npnv_dcje_cmos065 = '-1*min(3,max(-3,npnv_user_cmos065))'
+.param nsigma_npnv_dcjc_cmos065 = '1*min(3,max(-3,npnv_user_cmos065))'
+.param nsigma_npnv_degxti_cmos065 = '1*min(3,max(-3,npnv_user_cmos065))'
+.param nsigma_npnv_dxtb_cmos065 = '1*min(3,max(-3,npnv_user_cmos065))'
+
+
+
+
+
+
+
+
+
+
+
+.param process_stat_npnv_cmos065 = 1
+.param nsigma_npnv_wed_cmos065 = 3
+.param nsigma_npnv_disvar_cmos065 = 3
+.param nsigma_npnv_dise_cmos065 = -3
+.param nsigma_npnv_disf_cmos065 = -3
+.param nsigma_npnv_drb_cmos065 = 3
+.param nsigma_npnv_drbm_cmos065 = 3
+.param nsigma_npnv_nsub_cmos065 = 3
+.param nsigma_npnv_dcje_cmos065 = -3
+.param nsigma_npnv_dcjc_cmos065 = 3
+.param nsigma_npnv_degxti_cmos065 = 3
+.param nsigma_npnv_dxtb_cmos065 = -3
+
+
+
+
+
+
+
+
+
+
+
+
+.param process_stat_npnv_cmos065 = 1
+.param nsigma_npnv_wed_cmos065 = -3
+.param nsigma_npnv_disvar_cmos065 = -3
+.param nsigma_npnv_dise_cmos065 = 3
+.param nsigma_npnv_disf_cmos065 = 3
+.param nsigma_npnv_drb_cmos065 = -3
+.param nsigma_npnv_drbm_cmos065 = -3
+.param nsigma_npnv_nsub_cmos065 = -3
+.param nsigma_npnv_dcje_cmos065 = 3
+.param nsigma_npnv_dcjc_cmos065 = -3
+.param nsigma_npnv_degxti_cmos065 = -3
+.param nsigma_npnv_dxtb_cmos065 = 3
+
+
+
+
+
+
+
+
+
+
+
+
+.param process_stat_npnv_cmos065 = 1
+.param nsigma_npnv_wed_cmos065 = 3
+.param nsigma_npnv_disvar_cmos065 = 3
+.param nsigma_npnv_dise_cmos065 = 3
+.param nsigma_npnv_disf_cmos065 = 3
+.param nsigma_npnv_drb_cmos065 = 3
+.param nsigma_npnv_drbm_cmos065 = 3
+.param nsigma_npnv_nsub_cmos065 = 3
+.param nsigma_npnv_dcje_cmos065 = 3
+.param nsigma_npnv_dcjc_cmos065 = 3
+.param nsigma_npnv_degxti_cmos065 = 3
+.param nsigma_npnv_dxtb_cmos065 = 3
+
+
+
+
+
+
+
+
+
+
+
+
+.param process_stat_npnv_cmos065 = 1
+.param nsigma_npnv_wed_cmos065 = -3
+.param nsigma_npnv_disvar_cmos065 = -3
+.param nsigma_npnv_dise_cmos065 = -3
+.param nsigma_npnv_disf_cmos065 = -3
+.param nsigma_npnv_drb_cmos065 = -3
+.param nsigma_npnv_drbm_cmos065 = -3
+.param nsigma_npnv_nsub_cmos065 = -3
+.param nsigma_npnv_dcje_cmos065 = -3
+.param nsigma_npnv_dcjc_cmos065 = -3
+.param nsigma_npnv_degxti_cmos065 = -3
+.param nsigma_npnv_dxtb_cmos065 = -3
+
+
+
+
+
+
+
+
+
+
+
+
+.param process_stat_pnpv_cmos065 = 1
+.param nsigma_pnpv_wed_cmos065 = 0
+.param nsigma_pnpv_disvar_cmos065 = 0
+.param nsigma_pnpv_dise_cmos065 = 0
+.param nsigma_pnpv_disf_cmos065 = 0
+.param nsigma_pnpv_drb_cmos065 = 0
+.param nsigma_pnpv_drbm_cmos065 = 0
+.param nsigma_pnpv_nsub_cmos065 = 0
+.param nsigma_pnpv_dcje_cmos065 = 0
+.param nsigma_pnpv_dcjc_cmos065 = 0
+.param nsigma_pnpv_degxti_cmos065 = 0
+.param nsigma_pnpv_dxtb_cmos065 = 0
+
+
+
+
+
+
+
+
+
+
+
+
+.param process_stat_pnpv_cmos065 = 0
+.param nsigma_pnpv_wed_cmos065 = '1*min(3,max(-3,pnpv_user_cmos065))'
+.param nsigma_pnpv_disvar_cmos065 = '1*min(3,max(-3,pnpv_user_cmos065))'
+.param nsigma_pnpv_dise_cmos065 = '1*min(3,max(-3,pnpv_user_cmos065))'
+.param nsigma_pnpv_disf_cmos065 = '-1*min(3,max(-3,pnpv_user_cmos065))'
+.param nsigma_pnpv_drb_cmos065 = '1*min(3,max(-3,pnpv_user_cmos065))'
+.param nsigma_pnpv_drbm_cmos065 = '1*min(3,max(-3,pnpv_user_cmos065))'
+.param nsigma_pnpv_nsub_cmos065 = '1*min(3,max(-3,pnpv_user_cmos065))'
+.param nsigma_pnpv_dcje_cmos065 = '-1*min(3,max(-3,pnpv_user_cmos065))'
+.param nsigma_pnpv_dcjc_cmos065 = '1*min(3,max(-3,pnpv_user_cmos065))'
+.param nsigma_pnpv_degxti_cmos065 = '1*min(3,max(-3,pnpv_user_cmos065))'
+.param nsigma_pnpv_dxtb_cmos065 = '1*min(3,max(-3,pnpv_user_cmos065))'
+
+
+
+
+
+
+
+
+
+
+
+.param process_stat_pnpv_cmos065 = 1
+.param nsigma_pnpv_wed_cmos065 = 3
+.param nsigma_pnpv_disvar_cmos065 = 3
+.param nsigma_pnpv_dise_cmos065 = -3
+.param nsigma_pnpv_disf_cmos065 = -3
+.param nsigma_pnpv_drb_cmos065 = 3
+.param nsigma_pnpv_drbm_cmos065 = 3
+.param nsigma_pnpv_nsub_cmos065 = 3
+.param nsigma_pnpv_dcje_cmos065 = -3
+.param nsigma_pnpv_dcjc_cmos065 = 3
+.param nsigma_pnpv_degxti_cmos065 = 3
+.param nsigma_pnpv_dxtb_cmos065 = -3
+
+
+
+
+
+
+
+
+
+
+
+
+.param process_stat_pnpv_cmos065 = 1
+.param nsigma_pnpv_wed_cmos065 = -3
+.param nsigma_pnpv_disvar_cmos065 = -3
+.param nsigma_pnpv_dise_cmos065 = 3
+.param nsigma_pnpv_disf_cmos065 = 3
+.param nsigma_pnpv_drb_cmos065 = -3
+.param nsigma_pnpv_drbm_cmos065 = -3
+.param nsigma_pnpv_nsub_cmos065 = -3
+.param nsigma_pnpv_dcje_cmos065 = 3
+.param nsigma_pnpv_dcjc_cmos065 = -3
+.param nsigma_pnpv_degxti_cmos065 = -3
+.param nsigma_pnpv_dxtb_cmos065 = 3
+
+
+
+
+
+
+
+
+
+
+
+
+.param process_stat_pnpv_cmos065 = 1
+.param nsigma_pnpv_wed_cmos065 = 3
+.param nsigma_pnpv_disvar_cmos065 = 3
+.param nsigma_pnpv_dise_cmos065 = 3
+.param nsigma_pnpv_disf_cmos065 = 3
+.param nsigma_pnpv_drb_cmos065 = 3
+.param nsigma_pnpv_drbm_cmos065 = 3
+.param nsigma_pnpv_nsub_cmos065 = 3
+.param nsigma_pnpv_dcje_cmos065 = 3
+.param nsigma_pnpv_dcjc_cmos065 = 3
+.param nsigma_pnpv_degxti_cmos065 = 3
+.param nsigma_pnpv_dxtb_cmos065 = 3
+
+
+
+
+
+
+
+
+
+
+
+
+.param process_stat_pnpv_cmos065 = 1
+.param nsigma_pnpv_wed_cmos065 = -3
+.param nsigma_pnpv_disvar_cmos065 = -3
+.param nsigma_pnpv_dise_cmos065 = -3
+.param nsigma_pnpv_disf_cmos065 = -3
+.param nsigma_pnpv_drb_cmos065 = -3
+.param nsigma_pnpv_drbm_cmos065 = -3
+.param nsigma_pnpv_nsub_cmos065 = -3
+.param nsigma_pnpv_dcje_cmos065 = -3
+.param nsigma_pnpv_dcjc_cmos065 = -3
+.param nsigma_pnpv_degxti_cmos065 = -3
+.param nsigma_pnpv_dxtb_cmos065 = -3
+
+
+
+
+
+
+
+
+
+
+
+.param npnv_wed_cmos065 = '0+nsigma_npnv_wed_cmos065*7e-08'
+.param npnv_disvar_cmos065 = '0+nsigma_npnv_disvar_cmos065*1'
+.param npnv_dise_cmos065 = '0+nsigma_npnv_dise_cmos065*0.11'
+.param npnv_disf_cmos065 = '0+nsigma_npnv_disf_cmos065*0.11'
+.param npnv_drb_cmos065 = '0+nsigma_npnv_drb_cmos065*0.0702'
+.param npnv_drbm_cmos065 = '0+nsigma_npnv_drbm_cmos065*0.0702'
+.param npnv_nsub_cmos065 = '0+nsigma_npnv_nsub_cmos065*0.05'
+.param npnv_dcje_cmos065 = '0+nsigma_npnv_dcje_cmos065*(nsigma_npnv_dcje_cmos065>0 ? 0.0418:0.0303667)'
+.param npnv_dcjc_cmos065 = '0+nsigma_npnv_dcjc_cmos065*(nsigma_npnv_dcjc_cmos065>0 ? 0.0801:0.0464333)'
+.param npnv_degxti_cmos065 = '0+nsigma_npnv_degxti_cmos065*1'
+.param npnv_dxtb_cmos065 = '0+nsigma_npnv_dxtb_cmos065*0.03'
+
+
+.param npnv_wed_cmos065 = '0+nsigma_npnv_wed_cmos065*7e-08'
+.param npnv_disvar_cmos065 = '0+nsigma_npnv_disvar_cmos065*1'
+.param npnv_dise_cmos065 = '0+nsigma_npnv_dise_cmos065*0.11'
+.param npnv_disf_cmos065 = '0+nsigma_npnv_disf_cmos065*0.11'
+.param npnv_drb_cmos065 = '0+nsigma_npnv_drb_cmos065*0.0702'
+.param npnv_drbm_cmos065 = '0+nsigma_npnv_drbm_cmos065*0.0702'
+.param npnv_nsub_cmos065 = '0+nsigma_npnv_nsub_cmos065*0.05'
+.param npnv_dcje_cmos065 = '0+nsigma_npnv_dcje_cmos065*(nsigma_npnv_dcje_cmos065>0 ? 0.0418:0.0303667)'
+.param npnv_dcjc_cmos065 = '0+nsigma_npnv_dcjc_cmos065*(nsigma_npnv_dcjc_cmos065>0 ? 0.0801:0.0464333)'
+.param npnv_degxti_cmos065 = '0+nsigma_npnv_degxti_cmos065*1'
+.param npnv_dxtb_cmos065 = '0+nsigma_npnv_dxtb_cmos065*0.03'
+
+
+.param pnpv_wed_cmos065 = '0+nsigma_pnpv_wed_cmos065*7e-08'
+.param pnpv_disvar_cmos065 = '0+nsigma_pnpv_disvar_cmos065*1'
+.param pnpv_dise_cmos065 = '0+nsigma_pnpv_dise_cmos065*0.08'
+.param pnpv_disf_cmos065 = '0+nsigma_pnpv_disf_cmos065*0.08'
+.param pnpv_drb_cmos065 = '0+nsigma_pnpv_drb_cmos065*0.1066'
+.param pnpv_drbm_cmos065 = '0+nsigma_pnpv_drbm_cmos065*0.1111'
+.param pnpv_nsub_cmos065 = '0+nsigma_pnpv_nsub_cmos065*0.05'
+.param pnpv_dcje_cmos065 = '0+nsigma_pnpv_dcje_cmos065*(nsigma_pnpv_dcje_cmos065>0 ? 0.0650667:0.0409667)'
+.param pnpv_dcjc_cmos065 = '0+nsigma_pnpv_dcjc_cmos065*(nsigma_pnpv_dcjc_cmos065>0 ? 0.0801:0.0464333)'
+.param pnpv_degxti_cmos065 = '0+nsigma_pnpv_degxti_cmos065*1'
+.param pnpv_dxtb_cmos065 = '0+nsigma_pnpv_dxtb_cmos065*0.03'
+
+
+.param pnpv_wed_cmos065 = '0+nsigma_pnpv_wed_cmos065*7e-08'
+.param pnpv_disvar_cmos065 = '0+nsigma_pnpv_disvar_cmos065*1'
+.param pnpv_dise_cmos065 = '0+nsigma_pnpv_dise_cmos065*0.08'
+.param pnpv_disf_cmos065 = '0+nsigma_pnpv_disf_cmos065*0.08'
+.param pnpv_drb_cmos065 = '0+nsigma_pnpv_drb_cmos065*0.1066'
+.param pnpv_drbm_cmos065 = '0+nsigma_pnpv_drbm_cmos065*0.1111'
+.param pnpv_nsub_cmos065 = '0+nsigma_pnpv_nsub_cmos065*0.05'
+.param pnpv_dcje_cmos065 = '0+nsigma_pnpv_dcje_cmos065*(nsigma_pnpv_dcje_cmos065>0 ? 0.0650667:0.0409667)'
+.param pnpv_dcjc_cmos065 = '0+nsigma_pnpv_dcjc_cmos065*(nsigma_pnpv_dcjc_cmos065>0 ? 0.0801:0.0464333)'
+.param pnpv_degxti_cmos065 = '0+nsigma_pnpv_degxti_cmos065*1'
+.param pnpv_dxtb_cmos065 = '0+nsigma_pnpv_dxtb_cmos065*0.03'
+
+
+.param process_stat_npnv_cmos065 = 0
+.param npnv_wed_cmos065 = npnv_wed_cmos065_alias
+.param npnv_wed_cmos065_alias = agauss(0,7e-08,1.0)
+.param npnv_disvar_cmos065 = npnv_disvar_cmos065_alias
+.param npnv_disvar_cmos065_alias = agauss(0,1,1.0)
+.param npnv_dise_cmos065 = npnv_dise_cmos065_alias
+.param npnv_dise_cmos065_alias = agauss(0,0.11,1.0)
+.param npnv_disf_cmos065 = npnv_disf_cmos065_alias
+.param npnv_disf_cmos065_alias = agauss(0,0.11,1.0)
+.param npnv_drb_cmos065 = npnv_drb_cmos065_alias
+.param npnv_drb_cmos065_alias = agauss(0,0.0702,1.0)
+.param npnv_drbm_cmos065 = npnv_drbm_cmos065_alias
+.param npnv_drbm_cmos065_alias = agauss(0,0.0702,1.0)
+.param npnv_nsub_cmos065 = npnv_nsub_cmos065_alias
+.param npnv_nsub_cmos065_alias = agauss(0,0.05,1.0)
+.param npnv_dcje_cmos065 = npnv_dcje_cmos065_alias
+.param npnv_dcje_cmos065_alias = aunif(0.01715,0.10825)
+.param npnv_dcjc_cmos065 = npnv_dcjc_cmos065_alias
+.param npnv_dcjc_cmos065_alias = aunif(0.0505,0.1898)
+.param npnv_degxti_cmos065 = npnv_degxti_cmos065_alias
+.param npnv_degxti_cmos065_alias = agauss(0,1,1.0)
+.param npnv_dxtb_cmos065 = npnv_dxtb_cmos065_alias
+.param npnv_dxtb_cmos065_alias = agauss(0,0.03,1.0)
+
+
+
+.param process_stat_npnv_cmos065 = 0
+.param npnv_wed_cmos065 = npnv_wed_cmos065_alias
+.param npnv_wed_cmos065_alias = aunif(0,2.1e-07)
+.param npnv_disvar_cmos065 = npnv_disvar_cmos065_alias
+.param npnv_disvar_cmos065_alias = aunif(0,3)
+.param npnv_dise_cmos065 = npnv_dise_cmos065_alias
+.param npnv_dise_cmos065_alias = aunif(0,0.33)
+.param npnv_disf_cmos065 = npnv_disf_cmos065_alias
+.param npnv_disf_cmos065_alias = aunif(0,0.33)
+.param npnv_drb_cmos065 = npnv_drb_cmos065_alias
+.param npnv_drb_cmos065_alias = aunif(0,0.2105)
+.param npnv_drbm_cmos065 = npnv_drbm_cmos065_alias
+.param npnv_drbm_cmos065_alias = aunif(0,0.2105)
+.param npnv_nsub_cmos065 = npnv_nsub_cmos065_alias
+.param npnv_nsub_cmos065_alias = aunif(0,0.15)
+.param npnv_dcje_cmos065 = npnv_dcje_cmos065_alias
+.param npnv_dcje_cmos065_alias = aunif(0.01715,0.10825)
+.param npnv_dcjc_cmos065 = npnv_dcjc_cmos065_alias
+.param npnv_dcjc_cmos065_alias = aunif(0.0505,0.1898)
+.param npnv_degxti_cmos065 = npnv_degxti_cmos065_alias
+.param npnv_degxti_cmos065_alias = aunif(0,3)
+.param npnv_dxtb_cmos065 = npnv_dxtb_cmos065_alias
+.param npnv_dxtb_cmos065_alias = aunif(0,0.09)
+
+
+
+.param process_stat_pnpv_cmos065 = 0
+.param pnpv_wed_cmos065 = pnpv_wed_cmos065_alias
+.param pnpv_wed_cmos065_alias = agauss(0,7e-08,1.0)
+.param pnpv_disvar_cmos065 = pnpv_disvar_cmos065_alias
+.param pnpv_disvar_cmos065_alias = agauss(0,1,1.0)
+.param pnpv_dise_cmos065 = pnpv_dise_cmos065_alias
+.param pnpv_dise_cmos065_alias = agauss(0,0.08,1.0)
+.param pnpv_disf_cmos065 = pnpv_disf_cmos065_alias
+.param pnpv_disf_cmos065_alias = agauss(0,0.08,1.0)
+.param pnpv_drb_cmos065 = pnpv_drb_cmos065_alias
+.param pnpv_drb_cmos065_alias = agauss(0,0.1066,1.0)
+.param pnpv_drbm_cmos065 = pnpv_drbm_cmos065_alias
+.param pnpv_drbm_cmos065_alias = agauss(0,0.1111,1.0)
+.param pnpv_nsub_cmos065 = pnpv_nsub_cmos065_alias
+.param pnpv_nsub_cmos065_alias = agauss(0,0.05,1.0)
+.param pnpv_dcje_cmos065 = pnpv_dcje_cmos065_alias
+.param pnpv_dcje_cmos065_alias = aunif(0.03615,0.15905)
+.param pnpv_dcjc_cmos065 = pnpv_dcjc_cmos065_alias
+.param pnpv_dcjc_cmos065_alias = aunif(0.0505,0.1898)
+.param pnpv_degxti_cmos065 = pnpv_degxti_cmos065_alias
+.param pnpv_degxti_cmos065_alias = agauss(0,1,1.0)
+.param pnpv_dxtb_cmos065 = pnpv_dxtb_cmos065_alias
+.param pnpv_dxtb_cmos065_alias = agauss(0,0.03,1.0)
+
+
+
+.param process_stat_pnpv_cmos065 = 0
+.param pnpv_wed_cmos065 = pnpv_wed_cmos065_alias
+.param pnpv_wed_cmos065_alias = aunif(0,2.1e-07)
+.param pnpv_disvar_cmos065 = pnpv_disvar_cmos065_alias
+.param pnpv_disvar_cmos065_alias = aunif(0,3)
+.param pnpv_dise_cmos065 = pnpv_dise_cmos065_alias
+.param pnpv_dise_cmos065_alias = aunif(0,0.24)
+.param pnpv_disf_cmos065 = pnpv_disf_cmos065_alias
+.param pnpv_disf_cmos065_alias = aunif(0,0.24)
+.param pnpv_drb_cmos065 = pnpv_drb_cmos065_alias
+.param pnpv_drb_cmos065_alias = aunif(0,0.32)
+.param pnpv_drbm_cmos065 = pnpv_drbm_cmos065_alias
+.param pnpv_drbm_cmos065_alias = aunif(0,0.3333)
+.param pnpv_nsub_cmos065 = pnpv_nsub_cmos065_alias
+.param pnpv_nsub_cmos065_alias = aunif(0,0.15)
+.param pnpv_dcje_cmos065 = pnpv_dcje_cmos065_alias
+.param pnpv_dcje_cmos065_alias = aunif(0.03615,0.15905)
+.param pnpv_dcjc_cmos065 = pnpv_dcjc_cmos065_alias
+.param pnpv_dcjc_cmos065_alias = aunif(0.0505,0.1898)
+.param pnpv_degxti_cmos065 = pnpv_degxti_cmos065_alias
+.param pnpv_degxti_cmos065_alias = aunif(0,3)
+.param pnpv_dxtb_cmos065 = pnpv_dxtb_cmos065_alias
+.param pnpv_dxtb_cmos065_alias = aunif(0,0.09)
+
+
+
+
+
+
+
+
+
+.subckt npniso25 c b e s
++ mismatch = 1
++  mult = 1
++  dic_mdev = 0
++  dib_mdev = 0
+
+
+.param dwed = npnv_wed_cmos065
+.param disvar = npnv_disvar_cmos065
+.param dise = npnv_dise_cmos065
+.param disf = npnv_disf_cmos065
+.param drb = npnv_drb_cmos065
+.param drbm = npnv_drbm_cmos065
+.param dcje = npnv_dcje_cmos065
+.param dcjc = npnv_dcjc_cmos065
+.param nsub = npnv_nsub_cmos065
+.param degxti = npnv_degxti_cmos065
+.param dxtb = npnv_dxtb_cmos065
+.param dis = 0.05
+.param dvar = -0.0001
+.param deg = 0.0075
+.param dxti = -0.105
+.param nis = '1+dis*disvar'
+.param nvar = '1+dvar*disvar'
+.param nise = '1+dise'
+.param nisf = '1+disf'
+.param nrb = '1+drb'
+.param nrbm = '1+drbm'
+.param ncje = '1+dcje'
+.param ncjc = '1+dcjc'
+.param nnsub = '1+nsub'
+.param neg = '1+deg*degxti'
+.param nxti = '1+dxti*degxti'
+.param nxtb = '1+dxtb'
+************************************************************************
+* Spread of model parameters
+************************************************************************
+************************************************************************
+
+.param shrinkcoef = 1
+.param area_shrinkcoef = 1
+.param perim_shrinkcoef = 1
+
+
+************************************************************************
+* temperature data
+************************************************************************
+.param ptnom = 27
+************************************************************************
+* device parameters (layout)
+************************************************************************
+.param w = '5e-06*shrinkcoef'
+.param l = '5e-06*shrinkcoef'
+.param dw = 'dwed*shrinkcoef'
+************************************************************************
+*  BE junction parameter layout
+************************************************************************
+.param aed = 'w*l'
+.param is = '4.923e-18*area_shrinkcoef'
+.param pnf = 1
+.param pvaf = 35.21
+.param var = 23
+.param prw = 0
+.param pvrp = 2
+.param pikf = '0.0206*area_shrinkcoef'
+.param pikr = '0.0206*area_shrinkcoef'
+.param isf = '6.867e-19*area_shrinkcoef'
+.param pnbf = 1
+.param pisr = '1e-31*area_shrinkcoef'
+.param ise = '4.377e-17*area_shrinkcoef'
+.param pne = 1.4
+.param rb = 169
+.param rbm = '57/perim_shrinkcoef'
+.param pre = '2.512/area_shrinkcoef'
+.param rc = 77
+.param pbvc = 1
+.param pmf = 0
+.param cje = '3.496e-14*area_shrinkcoef'
+.param pvje = 0.6839
+.param pmje = 0.294
+.param cjc = '4.331e-14*area_shrinkcoef'
+.param pvjc = 0.6249
+.param pmjc = 0.3222
+.param pxjbc = 1
+.param pxjbs = 1
+.param ptf = 3.46154e-10
+.param ptre1 = -0.0001859
+.param ptre2 = 4.0288e-06
+.param ptrbm1 = 0
+.param ptrbm2 = 0
+.param ptrb1 = 0
+.param ptrb2 = 0
+.param ptrc1 = 0
+.param ptrc2 = 0
+.param pmjs = 0.2562
+.param pvtf = 1
+.param ptr = 0
+.param pcjs = '2.574e-14*area_shrinkcoef'
+.param pnr = 1
+.param pkf = '3.9e-14/area_shrinkcoef'
+.param pfc = 0.95
+.param pvjs = 0.5
+.param pxtf = 0
+.param pptf = 30
+.param paf = 1.5
+.param pitf = pikf
+.param pvert = 1
+.param psubsn = 0
+.param eg = 1.17
+.param xti = 3.23
+.param xtb = 1.116
+************************************************************************
+* model paramaters
+************************************************************************
+************************************************************************
+* temperature dependence
+************************************************************************
+************************************************************************
+* spread of model parameters    
+************************************************************************
+************************************************************************
+* device parameters (layout)
+************************************************************************
+.param naed = '1+dw/w+dw/l'
+************************************************************************
+* currents spread
+************************************************************************
+.param pis = 'is*nis*naed'
+.param pvar = 'var*nvar'
+.param pisf = 'isf*nisf*naed'
+.param pise = 'ise*nise'
+.param pbf = 'pis/pisf'
+.param pbr = 'pis/pisr'
+************************************************************************
+* resistance spread
+************************************************************************
+.param prbm = 'rbm*nrbm'
+.param prb = 'rb*nrb'
+.param prc = 'rc/nnsub'
+
+************************************************************************
+* capacitance spread
+************************************************************************
+.param pcje = 'cje*ncje'
+.param pcjc = 'cjc*ncjc'
+.param peg = 'eg*neg'
+.param pxti = 'xti*nxti'
+.param pxtb = 'xtb*nxtb'
+************************************************************************
+* temperature dependence spread
+************************************************************************
+
+
+************************************************************************
+* mismatch effects
+************************************************************************
+
+.param mflag_no = '(npnv_dev==0 ? 1:0)'
+.param mflag_mc = '(npnv_dev==1 ? 1:0)'
+.param mflag_param = '(npnv_dev==3 ? 1:0)'
+
+* mismatch variations and translation into saturation currents for Ic and Ib
+
+.param dic_mean = 0
+.param dic_dev1 = 3.5e-09
+.param dic_dev2 = 0
+.param dic_fudge = 1
+.param dic_sigma = '(dic_dev1/sqrt(aed)+dic_dev2)*dic_fudge*mismatch/sqrt(2*mult)'
+.param dic_dev = dic_dev_alias
+.param dic_dev_alias = agauss(0,dic_sigma,1.0)
+
+.param dib_mean = 0
+.param dib_dev1 = 6.9e-09
+.param dib_dev2 = 0
+.param dib_fudge = 1
+.param dib_sigma = '(dib_dev1/sqrt(aed)+dib_dev2)*dib_fudge*mismatch/sqrt(2*mult)'
+.param dib_dev = dib_dev_alias
+.param dib_dev_alias = agauss(0,dib_sigma,1.0)
+
+.param dic_norm = '1+dic_mean+dic_dev*mflag_mc+dic_sigma*dic_mdev*mflag_param'
+.param dib_norm = '1+dib_mean+dib_dev*mflag_mc+dib_sigma*dib_mdev*mflag_param'
+
+
+
+************************************************************************
+* compact model parameters
+************************************************************************
+* intrinsic transistor
+q1 c b e s npniso25_int  area=mult
+q2 s c b npniso25_par  area=mult
+.model npniso25_int NPN
++ level=1 tref=27
++        is='pis*dic_norm'
++        bf='pis/pisf*dic_norm/dib_norm'
++        br='pis/pisr'
++        nf=1                    vaf=35.21                ikf=pikf          
++       ise=pise                  ne=1.4                   nr=1             
++       var=pvar                 ikr=pikr                  rb=prb           
++       rbm=prbm                  re=pre                   rc=prc           
++       cje=pcje                 vje=0.6839               mje=0.294         
++       cjc=pcjc                 vjc=0.6249               mjc=0.3222        
++       cjs=pcjs                 vjs=0.5                  mjs=0.2562        
++        fc=0.95                 xtf=0                     tf=3.46154e-10   
++       vtf=1                    ptf=30                    tr=0             
++        kf=pkf                   af=1.5                   eg=peg           
++      trb1=0                   trb2=0                   trc1=0             
++      trc2=0                   tre1=-0.0001859          tre2=4.0288e-06    
++       xtb=pxtb                 xti=pxti          
+
+
+.param pis_par = '9e-18*area_shrinkcoef'
+.param pisf_par = '8e-19*area_shrinkcoef'
+.param pisr_par = '1e-31*area_shrinkcoef'
+.param pbf_par = 'pis_par/pisf_par'
+.param pbr_par = 'pis_par/pisr_par'
+.model npniso25_par PNP
++ level=1 tref=27
++        is=pis_par               bf=pbf_par               br=pbr_par       
+
+
+
+
+************************************************************************
+
+*   
+
+
+
+
+
+.ends
+
+
+
+.subckt npniso4 c b e s
++ mismatch = 1
++  mult = 1
++  dic_mdev = 0
++  dib_mdev = 0
+
+
+.param dwed = npnv_wed_cmos065
+.param disvar = npnv_disvar_cmos065
+.param dise = npnv_dise_cmos065
+.param disf = npnv_disf_cmos065
+.param drb = npnv_drb_cmos065
+.param drbm = npnv_drbm_cmos065
+.param dcje = npnv_dcje_cmos065
+.param dcjc = npnv_dcjc_cmos065
+.param nsub = npnv_nsub_cmos065
+.param degxti = npnv_degxti_cmos065
+.param dxtb = npnv_dxtb_cmos065
+.param dis = 0.05
+.param dvar = -0.0001
+.param deg = 0.0075
+.param dxti = -0.105
+.param nis = '1+dis*disvar'
+.param nvar = '1+dvar*disvar'
+.param nise = '1+dise'
+.param nisf = '1+disf'
+.param nrb = '1+drb'
+.param nrbm = '1+drbm'
+.param ncje = '1+dcje'
+.param ncjc = '1+dcjc'
+.param nnsub = '1+nsub'
+.param neg = '1+deg*degxti'
+.param nxti = '1+dxti*degxti'
+.param nxtb = '1+dxtb'
+************************************************************************
+* Spread of model parameters
+************************************************************************
+************************************************************************
+
+.param shrinkcoef = 1
+.param area_shrinkcoef = 1
+.param perim_shrinkcoef = 1
+
+
+************************************************************************
+* temperature data
+************************************************************************
+.param ptnom = 27
+************************************************************************
+* device parameters (layout)
+************************************************************************
+.param w = '2e-06*shrinkcoef'
+.param l = '2e-06*shrinkcoef'
+.param dw = 'dwed*shrinkcoef'
+************************************************************************
+*  BE junction parameter layout
+************************************************************************
+.param aed = 'w*l'
+.param is = '9.214e-19*area_shrinkcoef'
+.param pnf = 1
+.param pvaf = 33.85
+.param var = 72.19
+.param prw = 0
+.param pvrp = 3
+.param pikf = '0.0049*area_shrinkcoef'
+.param pikr = '0.0049*area_shrinkcoef'
+.param isf = '1.396e-19*area_shrinkcoef'
+.param pnbf = 1
+.param pisr = '1e-31*area_shrinkcoef'
+.param ise = '5.775e-18*area_shrinkcoef'
+.param pne = 1.3
+.param rb = 222
+.param rbm = '110/perim_shrinkcoef'
+.param pre = '13/area_shrinkcoef'
+.param rc = 82
+.param pbvc = 7.41
+.param pmf = 0
+.param cje = '5.835e-15*area_shrinkcoef'
+.param pvje = 0.6965
+.param pmje = 0.2862
+.param cjc = '1.411e-14*area_shrinkcoef'
+.param pvjc = 0.6321
+.param pmjc = 0.3275
+.param pxjbc = 1
+.param pxjbs = 1
+.param ptf = 3.46154e-10
+.param ptre1 = 9.812e-05
+.param ptre2 = 2.7815e-06
+.param ptrbm1 = 0
+.param ptrbm2 = 0
+.param ptrb1 = 0
+.param ptrb2 = 0
+.param ptrc1 = 0
+.param ptrc2 = 0
+.param pmjs = 0.2331
+.param pvtf = 1
+.param ptr = 0
+.param pcjs = '1.4328e-14*area_shrinkcoef'
+.param pnr = 1
+.param pkf = '2.4e-13/area_shrinkcoef'
+.param pfc = 0.95
+.param pvjs = 0.5
+.param pxtf = 0
+.param pptf = 30
+.param paf = 1.5
+.param pitf = pikf
+.param pvert = 1
+.param psubsn = 0
+.param eg = 1.17
+.param xti = 3.23
+.param xtb = 1.256
+************************************************************************
+* model paramaters
+************************************************************************
+************************************************************************
+* temperature dependence
+************************************************************************
+************************************************************************
+* spread of model parameters    
+************************************************************************
+************************************************************************
+* device parameters (layout)
+************************************************************************
+.param naed = '1+dw/w+dw/l'
+************************************************************************
+* currents spread
+************************************************************************
+.param pis = 'is*nis*naed'
+.param pvar = 'var*nvar'
+.param pisf = 'isf*nisf*naed'
+.param pise = 'ise*nise'
+.param pbf = 'pis/pisf'
+.param pbr = 'pis/pisr'
+************************************************************************
+* resistance spread
+************************************************************************
+.param prbm = 'rbm*nrbm'
+.param prb = 'rb*nrb'
+.param prc = 'rc/nnsub'
+
+************************************************************************
+* capacitance spread
+************************************************************************
+.param pcje = 'cje*ncje'
+.param pcjc = 'cjc*ncjc'
+.param peg = 'eg*neg'
+.param pxti = 'xti*nxti'
+.param pxtb = 'xtb*nxtb'
+************************************************************************
+* temperature dependence spread
+************************************************************************
+
+
+************************************************************************
+* mismatch effects
+************************************************************************
+
+.param mflag_no = '(npnv_dev==0 ? 1:0)'
+.param mflag_mc = '(npnv_dev==1 ? 1:0)'
+.param mflag_param = '(npnv_dev==3 ? 1:0)'
+
+* mismatch variations and translation into saturation currents for Ic and Ib
+
+.param dic_mean = 0
+.param dic_dev1 = 3.5e-09
+.param dic_dev2 = 0
+.param dic_fudge = 1
+.param dic_sigma = '(dic_dev1/sqrt(aed)+dic_dev2)*dic_fudge*mismatch/sqrt(2*mult)'
+.param dic_dev = dic_dev_alias
+.param dic_dev_alias = agauss(0,dic_sigma,1.0)
+
+.param dib_mean = 0
+.param dib_dev1 = 6.9e-09
+.param dib_dev2 = 0
+.param dib_fudge = 1
+.param dib_sigma = '(dib_dev1/sqrt(aed)+dib_dev2)*dib_fudge*mismatch/sqrt(2*mult)'
+.param dib_dev = dib_dev_alias
+.param dib_dev_alias = agauss(0,dib_sigma,1.0)
+
+.param dic_norm = '1+dic_mean+dic_dev*mflag_mc+dic_sigma*dic_mdev*mflag_param'
+.param dib_norm = '1+dib_mean+dib_dev*mflag_mc+dib_sigma*dib_mdev*mflag_param'
+
+
+
+************************************************************************
+* compact model parameters
+************************************************************************
+* intrinsic transistor
+q1 c b e s npniso4_int  area=mult
+q2 s c b npniso4_par  area=mult
+.model npniso4_int NPN
++ level=1 tref=27
++        is='pis*dic_norm'
++        bf='pis/pisf*dic_norm/dib_norm'
++        br='pis/pisr'
++        nf=1                    vaf=33.85                ikf=pikf          
++       ise=pise                  ne=1.3                   nr=1             
++       var=pvar                 ikr=pikr                  rb=prb           
++       rbm=prbm                  re=pre                   rc=prc           
++       cje=pcje                 vje=0.6965               mje=0.2862        
++       cjc=pcjc                 vjc=0.6321               mjc=0.3275        
++       cjs=pcjs                 vjs=0.5                  mjs=0.2331        
++        fc=0.95                 xtf=0                     tf=3.46154e-10   
++       vtf=1                    ptf=30                    tr=0             
++        kf=pkf                   af=1.5                   eg=peg           
++      trb1=0                   trb2=0                   trc1=0             
++      trc2=0                   tre1=9.812e-05           tre2=2.7815e-06    
++       xtb=pxtb                 xti=pxti          
+
+
+.param pis_par = '3e-18*area_shrinkcoef'
+.param pisf_par = '6e-19*area_shrinkcoef'
+.param pisr_par = '1e-31*area_shrinkcoef'
+.param pbf_par = 'pis_par/pisf_par'
+.param pbr_par = 'pis_par/pisr_par'
+.model npniso4_par PNP
++ level=1 tref=27
++        is=pis_par               bf=pbf_par               br=pbr_par       
+
+
+
+
+************************************************************************
+
+*   
+
+
+
+
+
+.ends
+
+
+
+
+
+
+
+
+
+
+.subckt pnps25 c b e
++ mismatch = 1
++  mult = 1
++  dic_mdev = 0
++  dib_mdev = 0
+
+
+.param dwed = pnpv_wed_cmos065
+.param disvar = pnpv_disvar_cmos065
+.param dise = pnpv_dise_cmos065
+.param disf = pnpv_disf_cmos065
+.param drb = pnpv_drb_cmos065
+.param drbm = pnpv_drbm_cmos065
+.param dcje = pnpv_dcje_cmos065
+.param dcjc = pnpv_dcjc_cmos065
+.param nsub = pnpv_nsub_cmos065
+.param degxti = pnpv_degxti_cmos065
+.param dxtb = pnpv_dxtb_cmos065
+.param dis = 0.05
+.param dvar = -0.0001
+.param deg = 0.0075
+.param dxti = -0.105
+.param nis = '1+dis*disvar'
+.param nvar = '1+dvar*disvar'
+.param nise = '1+dise'
+.param nisf = '1+disf'
+.param nrb = '1+drb'
+.param nrbm = '1+drbm'
+.param ncje = '1+dcje'
+.param ncjc = '1+dcjc'
+.param nnsub = '1+nsub'
+.param neg = '1+deg*degxti'
+.param nxti = '1+dxti*degxti'
+.param nxtb = '1+dxtb'
+************************************************************************
+* Spread of model parameters
+************************************************************************
+************************************************************************
+
+.param shrinkcoef = 1
+.param area_shrinkcoef = 1
+.param perim_shrinkcoef = 1
+
+
+************************************************************************
+* temperature data
+************************************************************************
+.param ptnom = 27
+************************************************************************
+* device parameters (layout)
+************************************************************************
+.param w = '5e-06*shrinkcoef'
+.param l = '5e-06*shrinkcoef'
+.param dw = 'dwed*shrinkcoef'
+************************************************************************
+*  BE junction parameter layout
+************************************************************************
+.param aed = 'w*l'
+.param is = '2.767e-18*area_shrinkcoef'
+.param pnf = 1
+.param pvaf = 300
+.param var = 50
+.param prw = 0
+.param pvrp = 10
+.param pikf = '0.0025*area_shrinkcoef'
+.param pikr = '0.0025*area_shrinkcoef'
+.param isf = '2.62e-18*area_shrinkcoef'
+.param pnbf = 1
+.param pisr = '1.7e-16*area_shrinkcoef'
+.param ise = '3.1e-16*area_shrinkcoef'
+.param pne = 1.75
+.param rb = 69
+.param rbm = '28/perim_shrinkcoef'
+.param pre = '5/area_shrinkcoef'
+.param rc = 152
+.param pbvc = 14
+.param pmf = 0
+.param cje = '3.277e-14*area_shrinkcoef'
+.param pvje = 0.7147
+.param pmje = 0.2998
+.param cjc = '1.65e-14*area_shrinkcoef'
+.param pvjc = 0.55
+.param pmjc = 0.35
+.param pxjbc = 1
+.param pxjbs = 1
+.param ptf = 3.46154e-10
+.param ptre1 = -0.00016273
+.param ptre2 = 4.2973e-06
+.param ptrbm1 = 0
+.param ptrbm2 = 0
+.param ptrb1 = 0
+.param ptrb2 = 0
+.param ptrc1 = 0
+.param ptrc2 = 0
+.param pmjs = 0.5
+.param pvtf = 1
+.param ptr = 0
+.param pcjs = '0*area_shrinkcoef'
+.param pnr = 1
+.param pkf = '3.2e-17/area_shrinkcoef'
+.param pfc = 0.95
+.param pvjs = 0.75
+.param pxtf = 0
+.param pptf = 30
+.param paf = 1
+.param pitf = pikf
+.param pvert = 1
+.param psubsn = 0
+.param eg = 1.162
+.param xti = 3.15
+.param xtb = 1.226
+************************************************************************
+* model paramaters
+************************************************************************
+************************************************************************
+* temperature dependence
+************************************************************************
+************************************************************************
+* spread of model parameters    
+************************************************************************
+************************************************************************
+* device parameters (layout)
+************************************************************************
+.param naed = '1+dw/w+dw/l'
+************************************************************************
+* currents spread
+************************************************************************
+.param pis = 'is*nis*naed'
+.param pvar = 'var*nvar'
+.param pisf = 'isf*nisf*naed'
+.param pise = 'ise*nise'
+.param pbf = 'pis/pisf'
+.param pbr = 'pis/pisr'
+************************************************************************
+* resistance spread
+************************************************************************
+.param prbm = 'rbm*nrbm'
+.param prb = 'rb*nrb'
+.param prc = 'rc/nnsub'
+
+************************************************************************
+* capacitance spread
+************************************************************************
+.param pcje = 'cje*ncje'
+.param pcjc = 'cjc*ncjc'
+.param peg = 'eg*neg'
+.param pxti = 'xti*nxti'
+.param pxtb = 'xtb*nxtb'
+************************************************************************
+* temperature dependence spread
+************************************************************************
+
+
+************************************************************************
+* mismatch effects
+************************************************************************
+
+.param mflag_no = '(pnpv_dev==0 ? 1:0)'
+.param mflag_mc = '(pnpv_dev==1 ? 1:0)'
+.param mflag_param = '(pnpv_dev==3 ? 1:0)'
+
+* mismatch variations and translation into saturation currents for Ic and Ib
+
+.param dic_mean = 0
+.param dic_dev1 = 2.6e-09
+.param dic_dev2 = 0
+.param dic_fudge = 1
+.param dic_sigma = '(dic_dev1/sqrt(aed)+dic_dev2)*dic_fudge*mismatch/sqrt(2*mult)'
+.param dic_dev = dic_dev_alias
+.param dic_dev_alias = agauss(0,dic_sigma,1.0)
+
+.param dib_mean = 0
+.param dib_dev1 = 6.8e-09
+.param dib_dev2 = 0
+.param dib_fudge = 1
+.param dib_sigma = '(dib_dev1/sqrt(aed)+dib_dev2)*dib_fudge*mismatch/sqrt(2*mult)'
+.param dib_dev = dib_dev_alias
+.param dib_dev_alias = agauss(0,dib_sigma,1.0)
+
+.param dic_norm = '1+dic_mean+dic_dev*mflag_mc+dic_sigma*dic_mdev*mflag_param'
+.param dib_norm = '1+dib_mean+dib_dev*mflag_mc+dib_sigma*dib_mdev*mflag_param'
+
+
+
+************************************************************************
+* compact model parameters
+************************************************************************
+* intrinsic transistor
+q1 c b e pnps25_int  area=mult
+.model pnps25_int PNP
++ level=1 tref=27
++        is='pis*dic_norm'
++        bf='pis/pisf*dic_norm/dib_norm'
++        br='pis/pisr'
++        nf=1                    vaf=300                  ikf=pikf          
++       ise=pise                  ne=1.75                  nr=1             
++       var=pvar                 ikr=pikr                  rb=prb           
++       rbm=prbm                  re=pre                   rc=prc           
++       cje=pcje                 vje=0.7147               mje=0.2998        
++       cjc=pcjc                 vjc=0.55                 mjc=0.35          
++       cjs=pcjs                 vjs=0.75                 mjs=0.5           
++        fc=0.95                 xtf=0                     tf=3.46154e-10   
++       vtf=1                    ptf=30                    tr=0             
++        kf=pkf                   af=1                     eg=peg           
++      trb1=0                   trb2=0                   trc1=0             
++      trc2=0                   tre1=-0.00016273         tre2=4.2973e-06    
++       xtb=pxtb                 xti=pxti          
+
+
+
+************************************************************************
+
+*   
+
+
+
+
+
+.ends
+
+
