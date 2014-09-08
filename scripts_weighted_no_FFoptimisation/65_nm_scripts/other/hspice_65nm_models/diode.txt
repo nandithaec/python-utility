@@ -1,0 +1,13 @@
+
+*-------------------------------------------------------------------------------
+.subckt dnwps plus minus
++ area = 0.22
++  pj = 1.88
+
+
+d1 plus minus dnwps  area='area_diode*1e-06*1e-06' pj='pj_diode*1e-06'
+
+* # Parameters file : "vclass.dds,v 1.42 2010/02/04 09:23:17"    
+
+.ends
+

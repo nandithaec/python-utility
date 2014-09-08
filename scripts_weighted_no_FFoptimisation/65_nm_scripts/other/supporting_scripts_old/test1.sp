@@ -1,0 +1,1 @@
+.SUBCKT AND2X1 A B 0 Y vdd*corrected**Vvdd vdd 0 1.8*COMMENT Extracted with DK_cmos065lpgp_RF_7m4x0y2z_2V51V8@5.0.2@20070516.0 at 17:38 5 Jun 2007Xld_D0 gnds:F20 vdds:F21 DNWPS AREA=7.83275 PJ=13.5MM0 a_2_6# A vdd vdd pfet w=2u l=0.2u+ ad=0p pd=0u as=0p ps=0u 

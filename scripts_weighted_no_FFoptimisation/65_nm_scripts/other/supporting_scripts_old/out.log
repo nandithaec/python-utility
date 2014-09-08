@@ -1,0 +1,7665 @@
+length of lines 658
+length of lines 597
+*****************
+
+i is 0
+Current line: 
+
+*****************
+
+i is 1
+Current line: .SUBCKT HS65_GS_DFPQX4 Q D CP gnd gnds vdd vdds
+
+*****************
+
+i is 2
+Current line: 
+
+*****************
+
+i is 3
+Current line: *Modified
+
+*****************
+
+i is 4
+Current line: *COMMENT Extracted with DK_cmos065lpgp_RF_7m4x0y2z_2V51V8@5.0.2@20070413.0 at 12:44 14 May 2007
+
+*****************
+
+i is 5
+Current line: Xld_D0 gnds:F24 vdds:F25 DNWPS AREA=5.1312 PJ=10.24
+
+*****************
+
+i is 6
+Current line: MMM1 net47:F31 D:F32 gnd:F33 gnds:F30 NSVTGP AD=0.014p AS=0.0456667p L=0.06u NRD=0.35 NRS=0.4 PD=0.14u PS=0.530435u W=0.2u lpe=3 ngcon=1 po2act=0.296591 sca=1.69635 scb=0.000126319 scc=2.33728e-08
+
+*****************
+
+i is 7
+Current line: MMM12 CPN:F85 CP:F84 vdd:F83 vdds:F82 PSVTGP L=0.06u W=0.29u ad=0.058p as=0.0669495p lpe=3 ngcon=1 nrd=0.224138 nrs=15.3376 pd=0.69u po2act=0.28576 ps=0.636129u sca=14.0804 scb=0.0159942 scc=0.00146523
+
+*****************
+
+i is 8
+Current line: MMM13 CPN:F29 CP:F28 gnd:F27 gnds:F26 NSVTGP L=0.06u W=0.29u ad=0.05365p as=0.0662167p lpe=3 ngcon=1 nrd=0.206897 nrs=7.15869 pd=0.66u po2act=0.214753 ps=0.76913u sca=8.12641 scb=0.00955152 scc=0.000408996
+
+*****************
+
+i is 9
+Current line: MMM14 CPI:F87 CPN:F88 vdd:F89 vdds:F86 PSVTGP AD=0.0597p AS=0.0669495p L=0.06u NRD=0.344828 NRS=15.3376 PD=0.77u PS=0.636129u W=0.29u lpe=3 ngcon=1 po2act=0.275451 sca=14.0793 scb=0.0159942 scc=0.00146523
+
+*****************
+
+i is 10
+Current line: MMM15 CPI:F35 CPN:F36 gnd:F37 gnds:F34 NSVTGP AD=0.039p AS=0.0456667p L=0.06u NRD=0.3 NRS=8.2448 PD=0.59u PS=0.530435u W=0.2u lpe=3 ngcon=1 po2act=0.238627 sca=17.5984 scb=0.0199621 scc=0.00206349
+
+*****************
+
+i is 11
+Current line: MMM16 net0113:F97 net35:F96 vdd:F95 vdds:F94 PSVTGP L=0.06u W=0.29u ad=0.0517p as=0.0623595p lpe=3 ngcon=1 nrd=0.206897 nrs=10.6859 pd=0.69u po2act=0.214968 ps=0.763158u sca=12.0121 scb=0.0141722 scc=0.00107611
+
+*****************
+
+i is 12
+Current line: MMM17 net0113:F45 net35:F44 gnd:F43 gnds:F42 NSVTGP L=0.06u W=0.2u ad=0.038p as=0.0500821p lpe=3 ngcon=1 nrd=0.3 nrs=10.1217 pd=0.58u po2act=0.326495 ps=0.564179u sca=17.5978 scb=0.0199621 scc=0.00206349
+
+*****************
+
+i is 13
+Current line: MMM18 net0109:F47 net0113:F48 gnd:F49 gnds:F46 NSVTGP AD=0.014p AS=0.0500821p L=0.06u NRD=0.35 NRS=2.20697 PD=0.14u PS=0.564179u W=0.2u lpe=3 ngcon=1 po2act=0.282173 sca=2.32991 scb=0.000604316 scc=6.73457e-07
+
+*****************
+
+i is 14
+Current line: MMM19 net35:F55 CPI:F56 net0109:F57 gnds:F54 NSVTGP AD=0.035p AS=0.014p L=0.06u NRD=0.275 NRS=0.35 PD=0.55u PS=0.14u W=0.2u lpe=3 ngcon=1 po2act=0.24913 sca=2.33003 scb=0.000604316 scc=6.73457e-07
+
+*****************
+
+i is 15
+Current line: MMM20 net35:F107 CPN:F108 net053:F109 vdds:F106 PSVTGP AD=0.037p AS=0.014p L=0.06u NRD=0.3 NRS=0.35 PD=0.57u PS=0.14u W=0.2u lpe=3 ngcon=1 po2act=0.247344 sca=1.54672 scb=0.000125995 scc=2.33727e-08
+
+*****************
+
+i is 16
+Current line: MMM21 net053:F103 net0113:F104 vdd:F105 vdds:F102 PSVTGP AD=0.014p AS=0.0430066p L=0.06u NRD=0.35 NRS=1.97518 PD=0.14u PS=0.526316u W=0.2u lpe=3 ngcon=1 po2act=0.23417 sca=1.54656 scb=0.000125995 scc=2.33727e-08
+
+*****************
+
+i is 17
+Current line: MMM22 net0145:F99 net0113:F100 vdd:F101 vdds:F98 PSVTGP AD=0.027p AS=0.0580589p L=0.06u NRD=0.203704 NRS=10.8032 PD=0.2u PS=0.710526u W=0.27u lpe=3 ngcon=1 po2act=0.373692 sca=6.20515 scb=0.00679075 scc=0.000173611
+
+*****************
+
+i is 18
+Current line: MMM23 net0145:F51 net0113:F52 gnd:F53 gnds:F50 NSVTGP AD=0.029025p AS=0.0676108p L=0.06u NRD=0.240741 NRS=9.38888 PD=0.215u PS=0.761642u W=0.27u lpe=3 ngcon=1 po2act=0.454622 sca=14.7788 scb=0.0167784 scc=0.00156883
+
+*****************
+
+i is 19
+Current line: MMM24 net0145:F113 CPN:F112 net0148:F111 vdds:F110 PSVTGP L=0.06u W=0.27u ad=0.027p as=0.0347266p lpe=3 ngcon=1 nrd=0.203704 nrs=0.333333 pd=0.2u po2act=0.371244 ps=0.373404u sca=6.20538 scb=0.00679075 scc=0.000173611
+
+*****************
+
+i is 20
+Current line: MMM25 net0145:F61 CPI:F60 net0148:F59 gnds:F58 NSVTGP L=0.06u W=0.27u ad=0.029025p as=0.0322071p lpe=3 ngcon=1 nrd=0.222222 nrs=0.259259 pd=0.215u po2act=0.363522 ps=0.372857u sca=14.779 scb=0.0167784 scc=0.00156883
+
+*****************
+
+i is 21
+Current line: MMM26 net069:F121 net097:F120 vdd:F119 vdds:F118 PSVTGP L=0.06u W=0.2u ad=0.017p as=0.0364737p lpe=3 ngcon=1 nrd=0.425 nrs=8.68125 pd=0.17u po2act=0.630845 ps=0.349474u sca=6.20704 scb=0.00684993 scc=0.000149357
+
+*****************
+
+i is 22
+Current line: MMM27 net0148:F117 CPI:F116 net069:F115 vdds:F114 PSVTGP L=0.06u W=0.2u ad=0.0257234p as=0.017p lpe=3 ngcon=1 nrd=0.375 nrs=0.425 pd=0.276596u po2act=0.571307 ps=0.17u sca=8.55791 scb=0.0105547 scc=0.000414651
+
+*****************
+
+i is 23
+Current line: MMM28 net097:F125 net0148:F124 vdd:F123 vdds:F122 PSVTGP L=0.06u W=0.2u ad=0.082425p as=0.0364737p lpe=3 ngcon=1 nrd=1.74938 nrs=0.3 pd=1.13u po2act=0.211059 ps=0.349474u sca=1.10977 scb=1.22045e-05 scc=1.68552e-10
+
+*****************
+
+i is 24
+Current line: MMM29 net0148:F65 CPN:F64 net0133:F63 gnds:F62 NSVTGP L=0.06u W=0.15u ad=0.0178929p as=0.0105p lpe=3 ngcon=1 nrd=0.466667 nrs=0.466667 pd=0.207143u po2act=0.820147 ps=0.14u sca=12.5289 scb=0.0158913 scc=0.00101939
+
+*****************
+
+i is 25
+Current line: MMM30 net0133:F69 net097:F68 gnd:F67 gnds:F66 NSVTGP L=0.06u W=0.15u ad=0.0105p as=0.0273851p lpe=3 ngcon=1 nrd=0.466667 nrs=9.42667 pd=0.14u po2act=0.687885 ps=0.316216u sca=20.4056 scb=0.0226819 scc=0.00260982
+
+*****************
+
+i is 26
+Current line: MMM31 net097:F73 net0148:F72 gnd:F71 gnds:F70 NSVTGP L=0.06u W=0.2u ad=0.0755p as=0.0365135p lpe=3 ngcon=1 nrd=1.7 nrs=0.35 pd=1.06u po2act=0.214984 ps=0.421622u sca=1.88439 scb=0.000214041 scc=7.20983e-08
+
+*****************
+
+i is 27
+Current line: MMM32 Q:F127 net0148:F128 vdd:F129 vdds:F126 PSVTGP AD=0.09075p AS=0.100303p L=0.06u NRD=0.3 NRS=6.18099 PD=0.88u PS=0.961053u W=0.55u lpe=3 ngcon=1 po2act=0.200385 sca=3.81818 scb=0.00308337 scc=5.58864e-05
+
+*****************
+
+i is 28
+Current line: MMM33 Q:F75 net0148:F76 gnd:F77 gnds:F74 NSVTGP AD=0.06435p AS=0.0712014p L=0.06u NRD=0.282051 NRS=6.64323 PD=0.72u PS=0.822162u W=0.39u lpe=3 ngcon=1 po2act=0.192123 sca=11.6369 scb=0.0127786 scc=0.00109616
+
+*****************
+
+i is 29
+Current line: MMM4 net35:F39 CPN:F40 net47:F41 gnds:F38 NSVTGP AD=0.0862p AS=0.014p L=0.06u NRD=1.78633 NRS=0.35 PD=1.16u PS=0.14u W=0.2u lpe=3 ngcon=1 po2act=0.302652 sca=1.69604 scb=0.000126319 scc=2.33728e-08
+
+*****************
+
+i is 30
+Current line: MMM5 net35:F91 CPI:F92 net22:F93 vdds:F90 PSVTGP AD=0.0612p AS=0.0558p L=0.06u NRD=0.323529 NRS=0.323529 PD=0.7u PS=0.7u W=0.34u lpe=3 ngcon=1 po2act=0.17 sca=1.72715 scb=0.000243274 scc=1.32953e-07
+
+*****************
+
+i is 31
+Current line: MMM6 net22:F81 D:F80 vdd:F79 vdds:F78 PSVTGP L=0.06u W=0.35u ad=0.05775p as=0.0808011p lpe=3 ngcon=1 nrd=0.314286 nrs=0.885714 pd=0.68u po2act=0.211816 ps=0.767742u sca=1.36111 scb=6.68153e-05 scc=8.8344e-09
+
+*****************
+
+i is 32
+Current line: C100 CPN:F85 net22:F93 1.67092e-17
+
+cap1 = CPN:F85 , cap2= net22:F93 ,cap_new= C100 
+replacing..into for
+outside for C
+*****************
+
+i is 33
+Current line: C101 CPN:F85 net22:F81 1.7846e-18
+
+cap1 = CPN:F85 , cap2= net22:F81 ,cap_new= C101 
+replacing..into for
+outside for C
+*****************
+
+i is 34
+Current line: C103 CPN:F36 net22:F93 3.40032e-19
+
+cap1 = CPN:F36 , cap2= net22:F93 ,cap_new= C103 
+replacing..into for
+outside for C
+*****************
+
+i is 35
+Current line: C104 CPN:F36 net22:F81 1.4939e-19
+
+cap1 = CPN:F36 , cap2= net22:F81 ,cap_new= C104 
+replacing..into for
+outside for C
+*****************
+
+i is 36
+Current line: C106 CPN:F64 net069:F115 1.8244e-18
+
+cap1 = CPN:F64 , cap2= net069:F115 ,cap_new= C106 
+replacing..into for
+outside for C
+*****************
+
+i is 37
+Current line: C107 CPN:F64 net0145:F51 1.3585e-19
+
+cap1 = CPN:F64 , cap2= net0145:F51 ,cap_new= C107 
+replacing..into for
+outside for C
+*****************
+
+i is 38
+Current line: C109 CPN:F29 net0145:F99 1.11531e-21
+
+cap1 = CPN:F29 , cap2= net0145:F99 ,cap_new= C109 
+replacing..into for
+outside for C
+*****************
+
+i is 39
+Current line: C110 CPN:F29 net22:F81 9.67066e-22
+
+cap1 = CPN:F29 , cap2= net22:F81 ,cap_new= C110 
+replacing..into for
+outside for C
+*****************
+
+i is 40
+Current line: C112 CPN:F40 net0145:F99 1.15535e-19
+
+cap1 = CPN:F40 , cap2= net0145:F99 ,cap_new= C112 
+replacing..into for
+outside for C
+*****************
+
+i is 41
+Current line: C113 CPN:F40 net0145:F51 5.0981e-19
+
+cap1 = CPN:F40 , cap2= net0145:F51 ,cap_new= C113 
+replacing..into for
+outside for C
+*****************
+
+i is 42
+Current line: C114 CPN:F40 net0109:F47 4.91908e-18
+
+cap1 = CPN:F40 , cap2= net0109:F47 ,cap_new= C114 
+replacing..into for
+outside for C
+*****************
+
+i is 43
+Current line: C115 CPN:F40 net47:F31 1.86077e-17
+
+cap1 = CPN:F40 , cap2= net47:F31 ,cap_new= C115 
+replacing..into for
+outside for C
+*****************
+
+i is 44
+Current line: C117 D:F80 net22:F93 1.26294e-19
+
+cap1 = D:F80 , cap2= net22:F93 ,cap_new= C117 
+replacing..into for
+outside for C
+*****************
+
+i is 45
+Current line: C118 D:F80 net22:F81 3.72969e-17
+
+cap1 = D:F80 , cap2= net22:F81 ,cap_new= C118 
+replacing..into for
+outside for C
+*****************
+
+i is 46
+Current line: C120 D:F4 net22:F93 2.03738e-18
+
+cap1 = D:F4 , cap2= net22:F93 ,cap_new= C120 
+replacing..into for
+outside for C
+*****************
+
+i is 47
+Current line: C121 D:F4 net22:F81 1.03398e-17
+
+cap1 = D:F4 , cap2= net22:F81 ,cap_new= C121 
+replacing..into for
+outside for C
+*****************
+
+i is 48
+Current line: C128 net0148:F111 net069:F115 1.91616e-18
+
+cap1 = net0148:F111 , cap2= net069:F115 ,cap_new= C128 
+replacing..into for
+outside for C
+*****************
+
+i is 49
+Current line: C129 net0148:F111 net0145:F99 3.18974e-18
+
+cap1 = net0148:F111 , cap2= net0145:F99 ,cap_new= C129 
+replacing..into for
+outside for C
+*****************
+
+i is 50
+Current line: C13 net053:F103 net0145:F99 6.48454e-18
+
+cap1 = net053:F103 , cap2= net0145:F99 ,cap_new= C13 
+replacing..into for
+outside for C
+*****************
+
+i is 51
+Current line: C130 net0148:F111 net0145:F51 3.20378e-19
+
+cap1 = net0148:F111 , cap2= net0145:F51 ,cap_new= C130 
+replacing..into for
+outside for C
+*****************
+
+i is 52
+Current line: C132 net0148:F59 net0145:F99 6.86786e-19
+
+cap1 = net0148:F59 , cap2= net0145:F99 ,cap_new= C132 
+replacing..into for
+outside for C
+*****************
+
+i is 53
+Current line: C133 net0148:F59 net0133:F63 4.03504e-19
+
+cap1 = net0148:F59 , cap2= net0133:F63 ,cap_new= C133 
+replacing..into for
+outside for C
+*****************
+
+i is 54
+Current line: C134 net0148:F59 net0145:F51 6.62895e-17
+
+cap1 = net0148:F59 , cap2= net0145:F51 ,cap_new= C134 
+replacing..into for
+outside for C
+*****************
+
+i is 55
+Current line: C136 Q:F5 net0148:F128 1.43888e-17
+
+cap1 = Q:F5 , cap2= net0148:F128 ,cap_new= C136 
+replacing..into for
+outside for C
+*****************
+
+i is 56
+Current line: C137 Q:F5 net0148:F124 4.37731e-19
+
+cap1 = Q:F5 , cap2= net0148:F124 ,cap_new= C137 
+replacing..into for
+outside for C
+*****************
+
+i is 57
+Current line: C138 Q:F5 net097:F120 1.4333e-17
+
+cap1 = Q:F5 , cap2= net097:F120 ,cap_new= C138 
+replacing..into for
+outside for C
+*****************
+
+i is 58
+Current line: C139 Q:F5 net0148:F76 7.99158e-17
+
+cap1 = Q:F5 , cap2= net0148:F76 ,cap_new= C139 
+replacing..into for
+outside for C
+*****************
+
+i is 59
+Current line: C14 net053:F103 net0145:F51 7.48733e-20
+
+cap1 = net053:F103 , cap2= net0145:F51 ,cap_new= C14 
+replacing..into for
+outside for C
+*****************
+
+i is 60
+Current line: C140 Q:F5 net097:F73 1.18915e-17
+
+cap1 = Q:F5 , cap2= net097:F73 ,cap_new= C140 
+replacing..into for
+outside for C
+*****************
+
+i is 61
+Current line: C141 Q:F5 net097:F68 1.78035e-18
+
+cap1 = Q:F5 , cap2= net097:F68 ,cap_new= C141 
+replacing..into for
+outside for C
+*****************
+
+i is 62
+Current line: C143 Q:F75 net0148:F111 4.67771e-20
+
+cap1 = Q:F75 , cap2= net0148:F111 ,cap_new= C143 
+replacing..into for
+outside for C
+*****************
+
+i is 63
+Current line: C144 Q:F75 net0148:F76 2.79191e-17
+
+cap1 = Q:F75 , cap2= net0148:F76 ,cap_new= C144 
+replacing..into for
+outside for C
+*****************
+
+i is 64
+Current line: C145 Q:F75 net097:F73 3.06558e-19
+
+cap1 = Q:F75 , cap2= net097:F73 ,cap_new= C145 
+replacing..into for
+outside for C
+*****************
+
+i is 65
+Current line: C146 Q:F75 net0148:F72 7.23834e-18
+
+cap1 = Q:F75 , cap2= net0148:F72 ,cap_new= C146 
+replacing..into for
+outside for C
+*****************
+
+i is 66
+Current line: C147 Q:F75 net097:F68 2.12544e-19
+
+cap1 = Q:F75 , cap2= net097:F68 ,cap_new= C147 
+replacing..into for
+outside for C
+*****************
+
+i is 67
+Current line: C148 Q:F75 net0148:F59 3.28633e-21
+
+cap1 = Q:F75 , cap2= net0148:F59 ,cap_new= C148 
+replacing..into for
+outside for C
+*****************
+
+i is 68
+Current line: C150 Q:F127 net0148:F128 2.60944e-17
+
+cap1 = Q:F127 , cap2= net0148:F128 ,cap_new= C150 
+replacing..into for
+outside for C
+*****************
+
+i is 69
+Current line: C151 Q:F127 net097:F125 9.01758e-19
+
+cap1 = Q:F127 , cap2= net097:F125 ,cap_new= C151 
+replacing..into for
+outside for C
+*****************
+
+i is 70
+Current line: C152 Q:F127 net097:F120 6.21789e-20
+
+cap1 = Q:F127 , cap2= net097:F120 ,cap_new= C152 
+replacing..into for
+outside for C
+*****************
+
+i is 71
+Current line: C153 Q:F127 net0148:F111 1.65545e-19
+
+cap1 = Q:F127 , cap2= net0148:F111 ,cap_new= C153 
+replacing..into for
+outside for C
+*****************
+
+i is 72
+Current line: C154 Q:F127 net0148:F76 6.59514e-20
+
+cap1 = Q:F127 , cap2= net0148:F76 ,cap_new= C154 
+replacing..into for
+outside for C
+*****************
+
+i is 73
+Current line: C156 vdd:F8 net0148:F128 1.62253e-17
+
+cap1 = vdd:F8 , cap2= net0148:F128 ,cap_new= C156 
+replacing..into for
+outside for C
+*****************
+
+i is 74
+Current line: C157 vdd:F8 Q:F127 1.32832e-18
+
+cap1 = vdd:F8 , cap2= Q:F127 ,cap_new= C157 
+replacing..into for
+outside for C
+*****************
+
+i is 75
+Current line: C158 vdd:F8 net097:F125 3.80059e-17
+
+cap1 = vdd:F8 , cap2= net097:F125 ,cap_new= C158 
+replacing..into for
+outside for C
+*****************
+
+i is 76
+Current line: C159 vdd:F8 net0148:F124 2.07164e-17
+
+cap1 = vdd:F8 , cap2= net0148:F124 ,cap_new= C159 
+replacing..into for
+outside for C
+*****************
+
+i is 77
+Current line: C16 net35:F91 net053:F103 9.36103e-19
+
+cap1 = net35:F91 , cap2= net053:F103 ,cap_new= C16 
+replacing..into for
+outside for C
+*****************
+
+i is 78
+Current line: C160 vdd:F8 net097:F120 8.52221e-19
+
+cap1 = vdd:F8 , cap2= net097:F120 ,cap_new= C160 
+replacing..into for
+outside for C
+*****************
+
+i is 79
+Current line: C161 vdd:F8 CPI:F116 5.40397e-19
+
+cap1 = vdd:F8 , cap2= CPI:F116 ,cap_new= C161 
+replacing..into for
+outside for C
+*****************
+
+i is 80
+Current line: C162 vdd:F8 net0148:F111 5.21995e-19
+
+cap1 = vdd:F8 , cap2= net0148:F111 ,cap_new= C162 
+replacing..into for
+outside for C
+*****************
+
+i is 81
+Current line: C163 vdd:F8 CPN:F108 3.29221e-17
+
+cap1 = vdd:F8 , cap2= CPN:F108 ,cap_new= C163 
+replacing..into for
+outside for C
+*****************
+
+i is 82
+Current line: C164 vdd:F8 net35:F107 8.95661e-17
+
+cap1 = vdd:F8 , cap2= net35:F107 ,cap_new= C164 
+replacing..into for
+outside for C
+*****************
+
+i is 83
+Current line: C165 vdd:F8 net0113:F104 4.23689e-18
+
+cap1 = vdd:F8 , cap2= net0113:F104 ,cap_new= C165 
+replacing..into for
+outside for C
+*****************
+
+i is 84
+Current line: C166 vdd:F8 net22:F93 8.6283e-19
+
+cap1 = vdd:F8 , cap2= net22:F93 ,cap_new= C166 
+replacing..into for
+outside for C
+*****************
+
+i is 85
+Current line: C167 vdd:F8 CPI:F92 6.05703e-18
+
+cap1 = vdd:F8 , cap2= CPI:F92 ,cap_new= C167 
+replacing..into for
+outside for C
+*****************
+
+i is 86
+Current line: C168 vdd:F8 net35:F91 8.93421e-19
+
+cap1 = vdd:F8 , cap2= net35:F91 ,cap_new= C168 
+replacing..into for
+outside for C
+*****************
+
+i is 87
+Current line: C169 vdd:F8 CPN:F88 3.42693e-17
+
+cap1 = vdd:F8 , cap2= CPN:F88 ,cap_new= C169 
+replacing..into for
+outside for C
+*****************
+
+i is 88
+Current line: C17 net35:F91 net0145:F99 1.4672e-18
+
+cap1 = net35:F91 , cap2= net0145:F99 ,cap_new= C17 
+replacing..into for
+outside for C
+*****************
+
+i is 89
+Current line: C170 vdd:F8 CPI:F87 1.5747e-18
+
+cap1 = vdd:F8 , cap2= CPI:F87 ,cap_new= C170 
+replacing..into for
+outside for C
+*****************
+
+i is 90
+Current line: C171 vdd:F8 CPN:F85 4.28521e-18
+
+cap1 = vdd:F8 , cap2= CPN:F85 ,cap_new= C171 
+replacing..into for
+outside for C
+*****************
+
+i is 91
+Current line: C172 vdd:F8 net22:F81 1.04787e-16
+
+cap1 = vdd:F8 , cap2= net22:F81 ,cap_new= C172 
+replacing..into for
+outside for C
+*****************
+
+i is 92
+Current line: C173 vdd:F8 D:F80 4.3323e-17
+
+cap1 = vdd:F8 , cap2= D:F80 ,cap_new= C173 
+replacing..into for
+outside for C
+*****************
+
+i is 93
+Current line: C174 vdd:F8 net097:F68 1.60025e-20
+
+cap1 = vdd:F8 , cap2= net097:F68 ,cap_new= C174 
+replacing..into for
+outside for C
+*****************
+
+i is 94
+Current line: C175 vdd:F8 Q:F5 1.05213e-17
+
+cap1 = vdd:F8 , cap2= Q:F5 ,cap_new= C175 
+replacing..into for
+outside for C
+*****************
+
+i is 95
+Current line: C176 vdd:F8 D:F4 2.9991e-17
+
+cap1 = vdd:F8 , cap2= D:F4 ,cap_new= C176 
+replacing..into for
+outside for C
+*****************
+
+i is 96
+Current line: C178 vdd:F79 net097:F125 4.23092e-21
+
+cap1 = vdd:F79 , cap2= net097:F125 ,cap_new= C178 
+replacing..into for
+outside for C
+*****************
+
+i is 97
+Current line: C179 vdd:F79 CPN:F108 9.45368e-17
+
+cap1 = vdd:F79 , cap2= CPN:F108 ,cap_new= C179 
+replacing..into for
+outside for C
+*****************
+
+i is 98
+Current line: C180 vdd:F79 net35:F107 1.38336e-17
+
+cap1 = vdd:F79 , cap2= net35:F107 ,cap_new= C180 
+replacing..into for
+outside for C
+*****************
+
+i is 99
+Current line: C181 vdd:F79 net0113:F97 8.1862e-20
+
+cap1 = vdd:F79 , cap2= net0113:F97 ,cap_new= C181 
+replacing..into for
+outside for C
+*****************
+
+i is 100
+Current line: C182 vdd:F79 net22:F93 1.10469e-17
+
+cap1 = vdd:F79 , cap2= net22:F93 ,cap_new= C182 
+replacing..into for
+outside for C
+*****************
+
+i is 101
+Current line: C183 vdd:F79 CPI:F92 3.36794e-17
+
+cap1 = vdd:F79 , cap2= CPI:F92 ,cap_new= C183 
+replacing..into for
+outside for C
+*****************
+
+i is 102
+Current line: C184 vdd:F79 net35:F91 3.78314e-20
+
+cap1 = vdd:F79 , cap2= net35:F91 ,cap_new= C184 
+replacing..into for
+outside for C
+*****************
+
+i is 103
+Current line: C185 vdd:F79 CPN:F88 1.92171e-17
+
+cap1 = vdd:F79 , cap2= CPN:F88 ,cap_new= C185 
+replacing..into for
+outside for C
+*****************
+
+i is 104
+Current line: C186 vdd:F79 CPI:F87 6.38773e-19
+
+cap1 = vdd:F79 , cap2= CPI:F87 ,cap_new= C186 
+replacing..into for
+outside for C
+*****************
+
+i is 105
+Current line: C187 vdd:F79 CPN:F85 7.775e-18
+
+cap1 = vdd:F79 , cap2= CPN:F85 ,cap_new= C187 
+replacing..into for
+outside for C
+*****************
+
+i is 106
+Current line: C188 vdd:F79 net22:F81 9.61908e-18
+
+cap1 = vdd:F79 , cap2= net22:F81 ,cap_new= C188 
+replacing..into for
+outside for C
+*****************
+
+i is 107
+Current line: C189 vdd:F79 D:F80 1.99313e-17
+
+cap1 = vdd:F79 , cap2= D:F80 ,cap_new= C189 
+replacing..into for
+outside for C
+*****************
+
+i is 108
+Current line: C19 net35:F107 net053:F103 2.2381e-19
+
+cap1 = net35:F107 , cap2= net053:F103 ,cap_new= C19 
+replacing..into for
+outside for C
+*****************
+
+i is 109
+Current line: C190 vdd:F79 CPN:F36 1.97635e-18
+
+cap1 = vdd:F79 , cap2= CPN:F36 ,cap_new= C190 
+replacing..into for
+outside for C
+*****************
+
+i is 110
+Current line: C191 vdd:F79 CPN:F29 7.40506e-20
+
+cap1 = vdd:F79 , cap2= CPN:F29 ,cap_new= C191 
+replacing..into for
+outside for C
+*****************
+
+i is 111
+Current line: C192 vdd:F79 D:F4 1.28223e-18
+
+cap1 = vdd:F79 , cap2= D:F4 ,cap_new= C192 
+replacing..into for
+outside for C
+*****************
+
+i is 112
+Current line: C194 vdd:F123 net0148:F128 5.26395e-20
+
+cap1 = vdd:F123 , cap2= net0148:F128 ,cap_new= C194 
+replacing..into for
+outside for C
+*****************
+
+i is 113
+Current line: C195 vdd:F123 Q:F127 6.52306e-19
+
+cap1 = vdd:F123 , cap2= Q:F127 ,cap_new= C195 
+replacing..into for
+outside for C
+*****************
+
+i is 114
+Current line: C196 vdd:F123 net097:F125 2.86403e-17
+
+cap1 = vdd:F123 , cap2= net097:F125 ,cap_new= C196 
+replacing..into for
+outside for C
+*****************
+
+i is 115
+Current line: C197 vdd:F123 net0148:F124 1.07861e-16
+
+cap1 = vdd:F123 , cap2= net0148:F124 ,cap_new= C197 
+replacing..into for
+outside for C
+*****************
+
+i is 116
+Current line: C198 vdd:F123 net097:F120 2.35034e-17
+
+cap1 = vdd:F123 , cap2= net097:F120 ,cap_new= C198 
+replacing..into for
+outside for C
+*****************
+
+i is 117
+Current line: C199 vdd:F123 CPI:F116 4.85366e-18
+
+cap1 = vdd:F123 , cap2= CPI:F116 ,cap_new= C199 
+replacing..into for
+outside for C
+*****************
+
+i is 118
+Current line: C20 net35:F107 net0145:F51 1.61112e-19
+
+cap1 = net35:F107 , cap2= net0145:F51 ,cap_new= C20 
+replacing..into for
+outside for C
+*****************
+
+i is 119
+Current line: C200 vdd:F123 CPN:F112 7.46557e-18
+
+cap1 = vdd:F123 , cap2= CPN:F112 ,cap_new= C200 
+replacing..into for
+outside for C
+*****************
+
+i is 120
+Current line: C201 vdd:F123 net0148:F111 5.96323e-18
+
+cap1 = vdd:F123 , cap2= net0148:F111 ,cap_new= C201 
+replacing..into for
+outside for C
+*****************
+
+i is 121
+Current line: C202 vdd:F123 CPN:F108 2.40217e-17
+
+cap1 = vdd:F123 , cap2= CPN:F108 ,cap_new= C202 
+replacing..into for
+outside for C
+*****************
+
+i is 122
+Current line: C203 vdd:F123 net35:F107 1.72861e-20
+
+cap1 = vdd:F123 , cap2= net35:F107 ,cap_new= C203 
+replacing..into for
+outside for C
+*****************
+
+i is 123
+Current line: C204 vdd:F123 net0113:F104 3.07228e-17
+
+cap1 = vdd:F123 , cap2= net0113:F104 ,cap_new= C204 
+replacing..into for
+outside for C
+*****************
+
+i is 124
+Current line: C205 vdd:F123 net35:F91 2.05502e-21
+
+cap1 = vdd:F123 , cap2= net35:F91 ,cap_new= C205 
+replacing..into for
+outside for C
+*****************
+
+i is 125
+Current line: C206 vdd:F123 CPI:F87 2.80486e-17
+
+cap1 = vdd:F123 , cap2= CPI:F87 ,cap_new= C206 
+replacing..into for
+outside for C
+*****************
+
+i is 126
+Current line: C207 vdd:F123 net22:F81 4.25714e-20
+
+cap1 = vdd:F123 , cap2= net22:F81 ,cap_new= C207 
+replacing..into for
+outside for C
+*****************
+
+i is 127
+Current line: C208 vdd:F123 net0148:F76 2.40323e-18
+
+cap1 = vdd:F123 , cap2= net0148:F76 ,cap_new= C208 
+replacing..into for
+outside for C
+*****************
+
+i is 128
+Current line: C209 vdd:F123 net097:F73 3.95931e-20
+
+cap1 = vdd:F123 , cap2= net097:F73 ,cap_new= C209 
+replacing..into for
+outside for C
+*****************
+
+i is 129
+Current line: C210 vdd:F123 net0148:F72 2.22512e-20
+
+cap1 = vdd:F123 , cap2= net0148:F72 ,cap_new= C210 
+replacing..into for
+outside for C
+*****************
+
+i is 130
+Current line: C211 vdd:F123 net097:F68 2.72585e-18
+
+cap1 = vdd:F123 , cap2= net097:F68 ,cap_new= C211 
+replacing..into for
+outside for C
+*****************
+
+i is 131
+Current line: C212 vdd:F123 Q:F5 7.1392e-19
+
+cap1 = vdd:F123 , cap2= Q:F5 ,cap_new= C212 
+replacing..into for
+outside for C
+*****************
+
+i is 132
+Current line: C214 vdd:F105 Q:F127 4.83533e-21
+
+cap1 = vdd:F105 , cap2= Q:F127 ,cap_new= C214 
+replacing..into for
+outside for C
+*****************
+
+i is 133
+Current line: C215 vdd:F105 net097:F125 2.48012e-18
+
+cap1 = vdd:F105 , cap2= net097:F125 ,cap_new= C215 
+replacing..into for
+outside for C
+*****************
+
+i is 134
+Current line: C216 vdd:F105 net0148:F124 2.40709e-21
+
+cap1 = vdd:F105 , cap2= net0148:F124 ,cap_new= C216 
+replacing..into for
+outside for C
+*****************
+
+i is 135
+Current line: C217 vdd:F105 CPN:F112 5.09757e-18
+
+cap1 = vdd:F105 , cap2= CPN:F112 ,cap_new= C217 
+replacing..into for
+outside for C
+*****************
+
+i is 136
+Current line: C218 vdd:F105 net0148:F111 3.38095e-18
+
+cap1 = vdd:F105 , cap2= net0148:F111 ,cap_new= C218 
+replacing..into for
+outside for C
+*****************
+
+i is 137
+Current line: C219 vdd:F105 CPN:F108 5.90368e-18
+
+cap1 = vdd:F105 , cap2= CPN:F108 ,cap_new= C219 
+replacing..into for
+outside for C
+*****************
+
+i is 138
+Current line: C22 net35:F96 net0145:F99 8.44262e-19
+
+cap1 = net35:F96 , cap2= net0145:F99 ,cap_new= C22 
+replacing..into for
+outside for C
+*****************
+
+i is 139
+Current line: C220 vdd:F105 net35:F107 4.52066e-17
+
+cap1 = vdd:F105 , cap2= net35:F107 ,cap_new= C220 
+replacing..into for
+outside for C
+*****************
+
+i is 140
+Current line: C221 vdd:F105 net0113:F104 3.40693e-17
+
+cap1 = vdd:F105 , cap2= net0113:F104 ,cap_new= C221 
+replacing..into for
+outside for C
+*****************
+
+i is 141
+Current line: C222 vdd:F105 net0113:F100 1.10048e-17
+
+cap1 = vdd:F105 , cap2= net0113:F100 ,cap_new= C222 
+replacing..into for
+outside for C
+*****************
+
+i is 142
+Current line: C223 vdd:F105 net0113:F97 1.7773e-18
+
+cap1 = vdd:F105 , cap2= net0113:F97 ,cap_new= C223 
+replacing..into for
+outside for C
+*****************
+
+i is 143
+Current line: C224 vdd:F105 net35:F96 2.49988e-17
+
+cap1 = vdd:F105 , cap2= net35:F96 ,cap_new= C224 
+replacing..into for
+outside for C
+*****************
+
+i is 144
+Current line: C225 vdd:F105 net22:F93 3.52256e-20
+
+cap1 = vdd:F105 , cap2= net22:F93 ,cap_new= C225 
+replacing..into for
+outside for C
+*****************
+
+i is 145
+Current line: C226 vdd:F105 CPI:F92 4.2194e-17
+
+cap1 = vdd:F105 , cap2= CPI:F92 ,cap_new= C226 
+replacing..into for
+outside for C
+*****************
+
+i is 146
+Current line: C227 vdd:F105 net35:F91 1.007e-17
+
+cap1 = vdd:F105 , cap2= net35:F91 ,cap_new= C227 
+replacing..into for
+outside for C
+*****************
+
+i is 147
+Current line: C228 vdd:F105 CPN:F88 6.37732e-17
+
+cap1 = vdd:F105 , cap2= CPN:F88 ,cap_new= C228 
+replacing..into for
+outside for C
+*****************
+
+i is 148
+Current line: C229 vdd:F105 CPI:F87 1.70892e-18
+
+cap1 = vdd:F105 , cap2= CPI:F87 ,cap_new= C229 
+replacing..into for
+outside for C
+*****************
+
+i is 149
+Current line: C23 net35:F96 net0145:F51 8.0436e-20
+
+cap1 = net35:F96 , cap2= net0145:F51 ,cap_new= C23 
+replacing..into for
+outside for C
+*****************
+
+i is 150
+Current line: C230 vdd:F105 net22:F81 2.41231e-19
+
+cap1 = vdd:F105 , cap2= net22:F81 ,cap_new= C230 
+replacing..into for
+outside for C
+*****************
+
+i is 151
+Current line: C231 vdd:F105 net35:F44 4.70254e-20
+
+cap1 = vdd:F105 , cap2= net35:F44 ,cap_new= C231 
+replacing..into for
+outside for C
+*****************
+
+i is 152
+Current line: C232 vdd:F105 CPN:F40 6.13442e-21
+
+cap1 = vdd:F105 , cap2= CPN:F40 ,cap_new= C232 
+replacing..into for
+outside for C
+*****************
+
+i is 153
+Current line: C234 vdds:F126 net0148:F128 2.95314e-17
+
+cap1 = vdds:F126 , cap2= net0148:F128 ,cap_new= C234 
+replacing..into for
+outside for C
+*****************
+
+i is 154
+Current line: C235 vdds:F126 Q:F127 2.18278e-18
+
+cap1 = vdds:F126 , cap2= Q:F127 ,cap_new= C235 
+replacing..into for
+outside for C
+*****************
+
+i is 155
+Current line: C236 vdds:F126 net0148:F124 3.31858e-18
+
+cap1 = vdds:F126 , cap2= net0148:F124 ,cap_new= C236 
+replacing..into for
+outside for C
+*****************
+
+i is 156
+Current line: C237 vdds:F126 CPI:F116 1.28306e-17
+
+cap1 = vdds:F126 , cap2= CPI:F116 ,cap_new= C237 
+replacing..into for
+outside for C
+*****************
+
+i is 157
+Current line: C238 vdds:F126 CPN:F112 7.09091e-18
+
+cap1 = vdds:F126 , cap2= CPN:F112 ,cap_new= C238 
+replacing..into for
+outside for C
+*****************
+
+i is 158
+Current line: C239 vdds:F126 CPN:F108 7.06651e-18
+
+cap1 = vdds:F126 , cap2= CPN:F108 ,cap_new= C239 
+replacing..into for
+outside for C
+*****************
+
+i is 159
+Current line: C240 vdds:F126 net0113:F104 9.15461e-18
+
+cap1 = vdds:F126 , cap2= net0113:F104 ,cap_new= C240 
+replacing..into for
+outside for C
+*****************
+
+i is 160
+Current line: C241 vdds:F126 net0113:F100 1.49546e-18
+
+cap1 = vdds:F126 , cap2= net0113:F100 ,cap_new= C241 
+replacing..into for
+outside for C
+*****************
+
+i is 161
+Current line: C242 vdds:F126 net0113:F97 2.96318e-18
+
+cap1 = vdds:F126 , cap2= net0113:F97 ,cap_new= C242 
+replacing..into for
+outside for C
+*****************
+
+i is 162
+Current line: C243 vdds:F126 net22:F93 1.49158e-18
+
+cap1 = vdds:F126 , cap2= net22:F93 ,cap_new= C243 
+replacing..into for
+outside for C
+*****************
+
+i is 163
+Current line: C244 vdds:F126 CPI:F92 4.48758e-18
+
+cap1 = vdds:F126 , cap2= CPI:F92 ,cap_new= C244 
+replacing..into for
+outside for C
+*****************
+
+i is 164
+Current line: C245 vdds:F126 CPN:F88 3.49499e-17
+
+cap1 = vdds:F126 , cap2= CPN:F88 ,cap_new= C245 
+replacing..into for
+outside for C
+*****************
+
+i is 165
+Current line: C246 vdds:F126 CPI:F87 4.84806e-18
+
+cap1 = vdds:F126 , cap2= CPI:F87 ,cap_new= C246 
+replacing..into for
+outside for C
+*****************
+
+i is 166
+Current line: C247 vdds:F126 CPN:F85 1.12083e-19
+
+cap1 = vdds:F126 , cap2= CPN:F85 ,cap_new= C247 
+replacing..into for
+outside for C
+*****************
+
+i is 167
+Current line: C248 vdds:F126 CP:F84 3.08424e-17
+
+cap1 = vdds:F126 , cap2= CP:F84 ,cap_new= C248 
+replacing..into for
+outside for C
+*****************
+
+i is 168
+Current line: C249 vdds:F126 net22:F81 9.3204e-18
+
+cap1 = vdds:F126 , cap2= net22:F81 ,cap_new= C249 
+replacing..into for
+outside for C
+*****************
+
+i is 169
+Current line: C25 net35:F44 net0145:F99 1.00451e-18
+
+cap1 = net35:F44 , cap2= net0145:F99 ,cap_new= C25 
+replacing..into for
+outside for C
+*****************
+
+i is 170
+Current line: C250 vdds:F126 D:F80 3.20691e-17
+
+cap1 = vdds:F126 , cap2= D:F80 ,cap_new= C250 
+replacing..into for
+outside for C
+*****************
+
+i is 171
+Current line: C251 vdds:F126 net0133:F63 1.85353e-19
+
+cap1 = vdds:F126 , cap2= net0133:F63 ,cap_new= C251 
+replacing..into for
+outside for C
+*****************
+
+i is 172
+Current line: C252 vdds:F126 CPI:F60 4.67617e-19
+
+cap1 = vdds:F126 , cap2= CPI:F60 ,cap_new= C252 
+replacing..into for
+outside for C
+*****************
+
+i is 173
+Current line: C253 vdds:F126 CPN:F36 2.08854e-18
+
+cap1 = vdds:F126 , cap2= CPN:F36 ,cap_new= C253 
+replacing..into for
+outside for C
+*****************
+
+i is 174
+Current line: C254 vdds:F126 vdd:F8 4.2058e-16
+
+cap1 = vdds:F126 , cap2= vdd:F8 ,cap_new= C254 
+replacing..into for
+outside for C
+*****************
+
+i is 175
+Current line: C255 vdds:F126 Q:F5 1.00635e-17
+
+cap1 = vdds:F126 , cap2= Q:F5 ,cap_new= C255 
+replacing..into for
+outside for C
+*****************
+
+i is 176
+Current line: C256 vdds:F126 D:F4 4.47885e-17
+
+cap1 = vdds:F126 , cap2= D:F4 ,cap_new= C256 
+replacing..into for
+outside for C
+*****************
+
+i is 177
+Current line: C257 vdds:F126 CP:F3 1.15138e-18
+
+cap1 = vdds:F126 , cap2= CP:F3 ,cap_new= C257 
+replacing..into for
+outside for C
+*****************
+
+i is 178
+Current line: C259 vdds:F9 CPI:F116 2.68924e-21
+
+cap1 = vdds:F9 , cap2= CPI:F116 ,cap_new= C259 
+replacing..into for
+outside for C
+*****************
+
+i is 179
+Current line: C26 net35:F44 net0145:F51 1.76006e-19
+
+cap1 = net35:F44 , cap2= net0145:F51 ,cap_new= C26 
+replacing..into for
+outside for C
+*****************
+
+i is 180
+Current line: C260 vdds:F9 CPN:F88 4.01394e-20
+
+cap1 = vdds:F9 , cap2= CPN:F88 ,cap_new= C260 
+replacing..into for
+outside for C
+*****************
+
+i is 181
+Current line: C261 vdds:F9 CPI:F87 1.03652e-19
+
+cap1 = vdds:F9 , cap2= CPI:F87 ,cap_new= C261 
+replacing..into for
+outside for C
+*****************
+
+i is 182
+Current line: C262 vdds:F9 net22:F81 1.881e-17
+
+cap1 = vdds:F9 , cap2= net22:F81 ,cap_new= C262 
+replacing..into for
+outside for C
+*****************
+
+i is 183
+Current line: C263 vdds:F9 D:F80 1.02729e-19
+
+cap1 = vdds:F9 , cap2= D:F80 ,cap_new= C263 
+replacing..into for
+outside for C
+*****************
+
+i is 184
+Current line: C264 vdds:F9 vdd:F8 4.80478e-17
+
+cap1 = vdds:F9 , cap2= vdd:F8 ,cap_new= C264 
+replacing..into for
+outside for C
+*****************
+
+i is 185
+Current line: C265 vdds:F9 D:F4 1.74297e-19
+
+cap1 = vdds:F9 , cap2= D:F4 ,cap_new= C265 
+replacing..into for
+outside for C
+*****************
+
+i is 186
+Current line: C267 gnds:F24 net0148:F128 2.35324e-19
+
+cap1 = gnds:F24 , cap2= net0148:F128 ,cap_new= C267 
+replacing..into for
+outside for C
+*****************
+
+i is 187
+Current line: C268 gnds:F24 Q:F127 2.18264e-19
+
+cap1 = gnds:F24 , cap2= Q:F127 ,cap_new= C268 
+replacing..into for
+outside for C
+*****************
+
+i is 188
+Current line: C269 gnds:F24 vdds:F126 4.36321e-18
+
+cap1 = gnds:F24 , cap2= vdds:F126 ,cap_new= C269 
+replacing..into for
+outside for C
+*****************
+
+i is 189
+Current line: C270 gnds:F24 net0148:F124 7.94874e-19
+
+cap1 = gnds:F24 , cap2= net0148:F124 ,cap_new= C270 
+replacing..into for
+outside for C
+*****************
+
+i is 190
+Current line: C271 gnds:F24 CPI:F116 4.04807e-19
+
+cap1 = gnds:F24 , cap2= CPI:F116 ,cap_new= C271 
+replacing..into for
+outside for C
+*****************
+
+i is 191
+Current line: C272 gnds:F24 net0148:F111 4.55072e-19
+
+cap1 = gnds:F24 , cap2= net0148:F111 ,cap_new= C272 
+replacing..into for
+outside for C
+*****************
+
+i is 192
+Current line: C273 gnds:F24 CPN:F108 2.61826e-19
+
+cap1 = gnds:F24 , cap2= CPN:F108 ,cap_new= C273 
+replacing..into for
+outside for C
+*****************
+
+i is 193
+Current line: C274 gnds:F24 net35:F107 1.86854e-19
+
+cap1 = gnds:F24 , cap2= net35:F107 ,cap_new= C274 
+replacing..into for
+outside for C
+*****************
+
+i is 194
+Current line: C275 gnds:F24 vdd:F105 1.0375e-19
+
+cap1 = gnds:F24 , cap2= vdd:F105 ,cap_new= C275 
+replacing..into for
+outside for C
+*****************
+
+i is 195
+Current line: C276 gnds:F24 net053:F103 1.14401e-19
+
+cap1 = gnds:F24 , cap2= net053:F103 ,cap_new= C276 
+replacing..into for
+outside for C
+*****************
+
+i is 196
+Current line: C277 gnds:F24 net0113:F97 1.77559e-19
+
+cap1 = gnds:F24 , cap2= net0113:F97 ,cap_new= C277 
+replacing..into for
+outside for C
+*****************
+
+i is 197
+Current line: C278 gnds:F24 net35:F96 1.84455e-20
+
+cap1 = gnds:F24 , cap2= net35:F96 ,cap_new= C278 
+replacing..into for
+outside for C
+*****************
+
+i is 198
+Current line: C279 gnds:F24 CPN:F88 1.58725e-20
+
+cap1 = gnds:F24 , cap2= CPN:F88 ,cap_new= C279 
+replacing..into for
+outside for C
+*****************
+
+i is 199
+Current line: C28 net35:F39 net0145:F99 1.59025e-17
+
+cap1 = net35:F39 , cap2= net0145:F99 ,cap_new= C28 
+replacing..into for
+outside for C
+*****************
+
+i is 200
+Current line: C280 gnds:F24 CPI:F87 1.42828e-19
+
+cap1 = gnds:F24 , cap2= CPI:F87 ,cap_new= C280 
+replacing..into for
+outside for C
+*****************
+
+i is 201
+Current line: C281 gnds:F24 D:F80 4.09058e-20
+
+cap1 = gnds:F24 , cap2= D:F80 ,cap_new= C281 
+replacing..into for
+outside for C
+*****************
+
+i is 202
+Current line: C282 gnds:F24 net0148:F76 3.50622e-19
+
+cap1 = gnds:F24 , cap2= net0148:F76 ,cap_new= C282 
+replacing..into for
+outside for C
+*****************
+
+i is 203
+Current line: C283 gnds:F24 net35:F39 5.92328e-21
+
+cap1 = gnds:F24 , cap2= net35:F39 ,cap_new= C283 
+replacing..into for
+outside for C
+*****************
+
+i is 204
+Current line: C284 gnds:F24 CPN:F36 1.3014e-19
+
+cap1 = gnds:F24 , cap2= CPN:F36 ,cap_new= C284 
+replacing..into for
+outside for C
+*****************
+
+i is 205
+Current line: C285 gnds:F24 D:F32 6.33427e-17
+
+cap1 = gnds:F24 , cap2= D:F32 ,cap_new= C285 
+replacing..into for
+outside for C
+*****************
+
+i is 206
+Current line: C286 gnds:F24 CPN:F29 2.68197e-18
+
+cap1 = gnds:F24 , cap2= CPN:F29 ,cap_new= C286 
+replacing..into for
+outside for C
+*****************
+
+i is 207
+Current line: C287 gnds:F24 CP:F28 2.75553e-17
+
+cap1 = gnds:F24 , cap2= CP:F28 ,cap_new= C287 
+replacing..into for
+outside for C
+*****************
+
+i is 208
+Current line: C288 gnds:F24 vdds:F9 1.28288e-19
+
+cap1 = gnds:F24 , cap2= vdds:F9 ,cap_new= C288 
+replacing..into for
+outside for C
+*****************
+
+i is 209
+Current line: C289 gnds:F24 vdd:F8 2.09742e-18
+
+cap1 = gnds:F24 , cap2= vdd:F8 ,cap_new= C289 
+replacing..into for
+outside for C
+*****************
+
+i is 210
+Current line: C29 net35:F39 net0145:F51 1.51591e-18
+
+cap1 = net35:F39 , cap2= net0145:F51 ,cap_new= C29 
+replacing..into for
+outside for C
+*****************
+
+i is 211
+Current line: C290 gnds:F24 Q:F5 1.28423e-18
+
+cap1 = gnds:F24 , cap2= Q:F5 ,cap_new= C290 
+replacing..into for
+outside for C
+*****************
+
+i is 212
+Current line: C291 gnds:F24 D:F4 5.00972e-19
+
+cap1 = gnds:F24 , cap2= D:F4 ,cap_new= C291 
+replacing..into for
+outside for C
+*****************
+
+i is 213
+Current line: C292 gnds:F24 CP:F3 3.65027e-20
+
+cap1 = gnds:F24 , cap2= CP:F3 ,cap_new= C292 
+replacing..into for
+outside for C
+*****************
+
+i is 214
+Current line: C293 gnds:F74 Q:F127 6.06068e-18
+
+cap1 = gnds:F74 , cap2= Q:F127 ,cap_new= C293 
+replacing..into for
+outside for C
+*****************
+
+i is 215
+Current line: C294 gnds:F74 vdds:F126 8.86341e-19
+
+cap1 = gnds:F74 , cap2= vdds:F126 ,cap_new= C294 
+replacing..into for
+outside for C
+*****************
+
+i is 216
+Current line: C295 gnds:F74 net0148:F124 2.64835e-18
+
+cap1 = gnds:F74 , cap2= net0148:F124 ,cap_new= C295 
+replacing..into for
+outside for C
+*****************
+
+i is 217
+Current line: C296 gnds:F74 vdd:F123 1.09015e-17
+
+cap1 = gnds:F74 , cap2= vdd:F123 ,cap_new= C296 
+replacing..into for
+outside for C
+*****************
+
+i is 218
+Current line: C297 gnds:F74 CPI:F116 2.09345e-18
+
+cap1 = gnds:F74 , cap2= CPI:F116 ,cap_new= C297 
+replacing..into for
+outside for C
+*****************
+
+i is 219
+Current line: C298 gnds:F74 net069:F115 5.58881e-18
+
+cap1 = gnds:F74 , cap2= net069:F115 ,cap_new= C298 
+replacing..into for
+outside for C
+*****************
+
+i is 220
+Current line: C299 gnds:F74 CPN:F112 2.29309e-19
+
+cap1 = gnds:F74 , cap2= CPN:F112 ,cap_new= C299 
+replacing..into for
+outside for C
+*****************
+
+i is 221
+Current line: C30 net35:F39 net0109:F47 2.27577e-19
+
+cap1 = net35:F39 , cap2= net0109:F47 ,cap_new= C30 
+replacing..into for
+outside for C
+*****************
+
+i is 222
+Current line: C300 gnds:F74 net0148:F111 6.9467e-18
+
+cap1 = gnds:F74 , cap2= net0148:F111 ,cap_new= C300 
+replacing..into for
+outside for C
+*****************
+
+i is 223
+Current line: C301 gnds:F74 CPN:F108 1.42961e-19
+
+cap1 = gnds:F74 , cap2= CPN:F108 ,cap_new= C301 
+replacing..into for
+outside for C
+*****************
+
+i is 224
+Current line: C302 gnds:F74 net35:F107 1.17111e-20
+
+cap1 = gnds:F74 , cap2= net35:F107 ,cap_new= C302 
+replacing..into for
+outside for C
+*****************
+
+i is 225
+Current line: C303 gnds:F74 vdd:F105 7.55882e-18
+
+cap1 = gnds:F74 , cap2= vdd:F105 ,cap_new= C303 
+replacing..into for
+outside for C
+*****************
+
+i is 226
+Current line: C304 gnds:F74 net053:F103 1.11118e-19
+
+cap1 = gnds:F74 , cap2= net053:F103 ,cap_new= C304 
+replacing..into for
+outside for C
+*****************
+
+i is 227
+Current line: C305 gnds:F74 net0113:F97 1.01711e-17
+
+cap1 = gnds:F74 , cap2= net0113:F97 ,cap_new= C305 
+replacing..into for
+outside for C
+*****************
+
+i is 228
+Current line: C306 gnds:F74 net35:F96 6.01092e-18
+
+cap1 = gnds:F74 , cap2= net35:F96 ,cap_new= C306 
+replacing..into for
+outside for C
+*****************
+
+i is 229
+Current line: C307 gnds:F74 net22:F93 6.17796e-18
+
+cap1 = gnds:F74 , cap2= net22:F93 ,cap_new= C307 
+replacing..into for
+outside for C
+*****************
+
+i is 230
+Current line: C308 gnds:F74 CPI:F92 9.74878e-19
+
+cap1 = gnds:F74 , cap2= CPI:F92 ,cap_new= C308 
+replacing..into for
+outside for C
+*****************
+
+i is 231
+Current line: C309 gnds:F74 net35:F91 3.02961e-18
+
+cap1 = gnds:F74 , cap2= net35:F91 ,cap_new= C309 
+replacing..into for
+outside for C
+*****************
+
+i is 232
+Current line: C310 gnds:F74 CPN:F88 1.0266e-17
+
+cap1 = gnds:F74 , cap2= CPN:F88 ,cap_new= C310 
+replacing..into for
+outside for C
+*****************
+
+i is 233
+Current line: C311 gnds:F74 CPI:F87 8.1675e-18
+
+cap1 = gnds:F74 , cap2= CPI:F87 ,cap_new= C311 
+replacing..into for
+outside for C
+*****************
+
+i is 234
+Current line: C312 gnds:F74 CPN:F85 1.49987e-17
+
+cap1 = gnds:F74 , cap2= CPN:F85 ,cap_new= C312 
+replacing..into for
+outside for C
+*****************
+
+i is 235
+Current line: C313 gnds:F74 CP:F84 3.12031e-18
+
+cap1 = gnds:F74 , cap2= CP:F84 ,cap_new= C313 
+replacing..into for
+outside for C
+*****************
+
+i is 236
+Current line: C314 gnds:F74 net22:F81 5.01295e-18
+
+cap1 = gnds:F74 , cap2= net22:F81 ,cap_new= C314 
+replacing..into for
+outside for C
+*****************
+
+i is 237
+Current line: C315 gnds:F74 D:F80 8.11133e-20
+
+cap1 = gnds:F74 , cap2= D:F80 ,cap_new= C315 
+replacing..into for
+outside for C
+*****************
+
+i is 238
+Current line: C316 gnds:F74 vdd:F79 1.47005e-17
+
+cap1 = gnds:F74 , cap2= vdd:F79 ,cap_new= C316 
+replacing..into for
+outside for C
+*****************
+
+i is 239
+Current line: C317 gnds:F74 net0148:F76 2.17455e-17
+
+cap1 = gnds:F74 , cap2= net0148:F76 ,cap_new= C317 
+replacing..into for
+outside for C
+*****************
+
+i is 240
+Current line: C318 gnds:F74 Q:F75 2.32532e-18
+
+cap1 = gnds:F74 , cap2= Q:F75 ,cap_new= C318 
+replacing..into for
+outside for C
+*****************
+
+i is 241
+Current line: C319 gnds:F74 net0148:F72 1.30971e-17
+
+cap1 = gnds:F74 , cap2= net0148:F72 ,cap_new= C319 
+replacing..into for
+outside for C
+*****************
+
+i is 242
+Current line: C32 net35:F55 net0109:F47 5.8296e-19
+
+cap1 = net35:F55 , cap2= net0109:F47 ,cap_new= C32 
+replacing..into for
+outside for C
+*****************
+
+i is 243
+Current line: C320 gnds:F74 CPN:F64 6.16889e-18
+
+cap1 = gnds:F74 , cap2= CPN:F64 ,cap_new= C320 
+replacing..into for
+outside for C
+*****************
+
+i is 244
+Current line: C321 gnds:F74 CPI:F60 6.45978e-18
+
+cap1 = gnds:F74 , cap2= CPI:F60 ,cap_new= C321 
+replacing..into for
+outside for C
+*****************
+
+i is 245
+Current line: C322 gnds:F74 CPI:F56 7.73474e-19
+
+cap1 = gnds:F74 , cap2= CPI:F56 ,cap_new= C322 
+replacing..into for
+outside for C
+*****************
+
+i is 246
+Current line: C323 gnds:F74 net0113:F52 5.772e-18
+
+cap1 = gnds:F74 , cap2= net0113:F52 ,cap_new= C323 
+replacing..into for
+outside for C
+*****************
+
+i is 247
+Current line: C324 gnds:F74 net0113:F48 2.11443e-18
+
+cap1 = gnds:F74 , cap2= net0113:F48 ,cap_new= C324 
+replacing..into for
+outside for C
+*****************
+
+i is 248
+Current line: C325 gnds:F74 net35:F44 2.37267e-18
+
+cap1 = gnds:F74 , cap2= net35:F44 ,cap_new= C325 
+replacing..into for
+outside for C
+*****************
+
+i is 249
+Current line: C326 gnds:F74 CPN:F40 3.69683e-17
+
+cap1 = gnds:F74 , cap2= CPN:F40 ,cap_new= C326 
+replacing..into for
+outside for C
+*****************
+
+i is 250
+Current line: C327 gnds:F74 net35:F39 3.28669e-18
+
+cap1 = gnds:F74 , cap2= net35:F39 ,cap_new= C327 
+replacing..into for
+outside for C
+*****************
+
+i is 251
+Current line: C328 gnds:F74 CP:F28 1.55919e-18
+
+cap1 = gnds:F74 , cap2= CP:F28 ,cap_new= C328 
+replacing..into for
+outside for C
+*****************
+
+i is 252
+Current line: C329 gnds:F74 vdds:F9 5.62548e-18
+
+cap1 = gnds:F74 , cap2= vdds:F9 ,cap_new= C329 
+replacing..into for
+outside for C
+*****************
+
+i is 253
+Current line: C33 net35:F55 net0145:F51 4.25378e-19
+
+cap1 = net35:F55 , cap2= net0145:F51 ,cap_new= C33 
+replacing..into for
+outside for C
+*****************
+
+i is 254
+Current line: C330 gnds:F74 vdd:F8 4.25097e-17
+
+cap1 = gnds:F74 , cap2= vdd:F8 ,cap_new= C330 
+replacing..into for
+outside for C
+*****************
+
+i is 255
+Current line: C331 gnds:F74 Q:F5 9.95422e-18
+
+cap1 = gnds:F74 , cap2= Q:F5 ,cap_new= C331 
+replacing..into for
+outside for C
+*****************
+
+i is 256
+Current line: C332 gnds:F74 D:F4 3.21437e-17
+
+cap1 = gnds:F74 , cap2= D:F4 ,cap_new= C332 
+replacing..into for
+outside for C
+*****************
+
+i is 257
+Current line: C333 gnds:F74 CP:F3 1.29162e-18
+
+cap1 = gnds:F74 , cap2= CP:F3 ,cap_new= C333 
+replacing..into for
+outside for C
+*****************
+
+i is 258
+Current line: C334 gnds:F7 vdds:F126 8.56536e-21
+
+cap1 = gnds:F7 , cap2= vdds:F126 ,cap_new= C334 
+replacing..into for
+outside for C
+*****************
+
+i is 259
+Current line: C335 gnds:F7 net0113:F97 4.04816e-22
+
+cap1 = gnds:F7 , cap2= net0113:F97 ,cap_new= C335 
+replacing..into for
+outside for C
+*****************
+
+i is 260
+Current line: C336 gnds:F7 CPN:F85 4.82575e-18
+
+cap1 = gnds:F7 , cap2= CPN:F85 ,cap_new= C336 
+replacing..into for
+outside for C
+*****************
+
+i is 261
+Current line: C337 gnds:F7 net22:F81 1.28914e-20
+
+cap1 = gnds:F7 , cap2= net22:F81 ,cap_new= C337 
+replacing..into for
+outside for C
+*****************
+
+i is 262
+Current line: C338 gnds:F7 D:F80 1.47194e-18
+
+cap1 = gnds:F7 , cap2= D:F80 ,cap_new= C338 
+replacing..into for
+outside for C
+*****************
+
+i is 263
+Current line: C339 gnds:F7 net35:F44 6.77967e-20
+
+cap1 = gnds:F7 , cap2= net35:F44 ,cap_new= C339 
+replacing..into for
+outside for C
+*****************
+
+i is 264
+Current line: C340 gnds:F7 net35:F39 6.45839e-19
+
+cap1 = gnds:F7 , cap2= net35:F39 ,cap_new= C340 
+replacing..into for
+outside for C
+*****************
+
+i is 265
+Current line: C341 gnds:F7 D:F32 3.6704e-20
+
+cap1 = gnds:F7 , cap2= D:F32 ,cap_new= C341 
+replacing..into for
+outside for C
+*****************
+
+i is 266
+Current line: C342 gnds:F7 CPN:F29 8.11637e-20
+
+cap1 = gnds:F7 , cap2= CPN:F29 ,cap_new= C342 
+replacing..into for
+outside for C
+*****************
+
+i is 267
+Current line: C343 gnds:F7 CP:F28 8.27987e-19
+
+cap1 = gnds:F7 , cap2= CP:F28 ,cap_new= C343 
+replacing..into for
+outside for C
+*****************
+
+i is 268
+Current line: C344 gnds:F7 vdds:F9 2.80166e-18
+
+cap1 = gnds:F7 , cap2= vdds:F9 ,cap_new= C344 
+replacing..into for
+outside for C
+*****************
+
+i is 269
+Current line: C345 gnds:F7 vdd:F8 1.69672e-18
+
+cap1 = gnds:F7 , cap2= vdd:F8 ,cap_new= C345 
+replacing..into for
+outside for C
+*****************
+
+i is 270
+Current line: C347 gnd:115 net0148:F128 2.64872e-17
+
+cap1 = gnd:115 , cap2= net0148:F128 ,cap_new= C347 
+replacing..into for
+outside for C
+*****************
+
+i is 271
+Current line: C348 gnd:115 Q:F127 1.53834e-18
+
+cap1 = gnd:115 , cap2= Q:F127 ,cap_new= C348 
+replacing..into for
+outside for C
+*****************
+
+i is 272
+Current line: C349 gnd:115 vdds:F126 1.4224e-16
+
+cap1 = gnd:115 , cap2= vdds:F126 ,cap_new= C349 
+replacing..into for
+outside for C
+*****************
+
+i is 273
+Current line: C350 gnd:115 net097:F125 1.68007e-18
+
+cap1 = gnd:115 , cap2= net097:F125 ,cap_new= C350 
+replacing..into for
+outside for C
+*****************
+
+i is 274
+Current line: C351 gnd:115 net0148:F124 7.47689e-19
+
+cap1 = gnd:115 , cap2= net0148:F124 ,cap_new= C351 
+replacing..into for
+outside for C
+*****************
+
+i is 275
+Current line: C352 gnd:115 vdd:F123 4.1046e-18
+
+cap1 = gnd:115 , cap2= vdd:F123 ,cap_new= C352 
+replacing..into for
+outside for C
+*****************
+
+i is 276
+Current line: C353 gnd:115 net097:F120 3.57049e-17
+
+cap1 = gnd:115 , cap2= net097:F120 ,cap_new= C353 
+replacing..into for
+outside for C
+*****************
+
+i is 277
+Current line: C354 gnd:115 CPI:F116 9.66217e-19
+
+cap1 = gnd:115 , cap2= CPI:F116 ,cap_new= C354 
+replacing..into for
+outside for C
+*****************
+
+i is 278
+Current line: C355 gnd:115 net069:F115 6.82034e-19
+
+cap1 = gnd:115 , cap2= net069:F115 ,cap_new= C355 
+replacing..into for
+outside for C
+*****************
+
+i is 279
+Current line: C356 gnd:115 CPN:F112 5.16708e-19
+
+cap1 = gnd:115 , cap2= CPN:F112 ,cap_new= C356 
+replacing..into for
+outside for C
+*****************
+
+i is 280
+Current line: C357 gnd:115 net0148:F111 1.25376e-18
+
+cap1 = gnd:115 , cap2= net0148:F111 ,cap_new= C357 
+replacing..into for
+outside for C
+*****************
+
+i is 281
+Current line: C358 gnd:115 CPN:F108 1.05367e-18
+
+cap1 = gnd:115 , cap2= CPN:F108 ,cap_new= C358 
+replacing..into for
+outside for C
+*****************
+
+i is 282
+Current line: C359 gnd:115 net35:F107 4.23312e-19
+
+cap1 = gnd:115 , cap2= net35:F107 ,cap_new= C359 
+replacing..into for
+outside for C
+*****************
+
+i is 283
+Current line: C36 net0113:F100 net0145:F99 2.55716e-17
+
+cap1 = net0113:F100 , cap2= net0145:F99 ,cap_new= C36 
+replacing..into for
+outside for C
+*****************
+
+i is 284
+Current line: C360 gnd:115 vdd:F105 3.02415e-18
+
+cap1 = gnd:115 , cap2= vdd:F105 ,cap_new= C360 
+replacing..into for
+outside for C
+*****************
+
+i is 285
+Current line: C361 gnd:115 net0113:F104 8.88194e-19
+
+cap1 = gnd:115 , cap2= net0113:F104 ,cap_new= C361 
+replacing..into for
+outside for C
+*****************
+
+i is 286
+Current line: C362 gnd:115 net053:F103 3.97448e-19
+
+cap1 = gnd:115 , cap2= net053:F103 ,cap_new= C362 
+replacing..into for
+outside for C
+*****************
+
+i is 287
+Current line: C363 gnd:115 net0113:F100 3.00654e-17
+
+cap1 = gnd:115 , cap2= net0113:F100 ,cap_new= C363 
+replacing..into for
+outside for C
+*****************
+
+i is 288
+Current line: C364 gnd:115 net0145:F99 5.55426e-18
+
+cap1 = gnd:115 , cap2= net0145:F99 ,cap_new= C364 
+replacing..into for
+outside for C
+*****************
+
+i is 289
+Current line: C365 gnd:115 net0113:F97 1.2628e-18
+
+cap1 = gnd:115 , cap2= net0113:F97 ,cap_new= C365 
+replacing..into for
+outside for C
+*****************
+
+i is 290
+Current line: C366 gnd:115 net35:F96 4.94373e-17
+
+cap1 = gnd:115 , cap2= net35:F96 ,cap_new= C366 
+replacing..into for
+outside for C
+*****************
+
+i is 291
+Current line: C367 gnd:115 net22:F93 5.5793e-17
+
+cap1 = gnd:115 , cap2= net22:F93 ,cap_new= C367 
+replacing..into for
+outside for C
+*****************
+
+i is 292
+Current line: C368 gnd:115 CPI:F92 7.57226e-17
+
+cap1 = gnd:115 , cap2= CPI:F92 ,cap_new= C368 
+replacing..into for
+outside for C
+*****************
+
+i is 293
+Current line: C369 gnd:115 net35:F91 3.21257e-18
+
+cap1 = gnd:115 , cap2= net35:F91 ,cap_new= C369 
+replacing..into for
+outside for C
+*****************
+
+i is 294
+Current line: C37 net0113:F100 net0145:F51 2.29059e-18
+
+cap1 = net0113:F100 , cap2= net0145:F51 ,cap_new= C37 
+replacing..into for
+outside for C
+*****************
+
+i is 295
+Current line: C370 gnd:115 CPN:F88 8.55433e-19
+
+cap1 = gnd:115 , cap2= CPN:F88 ,cap_new= C370 
+replacing..into for
+outside for C
+*****************
+
+i is 296
+Current line: C371 gnd:115 CPI:F87 4.05869e-18
+
+cap1 = gnd:115 , cap2= CPI:F87 ,cap_new= C371 
+replacing..into for
+outside for C
+*****************
+
+i is 297
+Current line: C372 gnd:115 CPN:F85 2.38613e-17
+
+cap1 = gnd:115 , cap2= CPN:F85 ,cap_new= C372 
+replacing..into for
+outside for C
+*****************
+
+i is 298
+Current line: C373 gnd:115 CP:F84 1.51276e-18
+
+cap1 = gnd:115 , cap2= CP:F84 ,cap_new= C373 
+replacing..into for
+outside for C
+*****************
+
+i is 299
+Current line: C374 gnd:115 net22:F81 4.94086e-19
+
+cap1 = gnd:115 , cap2= net22:F81 ,cap_new= C374 
+replacing..into for
+outside for C
+*****************
+
+i is 300
+Current line: C375 gnd:115 D:F80 3.28906e-18
+
+cap1 = gnd:115 , cap2= D:F80 ,cap_new= C375 
+replacing..into for
+outside for C
+*****************
+
+i is 301
+Current line: C376 gnd:115 vdd:F79 3.2516e-18
+
+cap1 = gnd:115 , cap2= vdd:F79 ,cap_new= C376 
+replacing..into for
+outside for C
+*****************
+
+i is 302
+Current line: C377 gnd:115 net0148:F76 3.65678e-18
+
+cap1 = gnd:115 , cap2= net0148:F76 ,cap_new= C377 
+replacing..into for
+outside for C
+*****************
+
+i is 303
+Current line: C378 gnd:115 Q:F75 9.36411e-19
+
+cap1 = gnd:115 , cap2= Q:F75 ,cap_new= C378 
+replacing..into for
+outside for C
+*****************
+
+i is 304
+Current line: C379 gnd:115 gnds:F74 1.75243e-16
+
+cap1 = gnd:115 , cap2= gnds:F74 ,cap_new= C379 
+replacing..into for
+outside for C
+*****************
+
+i is 305
+Current line: C380 gnd:115 net097:F73 5.23326e-17
+
+cap1 = gnd:115 , cap2= net097:F73 ,cap_new= C380 
+replacing..into for
+outside for C
+*****************
+
+i is 306
+Current line: C381 gnd:115 net0148:F72 2.05103e-19
+
+cap1 = gnd:115 , cap2= net0148:F72 ,cap_new= C381 
+replacing..into for
+outside for C
+*****************
+
+i is 307
+Current line: C382 gnd:115 net097:F68 2.50377e-18
+
+cap1 = gnd:115 , cap2= net097:F68 ,cap_new= C382 
+replacing..into for
+outside for C
+*****************
+
+i is 308
+Current line: C383 gnd:115 CPN:F64 1.19063e-18
+
+cap1 = gnd:115 , cap2= CPN:F64 ,cap_new= C383 
+replacing..into for
+outside for C
+*****************
+
+i is 309
+Current line: C384 gnd:115 CPI:F60 1.56309e-18
+
+cap1 = gnd:115 , cap2= CPI:F60 ,cap_new= C384 
+replacing..into for
+outside for C
+*****************
+
+i is 310
+Current line: C385 gnd:115 net0148:F59 5.75058e-17
+
+cap1 = gnd:115 , cap2= net0148:F59 ,cap_new= C385 
+replacing..into for
+outside for C
+*****************
+
+i is 311
+Current line: C386 gnd:115 CPI:F56 3.10032e-19
+
+cap1 = gnd:115 , cap2= CPI:F56 ,cap_new= C386 
+replacing..into for
+outside for C
+*****************
+
+i is 312
+Current line: C387 gnd:115 net35:F55 4.79864e-19
+
+cap1 = gnd:115 , cap2= net35:F55 ,cap_new= C387 
+replacing..into for
+outside for C
+*****************
+
+i is 313
+Current line: C388 gnd:115 net0113:F52 5.60421e-19
+
+cap1 = gnd:115 , cap2= net0113:F52 ,cap_new= C388 
+replacing..into for
+outside for C
+*****************
+
+i is 314
+Current line: C389 gnd:115 net0145:F51 4.05411e-17
+
+cap1 = gnd:115 , cap2= net0145:F51 ,cap_new= C389 
+replacing..into for
+outside for C
+*****************
+
+i is 315
+Current line: C39 net0113:F97 net0145:F99 5.92245e-17
+
+cap1 = net0113:F97 , cap2= net0145:F99 ,cap_new= C39 
+replacing..into for
+outside for C
+*****************
+
+i is 316
+Current line: C390 gnd:115 net0113:F48 3.12363e-19
+
+cap1 = gnd:115 , cap2= net0113:F48 ,cap_new= C390 
+replacing..into for
+outside for C
+*****************
+
+i is 317
+Current line: C391 gnd:115 net0109:F47 8.7366e-19
+
+cap1 = gnd:115 , cap2= net0109:F47 ,cap_new= C391 
+replacing..into for
+outside for C
+*****************
+
+i is 318
+Current line: C392 gnd:115 net0113:F45 3.23017e-17
+
+cap1 = gnd:115 , cap2= net0113:F45 ,cap_new= C392 
+replacing..into for
+outside for C
+*****************
+
+i is 319
+Current line: C393 gnd:115 net35:F44 3.54085e-17
+
+cap1 = gnd:115 , cap2= net35:F44 ,cap_new= C393 
+replacing..into for
+outside for C
+*****************
+
+i is 320
+Current line: C394 gnd:115 CPN:F40 1.14895e-18
+
+cap1 = gnd:115 , cap2= CPN:F40 ,cap_new= C394 
+replacing..into for
+outside for C
+*****************
+
+i is 321
+Current line: C395 gnd:115 net35:F39 3.89058e-17
+
+cap1 = gnd:115 , cap2= net35:F39 ,cap_new= C395 
+replacing..into for
+outside for C
+*****************
+
+i is 322
+Current line: C396 gnd:115 CPN:F36 1.51625e-18
+
+cap1 = gnd:115 , cap2= CPN:F36 ,cap_new= C396 
+replacing..into for
+outside for C
+*****************
+
+i is 323
+Current line: C397 gnd:115 CPI:F35 1.80718e-17
+
+cap1 = gnd:115 , cap2= CPI:F35 ,cap_new= C397 
+replacing..into for
+outside for C
+*****************
+
+i is 324
+Current line: C398 gnd:115 D:F32 2.44533e-19
+
+cap1 = gnd:115 , cap2= D:F32 ,cap_new= C398 
+replacing..into for
+outside for C
+*****************
+
+i is 325
+Current line: C399 gnd:115 net47:F31 2.30361e-19
+
+cap1 = gnd:115 , cap2= net47:F31 ,cap_new= C399 
+replacing..into for
+outside for C
+*****************
+
+i is 326
+Current line: C4 net069:F115 net0133:F63 1.94783e-18
+
+cap1 = net069:F115 , cap2= net0133:F63 ,cap_new= C4 
+replacing..into for
+outside for C
+*****************
+
+i is 327
+Current line: C40 net0113:F97 net0145:F51 2.76398e-18
+
+cap1 = net0113:F97 , cap2= net0145:F51 ,cap_new= C40 
+replacing..into for
+outside for C
+*****************
+
+i is 328
+Current line: C400 gnd:115 CPN:F29 6.37345e-17
+
+cap1 = gnd:115 , cap2= CPN:F29 ,cap_new= C400 
+replacing..into for
+outside for C
+*****************
+
+i is 329
+Current line: C401 gnd:115 CP:F28 1.00124e-18
+
+cap1 = gnd:115 , cap2= CP:F28 ,cap_new= C401 
+replacing..into for
+outside for C
+*****************
+
+i is 330
+Current line: C402 gnd:115 gnds:F24 1.62389e-18
+
+cap1 = gnd:115 , cap2= gnds:F24 ,cap_new= C402 
+replacing..into for
+outside for C
+*****************
+
+i is 331
+Current line: C403 gnd:115 vdds:F9 2.30638e-17
+
+cap1 = gnd:115 , cap2= vdds:F9 ,cap_new= C403 
+replacing..into for
+outside for C
+*****************
+
+i is 332
+Current line: C404 gnd:115 vdd:F8 4.25796e-16
+
+cap1 = gnd:115 , cap2= vdd:F8 ,cap_new= C404 
+replacing..into for
+outside for C
+*****************
+
+i is 333
+Current line: C405 gnd:115 gnds:F7 2.60941e-17
+
+cap1 = gnd:115 , cap2= gnds:F7 ,cap_new= C405 
+replacing..into for
+outside for C
+*****************
+
+i is 334
+Current line: C406 gnd:115 Q:F5 9.27046e-17
+
+cap1 = gnd:115 , cap2= Q:F5 ,cap_new= C406 
+replacing..into for
+outside for C
+*****************
+
+i is 335
+Current line: C407 gnd:115 D:F4 4.02193e-17
+
+cap1 = gnd:115 , cap2= D:F4 ,cap_new= C407 
+replacing..into for
+outside for C
+*****************
+
+i is 336
+Current line: C408 gnd:115 CP:F3 2.0301e-17
+
+cap1 = gnd:115 , cap2= CP:F3 ,cap_new= C408 
+replacing..into for
+outside for C
+*****************
+
+i is 337
+Current line: C409 gnd:F6 net097:F125 7.6057e-21
+
+cap1 = gnd:F6 , cap2= net097:F125 ,cap_new= C409 
+replacing..into for
+outside for C
+*****************
+
+i is 338
+Current line: C410 gnd:F6 net097:F120 2.43897e-17
+
+cap1 = gnd:F6 , cap2= net097:F120 ,cap_new= C410 
+replacing..into for
+outside for C
+*****************
+
+i is 339
+Current line: C411 gnd:F6 net0145:F99 1.30135e-19
+
+cap1 = gnd:F6 , cap2= net0145:F99 ,cap_new= C411 
+replacing..into for
+outside for C
+*****************
+
+i is 340
+Current line: C412 gnd:F6 net0113:F97 5.16166e-19
+
+cap1 = gnd:F6 , cap2= net0113:F97 ,cap_new= C412 
+replacing..into for
+outside for C
+*****************
+
+i is 341
+Current line: C413 gnd:F6 CPI:F87 1.76388e-18
+
+cap1 = gnd:F6 , cap2= CPI:F87 ,cap_new= C413 
+replacing..into for
+outside for C
+*****************
+
+i is 342
+Current line: C414 gnd:F6 CPN:F85 1.81303e-17
+
+cap1 = gnd:F6 , cap2= CPN:F85 ,cap_new= C414 
+replacing..into for
+outside for C
+*****************
+
+i is 343
+Current line: C415 gnd:F6 CP:F84 5.16443e-19
+
+cap1 = gnd:F6 , cap2= CP:F84 ,cap_new= C415 
+replacing..into for
+outside for C
+*****************
+
+i is 344
+Current line: C416 gnd:F6 net22:F81 6.96671e-20
+
+cap1 = gnd:F6 , cap2= net22:F81 ,cap_new= C416 
+replacing..into for
+outside for C
+*****************
+
+i is 345
+Current line: C417 gnd:F6 net0148:F76 1.71226e-18
+
+cap1 = gnd:F6 , cap2= net0148:F76 ,cap_new= C417 
+replacing..into for
+outside for C
+*****************
+
+i is 346
+Current line: C418 gnd:F6 Q:F75 8.649e-19
+
+cap1 = gnd:F6 , cap2= Q:F75 ,cap_new= C418 
+replacing..into for
+outside for C
+*****************
+
+i is 347
+Current line: C419 gnd:F6 gnds:F74 3.22515e-16
+
+cap1 = gnd:F6 , cap2= gnds:F74 ,cap_new= C419 
+replacing..into for
+outside for C
+*****************
+
+i is 348
+Current line: C42 net0113:F52 net0145:F99 3.56863e-18
+
+cap1 = net0113:F52 , cap2= net0145:F99 ,cap_new= C42 
+replacing..into for
+outside for C
+*****************
+
+i is 349
+Current line: C420 gnd:F6 net097:F73 4.98185e-18
+
+cap1 = gnd:F6 , cap2= net097:F73 ,cap_new= C420 
+replacing..into for
+outside for C
+*****************
+
+i is 350
+Current line: C421 gnd:F6 net0148:F72 3.77248e-17
+
+cap1 = gnd:F6 , cap2= net0148:F72 ,cap_new= C421 
+replacing..into for
+outside for C
+*****************
+
+i is 351
+Current line: C422 gnd:F6 net0148:F59 5.21281e-19
+
+cap1 = gnd:F6 , cap2= net0148:F59 ,cap_new= C422 
+replacing..into for
+outside for C
+*****************
+
+i is 352
+Current line: C423 gnd:F6 CPI:F56 4.57335e-18
+
+cap1 = gnd:F6 , cap2= CPI:F56 ,cap_new= C423 
+replacing..into for
+outside for C
+*****************
+
+i is 353
+Current line: C424 gnd:F6 net35:F55 9.12531e-17
+
+cap1 = gnd:F6 , cap2= net35:F55 ,cap_new= C424 
+replacing..into for
+outside for C
+*****************
+
+i is 354
+Current line: C425 gnd:F6 net0145:F51 2.33047e-19
+
+cap1 = gnd:F6 , cap2= net0145:F51 ,cap_new= C425 
+replacing..into for
+outside for C
+*****************
+
+i is 355
+Current line: C426 gnd:F6 net0113:F48 3.85551e-18
+
+cap1 = gnd:F6 , cap2= net0113:F48 ,cap_new= C426 
+replacing..into for
+outside for C
+*****************
+
+i is 356
+Current line: C427 gnd:F6 CPN:F40 6.95469e-17
+
+cap1 = gnd:F6 , cap2= CPN:F40 ,cap_new= C427 
+replacing..into for
+outside for C
+*****************
+
+i is 357
+Current line: C428 gnd:F6 net35:F39 4.8192e-18
+
+cap1 = gnd:F6 , cap2= net35:F39 ,cap_new= C428 
+replacing..into for
+outside for C
+*****************
+
+i is 358
+Current line: C429 gnd:F6 CPN:F36 1.05834e-17
+
+cap1 = gnd:F6 , cap2= CPN:F36 ,cap_new= C429 
+replacing..into for
+outside for C
+*****************
+
+i is 359
+Current line: C43 net0113:F52 net0145:F51 2.13173e-17
+
+cap1 = net0113:F52 , cap2= net0145:F51 ,cap_new= C43 
+replacing..into for
+outside for C
+*****************
+
+i is 360
+Current line: C430 gnd:F6 CPI:F35 5.80123e-20
+
+cap1 = gnd:F6 , cap2= CPI:F35 ,cap_new= C430 
+replacing..into for
+outside for C
+*****************
+
+i is 361
+Current line: C431 gnd:F6 D:F32 1.05405e-16
+
+cap1 = gnd:F6 , cap2= D:F32 ,cap_new= C431 
+replacing..into for
+outside for C
+*****************
+
+i is 362
+Current line: C432 gnd:F6 net47:F31 4.7739e-18
+
+cap1 = gnd:F6 , cap2= net47:F31 ,cap_new= C432 
+replacing..into for
+outside for C
+*****************
+
+i is 363
+Current line: C433 gnd:F6 CPN:F29 1.3937e-17
+
+cap1 = gnd:F6 , cap2= CPN:F29 ,cap_new= C433 
+replacing..into for
+outside for C
+*****************
+
+i is 364
+Current line: C434 gnd:F6 CP:F28 8.77348e-19
+
+cap1 = gnd:F6 , cap2= CP:F28 ,cap_new= C434 
+replacing..into for
+outside for C
+*****************
+
+i is 365
+Current line: C435 gnd:F6 gnds:F24 6.92208e-18
+
+cap1 = gnd:F6 , cap2= gnds:F24 ,cap_new= C435 
+replacing..into for
+outside for C
+*****************
+
+i is 366
+Current line: C436 gnd:F6 vdds:F9 1.3996e-18
+
+cap1 = gnd:F6 , cap2= vdds:F9 ,cap_new= C436 
+replacing..into for
+outside for C
+*****************
+
+i is 367
+Current line: C437 gnd:F6 vdd:F8 3.26028e-17
+
+cap1 = gnd:F6 , cap2= vdd:F8 ,cap_new= C437 
+replacing..into for
+outside for C
+*****************
+
+i is 368
+Current line: C438 gnd:F6 gnds:F7 4.92589e-17
+
+cap1 = gnd:F6 , cap2= gnds:F7 ,cap_new= C438 
+replacing..into for
+outside for C
+*****************
+
+i is 369
+Current line: C439 gnd:F6 Q:F5 1.04835e-17
+
+cap1 = gnd:F6 , cap2= Q:F5 ,cap_new= C439 
+replacing..into for
+outside for C
+*****************
+
+i is 370
+Current line: C440 gnd:F6 D:F4 5.49666e-18
+
+cap1 = gnd:F6 , cap2= D:F4 ,cap_new= C440 
+replacing..into for
+outside for C
+*****************
+
+i is 371
+Current line: C441 gnd:F6 CP:F3 2.07857e-19
+
+cap1 = gnd:F6 , cap2= CP:F3 ,cap_new= C441 
+replacing..into for
+outside for C
+*****************
+
+i is 372
+Current line: C442 gnd:F37 vdds:F126 8.45941e-20
+
+cap1 = gnd:F37 , cap2= vdds:F126 ,cap_new= C442 
+replacing..into for
+outside for C
+*****************
+
+i is 373
+Current line: C443 gnd:F37 CPN:F88 9.70874e-18
+
+cap1 = gnd:F37 , cap2= CPN:F88 ,cap_new= C443 
+replacing..into for
+outside for C
+*****************
+
+i is 374
+Current line: C444 gnd:F37 CPN:F85 6.25817e-18
+
+cap1 = gnd:F37 , cap2= CPN:F85 ,cap_new= C444 
+replacing..into for
+outside for C
+*****************
+
+i is 375
+Current line: C445 gnd:F37 CP:F84 2.59775e-19
+
+cap1 = gnd:F37 , cap2= CP:F84 ,cap_new= C445 
+replacing..into for
+outside for C
+*****************
+
+i is 376
+Current line: C446 gnd:F37 vdd:F79 5.00133e-18
+
+cap1 = gnd:F37 , cap2= vdd:F79 ,cap_new= C446 
+replacing..into for
+outside for C
+*****************
+
+i is 377
+Current line: C447 gnd:F37 net0145:F51 1.69237e-21
+
+cap1 = gnd:F37 , cap2= net0145:F51 ,cap_new= C447 
+replacing..into for
+outside for C
+*****************
+
+i is 378
+Current line: C448 gnd:F37 net0113:F45 1.71176e-18
+
+cap1 = gnd:F37 , cap2= net0113:F45 ,cap_new= C448 
+replacing..into for
+outside for C
+*****************
+
+i is 379
+Current line: C449 gnd:F37 net35:F44 8.79275e-18
+
+cap1 = gnd:F37 , cap2= net35:F44 ,cap_new= C449 
+replacing..into for
+outside for C
+*****************
+
+i is 380
+Current line: C45 net0113:F45 net0145:F51 3.16269e-20
+
+cap1 = net0113:F45 , cap2= net0145:F51 ,cap_new= C45 
+replacing..into for
+outside for C
+*****************
+
+i is 381
+Current line: C450 gnd:F37 CPN:F40 2.53986e-17
+
+cap1 = gnd:F37 , cap2= CPN:F40 ,cap_new= C450 
+replacing..into for
+outside for C
+*****************
+
+i is 382
+Current line: C451 gnd:F37 net35:F39 3.54123e-18
+
+cap1 = gnd:F37 , cap2= net35:F39 ,cap_new= C451 
+replacing..into for
+outside for C
+*****************
+
+i is 383
+Current line: C452 gnd:F37 CPN:F36 1.46855e-17
+
+cap1 = gnd:F37 , cap2= CPN:F36 ,cap_new= C452 
+replacing..into for
+outside for C
+*****************
+
+i is 384
+Current line: C453 gnd:F37 CPI:F35 3.42063e-18
+
+cap1 = gnd:F37 , cap2= CPI:F35 ,cap_new= C453 
+replacing..into for
+outside for C
+*****************
+
+i is 385
+Current line: C454 gnd:F37 D:F32 3.7586e-17
+
+cap1 = gnd:F37 , cap2= D:F32 ,cap_new= C454 
+replacing..into for
+outside for C
+*****************
+
+i is 386
+Current line: C455 gnd:F37 net47:F31 3.83289e-19
+
+cap1 = gnd:F37 , cap2= net47:F31 ,cap_new= C455 
+replacing..into for
+outside for C
+*****************
+
+i is 387
+Current line: C456 gnd:F37 CPN:F29 3.34618e-18
+
+cap1 = gnd:F37 , cap2= CPN:F29 ,cap_new= C456 
+replacing..into for
+outside for C
+*****************
+
+i is 388
+Current line: C457 gnd:F37 CP:F28 3.50435e-17
+
+cap1 = gnd:F37 , cap2= CP:F28 ,cap_new= C457 
+replacing..into for
+outside for C
+*****************
+
+i is 389
+Current line: C458 gnd:F37 gnds:F24 9.73071e-19
+
+cap1 = gnd:F37 , cap2= gnds:F24 ,cap_new= C458 
+replacing..into for
+outside for C
+*****************
+
+i is 390
+Current line: C459 gnd:F37 D:F4 4.91718e-17
+
+cap1 = gnd:F37 , cap2= D:F4 ,cap_new= C459 
+replacing..into for
+outside for C
+*****************
+
+i is 391
+Current line: C460 gnd:F37 CP:F3 2.77676e-19
+
+cap1 = gnd:F37 , cap2= CP:F3 ,cap_new= C460 
+replacing..into for
+outside for C
+*****************
+
+i is 392
+Current line: C461 gnd:F43 vdds:F126 3.57812e-20
+
+cap1 = gnd:F43 , cap2= vdds:F126 ,cap_new= C461 
+replacing..into for
+outside for C
+*****************
+
+i is 393
+Current line: C462 gnd:F43 vdd:F105 5.43958e-18
+
+cap1 = gnd:F43 , cap2= vdd:F105 ,cap_new= C462 
+replacing..into for
+outside for C
+*****************
+
+i is 394
+Current line: C463 gnd:F43 net35:F91 4.15067e-20
+
+cap1 = gnd:F43 , cap2= net35:F91 ,cap_new= C463 
+replacing..into for
+outside for C
+*****************
+
+i is 395
+Current line: C464 gnd:F43 CPN:F88 4.46239e-20
+
+cap1 = gnd:F43 , cap2= CPN:F88 ,cap_new= C464 
+replacing..into for
+outside for C
+*****************
+
+i is 396
+Current line: C465 gnd:F43 Q:F75 3.86827e-21
+
+cap1 = gnd:F43 , cap2= Q:F75 ,cap_new= C465 
+replacing..into for
+outside for C
+*****************
+
+i is 397
+Current line: C466 gnd:F43 net097:F73 6.86415e-18
+
+cap1 = gnd:F43 , cap2= net097:F73 ,cap_new= C466 
+replacing..into for
+outside for C
+*****************
+
+i is 398
+Current line: C467 gnd:F43 net0148:F72 1.45836e-21
+
+cap1 = gnd:F43 , cap2= net0148:F72 ,cap_new= C467 
+replacing..into for
+outside for C
+*****************
+
+i is 399
+Current line: C468 gnd:F43 CPI:F60 1.36563e-18
+
+cap1 = gnd:F43 , cap2= CPI:F60 ,cap_new= C468 
+replacing..into for
+outside for C
+*****************
+
+i is 400
+Current line: C469 gnd:F43 net0148:F59 7.16236e-20
+
+cap1 = gnd:F43 , cap2= net0148:F59 ,cap_new= C469 
+replacing..into for
+outside for C
+*****************
+
+i is 401
+Current line: C470 gnd:F43 CPI:F56 2.37144e-17
+
+cap1 = gnd:F43 , cap2= CPI:F56 ,cap_new= C470 
+replacing..into for
+outside for C
+*****************
+
+i is 402
+Current line: C471 gnd:F43 net35:F55 1.07659e-19
+
+cap1 = gnd:F43 , cap2= net35:F55 ,cap_new= C471 
+replacing..into for
+outside for C
+*****************
+
+i is 403
+Current line: C472 gnd:F43 net0113:F52 1.02434e-17
+
+cap1 = gnd:F43 , cap2= net0113:F52 ,cap_new= C472 
+replacing..into for
+outside for C
+*****************
+
+i is 404
+Current line: C473 gnd:F43 net0145:F51 5.53871e-19
+
+cap1 = gnd:F43 , cap2= net0145:F51 ,cap_new= C473 
+replacing..into for
+outside for C
+*****************
+
+i is 405
+Current line: C474 gnd:F43 net0113:F48 1.33549e-17
+
+cap1 = gnd:F43 , cap2= net0113:F48 ,cap_new= C474 
+replacing..into for
+outside for C
+*****************
+
+i is 406
+Current line: C475 gnd:F43 net0109:F47 1.60877e-19
+
+cap1 = gnd:F43 , cap2= net0109:F47 ,cap_new= C475 
+replacing..into for
+outside for C
+*****************
+
+i is 407
+Current line: C476 gnd:F43 net0113:F45 8.96433e-18
+
+cap1 = gnd:F43 , cap2= net0113:F45 ,cap_new= C476 
+replacing..into for
+outside for C
+*****************
+
+i is 408
+Current line: C477 gnd:F43 net35:F44 3.94224e-17
+
+cap1 = gnd:F43 , cap2= net35:F44 ,cap_new= C477 
+replacing..into for
+outside for C
+*****************
+
+i is 409
+Current line: C478 gnd:F43 CPN:F40 4.13965e-17
+
+cap1 = gnd:F43 , cap2= CPN:F40 ,cap_new= C478 
+replacing..into for
+outside for C
+*****************
+
+i is 410
+Current line: C479 gnd:F43 net35:F39 2.32971e-17
+
+cap1 = gnd:F43 , cap2= net35:F39 ,cap_new= C479 
+replacing..into for
+outside for C
+*****************
+
+i is 411
+Current line: C48 CPI:F92 net0145:F99 6.444e-20
+
+cap1 = CPI:F92 , cap2= net0145:F99 ,cap_new= C48 
+replacing..into for
+outside for C
+*****************
+
+i is 412
+Current line: C480 gnd:F43 CPN:F36 1.71812e-17
+
+cap1 = gnd:F43 , cap2= CPN:F36 ,cap_new= C480 
+replacing..into for
+outside for C
+*****************
+
+i is 413
+Current line: C481 gnd:F43 CPI:F35 1.78045e-18
+
+cap1 = gnd:F43 , cap2= CPI:F35 ,cap_new= C481 
+replacing..into for
+outside for C
+*****************
+
+i is 414
+Current line: C482 gnd:F43 D:F32 9.01026e-20
+
+cap1 = gnd:F43 , cap2= D:F32 ,cap_new= C482 
+replacing..into for
+outside for C
+*****************
+
+i is 415
+Current line: C483 gnd:F43 net47:F31 1.69103e-20
+
+cap1 = gnd:F43 , cap2= net47:F31 ,cap_new= C483 
+replacing..into for
+outside for C
+*****************
+
+i is 416
+Current line: C484 gnd:F43 CPN:F29 4.11003e-21
+
+cap1 = gnd:F43 , cap2= CPN:F29 ,cap_new= C484 
+replacing..into for
+outside for C
+*****************
+
+i is 417
+Current line: C485 gnd:F43 gnds:F24 6.04416e-22
+
+cap1 = gnd:F43 , cap2= gnds:F24 ,cap_new= C485 
+replacing..into for
+outside for C
+*****************
+
+i is 418
+Current line: C486 gnd:F67 vdds:F126 6.64523e-21
+
+cap1 = gnd:F67 , cap2= vdds:F126 ,cap_new= C486 
+replacing..into for
+outside for C
+*****************
+
+i is 419
+Current line: C487 gnd:F67 net0148:F124 2.06173e-20
+
+cap1 = gnd:F67 , cap2= net0148:F124 ,cap_new= C487 
+replacing..into for
+outside for C
+*****************
+
+i is 420
+Current line: C488 gnd:F67 vdd:F123 3.07884e-18
+
+cap1 = gnd:F67 , cap2= vdd:F123 ,cap_new= C488 
+replacing..into for
+outside for C
+*****************
+
+i is 421
+Current line: C489 gnd:F67 net0148:F76 3.48696e-17
+
+cap1 = gnd:F67 , cap2= net0148:F76 ,cap_new= C489 
+replacing..into for
+outside for C
+*****************
+
+i is 422
+Current line: C490 gnd:F67 Q:F75 6.42289e-19
+
+cap1 = gnd:F67 , cap2= Q:F75 ,cap_new= C490 
+replacing..into for
+outside for C
+*****************
+
+i is 423
+Current line: C491 gnd:F67 net097:F73 8.17684e-18
+
+cap1 = gnd:F67 , cap2= net097:F73 ,cap_new= C491 
+replacing..into for
+outside for C
+*****************
+
+i is 424
+Current line: C492 gnd:F67 net0148:F72 7.34399e-17
+
+cap1 = gnd:F67 , cap2= net0148:F72 ,cap_new= C492 
+replacing..into for
+outside for C
+*****************
+
+i is 425
+Current line: C493 gnd:F67 net097:F68 2.95156e-17
+
+cap1 = gnd:F67 , cap2= net097:F68 ,cap_new= C493 
+replacing..into for
+outside for C
+*****************
+
+i is 426
+Current line: C494 gnd:F67 CPN:F64 2.14398e-17
+
+cap1 = gnd:F67 , cap2= CPN:F64 ,cap_new= C494 
+replacing..into for
+outside for C
+*****************
+
+i is 427
+Current line: C495 gnd:F67 CPI:F60 1.0283e-17
+
+cap1 = gnd:F67 , cap2= CPI:F60 ,cap_new= C495 
+replacing..into for
+outside for C
+*****************
+
+i is 428
+Current line: C496 gnd:F67 net0148:F59 1.3208e-17
+
+cap1 = gnd:F67 , cap2= net0148:F59 ,cap_new= C496 
+replacing..into for
+outside for C
+*****************
+
+i is 429
+Current line: C497 gnd:F67 net35:F55 1.62065e-20
+
+cap1 = gnd:F67 , cap2= net35:F55 ,cap_new= C497 
+replacing..into for
+outside for C
+*****************
+
+i is 430
+Current line: C498 gnd:F67 net0113:F52 1.3965e-17
+
+cap1 = gnd:F67 , cap2= net0113:F52 ,cap_new= C498 
+replacing..into for
+outside for C
+*****************
+
+i is 431
+Current line: C499 gnd:F67 net0145:F51 3.43106e-21
+
+cap1 = gnd:F67 , cap2= net0145:F51 ,cap_new= C499 
+replacing..into for
+outside for C
+*****************
+
+i is 432
+Current line: C50 CPI:F116 net0145:F99 6.20032e-20
+
+cap1 = CPI:F116 , cap2= net0145:F99 ,cap_new= C50 
+replacing..into for
+outside for C
+*****************
+
+i is 433
+Current line: C500 gnd:F67 CPN:F40 3.9091e-19
+
+cap1 = gnd:F67 , cap2= CPN:F40 ,cap_new= C500 
+replacing..into for
+outside for C
+*****************
+
+i is 434
+Current line: C501 gnd:F67 net35:F39 1.08795e-21
+
+cap1 = gnd:F67 , cap2= net35:F39 ,cap_new= C501 
+replacing..into for
+outside for C
+*****************
+
+i is 435
+Current line: C502 gnd:F67 Q:F5 3.63503e-19
+
+cap1 = gnd:F67 , cap2= Q:F5 ,cap_new= C502 
+replacing..into for
+outside for C
+*****************
+
+i is 436
+Current line: C51 CPI:F116 net0145:F51 1.76501e-18
+
+cap1 = CPI:F116 , cap2= net0145:F51 ,cap_new= C51 
+replacing..into for
+outside for C
+*****************
+
+i is 437
+Current line: C53 CPI:F87 net0145:F99 2.91887e-17
+
+cap1 = CPI:F87 , cap2= net0145:F99 ,cap_new= C53 
+replacing..into for
+outside for C
+*****************
+
+i is 438
+Current line: C54 CPI:F87 net47:F31 1.75121e-19
+
+cap1 = CPI:F87 , cap2= net47:F31 ,cap_new= C54 
+replacing..into for
+outside for C
+*****************
+
+i is 439
+Current line: C56 CPI:F60 net0145:F99 3.53448e-18
+
+cap1 = CPI:F60 , cap2= net0145:F99 ,cap_new= C56 
+replacing..into for
+outside for C
+*****************
+
+i is 440
+Current line: C57 CPI:F60 net0145:F51 2.23983e-17
+
+cap1 = CPI:F60 , cap2= net0145:F51 ,cap_new= C57 
+replacing..into for
+outside for C
+*****************
+
+i is 441
+Current line: C59 CPI:F35 net0145:F99 8.49401e-20
+
+cap1 = CPI:F35 , cap2= net0145:F99 ,cap_new= C59 
+replacing..into for
+outside for C
+*****************
+
+i is 442
+Current line: C6 net0145:F99 net0109:F47 1.40685e-19
+
+cap1 = net0145:F99 , cap2= net0109:F47 ,cap_new= C6 
+replacing..into for
+outside for C
+*****************
+
+i is 443
+Current line: C60 CPI:F35 net47:F31 9.60337e-19
+
+cap1 = CPI:F35 , cap2= net47:F31 ,cap_new= C60 
+replacing..into for
+outside for C
+*****************
+
+i is 444
+Current line: C62 CPI:F56 net0145:F51 7.70574e-18
+
+cap1 = CPI:F56 , cap2= net0145:F51 ,cap_new= C62 
+replacing..into for
+outside for C
+*****************
+
+i is 445
+Current line: C64 net22:F81 CPI:F116 5.44418e-21
+
+cap1 = net22:F81 , cap2= CPI:F116 ,cap_new= C64 
+replacing..into for
+outside for C
+*****************
+
+i is 446
+Current line: C65 net22:F81 net35:F107 1.06994e-19
+
+cap1 = net22:F81 , cap2= net35:F107 ,cap_new= C65 
+replacing..into for
+outside for C
+*****************
+
+i is 447
+Current line: C66 net22:F81 CPI:F92 1.24202e-18
+
+cap1 = net22:F81 , cap2= CPI:F92 ,cap_new= C66 
+replacing..into for
+outside for C
+*****************
+
+i is 448
+Current line: C67 net22:F81 net35:F91 1.26723e-19
+
+cap1 = net22:F81 , cap2= net35:F91 ,cap_new= C67 
+replacing..into for
+outside for C
+*****************
+
+i is 449
+Current line: C68 net22:F81 CPI:F87 7.86029e-20
+
+cap1 = net22:F81 , cap2= CPI:F87 ,cap_new= C68 
+replacing..into for
+outside for C
+*****************
+
+i is 450
+Current line: C70 net22:F93 CPI:F92 2.6884e-17
+
+cap1 = net22:F93 , cap2= CPI:F92 ,cap_new= C70 
+replacing..into for
+outside for C
+*****************
+
+i is 451
+Current line: C71 net22:F93 net35:F91 2.12959e-17
+
+cap1 = net22:F93 , cap2= net35:F91 ,cap_new= C71 
+replacing..into for
+outside for C
+*****************
+
+i is 452
+Current line: C72 net22:F93 CPI:F87 2.14378e-17
+
+cap1 = net22:F93 , cap2= CPI:F87 ,cap_new= C72 
+replacing..into for
+outside for C
+*****************
+
+i is 453
+Current line: C73 net22:F93 CPI:F35 5.87387e-21
+
+cap1 = net22:F93 , cap2= CPI:F35 ,cap_new= C73 
+replacing..into for
+outside for C
+*****************
+
+i is 454
+Current line: C75 net097:F125 net069:F115 8.85302e-18
+
+cap1 = net097:F125 , cap2= net069:F115 ,cap_new= C75 
+replacing..into for
+outside for C
+*****************
+
+i is 455
+Current line: C76 net097:F125 net0133:F63 3.28309e-19
+
+cap1 = net097:F125 , cap2= net0133:F63 ,cap_new= C76 
+replacing..into for
+outside for C
+*****************
+
+i is 456
+Current line: C78 net097:F120 net069:F115 6.18061e-18
+
+cap1 = net097:F120 , cap2= net069:F115 ,cap_new= C78 
+replacing..into for
+outside for C
+*****************
+
+i is 457
+Current line: C79 net097:F120 net0133:F63 3.55499e-19
+
+cap1 = net097:F120 , cap2= net0133:F63 ,cap_new= C79 
+replacing..into for
+outside for C
+*****************
+
+i is 458
+Current line: C8 net0145:F51 net0109:F47 7.94192e-18
+
+cap1 = net0145:F51 , cap2= net0109:F47 ,cap_new= C8 
+replacing..into for
+outside for C
+*****************
+
+i is 459
+Current line: C81 net097:F68 net0133:F63 3.0068e-18
+
+cap1 = net097:F68 , cap2= net0133:F63 ,cap_new= C81 
+replacing..into for
+outside for C
+*****************
+
+i is 460
+Current line: C83 net097:F73 net069:F115 5.28349e-19
+
+cap1 = net097:F73 , cap2= net069:F115 ,cap_new= C83 
+replacing..into for
+outside for C
+*****************
+
+i is 461
+Current line: C84 net097:F73 net0133:F63 6.75916e-18
+
+cap1 = net097:F73 , cap2= net0133:F63 ,cap_new= C84 
+replacing..into for
+outside for C
+*****************
+
+i is 462
+Current line: C86 CPN:F108 net0145:F99 5.26683e-20
+
+cap1 = CPN:F108 , cap2= net0145:F99 ,cap_new= C86 
+replacing..into for
+outside for C
+*****************
+
+i is 463
+Current line: C87 CPN:F108 net22:F81 2.41052e-19
+
+cap1 = CPN:F108 , cap2= net22:F81 ,cap_new= C87 
+replacing..into for
+outside for C
+*****************
+
+i is 464
+Current line: C88 CPN:F108 net0145:F51 5.27294e-19
+
+cap1 = CPN:F108 , cap2= net0145:F51 ,cap_new= C88 
+replacing..into for
+outside for C
+*****************
+
+i is 465
+Current line: C90 CPN:F88 net053:F103 4.70649e-18
+
+cap1 = CPN:F88 , cap2= net053:F103 ,cap_new= C90 
+replacing..into for
+outside for C
+*****************
+
+i is 466
+Current line: C91 CPN:F88 net0145:F99 6.18919e-19
+
+cap1 = CPN:F88 , cap2= net0145:F99 ,cap_new= C91 
+replacing..into for
+outside for C
+*****************
+
+i is 467
+Current line: C92 CPN:F88 net22:F93 4.49292e-17
+
+cap1 = CPN:F88 , cap2= net22:F93 ,cap_new= C92 
+replacing..into for
+outside for C
+*****************
+
+i is 468
+Current line: C93 CPN:F88 net22:F81 6.08289e-18
+
+cap1 = CPN:F88 , cap2= net22:F81 ,cap_new= C93 
+replacing..into for
+outside for C
+*****************
+
+i is 469
+Current line: C94 CPN:F88 net0145:F51 7.46208e-21
+
+cap1 = CPN:F88 , cap2= net0145:F51 ,cap_new= C94 
+replacing..into for
+outside for C
+*****************
+
+i is 470
+Current line: C96 CPN:F112 net0145:F99 3.14795e-17
+
+cap1 = CPN:F112 , cap2= net0145:F99 ,cap_new= C96 
+replacing..into for
+outside for C
+*****************
+
+i is 471
+Current line: C97 CPN:F112 net0145:F51 6.43456e-18
+
+cap1 = CPN:F112 , cap2= net0145:F51 ,cap_new= C97 
+replacing..into for
+outside for C
+*****************
+
+i is 472
+Current line: C99 CPN:F85 net0145:F99 1.03143e-20
+
+cap1 = CPN:F85 , cap2= net0145:F99 ,cap_new= C99 
+replacing..into for
+outside for C
+*****************
+
+i is 473
+Current line: R1 net0109:F47 net0109:F57 0.001
+
+*****************
+
+i is 474
+Current line: R10 CP:F84 CP:F28 108.835
+
+*****************
+
+i is 475
+Current line: R100 gnds:F74 gnds:F58 0.001
+
+*****************
+
+i is 476
+Current line: R101 gnds:F74 gnds:F54 0.001
+
+*****************
+
+i is 477
+Current line: R102 gnds:F74 gnds:F50 0.001
+
+*****************
+
+i is 478
+Current line: R103 gnds:F74 gnds:F46 0.001
+
+*****************
+
+i is 479
+Current line: R104 gnds:F74 gnds:F42 0.001
+
+*****************
+
+i is 480
+Current line: R105 gnds:F74 gnds:F38 0.001
+
+*****************
+
+i is 481
+Current line: R106 gnds:F74 gnds:F34 0.001
+
+*****************
+
+i is 482
+Current line: R107 gnds:F74 gnds:F30 0.001
+
+*****************
+
+i is 483
+Current line: R108 gnds:F74 gnds:F26 0.001
+
+*****************
+
+i is 484
+Current line: R109 gnd gnd:F6 0.001
+
+*****************
+
+i is 485
+Current line: R11 CP:F3 CP:F28 149.773
+
+*****************
+
+i is 486
+Current line: R110 gnd:115 gnd:F67 3412.84
+
+*****************
+
+i is 487
+Current line: R111 gnd:115 gnd:F43 2679.64
+
+*****************
+
+i is 488
+Current line: R112 gnd:115 gnd:F37 3368.01
+
+*****************
+
+i is 489
+Current line: R113 gnd:115 gnd:F6 2.17112
+
+*****************
+
+i is 490
+Current line: R114 gnd:F6 gnd:F67 38.7791
+
+*****************
+
+i is 491
+Current line: R115 gnd:F6 gnd:F43 38.6979
+
+*****************
+
+i is 492
+Current line: R116 gnd:F6 gnd:F37 38.2697
+
+*****************
+
+i is 493
+Current line: R117 gnd:F37 gnd:F67 6332.97
+
+*****************
+
+i is 494
+Current line: R118 gnd:F37 gnd:F33 0.001
+
+*****************
+
+i is 495
+Current line: R119 gnd:F37 gnd:F27 0.001
+
+*****************
+
+i is 496
+Current line: R12 net053:F103 net053:F109 0.001
+
+*****************
+
+i is 497
+Current line: R120 gnd:F43 gnd:F53 0.001
+
+*****************
+
+i is 498
+Current line: R121 gnd:F43 gnd:F49 0.001
+
+*****************
+
+i is 499
+Current line: R122 gnd:F67 gnd:F77 0.001
+
+*****************
+
+i is 500
+Current line: R123 gnd:F67 gnd:F71 0.001
+
+*****************
+
+i is 501
+Current line: R13 net35:F91 net35:F107 89.44
+
+*****************
+
+i is 502
+Current line: R14 net35:F91 net35:F96 250.88
+
+*****************
+
+i is 503
+Current line: R15 net35:F107 net35:F96 254.581
+
+*****************
+
+i is 504
+Current line: R16 net35:F96 net35:F44 79
+
+*****************
+
+i is 505
+Current line: R17 net35:F44 net35:F55 197.832
+
+*****************
+
+i is 506
+Current line: R18 net35:F44 net35:F39 194.387
+
+*****************
+
+i is 507
+Current line: R19 net35:F39 net35:F55 94.3284
+
+*****************
+
+i is 508
+Current line: R2 net47:F31 net47:F41 0.001
+
+*****************
+
+i is 509
+Current line: R20 net0113:F104 net0113:F100 58.75
+
+*****************
+
+i is 510
+Current line: R21 net0113:F100 net0113:F97 358.583
+
+*****************
+
+i is 511
+Current line: R22 net0113:F100 net0113:F52 120.967
+
+*****************
+
+i is 512
+Current line: R23 net0113:F100 net0113:F45 361.077
+
+*****************
+
+i is 513
+Current line: R24 net0113:F97 net0113:F52 277.047
+
+*****************
+
+i is 514
+Current line: R25 net0113:F97 net0113:F45 99.6231
+
+*****************
+
+i is 515
+Current line: R26 net0113:F52 net0113:F45 278.974
+
+*****************
+
+i is 516
+Current line: R27 net0113:F52 net0113:F48 47.5
+
+*****************
+
+i is 517
+Current line: R28 CPI:F92 CPI:F116 313.289
+
+*****************
+
+i is 518
+Current line: R29 CPI:F92 CPI:F87 184.866
+
+*****************
+
+i is 519
+Current line: R3 net0133:F63 net0133:F69 0.001
+
+*****************
+
+i is 520
+Current line: R30 CPI:F92 CPI:F35 187.383
+
+*****************
+
+i is 521
+Current line: R31 CPI:F116 CPI:F87 210.168
+
+*****************
+
+i is 522
+Current line: R32 CPI:F116 CPI:F60 159.5
+
+*****************
+
+i is 523
+Current line: R33 CPI:F116 CPI:F35 213.029
+
+*****************
+
+i is 524
+Current line: R34 CPI:F87 CPI:F35 125.704
+
+*****************
+
+i is 525
+Current line: R35 CPI:F60 CPI:F56 35
+
+*****************
+
+i is 526
+Current line: R36 net22:F81 net22:F93 75.8106
+
+*****************
+
+i is 527
+Current line: R37 net097:F125 net097:F120 100.38
+
+*****************
+
+i is 528
+Current line: R38 net097:F120 net097:F73 265.536
+
+*****************
+
+i is 529
+Current line: R39 net097:F120 net097:F68 122.732
+
+*****************
+
+i is 530
+Current line: R4 net069:F115 net069:F121 0.001
+
+*****************
+
+i is 531
+Current line: R40 net097:F68 net097:F73 154.896
+
+*****************
+
+i is 532
+Current line: R41 CPN:F108 CPN:F112 48.125
+
+*****************
+
+i is 533
+Current line: R42 CPN:F108 CPN:F88 567.75
+
+*****************
+
+i is 534
+Current line: R43 CPN:F88 CPN:F85 276.906
+
+*****************
+
+i is 535
+Current line: R44 CPN:F88 CPN:F36 62.3514
+
+*****************
+
+i is 536
+Current line: R45 CPN:F88 CPN:F29 278.635
+
+*****************
+
+i is 537
+Current line: R46 CPN:F85 CPN:F36 276.906
+
+*****************
+
+i is 538
+Current line: R47 CPN:F85 CPN:F29 106.239
+
+*****************
+
+i is 539
+Current line: R48 CPN:F36 CPN:F40 148.75
+
+*****************
+
+i is 540
+Current line: R49 CPN:F36 CPN:F29 278.635
+
+*****************
+
+i is 541
+Current line: R5 net0145:F99 net0145:F113 0.001
+
+*****************
+
+i is 542
+Current line: R50 CPN:F64 CPN:F40 538.75
+
+*****************
+
+i is 543
+Current line: R51 D D:F4 0.001
+
+*****************
+
+i is 544
+Current line: R52 D:F80 D:F32 3464.27
+
+*****************
+
+i is 545
+Current line: R53 D:F80 D:F4 311.394
+
+*****************
+
+i is 546
+Current line: R54 D:F4 D:F32 517.884
+
+*****************
+
+i is 547
+Current line: R55 net0148:F76 net0148:F128 129.739
+
+*****************
+
+i is 548
+Current line: R56 net0148:F76 net0148:F111 217.091
+
+*****************
+
+i is 549
+Current line: R57 net0148:F76 net0148:F72 263.214
+
+*****************
+
+i is 550
+Current line: R58 net0148:F76 net0148:F59 221.688
+
+*****************
+
+i is 551
+Current line: R59 net0148:F128 net0148:F124 235
+
+*****************
+
+i is 552
+Current line: R6 net0145:F99 net0145:F51 75.9109
+
+*****************
+
+i is 553
+Current line: R60 net0148:F128 net0148:F111 525.081
+
+*****************
+
+i is 554
+Current line: R61 net0148:F128 net0148:F59 536.202
+
+*****************
+
+i is 555
+Current line: R62 net0148:F111 net0148:F117 0.001
+
+*****************
+
+i is 556
+Current line: R63 net0148:F111 net0148:F59 100.278
+
+*****************
+
+i is 557
+Current line: R64 net0148:F59 net0148:F65 0.001
+
+*****************
+
+i is 558
+Current line: R65 Q Q:F5 0.001
+
+*****************
+
+i is 559
+Current line: R66 Q:F5 Q:F127 37.6364
+
+*****************
+
+i is 560
+Current line: R67 Q:F5 Q:F75 38.6573
+
+*****************
+
+i is 561
+Current line: R68 vdd vdd:F8 0.001
+
+*****************
+
+i is 562
+Current line: R69 vdd:F8 vdd:F123 38.4177
+
+*****************
+
+i is 563
+Current line: R7 net0145:F51 net0145:F61 0.001
+
+*****************
+
+i is 564
+Current line: R70 vdd:F8 vdd:F105 38.1367
+
+*****************
+
+i is 565
+Current line: R71 vdd:F8 vdd:F79 37.5667
+
+*****************
+
+i is 566
+Current line: R72 vdd:F79 vdd:F89 0.001
+
+*****************
+
+i is 567
+Current line: R73 vdd:F79 vdd:F83 0.001
+
+*****************
+
+i is 568
+Current line: R74 vdd:F123 vdd:F129 0.001
+
+*****************
+
+i is 569
+Current line: R75 vdd:F123 vdd:F119 0.001
+
+*****************
+
+i is 570
+Current line: R76 vdd:F123 vdd:F105 4509.04
+
+*****************
+
+i is 571
+Current line: R77 vdd:F105 vdd:F101 0.001
+
+*****************
+
+i is 572
+Current line: R78 vdd:F105 vdd:F95 0.001
+
+*****************
+
+i is 573
+Current line: R79 vdds vdds:F9 0.001
+
+*****************
+
+i is 574
+Current line: R8 CP CP:F3 0.001
+
+*****************
+
+i is 575
+Current line: R80 vdds:F126 vdds:F122 0.001
+
+*****************
+
+i is 576
+Current line: R81 vdds:F126 vdds:F118 0.001
+
+*****************
+
+i is 577
+Current line: R82 vdds:F126 vdds:F114 0.001
+
+*****************
+
+i is 578
+Current line: R83 vdds:F126 vdds:F110 0.001
+
+*****************
+
+i is 579
+Current line: R84 vdds:F126 vdds:F106 0.001
+
+*****************
+
+i is 580
+Current line: R85 vdds:F126 vdds:F102 0.001
+
+*****************
+
+i is 581
+Current line: R86 vdds:F126 vdds:F98 0.001
+
+*****************
+
+i is 582
+Current line: R87 vdds:F126 vdds:F94 0.001
+
+*****************
+
+i is 583
+Current line: R88 vdds:F126 vdds:F90 0.001
+
+*****************
+
+i is 584
+Current line: R89 vdds:F126 vdds:F86 0.001
+
+*****************
+
+i is 585
+Current line: R9 CP:F84 CP:F3 86.377
+
+*****************
+
+i is 586
+Current line: R90 vdds:F126 vdds:F82 0.001
+
+*****************
+
+i is 587
+Current line: R91 vdds:F126 vdds:F78 0.001
+
+*****************
+
+i is 588
+Current line: R92 vdds:F126 vdds:F25 0.001
+
+*****************
+
+i is 589
+Current line: R93 vdds:F126 vdds:F9 37.6257
+
+*****************
+
+i is 590
+Current line: R94 gnds gnds:F7 0.001
+
+*****************
+
+i is 591
+Current line: R95 gnds:F24 gnds:F74 0.0256454
+
+*****************
+
+i is 592
+Current line: R96 gnds:F24 gnds:F7 37.6237
+
+*****************
+
+i is 593
+Current line: R97 gnds:F74 gnds:F70 0.001
+
+*****************
+
+i is 594
+Current line: R98 gnds:F74 gnds:F66 0.001
+
+*****************
+
+i is 595
+Current line: R99 gnds:F74 gnds:F62 0.001
+
+*****************
+
+i is 596
+Current line: .ENDS HS65_GS_DFPQX4
+
+length of lines 597
+*****************
+
+i is 0
+Current line: 
+
+*****************
+
+i is 1
+Current line: .SUBCKT HS65_GS_DFPQX4 Q D CP gnd gnds vdd vdds
+
+*****************
+
+i is 2
+Current line: 
+
+*****************
+
+i is 3
+Current line: *Modified
+
+*****************
+
+i is 4
+Current line: *COMMENT Extracted with DK_cmos065lpgp_RF_7m4x0y2z_2V51V8@5.0.2@20070413.0 at 12:44 14 May 2007
+
+*****************
+
+i is 5
+Current line: Xld_D0 C267 vdds:F25 DNWPS AREA=5.1312 PJ=10.24
+
+*****************
+
+i is 6
+Current line: MMM1 C115 C285 gnd:F33 gnds:F30 NSVTGP AD=0.014p AS=0.0456667p L=0.06u NRD=0.35 NRS=0.4 PD=0.14u PS=0.530435u W=0.2u lpe=3 ngcon=1 po2act=0.296591 sca=1.69635 scb=0.000126319 scc=2.33728e-08
+
+*****************
+
+i is 7
+Current line: MMM12 C100 C248 vdd:F83 vdds:F82 PSVTGP L=0.06u W=0.29u ad=0.058p as=0.0669495p lpe=3 ngcon=1 nrd=0.224138 nrs=15.3376 pd=0.69u po2act=0.28576 ps=0.636129u sca=14.0804 scb=0.0159942 scc=0.00146523
+
+*****************
+
+i is 8
+Current line: MMM13 C109 C287 gnd:F27 gnds:F26 NSVTGP L=0.06u W=0.29u ad=0.05365p as=0.0662167p lpe=3 ngcon=1 nrd=0.206897 nrs=7.15869 pd=0.66u po2act=0.214753 ps=0.76913u sca=8.12641 scb=0.00955152 scc=0.000408996
+
+*****************
+
+i is 9
+Current line: MMM14 C170 C169 vdd:F89 vdds:F86 PSVTGP AD=0.0597p AS=0.0669495p L=0.06u NRD=0.344828 NRS=15.3376 PD=0.77u PS=0.636129u W=0.29u lpe=3 ngcon=1 po2act=0.275451 sca=14.0793 scb=0.0159942 scc=0.00146523
+
+*****************
+
+i is 10
+Current line: MMM15 C397 C103 C442 gnds:F34 NSVTGP AD=0.039p AS=0.0456667p L=0.06u NRD=0.3 NRS=8.2448 PD=0.59u PS=0.530435u W=0.2u lpe=3 ngcon=1 po2act=0.238627 sca=17.5984 scb=0.0199621 scc=0.00206349
+
+*****************
+
+i is 11
+Current line: MMM16 C181 C22 vdd:F95 vdds:F94 PSVTGP L=0.06u W=0.29u ad=0.0517p as=0.0623595p lpe=3 ngcon=1 nrd=0.206897 nrs=10.6859 pd=0.69u po2act=0.214968 ps=0.763158u sca=12.0121 scb=0.0141722 scc=0.00107611
+
+*****************
+
+i is 12
+Current line: MMM17 C392 C231 C461 gnds:F42 NSVTGP L=0.06u W=0.2u ad=0.038p as=0.0500821p lpe=3 ngcon=1 nrd=0.3 nrs=10.1217 pd=0.58u po2act=0.326495 ps=0.564179u sca=17.5978 scb=0.0199621 scc=0.00206349
+
+*****************
+
+i is 13
+Current line: MMM18 C114 C324 gnd:F49 gnds:F46 NSVTGP AD=0.014p AS=0.0500821p L=0.06u NRD=0.35 NRS=2.20697 PD=0.14u PS=0.564179u W=0.2u lpe=3 ngcon=1 po2act=0.282173 sca=2.32991 scb=0.000604316 scc=6.73457e-07
+
+*****************
+
+i is 14
+Current line: MMM19 C32 C322 net0109:F57 gnds:F54 NSVTGP AD=0.035p AS=0.014p L=0.06u NRD=0.275 NRS=0.35 PD=0.55u PS=0.14u W=0.2u lpe=3 ngcon=1 po2act=0.24913 sca=2.33003 scb=0.000604316 scc=6.73457e-07
+
+*****************
+
+i is 15
+Current line: MMM20 C164 C163 net053:F109 vdds:F106 PSVTGP AD=0.037p AS=0.014p L=0.06u NRD=0.3 NRS=0.35 PD=0.57u PS=0.14u W=0.2u lpe=3 ngcon=1 po2act=0.247344 sca=1.54672 scb=0.000125995 scc=2.33727e-08
+
+*****************
+
+i is 16
+Current line: MMM21 C13 C165 C214 vdds:F102 PSVTGP AD=0.014p AS=0.0430066p L=0.06u NRD=0.35 NRS=1.97518 PD=0.14u PS=0.526316u W=0.2u lpe=3 ngcon=1 po2act=0.23417 sca=1.54656 scb=0.000125995 scc=2.33727e-08
+
+*****************
+
+i is 17
+Current line: MMM22 C109 C222 vdd:F101 vdds:F98 PSVTGP AD=0.027p AS=0.0580589p L=0.06u NRD=0.203704 NRS=10.8032 PD=0.2u PS=0.710526u W=0.27u lpe=3 ngcon=1 po2act=0.373692 sca=6.20515 scb=0.00679075 scc=0.000173611
+
+*****************
+
+i is 18
+Current line: MMM23 C107 C323 gnd:F53 gnds:F50 NSVTGP AD=0.029025p AS=0.0676108p L=0.06u NRD=0.240741 NRS=9.38888 PD=0.215u PS=0.761642u W=0.27u lpe=3 ngcon=1 po2act=0.454622 sca=14.7788 scb=0.0167784 scc=0.00156883
+
+*****************
+
+i is 19
+Current line: MMM24 net0145:F113 C200 C128 vdds:F110 PSVTGP L=0.06u W=0.27u ad=0.027p as=0.0347266p lpe=3 ngcon=1 nrd=0.203704 nrs=0.333333 pd=0.2u po2act=0.371244 ps=0.373404u sca=6.20538 scb=0.00679075 scc=0.000173611
+
+*****************
+
+i is 20
+Current line: MMM25 net0145:F61 C252 C132 gnds:F58 NSVTGP L=0.06u W=0.27u ad=0.029025p as=0.0322071p lpe=3 ngcon=1 nrd=0.222222 nrs=0.259259 pd=0.215u po2act=0.363522 ps=0.372857u sca=14.779 scb=0.0167784 scc=0.00156883
+
+*****************
+
+i is 21
+Current line: MMM26 net069:F121 C138 vdd:F119 vdds:F118 PSVTGP L=0.06u W=0.2u ad=0.017p as=0.0364737p lpe=3 ngcon=1 nrd=0.425 nrs=8.68125 pd=0.17u po2act=0.630845 ps=0.349474u sca=6.20704 scb=0.00684993 scc=0.000149357
+
+*****************
+
+i is 22
+Current line: MMM27 net0148:F117 C161 C106 vdds:F114 PSVTGP L=0.06u W=0.2u ad=0.0257234p as=0.017p lpe=3 ngcon=1 nrd=0.375 nrs=0.425 pd=0.276596u po2act=0.571307 ps=0.17u sca=8.55791 scb=0.0105547 scc=0.000414651
+
+*****************
+
+i is 23
+Current line: MMM28 C151 C137 C194 vdds:F122 PSVTGP L=0.06u W=0.2u ad=0.082425p as=0.0364737p lpe=3 ngcon=1 nrd=1.74938 nrs=0.3 pd=1.13u po2act=0.211059 ps=0.349474u sca=1.10977 scb=1.22045e-05 scc=1.68552e-10
+
+*****************
+
+i is 24
+Current line: MMM29 net0148:F65 C106 C133 gnds:F62 NSVTGP L=0.06u W=0.15u ad=0.0178929p as=0.0105p lpe=3 ngcon=1 nrd=0.466667 nrs=0.466667 pd=0.207143u po2act=0.820147 ps=0.14u sca=12.5289 scb=0.0158913 scc=0.00101939
+
+*****************
+
+i is 25
+Current line: MMM30 net0133:F69 C141 C486 gnds:F66 NSVTGP L=0.06u W=0.15u ad=0.0105p as=0.0273851p lpe=3 ngcon=1 nrd=0.466667 nrs=9.42667 pd=0.14u po2act=0.687885 ps=0.316216u sca=20.4056 scb=0.0226819 scc=0.00260982
+
+*****************
+
+i is 26
+Current line: MMM31 C140 C146 gnd:F71 gnds:F70 NSVTGP L=0.06u W=0.2u ad=0.0755p as=0.0365135p lpe=3 ngcon=1 nrd=1.7 nrs=0.35 pd=1.06u po2act=0.214984 ps=0.421622u sca=1.88439 scb=0.000214041 scc=7.20983e-08
+
+*****************
+
+i is 27
+Current line: MMM32 C150 C136 vdd:F129 C234 PSVTGP AD=0.09075p AS=0.100303p L=0.06u NRD=0.3 NRS=6.18099 PD=0.88u PS=0.961053u W=0.55u lpe=3 ngcon=1 po2act=0.200385 sca=3.81818 scb=0.00308337 scc=5.58864e-05
+
+*****************
+
+i is 28
+Current line: MMM33 C143 C139 gnd:F77 C293 NSVTGP AD=0.06435p AS=0.0712014p L=0.06u NRD=0.282051 NRS=6.64323 PD=0.72u PS=0.822162u W=0.39u lpe=3 ngcon=1 po2act=0.192123 sca=11.6369 scb=0.0127786 scc=0.00109616
+
+*****************
+
+i is 29
+Current line: MMM4 C28 C112 net47:F41 gnds:F38 NSVTGP AD=0.0862p AS=0.014p L=0.06u NRD=1.78633 NRS=0.35 PD=1.16u PS=0.14u W=0.2u lpe=3 ngcon=1 po2act=0.302652 sca=1.69604 scb=0.000126319 scc=2.33728e-08
+
+*****************
+
+i is 30
+Current line: MMM5 C16 C167 C100 vdds:F90 PSVTGP AD=0.0612p AS=0.0558p L=0.06u NRD=0.323529 NRS=0.323529 PD=0.7u PS=0.7u W=0.34u lpe=3 ngcon=1 po2act=0.17 sca=1.72715 scb=0.000243274 scc=1.32953e-07
+
+*****************
+
+i is 31
+Current line: MMM6 C101 C117 C178 vdds:F78 PSVTGP L=0.06u W=0.35u ad=0.05775p as=0.0808011p lpe=3 ngcon=1 nrd=0.314286 nrs=0.885714 pd=0.68u po2act=0.211816 ps=0.767742u sca=1.36111 scb=6.68153e-05 scc=8.8344e-09
+
+*****************
+
+i is 32
+Current line: C100 C100 C100 1.67092e-17
+
+*****************
+
+i is 33
+Current line: C101 C100 C101 1.7846e-18
+
+*****************
+
+i is 34
+Current line: C103 C103 C100 3.40032e-19
+
+*****************
+
+i is 35
+Current line: C104 C103 C101 1.4939e-19
+
+*****************
+
+i is 36
+Current line: C106 C106 C106 1.8244e-18
+
+*****************
+
+i is 37
+Current line: C107 C106 C107 1.3585e-19
+
+*****************
+
+i is 38
+Current line: C109 C109 C109 1.11531e-21
+
+*****************
+
+i is 39
+Current line: C110 C109 C101 9.67066e-22
+
+*****************
+
+i is 40
+Current line: C112 C112 C109 1.15535e-19
+
+*****************
+
+i is 41
+Current line: C113 C112 C107 5.0981e-19
+
+*****************
+
+i is 42
+Current line: C114 C112 C114 4.91908e-18
+
+*****************
+
+i is 43
+Current line: C115 C112 C115 1.86077e-17
+
+*****************
+
+i is 44
+Current line: C117 C117 C100 1.26294e-19
+
+*****************
+
+i is 45
+Current line: C118 C117 C101 3.72969e-17
+
+*****************
+
+i is 46
+Current line: C120 C120 C100 2.03738e-18
+
+*****************
+
+i is 47
+Current line: C121 C120 C101 1.03398e-17
+
+*****************
+
+i is 48
+Current line: C128 C128 C106 1.91616e-18
+
+*****************
+
+i is 49
+Current line: C129 C128 C109 3.18974e-18
+
+*****************
+
+i is 50
+Current line: C13 C13 C109 6.48454e-18
+
+*****************
+
+i is 51
+Current line: C130 C128 C107 3.20378e-19
+
+*****************
+
+i is 52
+Current line: C132 C132 C109 6.86786e-19
+
+*****************
+
+i is 53
+Current line: C133 C132 C133 4.03504e-19
+
+*****************
+
+i is 54
+Current line: C134 C132 C107 6.62895e-17
+
+*****************
+
+i is 55
+Current line: C136 C136 C136 1.43888e-17
+
+*****************
+
+i is 56
+Current line: C137 C136 C137 4.37731e-19
+
+*****************
+
+i is 57
+Current line: C138 C136 C138 1.4333e-17
+
+*****************
+
+i is 58
+Current line: C139 C136 C139 7.99158e-17
+
+*****************
+
+i is 59
+Current line: C14 C13 C107 7.48733e-20
+
+*****************
+
+i is 60
+Current line: C140 C136 C140 1.18915e-17
+
+*****************
+
+i is 61
+Current line: C141 C136 C141 1.78035e-18
+
+*****************
+
+i is 62
+Current line: C143 C143 C128 4.67771e-20
+
+*****************
+
+i is 63
+Current line: C144 C143 C139 2.79191e-17
+
+*****************
+
+i is 64
+Current line: C145 C143 C140 3.06558e-19
+
+*****************
+
+i is 65
+Current line: C146 C143 C146 7.23834e-18
+
+*****************
+
+i is 66
+Current line: C147 C143 C141 2.12544e-19
+
+*****************
+
+i is 67
+Current line: C148 C143 C132 3.28633e-21
+
+*****************
+
+i is 68
+Current line: C150 C150 C136 2.60944e-17
+
+*****************
+
+i is 69
+Current line: C151 C150 C151 9.01758e-19
+
+*****************
+
+i is 70
+Current line: C152 C150 C138 6.21789e-20
+
+*****************
+
+i is 71
+Current line: C153 C150 C128 1.65545e-19
+
+*****************
+
+i is 72
+Current line: C154 C150 C139 6.59514e-20
+
+*****************
+
+i is 73
+Current line: C156 C156 C136 1.62253e-17
+
+*****************
+
+i is 74
+Current line: C157 C156 C150 1.32832e-18
+
+*****************
+
+i is 75
+Current line: C158 C156 C151 3.80059e-17
+
+*****************
+
+i is 76
+Current line: C159 C156 C137 2.07164e-17
+
+*****************
+
+i is 77
+Current line: C16 C16 C13 9.36103e-19
+
+*****************
+
+i is 78
+Current line: C160 C156 C138 8.52221e-19
+
+*****************
+
+i is 79
+Current line: C161 C156 C161 5.40397e-19
+
+*****************
+
+i is 80
+Current line: C162 C156 C128 5.21995e-19
+
+*****************
+
+i is 81
+Current line: C163 C156 C163 3.29221e-17
+
+*****************
+
+i is 82
+Current line: C164 C156 C164 8.95661e-17
+
+*****************
+
+i is 83
+Current line: C165 C156 C165 4.23689e-18
+
+*****************
+
+i is 84
+Current line: C166 C156 C100 8.6283e-19
+
+*****************
+
+i is 85
+Current line: C167 C156 C167 6.05703e-18
+
+*****************
+
+i is 86
+Current line: C168 C156 C16 8.93421e-19
+
+*****************
+
+i is 87
+Current line: C169 C156 C169 3.42693e-17
+
+*****************
+
+i is 88
+Current line: C17 C16 C109 1.4672e-18
+
+*****************
+
+i is 89
+Current line: C170 C156 C170 1.5747e-18
+
+*****************
+
+i is 90
+Current line: C171 C156 C100 4.28521e-18
+
+*****************
+
+i is 91
+Current line: C172 C156 C101 1.04787e-16
+
+*****************
+
+i is 92
+Current line: C173 C156 C117 4.3323e-17
+
+*****************
+
+i is 93
+Current line: C174 C156 C141 1.60025e-20
+
+*****************
+
+i is 94
+Current line: C175 C156 C136 1.05213e-17
+
+*****************
+
+i is 95
+Current line: C176 C156 C120 2.9991e-17
+
+*****************
+
+i is 96
+Current line: C178 C178 C151 4.23092e-21
+
+*****************
+
+i is 97
+Current line: C179 C178 C163 9.45368e-17
+
+*****************
+
+i is 98
+Current line: C180 C178 C164 1.38336e-17
+
+*****************
+
+i is 99
+Current line: C181 C178 C181 8.1862e-20
+
+*****************
+
+i is 100
+Current line: C182 C178 C100 1.10469e-17
+
+*****************
+
+i is 101
+Current line: C183 C178 C167 3.36794e-17
+
+*****************
+
+i is 102
+Current line: C184 C178 C16 3.78314e-20
+
+*****************
+
+i is 103
+Current line: C185 C178 C169 1.92171e-17
+
+*****************
+
+i is 104
+Current line: C186 C178 C170 6.38773e-19
+
+*****************
+
+i is 105
+Current line: C187 C178 C100 7.775e-18
+
+*****************
+
+i is 106
+Current line: C188 C178 C101 9.61908e-18
+
+*****************
+
+i is 107
+Current line: C189 C178 C117 1.99313e-17
+
+*****************
+
+i is 108
+Current line: C19 C164 C13 2.2381e-19
+
+*****************
+
+i is 109
+Current line: C190 C178 C103 1.97635e-18
+
+*****************
+
+i is 110
+Current line: C191 C178 C109 7.40506e-20
+
+*****************
+
+i is 111
+Current line: C192 C178 C120 1.28223e-18
+
+*****************
+
+i is 112
+Current line: C194 C194 C136 5.26395e-20
+
+*****************
+
+i is 113
+Current line: C195 C194 C150 6.52306e-19
+
+*****************
+
+i is 114
+Current line: C196 C194 C151 2.86403e-17
+
+*****************
+
+i is 115
+Current line: C197 C194 C137 1.07861e-16
+
+*****************
+
+i is 116
+Current line: C198 C194 C138 2.35034e-17
+
+*****************
+
+i is 117
+Current line: C199 C194 C161 4.85366e-18
+
+*****************
+
+i is 118
+Current line: C20 C164 C107 1.61112e-19
+
+*****************
+
+i is 119
+Current line: C200 C194 C200 7.46557e-18
+
+*****************
+
+i is 120
+Current line: C201 C194 C128 5.96323e-18
+
+*****************
+
+i is 121
+Current line: C202 C194 C163 2.40217e-17
+
+*****************
+
+i is 122
+Current line: C203 C194 C164 1.72861e-20
+
+*****************
+
+i is 123
+Current line: C204 C194 C165 3.07228e-17
+
+*****************
+
+i is 124
+Current line: C205 C194 C16 2.05502e-21
+
+*****************
+
+i is 125
+Current line: C206 C194 C170 2.80486e-17
+
+*****************
+
+i is 126
+Current line: C207 C194 C101 4.25714e-20
+
+*****************
+
+i is 127
+Current line: C208 C194 C139 2.40323e-18
+
+*****************
+
+i is 128
+Current line: C209 C194 C140 3.95931e-20
+
+*****************
+
+i is 129
+Current line: C210 C194 C146 2.22512e-20
+
+*****************
+
+i is 130
+Current line: C211 C194 C141 2.72585e-18
+
+*****************
+
+i is 131
+Current line: C212 C194 C136 7.1392e-19
+
+*****************
+
+i is 132
+Current line: C214 C214 C150 4.83533e-21
+
+*****************
+
+i is 133
+Current line: C215 C214 C151 2.48012e-18
+
+*****************
+
+i is 134
+Current line: C216 C214 C137 2.40709e-21
+
+*****************
+
+i is 135
+Current line: C217 C214 C200 5.09757e-18
+
+*****************
+
+i is 136
+Current line: C218 C214 C128 3.38095e-18
+
+*****************
+
+i is 137
+Current line: C219 C214 C163 5.90368e-18
+
+*****************
+
+i is 138
+Current line: C22 C22 C109 8.44262e-19
+
+*****************
+
+i is 139
+Current line: C220 C214 C164 4.52066e-17
+
+*****************
+
+i is 140
+Current line: C221 C214 C165 3.40693e-17
+
+*****************
+
+i is 141
+Current line: C222 C214 C222 1.10048e-17
+
+*****************
+
+i is 142
+Current line: C223 C214 C181 1.7773e-18
+
+*****************
+
+i is 143
+Current line: C224 C214 C22 2.49988e-17
+
+*****************
+
+i is 144
+Current line: C225 C214 C100 3.52256e-20
+
+*****************
+
+i is 145
+Current line: C226 C214 C167 4.2194e-17
+
+*****************
+
+i is 146
+Current line: C227 C214 C16 1.007e-17
+
+*****************
+
+i is 147
+Current line: C228 C214 C169 6.37732e-17
+
+*****************
+
+i is 148
+Current line: C229 C214 C170 1.70892e-18
+
+*****************
+
+i is 149
+Current line: C23 C22 C107 8.0436e-20
+
+*****************
+
+i is 150
+Current line: C230 C214 C101 2.41231e-19
+
+*****************
+
+i is 151
+Current line: C231 C214 C231 4.70254e-20
+
+*****************
+
+i is 152
+Current line: C232 C214 C112 6.13442e-21
+
+*****************
+
+i is 153
+Current line: C234 C234 C136 2.95314e-17
+
+*****************
+
+i is 154
+Current line: C235 C234 C150 2.18278e-18
+
+*****************
+
+i is 155
+Current line: C236 C234 C137 3.31858e-18
+
+*****************
+
+i is 156
+Current line: C237 C234 C161 1.28306e-17
+
+*****************
+
+i is 157
+Current line: C238 C234 C200 7.09091e-18
+
+*****************
+
+i is 158
+Current line: C239 C234 C163 7.06651e-18
+
+*****************
+
+i is 159
+Current line: C240 C234 C165 9.15461e-18
+
+*****************
+
+i is 160
+Current line: C241 C234 C222 1.49546e-18
+
+*****************
+
+i is 161
+Current line: C242 C234 C181 2.96318e-18
+
+*****************
+
+i is 162
+Current line: C243 C234 C100 1.49158e-18
+
+*****************
+
+i is 163
+Current line: C244 C234 C167 4.48758e-18
+
+*****************
+
+i is 164
+Current line: C245 C234 C169 3.49499e-17
+
+*****************
+
+i is 165
+Current line: C246 C234 C170 4.84806e-18
+
+*****************
+
+i is 166
+Current line: C247 C234 C100 1.12083e-19
+
+*****************
+
+i is 167
+Current line: C248 C234 C248 3.08424e-17
+
+*****************
+
+i is 168
+Current line: C249 C234 C101 9.3204e-18
+
+*****************
+
+i is 169
+Current line: C25 C231 C109 1.00451e-18
+
+*****************
+
+i is 170
+Current line: C250 C234 C117 3.20691e-17
+
+*****************
+
+i is 171
+Current line: C251 C234 C133 1.85353e-19
+
+*****************
+
+i is 172
+Current line: C252 C234 C252 4.67617e-19
+
+*****************
+
+i is 173
+Current line: C253 C234 C103 2.08854e-18
+
+*****************
+
+i is 174
+Current line: C254 C234 C156 4.2058e-16
+
+*****************
+
+i is 175
+Current line: C255 C234 C136 1.00635e-17
+
+*****************
+
+i is 176
+Current line: C256 C234 C120 4.47885e-17
+
+*****************
+
+i is 177
+Current line: C257 C234 C257 1.15138e-18
+
+*****************
+
+i is 178
+Current line: C259 C259 C161 2.68924e-21
+
+*****************
+
+i is 179
+Current line: C26 C231 C107 1.76006e-19
+
+*****************
+
+i is 180
+Current line: C260 C259 C169 4.01394e-20
+
+*****************
+
+i is 181
+Current line: C261 C259 C170 1.03652e-19
+
+*****************
+
+i is 182
+Current line: C262 C259 C101 1.881e-17
+
+*****************
+
+i is 183
+Current line: C263 C259 C117 1.02729e-19
+
+*****************
+
+i is 184
+Current line: C264 C259 C156 4.80478e-17
+
+*****************
+
+i is 185
+Current line: C265 C259 C120 1.74297e-19
+
+*****************
+
+i is 186
+Current line: C267 C267 C136 2.35324e-19
+
+*****************
+
+i is 187
+Current line: C268 C267 C150 2.18264e-19
+
+*****************
+
+i is 188
+Current line: C269 C267 C234 4.36321e-18
+
+*****************
+
+i is 189
+Current line: C270 C267 C137 7.94874e-19
+
+*****************
+
+i is 190
+Current line: C271 C267 C161 4.04807e-19
+
+*****************
+
+i is 191
+Current line: C272 C267 C128 4.55072e-19
+
+*****************
+
+i is 192
+Current line: C273 C267 C163 2.61826e-19
+
+*****************
+
+i is 193
+Current line: C274 C267 C164 1.86854e-19
+
+*****************
+
+i is 194
+Current line: C275 C267 C214 1.0375e-19
+
+*****************
+
+i is 195
+Current line: C276 C267 C13 1.14401e-19
+
+*****************
+
+i is 196
+Current line: C277 C267 C181 1.77559e-19
+
+*****************
+
+i is 197
+Current line: C278 C267 C22 1.84455e-20
+
+*****************
+
+i is 198
+Current line: C279 C267 C169 1.58725e-20
+
+*****************
+
+i is 199
+Current line: C28 C28 C109 1.59025e-17
+
+*****************
+
+i is 200
+Current line: C280 C267 C170 1.42828e-19
+
+*****************
+
+i is 201
+Current line: C281 C267 C117 4.09058e-20
+
+*****************
+
+i is 202
+Current line: C282 C267 C139 3.50622e-19
+
+*****************
+
+i is 203
+Current line: C283 C267 C28 5.92328e-21
+
+*****************
+
+i is 204
+Current line: C284 C267 C103 1.3014e-19
+
+*****************
+
+i is 205
+Current line: C285 C267 C285 6.33427e-17
+
+*****************
+
+i is 206
+Current line: C286 C267 C109 2.68197e-18
+
+*****************
+
+i is 207
+Current line: C287 C267 C287 2.75553e-17
+
+*****************
+
+i is 208
+Current line: C288 C267 C259 1.28288e-19
+
+*****************
+
+i is 209
+Current line: C289 C267 C156 2.09742e-18
+
+*****************
+
+i is 210
+Current line: C29 C28 C107 1.51591e-18
+
+*****************
+
+i is 211
+Current line: C290 C267 C136 1.28423e-18
+
+*****************
+
+i is 212
+Current line: C291 C267 C120 5.00972e-19
+
+*****************
+
+i is 213
+Current line: C292 C267 C257 3.65027e-20
+
+*****************
+
+i is 214
+Current line: C293 C293 C150 6.06068e-18
+
+*****************
+
+i is 215
+Current line: C294 C293 C234 8.86341e-19
+
+*****************
+
+i is 216
+Current line: C295 C293 C137 2.64835e-18
+
+*****************
+
+i is 217
+Current line: C296 C293 C194 1.09015e-17
+
+*****************
+
+i is 218
+Current line: C297 C293 C161 2.09345e-18
+
+*****************
+
+i is 219
+Current line: C298 C293 C106 5.58881e-18
+
+*****************
+
+i is 220
+Current line: C299 C293 C200 2.29309e-19
+
+*****************
+
+i is 221
+Current line: C30 C28 C114 2.27577e-19
+
+*****************
+
+i is 222
+Current line: C300 C293 C128 6.9467e-18
+
+*****************
+
+i is 223
+Current line: C301 C293 C163 1.42961e-19
+
+*****************
+
+i is 224
+Current line: C302 C293 C164 1.17111e-20
+
+*****************
+
+i is 225
+Current line: C303 C293 C214 7.55882e-18
+
+*****************
+
+i is 226
+Current line: C304 C293 C13 1.11118e-19
+
+*****************
+
+i is 227
+Current line: C305 C293 C181 1.01711e-17
+
+*****************
+
+i is 228
+Current line: C306 C293 C22 6.01092e-18
+
+*****************
+
+i is 229
+Current line: C307 C293 C100 6.17796e-18
+
+*****************
+
+i is 230
+Current line: C308 C293 C167 9.74878e-19
+
+*****************
+
+i is 231
+Current line: C309 C293 C16 3.02961e-18
+
+*****************
+
+i is 232
+Current line: C310 C293 C169 1.0266e-17
+
+*****************
+
+i is 233
+Current line: C311 C293 C170 8.1675e-18
+
+*****************
+
+i is 234
+Current line: C312 C293 C100 1.49987e-17
+
+*****************
+
+i is 235
+Current line: C313 C293 C248 3.12031e-18
+
+*****************
+
+i is 236
+Current line: C314 C293 C101 5.01295e-18
+
+*****************
+
+i is 237
+Current line: C315 C293 C117 8.11133e-20
+
+*****************
+
+i is 238
+Current line: C316 C293 C178 1.47005e-17
+
+*****************
+
+i is 239
+Current line: C317 C293 C139 2.17455e-17
+
+*****************
+
+i is 240
+Current line: C318 C293 C143 2.32532e-18
+
+*****************
+
+i is 241
+Current line: C319 C293 C146 1.30971e-17
+
+*****************
+
+i is 242
+Current line: C32 C32 C114 5.8296e-19
+
+*****************
+
+i is 243
+Current line: C320 C293 C106 6.16889e-18
+
+*****************
+
+i is 244
+Current line: C321 C293 C252 6.45978e-18
+
+*****************
+
+i is 245
+Current line: C322 C293 C322 7.73474e-19
+
+*****************
+
+i is 246
+Current line: C323 C293 C323 5.772e-18
+
+*****************
+
+i is 247
+Current line: C324 C293 C324 2.11443e-18
+
+*****************
+
+i is 248
+Current line: C325 C293 C231 2.37267e-18
+
+*****************
+
+i is 249
+Current line: C326 C293 C112 3.69683e-17
+
+*****************
+
+i is 250
+Current line: C327 C293 C28 3.28669e-18
+
+*****************
+
+i is 251
+Current line: C328 C293 C287 1.55919e-18
+
+*****************
+
+i is 252
+Current line: C329 C293 C259 5.62548e-18
+
+*****************
+
+i is 253
+Current line: C33 C32 C107 4.25378e-19
+
+*****************
+
+i is 254
+Current line: C330 C293 C156 4.25097e-17
+
+*****************
+
+i is 255
+Current line: C331 C293 C136 9.95422e-18
+
+*****************
+
+i is 256
+Current line: C332 C293 C120 3.21437e-17
+
+*****************
+
+i is 257
+Current line: C333 C293 C257 1.29162e-18
+
+*****************
+
+i is 258
+Current line: C334 C334 C234 8.56536e-21
+
+*****************
+
+i is 259
+Current line: C335 C334 C181 4.04816e-22
+
+*****************
+
+i is 260
+Current line: C336 C334 C100 4.82575e-18
+
+*****************
+
+i is 261
+Current line: C337 C334 C101 1.28914e-20
+
+*****************
+
+i is 262
+Current line: C338 C334 C117 1.47194e-18
+
+*****************
+
+i is 263
+Current line: C339 C334 C231 6.77967e-20
+
+*****************
+
+i is 264
+Current line: C340 C334 C28 6.45839e-19
+
+*****************
+
+i is 265
+Current line: C341 C334 C285 3.6704e-20
+
+*****************
+
+i is 266
+Current line: C342 C334 C109 8.11637e-20
+
+*****************
+
+i is 267
+Current line: C343 C334 C287 8.27987e-19
+
+*****************
+
+i is 268
+Current line: C344 C334 C259 2.80166e-18
+
+*****************
+
+i is 269
+Current line: C345 C334 C156 1.69672e-18
+
+*****************
+
+i is 270
+Current line: C347 C347 C136 2.64872e-17
+
+*****************
+
+i is 271
+Current line: C348 C347 C150 1.53834e-18
+
+*****************
+
+i is 272
+Current line: C349 C347 C234 1.4224e-16
+
+*****************
+
+i is 273
+Current line: C350 C347 C151 1.68007e-18
+
+*****************
+
+i is 274
+Current line: C351 C347 C137 7.47689e-19
+
+*****************
+
+i is 275
+Current line: C352 C347 C194 4.1046e-18
+
+*****************
+
+i is 276
+Current line: C353 C347 C138 3.57049e-17
+
+*****************
+
+i is 277
+Current line: C354 C347 C161 9.66217e-19
+
+*****************
+
+i is 278
+Current line: C355 C347 C106 6.82034e-19
+
+*****************
+
+i is 279
+Current line: C356 C347 C200 5.16708e-19
+
+*****************
+
+i is 280
+Current line: C357 C347 C128 1.25376e-18
+
+*****************
+
+i is 281
+Current line: C358 C347 C163 1.05367e-18
+
+*****************
+
+i is 282
+Current line: C359 C347 C164 4.23312e-19
+
+*****************
+
+i is 283
+Current line: C36 C222 C109 2.55716e-17
+
+*****************
+
+i is 284
+Current line: C360 C347 C214 3.02415e-18
+
+*****************
+
+i is 285
+Current line: C361 C347 C165 8.88194e-19
+
+*****************
+
+i is 286
+Current line: C362 C347 C13 3.97448e-19
+
+*****************
+
+i is 287
+Current line: C363 C347 C222 3.00654e-17
+
+*****************
+
+i is 288
+Current line: C364 C347 C109 5.55426e-18
+
+*****************
+
+i is 289
+Current line: C365 C347 C181 1.2628e-18
+
+*****************
+
+i is 290
+Current line: C366 C347 C22 4.94373e-17
+
+*****************
+
+i is 291
+Current line: C367 C347 C100 5.5793e-17
+
+*****************
+
+i is 292
+Current line: C368 C347 C167 7.57226e-17
+
+*****************
+
+i is 293
+Current line: C369 C347 C16 3.21257e-18
+
+*****************
+
+i is 294
+Current line: C37 C222 C107 2.29059e-18
+
+*****************
+
+i is 295
+Current line: C370 C347 C169 8.55433e-19
+
+*****************
+
+i is 296
+Current line: C371 C347 C170 4.05869e-18
+
+*****************
+
+i is 297
+Current line: C372 C347 C100 2.38613e-17
+
+*****************
+
+i is 298
+Current line: C373 C347 C248 1.51276e-18
+
+*****************
+
+i is 299
+Current line: C374 C347 C101 4.94086e-19
+
+*****************
+
+i is 300
+Current line: C375 C347 C117 3.28906e-18
+
+*****************
+
+i is 301
+Current line: C376 C347 C178 3.2516e-18
+
+*****************
+
+i is 302
+Current line: C377 C347 C139 3.65678e-18
+
+*****************
+
+i is 303
+Current line: C378 C347 C143 9.36411e-19
+
+*****************
+
+i is 304
+Current line: C379 C347 C293 1.75243e-16
+
+*****************
+
+i is 305
+Current line: C380 C347 C140 5.23326e-17
+
+*****************
+
+i is 306
+Current line: C381 C347 C146 2.05103e-19
+
+*****************
+
+i is 307
+Current line: C382 C347 C141 2.50377e-18
+
+*****************
+
+i is 308
+Current line: C383 C347 C106 1.19063e-18
+
+*****************
+
+i is 309
+Current line: C384 C347 C252 1.56309e-18
+
+*****************
+
+i is 310
+Current line: C385 C347 C132 5.75058e-17
+
+*****************
+
+i is 311
+Current line: C386 C347 C322 3.10032e-19
+
+*****************
+
+i is 312
+Current line: C387 C347 C32 4.79864e-19
+
+*****************
+
+i is 313
+Current line: C388 C347 C323 5.60421e-19
+
+*****************
+
+i is 314
+Current line: C389 C347 C107 4.05411e-17
+
+*****************
+
+i is 315
+Current line: C39 C181 C109 5.92245e-17
+
+*****************
+
+i is 316
+Current line: C390 C347 C324 3.12363e-19
+
+*****************
+
+i is 317
+Current line: C391 C347 C114 8.7366e-19
+
+*****************
+
+i is 318
+Current line: C392 C347 C392 3.23017e-17
+
+*****************
+
+i is 319
+Current line: C393 C347 C231 3.54085e-17
+
+*****************
+
+i is 320
+Current line: C394 C347 C112 1.14895e-18
+
+*****************
+
+i is 321
+Current line: C395 C347 C28 3.89058e-17
+
+*****************
+
+i is 322
+Current line: C396 C347 C103 1.51625e-18
+
+*****************
+
+i is 323
+Current line: C397 C347 C397 1.80718e-17
+
+*****************
+
+i is 324
+Current line: C398 C347 C285 2.44533e-19
+
+*****************
+
+i is 325
+Current line: C399 C347 C115 2.30361e-19
+
+*****************
+
+i is 326
+Current line: C4 C106 C133 1.94783e-18
+
+*****************
+
+i is 327
+Current line: C40 C181 C107 2.76398e-18
+
+*****************
+
+i is 328
+Current line: C400 C347 C109 6.37345e-17
+
+*****************
+
+i is 329
+Current line: C401 C347 C287 1.00124e-18
+
+*****************
+
+i is 330
+Current line: C402 C347 C267 1.62389e-18
+
+*****************
+
+i is 331
+Current line: C403 C347 C259 2.30638e-17
+
+*****************
+
+i is 332
+Current line: C404 C347 C156 4.25796e-16
+
+*****************
+
+i is 333
+Current line: C405 C347 C334 2.60941e-17
+
+*****************
+
+i is 334
+Current line: C406 C347 C136 9.27046e-17
+
+*****************
+
+i is 335
+Current line: C407 C347 C120 4.02193e-17
+
+*****************
+
+i is 336
+Current line: C408 C347 C257 2.0301e-17
+
+*****************
+
+i is 337
+Current line: C409 C409 C151 7.6057e-21
+
+*****************
+
+i is 338
+Current line: C410 C409 C138 2.43897e-17
+
+*****************
+
+i is 339
+Current line: C411 C409 C109 1.30135e-19
+
+*****************
+
+i is 340
+Current line: C412 C409 C181 5.16166e-19
+
+*****************
+
+i is 341
+Current line: C413 C409 C170 1.76388e-18
+
+*****************
+
+i is 342
+Current line: C414 C409 C100 1.81303e-17
+
+*****************
+
+i is 343
+Current line: C415 C409 C248 5.16443e-19
+
+*****************
+
+i is 344
+Current line: C416 C409 C101 6.96671e-20
+
+*****************
+
+i is 345
+Current line: C417 C409 C139 1.71226e-18
+
+*****************
+
+i is 346
+Current line: C418 C409 C143 8.649e-19
+
+*****************
+
+i is 347
+Current line: C419 C409 C293 3.22515e-16
+
+*****************
+
+i is 348
+Current line: C42 C323 C109 3.56863e-18
+
+*****************
+
+i is 349
+Current line: C420 C409 C140 4.98185e-18
+
+*****************
+
+i is 350
+Current line: C421 C409 C146 3.77248e-17
+
+*****************
+
+i is 351
+Current line: C422 C409 C132 5.21281e-19
+
+*****************
+
+i is 352
+Current line: C423 C409 C322 4.57335e-18
+
+*****************
+
+i is 353
+Current line: C424 C409 C32 9.12531e-17
+
+*****************
+
+i is 354
+Current line: C425 C409 C107 2.33047e-19
+
+*****************
+
+i is 355
+Current line: C426 C409 C324 3.85551e-18
+
+*****************
+
+i is 356
+Current line: C427 C409 C112 6.95469e-17
+
+*****************
+
+i is 357
+Current line: C428 C409 C28 4.8192e-18
+
+*****************
+
+i is 358
+Current line: C429 C409 C103 1.05834e-17
+
+*****************
+
+i is 359
+Current line: C43 C323 C107 2.13173e-17
+
+*****************
+
+i is 360
+Current line: C430 C409 C397 5.80123e-20
+
+*****************
+
+i is 361
+Current line: C431 C409 C285 1.05405e-16
+
+*****************
+
+i is 362
+Current line: C432 C409 C115 4.7739e-18
+
+*****************
+
+i is 363
+Current line: C433 C409 C109 1.3937e-17
+
+*****************
+
+i is 364
+Current line: C434 C409 C287 8.77348e-19
+
+*****************
+
+i is 365
+Current line: C435 C409 C267 6.92208e-18
+
+*****************
+
+i is 366
+Current line: C436 C409 C259 1.3996e-18
+
+*****************
+
+i is 367
+Current line: C437 C409 C156 3.26028e-17
+
+*****************
+
+i is 368
+Current line: C438 C409 C334 4.92589e-17
+
+*****************
+
+i is 369
+Current line: C439 C409 C136 1.04835e-17
+
+*****************
+
+i is 370
+Current line: C440 C409 C120 5.49666e-18
+
+*****************
+
+i is 371
+Current line: C441 C409 C257 2.07857e-19
+
+*****************
+
+i is 372
+Current line: C442 C442 C234 8.45941e-20
+
+*****************
+
+i is 373
+Current line: C443 C442 C169 9.70874e-18
+
+*****************
+
+i is 374
+Current line: C444 C442 C100 6.25817e-18
+
+*****************
+
+i is 375
+Current line: C445 C442 C248 2.59775e-19
+
+*****************
+
+i is 376
+Current line: C446 C442 C178 5.00133e-18
+
+*****************
+
+i is 377
+Current line: C447 C442 C107 1.69237e-21
+
+*****************
+
+i is 378
+Current line: C448 C442 C392 1.71176e-18
+
+*****************
+
+i is 379
+Current line: C449 C442 C231 8.79275e-18
+
+*****************
+
+i is 380
+Current line: C45 C392 C107 3.16269e-20
+
+*****************
+
+i is 381
+Current line: C450 C442 C112 2.53986e-17
+
+*****************
+
+i is 382
+Current line: C451 C442 C28 3.54123e-18
+
+*****************
+
+i is 383
+Current line: C452 C442 C103 1.46855e-17
+
+*****************
+
+i is 384
+Current line: C453 C442 C397 3.42063e-18
+
+*****************
+
+i is 385
+Current line: C454 C442 C285 3.7586e-17
+
+*****************
+
+i is 386
+Current line: C455 C442 C115 3.83289e-19
+
+*****************
+
+i is 387
+Current line: C456 C442 C109 3.34618e-18
+
+*****************
+
+i is 388
+Current line: C457 C442 C287 3.50435e-17
+
+*****************
+
+i is 389
+Current line: C458 C442 C267 9.73071e-19
+
+*****************
+
+i is 390
+Current line: C459 C442 C120 4.91718e-17
+
+*****************
+
+i is 391
+Current line: C460 C442 C257 2.77676e-19
+
+*****************
+
+i is 392
+Current line: C461 C461 C234 3.57812e-20
+
+*****************
+
+i is 393
+Current line: C462 C461 C214 5.43958e-18
+
+*****************
+
+i is 394
+Current line: C463 C461 C16 4.15067e-20
+
+*****************
+
+i is 395
+Current line: C464 C461 C169 4.46239e-20
+
+*****************
+
+i is 396
+Current line: C465 C461 C143 3.86827e-21
+
+*****************
+
+i is 397
+Current line: C466 C461 C140 6.86415e-18
+
+*****************
+
+i is 398
+Current line: C467 C461 C146 1.45836e-21
+
+*****************
+
+i is 399
+Current line: C468 C461 C252 1.36563e-18
+
+*****************
+
+i is 400
+Current line: C469 C461 C132 7.16236e-20
+
+*****************
+
+i is 401
+Current line: C470 C461 C322 2.37144e-17
+
+*****************
+
+i is 402
+Current line: C471 C461 C32 1.07659e-19
+
+*****************
+
+i is 403
+Current line: C472 C461 C323 1.02434e-17
+
+*****************
+
+i is 404
+Current line: C473 C461 C107 5.53871e-19
+
+*****************
+
+i is 405
+Current line: C474 C461 C324 1.33549e-17
+
+*****************
+
+i is 406
+Current line: C475 C461 C114 1.60877e-19
+
+*****************
+
+i is 407
+Current line: C476 C461 C392 8.96433e-18
+
+*****************
+
+i is 408
+Current line: C477 C461 C231 3.94224e-17
+
+*****************
+
+i is 409
+Current line: C478 C461 C112 4.13965e-17
+
+*****************
+
+i is 410
+Current line: C479 C461 C28 2.32971e-17
+
+*****************
+
+i is 411
+Current line: C48 C167 C109 6.444e-20
+
+*****************
+
+i is 412
+Current line: C480 C461 C103 1.71812e-17
+
+*****************
+
+i is 413
+Current line: C481 C461 C397 1.78045e-18
+
+*****************
+
+i is 414
+Current line: C482 C461 C285 9.01026e-20
+
+*****************
+
+i is 415
+Current line: C483 C461 C115 1.69103e-20
+
+*****************
+
+i is 416
+Current line: C484 C461 C109 4.11003e-21
+
+*****************
+
+i is 417
+Current line: C485 C461 C267 6.04416e-22
+
+*****************
+
+i is 418
+Current line: C486 C486 C234 6.64523e-21
+
+*****************
+
+i is 419
+Current line: C487 C486 C137 2.06173e-20
+
+*****************
+
+i is 420
+Current line: C488 C486 C194 3.07884e-18
+
+*****************
+
+i is 421
+Current line: C489 C486 C139 3.48696e-17
+
+*****************
+
+i is 422
+Current line: C490 C486 C143 6.42289e-19
+
+*****************
+
+i is 423
+Current line: C491 C486 C140 8.17684e-18
+
+*****************
+
+i is 424
+Current line: C492 C486 C146 7.34399e-17
+
+*****************
+
+i is 425
+Current line: C493 C486 C141 2.95156e-17
+
+*****************
+
+i is 426
+Current line: C494 C486 C106 2.14398e-17
+
+*****************
+
+i is 427
+Current line: C495 C486 C252 1.0283e-17
+
+*****************
+
+i is 428
+Current line: C496 C486 C132 1.3208e-17
+
+*****************
+
+i is 429
+Current line: C497 C486 C32 1.62065e-20
+
+*****************
+
+i is 430
+Current line: C498 C486 C323 1.3965e-17
+
+*****************
+
+i is 431
+Current line: C499 C486 C107 3.43106e-21
+
+*****************
+
+i is 432
+Current line: C50 C161 C109 6.20032e-20
+
+*****************
+
+i is 433
+Current line: C500 C486 C112 3.9091e-19
+
+*****************
+
+i is 434
+Current line: C501 C486 C28 1.08795e-21
+
+*****************
+
+i is 435
+Current line: C502 C486 C136 3.63503e-19
+
+*****************
+
+i is 436
+Current line: C51 C161 C107 1.76501e-18
+
+*****************
+
+i is 437
+Current line: C53 C170 C109 2.91887e-17
+
+*****************
+
+i is 438
+Current line: C54 C170 C115 1.75121e-19
+
+*****************
+
+i is 439
+Current line: C56 C252 C109 3.53448e-18
+
+*****************
+
+i is 440
+Current line: C57 C252 C107 2.23983e-17
+
+*****************
+
+i is 441
+Current line: C59 C397 C109 8.49401e-20
+
+*****************
+
+i is 442
+Current line: C6 C109 C114 1.40685e-19
+
+*****************
+
+i is 443
+Current line: C60 C397 C115 9.60337e-19
+
+*****************
+
+i is 444
+Current line: C62 C322 C107 7.70574e-18
+
+*****************
+
+i is 445
+Current line: C64 C101 C161 5.44418e-21
+
+*****************
+
+i is 446
+Current line: C65 C101 C164 1.06994e-19
+
+*****************
+
+i is 447
+Current line: C66 C101 C167 1.24202e-18
+
+*****************
+
+i is 448
+Current line: C67 C101 C16 1.26723e-19
+
+*****************
+
+i is 449
+Current line: C68 C101 C170 7.86029e-20
+
+*****************
+
+i is 450
+Current line: C70 C100 C167 2.6884e-17
+
+*****************
+
+i is 451
+Current line: C71 C100 C16 2.12959e-17
+
+*****************
+
+i is 452
+Current line: C72 C100 C170 2.14378e-17
+
+*****************
+
+i is 453
+Current line: C73 C100 C397 5.87387e-21
+
+*****************
+
+i is 454
+Current line: C75 C151 C106 8.85302e-18
+
+*****************
+
+i is 455
+Current line: C76 C151 C133 3.28309e-19
+
+*****************
+
+i is 456
+Current line: C78 C138 C106 6.18061e-18
+
+*****************
+
+i is 457
+Current line: C79 C138 C133 3.55499e-19
+
+*****************
+
+i is 458
+Current line: C8 C107 C114 7.94192e-18
+
+*****************
+
+i is 459
+Current line: C81 C141 C133 3.0068e-18
+
+*****************
+
+i is 460
+Current line: C83 C140 C106 5.28349e-19
+
+*****************
+
+i is 461
+Current line: C84 C140 C133 6.75916e-18
+
+*****************
+
+i is 462
+Current line: C86 C163 C109 5.26683e-20
+
+*****************
+
+i is 463
+Current line: C87 C163 C101 2.41052e-19
+
+*****************
+
+i is 464
+Current line: C88 C163 C107 5.27294e-19
+
+*****************
+
+i is 465
+Current line: C90 C169 C13 4.70649e-18
+
+*****************
+
+i is 466
+Current line: C91 C169 C109 6.18919e-19
+
+*****************
+
+i is 467
+Current line: C92 C169 C100 4.49292e-17
+
+*****************
+
+i is 468
+Current line: C93 C169 C101 6.08289e-18
+
+*****************
+
+i is 469
+Current line: C94 C169 C107 7.46208e-21
+
+*****************
+
+i is 470
+Current line: C96 C200 C109 3.14795e-17
+
+*****************
+
+i is 471
+Current line: C97 C200 C107 6.43456e-18
+
+*****************
+
+i is 472
+Current line: C99 C100 C109 1.03143e-20
+
+*****************
+
+i is 473
+Current line: R1 C114 net0109:F57 0.001
+
+cap1 = C114 , cap2= net0109:F57 ,cap_new= R1 
+replacing..into for
+outside for R
+*****************
+
+i is 474
+Current line: R10 C248 C287 108.835
+
+cap1 = C248 , cap2= C287 ,cap_new= R10 
+replacing..into for
+outside for R
+*****************
+
+i is 475
+Current line: R100 C293 gnds:F58 0.001
+
+cap1 = C293 , cap2= gnds:F58 ,cap_new= R100 
+replacing..into for
+outside for R
+*****************
+
+i is 476
+Current line: R101 C293 gnds:F54 0.001
+
+cap1 = C293 , cap2= gnds:F54 ,cap_new= R101 
+replacing..into for
+outside for R
+*****************
+
+i is 477
+Current line: R102 C293 gnds:F50 0.001
+
+cap1 = C293 , cap2= gnds:F50 ,cap_new= R102 
+replacing..into for
+outside for R
+*****************
+
+i is 478
+Current line: R103 C293 gnds:F46 0.001
+
+cap1 = C293 , cap2= gnds:F46 ,cap_new= R103 
+replacing..into for
+outside for R
+*****************
+
+i is 479
+Current line: R104 C293 gnds:F42 0.001
+
+cap1 = C293 , cap2= gnds:F42 ,cap_new= R104 
+replacing..into for
+outside for R
+*****************
+
+i is 480
+Current line: R105 C293 gnds:F38 0.001
+
+cap1 = C293 , cap2= gnds:F38 ,cap_new= R105 
+replacing..into for
+outside for R
+*****************
+
+i is 481
+Current line: R106 C293 gnds:F34 0.001
+
+cap1 = C293 , cap2= gnds:F34 ,cap_new= R106 
+replacing..into for
+outside for R
+*****************
+
+i is 482
+Current line: R107 C293 gnds:F30 0.001
+
+cap1 = C293 , cap2= gnds:F30 ,cap_new= R107 
+replacing..into for
+outside for R
+*****************
+
+i is 483
+Current line: R108 C293 gnds:F26 0.001
+
+cap1 = C293 , cap2= gnds:F26 ,cap_new= R108 
+replacing..into for
+outside for R
+*****************
+
+i is 484
+Current line: R109 gnd C409 0.001
+
+cap1 = gnd , cap2= C409 ,cap_new= R109 
+replacing..into for
+outside for R
+*****************
+
+i is 485
+Current line: R11 C257 C287 149.773
+
+cap1 = C257 , cap2= C287 ,cap_new= R11 
+replacing..into for
+outside for R
+*****************
+
+i is 486
+Current line: R110 C347 C486 3412.84
+
+cap1 = C347 , cap2= C486 ,cap_new= R110 
+replacing..into for
+outside for R
+*****************
+
+i is 487
+Current line: R111 C347 C461 2679.64
+
+cap1 = C347 , cap2= C461 ,cap_new= R111 
+replacing..into for
+outside for R
+*****************
+
+i is 488
+Current line: R112 C347 C442 3368.01
+
+cap1 = C347 , cap2= C442 ,cap_new= R112 
+replacing..into for
+outside for R
+*****************
+
+i is 489
+Current line: R113 C347 C409 2.17112
+
+cap1 = C347 , cap2= C409 ,cap_new= R113 
+replacing..into for
+outside for R
+*****************
+
+i is 490
+Current line: R114 C409 C486 38.7791
+
+cap1 = C409 , cap2= C486 ,cap_new= R114 
+replacing..into for
+outside for R
+*****************
+
+i is 491
+Current line: R115 C409 C461 38.6979
+
+cap1 = C409 , cap2= C461 ,cap_new= R115 
+replacing..into for
+outside for R
+*****************
+
+i is 492
+Current line: R116 C409 C442 38.2697
+
+cap1 = C409 , cap2= C442 ,cap_new= R116 
+replacing..into for
+outside for R
+*****************
+
+i is 493
+Current line: R117 C442 C486 6332.97
+
+cap1 = C442 , cap2= C486 ,cap_new= R117 
+replacing..into for
+outside for R
+*****************
+
+i is 494
+Current line: R118 C442 gnd:F33 0.001
+
+cap1 = C442 , cap2= gnd:F33 ,cap_new= R118 
+replacing..into for
+outside for R
+*****************
+
+i is 495
+Current line: R119 C442 gnd:F27 0.001
+
+cap1 = C442 , cap2= gnd:F27 ,cap_new= R119 
+replacing..into for
+outside for R
+*****************
+
+i is 496
+Current line: R12 C13 net053:F109 0.001
+
+cap1 = C13 , cap2= net053:F109 ,cap_new= R12 
+replacing..into for
+outside for R
+*****************
+
+i is 497
+Current line: R120 C461 gnd:F53 0.001
+
+cap1 = C461 , cap2= gnd:F53 ,cap_new= R120 
+replacing..into for
+outside for R
+*****************
+
+i is 498
+Current line: R121 C461 gnd:F49 0.001
+
+cap1 = C461 , cap2= gnd:F49 ,cap_new= R121 
+replacing..into for
+outside for R
+*****************
+
+i is 499
+Current line: R122 C486 gnd:F77 0.001
+
+cap1 = C486 , cap2= gnd:F77 ,cap_new= R122 
+replacing..into for
+outside for R
+*****************
+
+i is 500
+Current line: R123 C486 gnd:F71 0.001
+
+cap1 = C486 , cap2= gnd:F71 ,cap_new= R123 
+replacing..into for
+outside for R
+*****************
+
+i is 501
+Current line: R13 C16 C164 89.44
+
+cap1 = C16 , cap2= C164 ,cap_new= R13 
+replacing..into for
+outside for R
+*****************
+
+i is 502
+Current line: R14 C16 C22 250.88
+
+cap1 = C16 , cap2= C22 ,cap_new= R14 
+replacing..into for
+outside for R
+*****************
+
+i is 503
+Current line: R15 C164 C22 254.581
+
+cap1 = C164 , cap2= C22 ,cap_new= R15 
+replacing..into for
+outside for R
+*****************
+
+i is 504
+Current line: R16 C22 C231 79
+
+cap1 = C22 , cap2= C231 ,cap_new= R16 
+replacing..into for
+outside for R
+*****************
+
+i is 505
+Current line: R17 C231 C32 197.832
+
+cap1 = C231 , cap2= C32 ,cap_new= R17 
+replacing..into for
+outside for R
+*****************
+
+i is 506
+Current line: R18 C231 C28 194.387
+
+cap1 = C231 , cap2= C28 ,cap_new= R18 
+replacing..into for
+outside for R
+*****************
+
+i is 507
+Current line: R19 C28 C32 94.3284
+
+cap1 = C28 , cap2= C32 ,cap_new= R19 
+replacing..into for
+outside for R
+*****************
+
+i is 508
+Current line: R2 C115 net47:F41 0.001
+
+cap1 = C115 , cap2= net47:F41 ,cap_new= R2 
+replacing..into for
+outside for R
+*****************
+
+i is 509
+Current line: R20 C165 C222 58.75
+
+cap1 = C165 , cap2= C222 ,cap_new= R20 
+replacing..into for
+outside for R
+*****************
+
+i is 510
+Current line: R21 C222 C181 358.583
+
+cap1 = C222 , cap2= C181 ,cap_new= R21 
+replacing..into for
+outside for R
+*****************
+
+i is 511
+Current line: R22 C222 C323 120.967
+
+cap1 = C222 , cap2= C323 ,cap_new= R22 
+replacing..into for
+outside for R
+*****************
+
+i is 512
+Current line: R23 C222 C392 361.077
+
+cap1 = C222 , cap2= C392 ,cap_new= R23 
+replacing..into for
+outside for R
+*****************
+
+i is 513
+Current line: R24 C181 C323 277.047
+
+cap1 = C181 , cap2= C323 ,cap_new= R24 
+replacing..into for
+outside for R
+*****************
+
+i is 514
+Current line: R25 C181 C392 99.6231
+
+cap1 = C181 , cap2= C392 ,cap_new= R25 
+replacing..into for
+outside for R
+*****************
+
+i is 515
+Current line: R26 C323 C392 278.974
+
+cap1 = C323 , cap2= C392 ,cap_new= R26 
+replacing..into for
+outside for R
+*****************
+
+i is 516
+Current line: R27 C323 C324 47.5
+
+cap1 = C323 , cap2= C324 ,cap_new= R27 
+replacing..into for
+outside for R
+*****************
+
+i is 517
+Current line: R28 C167 C161 313.289
+
+cap1 = C167 , cap2= C161 ,cap_new= R28 
+replacing..into for
+outside for R
+*****************
+
+i is 518
+Current line: R29 C167 C170 184.866
+
+cap1 = C167 , cap2= C170 ,cap_new= R29 
+replacing..into for
+outside for R
+*****************
+
+i is 519
+Current line: R3 C133 net0133:F69 0.001
+
+cap1 = C133 , cap2= net0133:F69 ,cap_new= R3 
+replacing..into for
+outside for R
+*****************
+
+i is 520
+Current line: R30 C167 C397 187.383
+
+cap1 = C167 , cap2= C397 ,cap_new= R30 
+replacing..into for
+outside for R
+*****************
+
+i is 521
+Current line: R31 C161 C170 210.168
+
+cap1 = C161 , cap2= C170 ,cap_new= R31 
+replacing..into for
+outside for R
+*****************
+
+i is 522
+Current line: R32 C161 C252 159.5
+
+cap1 = C161 , cap2= C252 ,cap_new= R32 
+replacing..into for
+outside for R
+*****************
+
+i is 523
+Current line: R33 C161 C397 213.029
+
+cap1 = C161 , cap2= C397 ,cap_new= R33 
+replacing..into for
+outside for R
+*****************
+
+i is 524
+Current line: R34 C170 C397 125.704
+
+cap1 = C170 , cap2= C397 ,cap_new= R34 
+replacing..into for
+outside for R
+*****************
+
+i is 525
+Current line: R35 C252 C322 35
+
+cap1 = C252 , cap2= C322 ,cap_new= R35 
+replacing..into for
+outside for R
+*****************
+
+i is 526
+Current line: R36 C101 C100 75.8106
+
+cap1 = C101 , cap2= C100 ,cap_new= R36 
+replacing..into for
+outside for R
+*****************
+
+i is 527
+Current line: R37 C151 C138 100.38
+
+cap1 = C151 , cap2= C138 ,cap_new= R37 
+replacing..into for
+outside for R
+*****************
+
+i is 528
+Current line: R38 C138 C140 265.536
+
+cap1 = C138 , cap2= C140 ,cap_new= R38 
+replacing..into for
+outside for R
+*****************
+
+i is 529
+Current line: R39 C138 C141 122.732
+
+cap1 = C138 , cap2= C141 ,cap_new= R39 
+replacing..into for
+outside for R
+*****************
+
+i is 530
+Current line: R4 C106 net069:F121 0.001
+
+cap1 = C106 , cap2= net069:F121 ,cap_new= R4 
+replacing..into for
+outside for R
+*****************
+
+i is 531
+Current line: R40 C141 C140 154.896
+
+cap1 = C141 , cap2= C140 ,cap_new= R40 
+replacing..into for
+outside for R
+*****************
+
+i is 532
+Current line: R41 C163 C200 48.125
+
+cap1 = C163 , cap2= C200 ,cap_new= R41 
+replacing..into for
+outside for R
+*****************
+
+i is 533
+Current line: R42 C163 C169 567.75
+
+cap1 = C163 , cap2= C169 ,cap_new= R42 
+replacing..into for
+outside for R
+*****************
+
+i is 534
+Current line: R43 C169 C100 276.906
+
+cap1 = C169 , cap2= C100 ,cap_new= R43 
+replacing..into for
+outside for R
+*****************
+
+i is 535
+Current line: R44 C169 C103 62.3514
+
+cap1 = C169 , cap2= C103 ,cap_new= R44 
+replacing..into for
+outside for R
+*****************
+
+i is 536
+Current line: R45 C169 C109 278.635
+
+cap1 = C169 , cap2= C109 ,cap_new= R45 
+replacing..into for
+outside for R
+*****************
+
+i is 537
+Current line: R46 C100 C103 276.906
+
+cap1 = C100 , cap2= C103 ,cap_new= R46 
+replacing..into for
+outside for R
+*****************
+
+i is 538
+Current line: R47 C100 C109 106.239
+
+cap1 = C100 , cap2= C109 ,cap_new= R47 
+replacing..into for
+outside for R
+*****************
+
+i is 539
+Current line: R48 C103 C112 148.75
+
+cap1 = C103 , cap2= C112 ,cap_new= R48 
+replacing..into for
+outside for R
+*****************
+
+i is 540
+Current line: R49 C103 C109 278.635
+
+cap1 = C103 , cap2= C109 ,cap_new= R49 
+replacing..into for
+outside for R
+*****************
+
+i is 541
+Current line: R5 C109 net0145:F113 0.001
+
+cap1 = C109 , cap2= net0145:F113 ,cap_new= R5 
+replacing..into for
+outside for R
+*****************
+
+i is 542
+Current line: R50 C106 C112 538.75
+
+cap1 = C106 , cap2= C112 ,cap_new= R50 
+replacing..into for
+outside for R
+*****************
+
+i is 543
+Current line: R51 D C120 0.001
+
+cap1 = D , cap2= C120 ,cap_new= R51 
+replacing..into for
+outside for R
+*****************
+
+i is 544
+Current line: R52 C117 C285 3464.27
+
+cap1 = C117 , cap2= C285 ,cap_new= R52 
+replacing..into for
+outside for R
+*****************
+
+i is 545
+Current line: R53 C117 C120 311.394
+
+cap1 = C117 , cap2= C120 ,cap_new= R53 
+replacing..into for
+outside for R
+*****************
+
+i is 546
+Current line: R54 C120 C285 517.884
+
+cap1 = C120 , cap2= C285 ,cap_new= R54 
+replacing..into for
+outside for R
+*****************
+
+i is 547
+Current line: R55 C139 C136 129.739
+
+cap1 = C139 , cap2= C136 ,cap_new= R55 
+replacing..into for
+outside for R
+*****************
+
+i is 548
+Current line: R56 C139 C128 217.091
+
+cap1 = C139 , cap2= C128 ,cap_new= R56 
+replacing..into for
+outside for R
+*****************
+
+i is 549
+Current line: R57 C139 C146 263.214
+
+cap1 = C139 , cap2= C146 ,cap_new= R57 
+replacing..into for
+outside for R
+*****************
+
+i is 550
+Current line: R58 C139 C132 221.688
+
+cap1 = C139 , cap2= C132 ,cap_new= R58 
+replacing..into for
+outside for R
+*****************
+
+i is 551
+Current line: R59 C136 C137 235
+
+cap1 = C136 , cap2= C137 ,cap_new= R59 
+replacing..into for
+outside for R
+*****************
+
+i is 552
+Current line: R6 C109 C107 75.9109
+
+cap1 = C109 , cap2= C107 ,cap_new= R6 
+replacing..into for
+outside for R
+*****************
+
+i is 553
+Current line: R60 C136 C128 525.081
+
+cap1 = C136 , cap2= C128 ,cap_new= R60 
+replacing..into for
+outside for R
+*****************
+
+i is 554
+Current line: R61 C136 C132 536.202
+
+cap1 = C136 , cap2= C132 ,cap_new= R61 
+replacing..into for
+outside for R
+*****************
+
+i is 555
+Current line: R62 C128 net0148:F117 0.001
+
+cap1 = C128 , cap2= net0148:F117 ,cap_new= R62 
+replacing..into for
+outside for R
+*****************
+
+i is 556
+Current line: R63 C128 C132 100.278
+
+cap1 = C128 , cap2= C132 ,cap_new= R63 
+replacing..into for
+outside for R
+*****************
+
+i is 557
+Current line: R64 C132 net0148:F65 0.001
+
+cap1 = C132 , cap2= net0148:F65 ,cap_new= R64 
+replacing..into for
+outside for R
+*****************
+
+i is 558
+Current line: R65 Q C136 0.001
+
+cap1 = Q , cap2= C136 ,cap_new= R65 
+replacing..into for
+outside for R
+*****************
+
+i is 559
+Current line: R66 C136 C150 37.6364
+
+cap1 = C136 , cap2= C150 ,cap_new= R66 
+replacing..into for
+outside for R
+*****************
+
+i is 560
+Current line: R67 C136 C143 38.6573
+
+cap1 = C136 , cap2= C143 ,cap_new= R67 
+replacing..into for
+outside for R
+*****************
+
+i is 561
+Current line: R68 vdd C156 0.001
+
+cap1 = vdd , cap2= C156 ,cap_new= R68 
+replacing..into for
+outside for R
+*****************
+
+i is 562
+Current line: R69 C156 C194 38.4177
+
+cap1 = C156 , cap2= C194 ,cap_new= R69 
+replacing..into for
+outside for R
+*****************
+
+i is 563
+Current line: R7 C107 net0145:F61 0.001
+
+cap1 = C107 , cap2= net0145:F61 ,cap_new= R7 
+replacing..into for
+outside for R
+*****************
+
+i is 564
+Current line: R70 C156 C214 38.1367
+
+cap1 = C156 , cap2= C214 ,cap_new= R70 
+replacing..into for
+outside for R
+*****************
+
+i is 565
+Current line: R71 C156 C178 37.5667
+
+cap1 = C156 , cap2= C178 ,cap_new= R71 
+replacing..into for
+outside for R
+*****************
+
+i is 566
+Current line: R72 C178 vdd:F89 0.001
+
+cap1 = C178 , cap2= vdd:F89 ,cap_new= R72 
+replacing..into for
+outside for R
+*****************
+
+i is 567
+Current line: R73 C178 vdd:F83 0.001
+
+cap1 = C178 , cap2= vdd:F83 ,cap_new= R73 
+replacing..into for
+outside for R
+*****************
+
+i is 568
+Current line: R74 C194 vdd:F129 0.001
+
+cap1 = C194 , cap2= vdd:F129 ,cap_new= R74 
+replacing..into for
+outside for R
+*****************
+
+i is 569
+Current line: R75 C194 vdd:F119 0.001
+
+cap1 = C194 , cap2= vdd:F119 ,cap_new= R75 
+replacing..into for
+outside for R
+*****************
+
+i is 570
+Current line: R76 C194 C214 4509.04
+
+cap1 = C194 , cap2= C214 ,cap_new= R76 
+replacing..into for
+outside for R
+*****************
+
+i is 571
+Current line: R77 C214 vdd:F101 0.001
+
+cap1 = C214 , cap2= vdd:F101 ,cap_new= R77 
+replacing..into for
+outside for R
+*****************
+
+i is 572
+Current line: R78 C214 vdd:F95 0.001
+
+cap1 = C214 , cap2= vdd:F95 ,cap_new= R78 
+replacing..into for
+outside for R
+*****************
+
+i is 573
+Current line: R79 vdds C259 0.001
+
+cap1 = vdds , cap2= C259 ,cap_new= R79 
+replacing..into for
+outside for R
+*****************
+
+i is 574
+Current line: R8 CP C257 0.001
+
+cap1 = CP , cap2= C257 ,cap_new= R8 
+replacing..into for
+outside for R
+*****************
+
+i is 575
+Current line: R80 C234 vdds:F122 0.001
+
+cap1 = C234 , cap2= vdds:F122 ,cap_new= R80 
+replacing..into for
+outside for R
+*****************
+
+i is 576
+Current line: R81 C234 vdds:F118 0.001
+
+cap1 = C234 , cap2= vdds:F118 ,cap_new= R81 
+replacing..into for
+outside for R
+*****************
+
+i is 577
+Current line: R82 C234 vdds:F114 0.001
+
+cap1 = C234 , cap2= vdds:F114 ,cap_new= R82 
+replacing..into for
+outside for R
+*****************
+
+i is 578
+Current line: R83 C234 vdds:F110 0.001
+
+cap1 = C234 , cap2= vdds:F110 ,cap_new= R83 
+replacing..into for
+outside for R
+*****************
+
+i is 579
+Current line: R84 C234 vdds:F106 0.001
+
+cap1 = C234 , cap2= vdds:F106 ,cap_new= R84 
+replacing..into for
+outside for R
+*****************
+
+i is 580
+Current line: R85 C234 vdds:F102 0.001
+
+cap1 = C234 , cap2= vdds:F102 ,cap_new= R85 
+replacing..into for
+outside for R
+*****************
+
+i is 581
+Current line: R86 C234 vdds:F98 0.001
+
+cap1 = C234 , cap2= vdds:F98 ,cap_new= R86 
+replacing..into for
+outside for R
+*****************
+
+i is 582
+Current line: R87 C234 vdds:F94 0.001
+
+cap1 = C234 , cap2= vdds:F94 ,cap_new= R87 
+replacing..into for
+outside for R
+*****************
+
+i is 583
+Current line: R88 C234 vdds:F90 0.001
+
+cap1 = C234 , cap2= vdds:F90 ,cap_new= R88 
+replacing..into for
+outside for R
+*****************
+
+i is 584
+Current line: R89 C234 vdds:F86 0.001
+
+cap1 = C234 , cap2= vdds:F86 ,cap_new= R89 
+replacing..into for
+outside for R
+*****************
+
+i is 585
+Current line: R9 C248 C257 86.377
+
+cap1 = C248 , cap2= C257 ,cap_new= R9 
+replacing..into for
+outside for R
+*****************
+
+i is 586
+Current line: R90 C234 vdds:F82 0.001
+
+cap1 = C234 , cap2= vdds:F82 ,cap_new= R90 
+replacing..into for
+outside for R
+*****************
+
+i is 587
+Current line: R91 C234 vdds:F78 0.001
+
+cap1 = C234 , cap2= vdds:F78 ,cap_new= R91 
+replacing..into for
+outside for R
+*****************
+
+i is 588
+Current line: R92 C234 vdds:F25 0.001
+
+cap1 = C234 , cap2= vdds:F25 ,cap_new= R92 
+replacing..into for
+outside for R
+*****************
+
+i is 589
+Current line: R93 C234 C259 37.6257
+
+cap1 = C234 , cap2= C259 ,cap_new= R93 
+replacing..into for
+outside for R
+*****************
+
+i is 590
+Current line: R94 gnds C334 0.001
+
+cap1 = gnds , cap2= C334 ,cap_new= R94 
+replacing..into for
+outside for R
+*****************
+
+i is 591
+Current line: R95 C267 C293 0.0256454
+
+cap1 = C267 , cap2= C293 ,cap_new= R95 
+replacing..into for
+outside for R
+*****************
+
+i is 592
+Current line: R96 C267 C334 37.6237
+
+cap1 = C267 , cap2= C334 ,cap_new= R96 
+replacing..into for
+outside for R
+*****************
+
+i is 593
+Current line: R97 C293 gnds:F70 0.001
+
+cap1 = C293 , cap2= gnds:F70 ,cap_new= R97 
+replacing..into for
+outside for R
+*****************
+
+i is 594
+Current line: R98 C293 gnds:F66 0.001
+
+cap1 = C293 , cap2= gnds:F66 ,cap_new= R98 
+replacing..into for
+outside for R
+*****************
+
+i is 595
+Current line: R99 C293 gnds:F62 0.001
+
+cap1 = C293 , cap2= gnds:F62 ,cap_new= R99 
+replacing..into for
+outside for R
+*****************
+
+i is 596
+Current line: .ENDS HS65_GS_DFPQX4
+
