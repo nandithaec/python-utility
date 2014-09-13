@@ -34,9 +34,11 @@ dir_num=int(options.dir_num)
 scripts_dir=options.scripts_dir
 
 #Write hspice glitch file.. that does not have duplicate gnd and vdd nodes
+#fin = open('%s/glitch_CORE65GPSVT_selected_lib_vg.sp' %(path), 'r') 
+#fnew= open('%s/hspice_glitch_CORE65GPSVT_selected_lib_vg.sp' %(path), 'w') 
 
-fin = open('%s/glitch_CORE65GPSVT_selected_lib_vg.sp' %(path), 'r') 
-fnew= open('%s/hspice_glitch_CORE65GPSVT_selected_lib_vg.sp' %(path), 'w') 
+fin = open('%s/glitch_CORE65GPSVT_selected_lib_WL_ad_noR.sp' %(path), 'r') 
+fnew= open('%s/hspice_glitch_CORE65GPSVT_selected_lib_WL_ad_noR.sp' %(path), 'w') 
 for line in fin:
 	if "gnd gnd vdd vdd" in line:
 		line = line.replace("gnd gnd vdd vdd","gnd gnds vdd vdds")
@@ -102,37 +104,49 @@ for i in range(0,num_of_files):
 	
 	print ("Creating %s/spice_decks_%d/hspice_deck_%s.sp\n" %(path,dir_num,deck_num[i]))	
 	for line in fin:
-		#if line ==".include  ../glitch_CORE65GPSVT_selected_lib_vg.sp\n":
-		#	fnew.write (".include ../hspice_glitch_CORE65GPSVT_selected_lib_vg.sp\n")
+		if line ==".include ../glitch_CORE65GPSVT_selected_lib_WL_ad_noR.sp\n":
+			line=".include ../hspice_glitch_CORE65GPSVT_selected_lib_WL_ad_noR.sp\n"
+			fnew.write(line)
+			#print "line replaced"
+			#print line
+			#time.sleep(3)
+			
 		#if "gnd gnds vdd vdds" in line:
 		#	line = line.replace("gnd gnds vdd vdds","gnd vdd")
 		#	fnew.write(line)
-		if ".control" in line:
+		elif ".control" in line:
 			line = line.replace(".control",".option measdgt=5 measform=3")
 			fnew.write(line)
+		
 		elif "tran 20ps" in line:
 			line = line.replace("tran 20ps",".tran 20ps")
 			fnew.write(line)		
+			
 		elif "meas tran " in line:
 			line = line.replace("meas tran ",".measure tran ")
 			fnew.write(line)
+			
 		elif "quit" in line:
 			line = line.replace("quit","")
 			fnew.write(line)
+			
 		elif ".endc" in line:
 			line = line.replace(".endc","")
 			fnew.write(line)
+			
 		elif "option rshunt = 1e12" in line:
 			line = line.replace("option rshunt = 1e12",".option rshunt = 1e12")
 			fnew.write(line)
+			
 		elif "option itl4 = 100  reltol =0.005  trtol=8 pivtol=1e-11  abstol=1e-10" in line:
 			line = line.replace("option itl4 = 100  reltol =0.005  trtol=8 pivtol=1e-11  abstol=1e-10",".option itl4 = 100  reltol =0.005  trtol=8 pivtol=1e-11  abstol=1e-10")
+			
 			fnew.write(line)		
 	
 		else:
 			if not "echo" in line:
 				fnew.write(line)
-
+				
 
 	fnew.close()
 	fin.close()

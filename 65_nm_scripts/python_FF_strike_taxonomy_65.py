@@ -22,7 +22,7 @@ import csv, re, time
 from optparse import OptionParser
 
 
-parser = OptionParser('This script reads in the spice_results/spice_rtl_difference_summary.csv and count_flips_summary.csv for both 2nd edge and 3rd edge. These files are written out:\n1. <path>/spice_results/strike_on_FF_taxonomy.csv 2. strike_on_FF_2nd_edge_count.csv and strike_on_FF_3rd_edge_count.csv. 3. taxonomy_report_FFs_<design>.pdf The flips for 'strike on flip-flop' are further classified into into NN, NF, FN, FF where N means 'no-flip', F means 'flip' in the 2 clock cycles.The flips along with this classification is written out in strike_on_FF_taxonomy.csv. The final table containing the same results is written out in spice_results/taxonomy_report_FFs_<design>.pdf  \nAuthor:Nanditha Rao(nanditha@ee.iitb.ac.in)\n')
+parser = OptionParser("This script reads in the spice_results/spice_rtl_difference_summary.csv and count_flips_summary.csv for both 2nd edge and 3rd edge. These files are written out:\n1. <path>/spice_results/strike_on_FF_taxonomy.csv 2. strike_on_FF_2nd_edge_count.csv and strike_on_FF_3rd_edge_count.csv. 3. taxonomy_report_FFs_<design>.pdf The flips for 'strike on flip-flop' are further classified into into NN, NF, FN, FF where N means 'no-flip', F means 'flip' in the 2 clock cycles.The flips along with this classification is written out in strike_on_FF_taxonomy.csv. The final table containing the same results is written out in spice_results/taxonomy_report_FFs_<design>.pdf\n author- Nanditha Rao: nanditha(at) ee.iitb.ac.in\n")
 
 parser.add_option("-p", "--path", dest="path",help="Enter the ENTIRE path to the folder which contains /spice_results  ")
 parser.add_option("-m", "--mod", dest="module",help="Enter the name of the design module ")

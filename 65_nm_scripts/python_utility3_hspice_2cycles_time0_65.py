@@ -12,7 +12,7 @@
 #This version of the script has the facility of selecting the gate based on the area of the gate. This version of the script uses another script python_weighted_gateselection.py to pick the random gate based on its area: Nov 17 2013
 #Glitch insertion window is within the 2.5 cycles, and not the 6.5 cycles that is required for the case with intermediate FFs
 
-#Example usage: python python_utility3_hspice_2cycles_time0_65.py -m decoder_op_ip -p /home/users/nanditha/Documents/utility/65nm/decoder_65nm -t 65 -n 4 --group 4 --clk 500 -d decoder_65nm
+#Example usage: python python_utility3_hspice_2cycles_time0_65.py -m b12 -p /home/users/nanditha/Documents/utility/65nm/b12 -t 65 -n 4 --group 4 --clk 300 -d b12
 
 import optparse
 import re,os
@@ -285,7 +285,7 @@ for loop in range(start_loop, (num_of_loops+1)):
 
 		#unif=random.uniform(0,arrival_clk_part*clk_period)
 		#rand_glitch= (initial_clk_part*clk_period) +  unif  #A random glitch picked
-		"""
+		
 				
 		#glitch in the 2nd cycle
 		unif=random.uniform(0,0.95*clk_period) 
@@ -305,9 +305,9 @@ for loop in range(start_loop, (num_of_loops+1)):
 
 		#deckgen.pl will need to be remotely executed through python_repeat_deckgen.py multiple number of times
 		os.system('perl perl_deckgen_65.pl -s %s/reference_spice.sp  -r %s/%s_reference_out/tool_reference_out.txt -n %d -m %s -f %s  -o %s -g %s -d %s -c %s -i %s' %(path,path,module,loop_var,module,path,loop,rand_gate,rand_drain,rand_clk,rand_glitch))
-		"""
+		
 ##################Script repeat_deckgen copied ends here####################################
-	"""
+	
 		
 	#The following script will run GNU Parallel and hspice 
 	os.system ('python python_hspice_mod_check_ic.py -p %s -n %s -d %s -o %d -c %s' %(path,num_at_a_time,design_folder,loop,scripts_dir))
@@ -333,7 +333,7 @@ for loop in range(start_loop, (num_of_loops+1)):
 
 	
 #For testing out new glitch files (afterdeleting process if at each echo statement). comment this out in the final run, else it will copy ALL spice files and consume lot of disk space
-	"""
+	
 ##########################################################
 #Comment this out to see the decks and the result files it generates. 	
 """
@@ -345,7 +345,7 @@ for loop in range(start_loop, (num_of_loops+1)):
 """
 
 ########################################End of loop########################################################
-"""
+
 print "Combining all rtl diff files\n"
 #seed="1644931266534706027"
 os.system('python  python_count_flips_2nd_3rd_edge_65.py -f %s  -n %s  --group %s -s %s' %(path,num,num_at_a_time,seed))  #To save the seed to results file
@@ -373,4 +373,4 @@ os.system('python  python_FF_strike_taxonomy_65.py  -p %s -m %s' %(path,module))
 
 print "\nCombining the pdf reports\n"
 os.system('python python_combine_pdfs_65.py -p %s/spice_results -m %s' %(path,module))
-"""
+

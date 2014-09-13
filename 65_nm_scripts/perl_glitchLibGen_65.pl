@@ -1,4 +1,4 @@
-#Example: perl perl_glitchLibGen_65.pl   -p /home/users/nanditha/Documents/utility/65nm/decoder_65nm -i CORE65GPSVT_selected_lib_vg.sp
+#Example: perl perl_glitchLibGen_65.pl   -p /home/users/nanditha/Documents/utility/65nm/b12 -i CORE65GPSVT_selected_lib_WL_ad_withR.sp
 
 #!/usr/bin/perl
 

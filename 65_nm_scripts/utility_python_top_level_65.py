@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-#Example usage: python utility_python_top_level_65.py -p /home/users/nanditha/Documents/utility/65nm/b04 --rtl=/home/users/nanditha/Documents/utility/65nm/b04/b04.vhd --mod=b04 --test=/home/users/nanditha/Documents/utility/65nm/b04/test_b04.vhd --tb_mod=test_b04 --clk=300 --run=100us --design=b04 --tech=65 --num=10 --group 10 --extl=/home/external/iitb/nanditha/simulations/65nm/b04  --proc_node 1 --ppn 5 --days 00 --hrs 00 --mins 10 --script python_utility3_yuva_2cycles_2nd_3rd_65.py 
+#Example usage: python utility_python_top_level_65.py -p /home/users/nanditha/Documents/utility/65nm/b12 --rtl=/home/users/nanditha/Documents/utility/65nm/b12/b12.vhd --mod=b12 --test=/home/users/nanditha/Documents/utility/65nm/b12/test_b12.vhd --tb_mod=test_b12 --clk=300 --run=100us --design=b12 --tech=65 --num=10 --group 10 --extl=/home/external/iitb/nanditha/simulations/65nm/b12  --proc_node 1 --ppn 5 --days 00 --hrs 00 --mins 10 --script python_utility3_yuva_2cycles_2nd_3rd_65.py 
 
 
 #Example usage: python utility_python_top_level_65.py -p /home/users/nanditha/Documents/utility/65nm/c432 --rtl=/home/users/nanditha/Documents/utility/65nm/c432/c432_clk_ipFF.v --mod=c432_clk_ipFF --test=/home/users/nanditha/Documents/utility/65nm/c432/test_c432.v --tb_mod=test_c432 --clk=350 --run=100us --design=c432 --tech=65 --num=10 --group 10 --extl=/home/external/iitb/nanditha/simulations/65nm/c432  --proc_node 1 --ppn 5 --days 00 --hrs 00 --mins 3 --script python_utility3_yuva_2cycles_2nd_3rd_65.py
@@ -84,7 +84,7 @@ days=options.days
 hrs=options.hrs
 mins=options.mins
 script=options.script
-
+"""
 
 #Example usage: python python1_read_RTL_syn_pnr.py -f decoder.vhd -m decoder_behav_pnr -clk 900
 os.system('python python_read_RTL_syn_pnr_65.py -f %s -m %s -c %s -p %s' %(rtl,module,clkfreq,main_path))
@@ -101,7 +101,7 @@ time.sleep(2)
 
 ##Example usage: python python3_create_simdo_vsim.py -rtl decoder_behav_pnr_modelsim.v -tb test_decoder_pnr.vhd -tb_mod t_decoder_pnr -time 1us
 os.system('python python_create_simdo_vsim_65.py -v %s/%s_modelsim.v -t %s -b %s -r %s -p %s' %(main_path,module,test_path,test_module,runtime,main_path))
-
+"""
 print('Done modelsim simulation\n')
 time.sleep(2)
 ####################################################################################################################################################################
@@ -118,8 +118,8 @@ os.system('python python_choose_subckts_library.py -p %s -m %s' %(main_path,modu
 
 
 ##Example usage: perl perl_glitchLibGen_65.pl  -i osu018_stdcells_correct_vdd_gnd.sp- this file will be provided by us for the 180nm technology
-#Create a glitched std cell library file 
-os.system('perl perl_glitchLibGen_65.pl -p %s -i CORE65GPSVT_selected_lib_vg.sp' %(main_path))
+#Create a glitched std cell library file CORE65GPSVT_selected_lib_vg.sp 
+os.system('perl perl_glitchLibGen_65.pl -p %s -i CORE65GPSVT_selected_lib_WL_ad_noR.sp' %(main_path))
 print "***Created glitch library..\n"
 time.sleep(5)
 
@@ -133,4 +133,5 @@ print "***Done modifying the spice file to make it simulatable. File available i
 time.sleep(5)
 
 #os.system('python python_create_jobscript_65.py -m %s -p %s -d %s -t %s -n %s --group %s --clk %s --proc_node %s --ppn %s --days %s --hrs %s --mins %s --script %s' %(module,extl_folder,design_folder,techn,num,group,clkfreq,nodes,ppn,days,hrs,mins,script))
+
 

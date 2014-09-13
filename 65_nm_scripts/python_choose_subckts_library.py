@@ -2,7 +2,7 @@
 #!/usr/bin/env python
 
 #Original file is chosen to be the one which has R & C included. - July 9 2014
-#Example usage: python python_choose_subckts_library.py -p /home/users/nanditha/Documents/utility/65nm/FF_optimisation/c432 -m c432_clk_opFF 
+#Example usage: python python_choose_subckts_library.py -p /home/users/nanditha/Documents/utility/65nm/b12 -m b12
 #Absolute paths introduced everywhere in the script, so that they can be run from one directory and no need of duplicating the scripts in all directories: June 25 2014
 
 import optparse
@@ -23,13 +23,14 @@ path=options.path
 module=options.module_name
 
 
-f=open("../CORE65GPSVT_all_vdd_gnd_bulk_node.sp" ,"r")
-#f=open("../CORE65GPSVT_all_onlyC.sp" ,"r")
-#f=open("../CORE65GPSVT_RC_all.sp" ,"r") #includes R and C 
-#f=open("test.sp" ,"r")
-#fnew=open("%s/CORE65GPSVT_selected_lib_vgRC.sp" %path ,"w")
+#f=open("../CORE65GPSVT_all_vdd_gnd_bulk_node_WL.sp" ,"r")
+#f=open("../CORE65GPSVT_all_vdd_gnd_WL_noR.txt" ,"r")
+#f=open("../CORE65GPSVT_all_vdd_gnd_WL_ad_noR.txt" ,"r")
+f=open("../CORE65GPSVT_all_vdd_gnd_WL_ad.sp" ,"r")
+
+
 os.chdir("%s" %path)
-fnew=open("%s/CORE65GPSVT_selected_lib_vg.sp" %path ,"w")
+fnew=open("%s/CORE65GPSVT_selected_lib_WL_ad_withR.sp" %path ,"w")
 
 lib_data=f.readlines()
 

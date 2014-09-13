@@ -7,10 +7,10 @@
 #Nanditha Rao
 
 
-def drain_selection(path,rand_gate_name):
+def drain_selection(path,rand_gate_name_in):
 	
-	import random,re
-	print "Random gate name is %s" %rand_gate_name
+	import random,re,time
+	print "Random gate name is %s" %rand_gate_name_in
 	fg = open("%s/drain_areas.txt" %path , "r")
 	data = [line.strip() for line in fg] #Get the lines in the file
 	length=len(data) #number of lines in the file
@@ -19,11 +19,14 @@ def drain_selection(path,rand_gate_name):
 	drain_areas=[]
 
 	for i in range(len(data)):
-		#print "data is %s" %data[i]
+		print "data is %s" %data[i]
+		rand_gate_name=rand_gate_name_in+"_" #rand_gate_name=rand_gate_name+"_" will introduce recursively many '_'
+		#print "Gate name is",rand_gate_name
+		#time.sleep(3)
 		if re.match(rand_gate_name,data[i]):
 			print "match found in line %s" %data[i]
 			words=data[i].split() #Split the sentence into words
-			print words[1]
+			print words[1] #drain area
 
 			drain_areas.append(float(words[1]))
 	print "drain_areas"
