@@ -1,0 +1,50 @@
+# //  ModelSim SE 10.0 Dec  4 2010 Linux 2.6.18-348.6.1.el5
+# //
+# //  Copyright 1991-2010 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  THIS WORK CONTAINS TRADE SECRET AND PROPRIETARY INFORMATION
+# //  WHICH IS THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS
+# //  LICENSORS AND IS SUBJECT TO LICENSE TERMS.
+# //
+# Loading project dec65
+# Compile of CORE65GPSVT_nodelay.v was successful with warnings.
+# Compile of test_decoder_opFF.vhd was successful with warnings.
+# Compile of decoder_op_ip_final_xors.v was successful with warnings.
+# 3 compiles, 0 failed with no errors. 
+vsim -voptargs=+acc work.test_decoder_op_ip
+# vsim -voptargs=+acc work.test_decoder_op_ip 
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-98) "/cad/mentor/ams_2013_2/libs/MS/OS/ixl/libadmslib.so" is not present; ADMS design-units may not be handled properly
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading synopsys.attributes
+# Loading ieee.std_logic_misc(body)
+# Loading ieee.numeric_std(body)
+# Loading verilog.vl_types(body)
+# Loading work.test_decoder_op_ip(tb_decoder_pnr)#1
+# Loading work.decoder_op_ip(fast)
+# Loading work.HS65_GS_BFX284(fast)
+# Loading work.HS65_GS_DFPQX4(fast)
+# Loading work.HS65_GSS_XOR2X6(fast)
+# Loading work.HS65_GS_NAND2X7(fast)
+# Loading work.HS65_GS_NOR2X6(fast)
+# Loading work.HS65_GS_AND2X4(fast)
+# Loading work.HS65_GS_IVX9(fast)
+# Loading work.HS65_GS_AOI22X6(fast)
+# Loading work.HS65_GS_NOR3X4(fast)
+# Loading work.HS65_GSS_XOR2X12(fast)
+add wave \
+{sim:/test_decoder_op_ip/clk } \
+{sim:/test_decoder_op_ip/input_dec } \
+{sim:/test_decoder_op_ip/output_dec } 
+add wave \
+{sim:/test_decoder_op_ip/dec_0/xor_indecoder_reg_2_/B } 
+run
+force -freeze sim:/test_decoder_op_ip/dec_0/xor_indecoder_reg_2_/B St1 0
+add wave \
+{sim:/test_decoder_op_ip/dec_0/xor_outdecoder_reg_7_/B } 
+quit
