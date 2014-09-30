@@ -43,10 +43,10 @@ parser.add_option("-r","--run", help='Enter the duration of the simulation run. 
 
 #########################################################################
 
-parser.add_option("-d", "--design", dest="design_folder",help="Enter the name of the design folder (your current working dir) which will be copied to the 48-core cluster to run simulations parallely")
+parser.add_option("-d", "--design", dest="design_folder",help="Enter the name of the design folder (your current working dir) which will be copied to the remote cluster or to any machine containing the hspice/ngspice simulator to run simulations parallely")
 parser.add_option("--tech",dest='tech',  help='Enter the technology node that you want to simulate, for eg.,180 for 180nm')
 parser.add_option("-n", "--num",dest='num',  help='Enter the number of spice decks to be generated and simulated')
-parser.add_option("--group",dest='group',  help='Enter the number of spice decks to be simulated at a time. For eg., if -n option is 10000, and say we want to run 100 at a time, then enter 100')
+parser.add_option("--group",dest='group',  help='Enter the number of spice decks to be simulated at a time. For eg., if -n option is 10000, and say we want to run 100 at a time, then enter 10. This option is just to save disk space so that 10000 decks do not get generated at the same time.')
 parser.add_option("--extl", dest="extl_folder",help="Enter the ENTIRE path to your current design folder (your working dir)- either this machine or remote machine where simulations will be run. The name of the folder there should be the same as the name of the folder being copied from the current machine. IF remote machine, enter /home/user1/simulations/<design_folder_name>")
 #########################################################################
 parser.add_option("--proc_node",dest='nodes', help='Enter the number of processor nodes you would need')
@@ -84,7 +84,7 @@ days=options.days
 hrs=options.hrs
 mins=options.mins
 script=options.script
-"""
+
 
 #Example usage: python python1_read_RTL_syn_pnr.py -f decoder.vhd -m decoder_behav_pnr -clk 900
 os.system('python python_read_RTL_syn_pnr_65.py -f %s -m %s -c %s -p %s' %(rtl,module,clkfreq,main_path))
@@ -101,7 +101,7 @@ time.sleep(2)
 
 ##Example usage: python python3_create_simdo_vsim.py -rtl decoder_behav_pnr_modelsim.v -tb test_decoder_pnr.vhd -tb_mod t_decoder_pnr -time 1us
 os.system('python python_create_simdo_vsim_65.py -v %s/%s_modelsim.v -t %s -b %s -r %s -p %s' %(main_path,module,test_path,test_module,runtime,main_path))
-"""
+
 print('Done modelsim simulation\n')
 time.sleep(2)
 ####################################################################################################################################################################
@@ -119,12 +119,12 @@ os.system('python python_choose_subckts_library.py -p %s -m %s' %(main_path,modu
 
 ##Example usage: perl perl_glitchLibGen_65.pl  -i osu018_stdcells_correct_vdd_gnd.sp- this file will be provided by us for the 180nm technology
 #Create a glitched std cell library file CORE65GPSVT_selected_lib_vg.sp 
-os.system('perl perl_glitchLibGen_65.pl -p %s -i CORE65GPSVT_selected_lib_WL_ad_noR.sp' %(main_path))
+os.system('perl perl_glitchLibGen_65.pl -p %s -i CORE65GPSVT_selected_lib_vg.sp' %(main_path))
 print "***Created glitch library..\n"
 time.sleep(5)
 
 
-
+"""
 ##Generate a template simulatable spice netlist from the dspf file generated after pnr. This would include all .ic, Voltage sources, meas, tran, control, param etc
 #NetlistFormat.pl
 #perl NetlstFrmt.pl -v decoder_behav_pnr_modelsim.v -s pnr/op_data/decoder_behav_pnr_final.dspf -l glitch_osu018_stdcells_correct_allcells.sp -c 1e9 -t 180 -m decoder_behav_pnr
@@ -134,4 +134,4 @@ time.sleep(5)
 
 #os.system('python python_create_jobscript_65.py -m %s -p %s -d %s -t %s -n %s --group %s --clk %s --proc_node %s --ppn %s --days %s --hrs %s --mins %s --script %s' %(module,extl_folder,design_folder,techn,num,group,clkfreq,nodes,ppn,days,hrs,mins,script))
 
-
+"""

@@ -37,8 +37,8 @@ scripts_dir=options.scripts_dir
 #fin = open('%s/glitch_CORE65GPSVT_selected_lib_vg.sp' %(path), 'r') 
 #fnew= open('%s/hspice_glitch_CORE65GPSVT_selected_lib_vg.sp' %(path), 'w') 
 
-fin = open('%s/glitch_CORE65GPSVT_selected_lib_WL_ad_noR.sp' %(path), 'r') 
-fnew= open('%s/hspice_glitch_CORE65GPSVT_selected_lib_WL_ad_noR.sp' %(path), 'w') 
+fin = open('%s/glitch_CORE65GPSVT_selected_lib_vg.sp' %(path), 'r') 
+fnew= open('%s/hspice_glitch_CORE65GPSVT_selected_lib_vg.sp' %(path), 'w') 
 for line in fin:
 	if "gnd gnd vdd vdd" in line:
 		line = line.replace("gnd gnd vdd vdd","gnd gnds vdd vdds")

@@ -30,7 +30,7 @@ f=open("../CORE65GPSVT_all_vdd_gnd_WL_ad.sp" ,"r")
 
 
 os.chdir("%s" %path)
-fnew=open("%s/CORE65GPSVT_selected_lib_WL_ad_withR.sp" %path ,"w")
+fnew=open("%s/CORE65GPSVT_selected_lib_vg.sp" %path ,"w")
 
 lib_data=f.readlines()
 

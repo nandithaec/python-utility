@@ -89,7 +89,7 @@ fw1.write('#!/bin/bash\n\n')
 #Remove work directory if it exists
 fw1.write('\\rm -rf %s/work\n' %path)
 
-#Run simulation, do not invoke modelsim
+#Run simulation, do not invoke modelsim gui
 #fw1.write('vsim -c -do simulate_vsim.do >vsim.log\n')
 
 #Run simulation, invoke modelsim

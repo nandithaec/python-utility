@@ -70,7 +70,7 @@ os.chdir("%s/spice_decks_%d" %(path,outloop))
 print "Changed to" , os.getcwd()
 time.sleep(2)
 #os.system("ls hspice_*.sp | parallel --progress -j 4  -q bash -c 'hspice {};pwd;' " )
-os.system("seq %d %d| parallel --progress -j 4  'pwd; hspice %s/spice_decks_%s/hspice_deck_{}.sp>log_{}.txt;' " % (start,end, path,outloop))
+os.system("seq %d %d| /usr/bin/parallel --progress -j 4  'pwd; hspice %s/spice_decks_%s/hspice_deck_{}.sp>log_{}.txt;' " % (start,end, path,outloop))
 
 
 for a in range(start,end+1):
