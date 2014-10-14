@@ -1,5 +1,7 @@
 #!/usr/bin/perl
-#Example usage: perl perl_write_simfile_65.pl -v /home/users/nanditha/Documents/utility/65nm/decoder_65nm/pnr/op_data/decoder_op_ip_final.v -m decoder_op_ip -p /home/users/nanditha/Documents/utility/65nm/decoder_65nm
+#Example usage: perl perl_write_simfile_65.pl -v /home/users/nanditha/Documents/utility/65nm/b12/pnr/op_data/b12_final.v -m b12 -p /home/users/nanditha/Documents/utility/65nm/b12
+
+
 #This was earlier named as mod_perl_outwrtr.pl
 
 #Modifications:
@@ -112,6 +114,7 @@ $ref=$module."_reference_out";
 #opening the required files
 open(VLOG,"$vlog")||die("unable to open file : $!");
 open(OPT,">$path/$op")||die("unable to open file : $!");
+
 open(OPT_F0,">$path/$op_F0")||die("unable to open file : $!");
 #This file REF (our_reference.txt is just created. Nothing is written to through this script.
 #The modelsim.v file will write to this file when simulated
@@ -119,12 +122,16 @@ open(REF,">$path/$ref/our_reference_out.txt")||die("unable to open file : $!");
 #open(REF_F0,">$path/$ref/F0_our_reference_out.txt")||die("unable to open file : $!");
 open(OUT_FF,">$path/$ref/ff_oppins.txt")||die("unable to open file : $!");
 open(TOOLREF,">$path/$ref/tool_reference_out.txt")||die("unable to open file : $!");
+
+
 #open(TOOLREF_F0,">$path/$ref/F0_tool_reference_out.txt")||die("unable to open file : $!");
 use File::Path qw(mkpath);
 mkpath("$path/spice_results");
 
 open(IM_ff,">$path/$module\_reference_out/flipflop_headers.csv");
 
+$j=0;
+$i=0;
 
 #Parsing the post pnr verilog file
 while(<VLOG>)
@@ -139,8 +146,10 @@ while(<VLOG>)
 		   {
                      ($fftype,$ffname,$pin)=split(" ",$_);#capturing the output pin of the flip flop
 		     $pin=~m/\(.*\((.*)\)/;
-		     print "FF name is $ffname \n";
+		       #print FF_TYPE "$fftype\n";
+		       print "FF name is $ffname\n";
 		     $ffopin[$i++]=$1;#this array has all output pins of all FFs
+		     $ff_types[$j++]=$fftype;
 		     print IM_ff "$ffname".",";
 		     $flag=1;
 		   }
@@ -484,6 +493,14 @@ close(IM);
 print IM_ff "\n";
 close(IM_ff);
 ##############################################################
+
+foreach $i(0 .. $#ff_types)
+{
+  print "$ff_types[$i]\n";
+
+}
+		
+		
 
 ##Printing spice headers to the csv file in spice_results/
 #This is required when we combine the spice simulation outputs and write out to a single file with this header

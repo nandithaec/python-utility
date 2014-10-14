@@ -1,20 +1,26 @@
 
-#Example: perl perl_spice_netlist_format_65.pl -v %s/decoder_op_ip_modelsim.v -s %s/pnr/op_data/decoder_op_ip_final_new.dspf -c 400 -t 65 -m decoder_op_ip -p <path>
+#Example: perl perl_spice_netlist_format_65.pl -v /home/users/nanditha/Documents/utility/65nm/b12/b12_modelsim.v -s /home/users/nanditha/Documents/utility/65nm/b12/pnr/op_data/b12_final_new.dspf -c 400 -t 65 -m b12 -p /home/users/nanditha/Documents/utility/65nm/b12
 
 
 #clk frequency in MHz
 
 #Modifications:
+# .ic statements for all flip-flops automated: Oct 15 2014
 #Most flip-flops in the designs are : DFPQX4 and DFPQX9. Initialisation nodes for flip-flops other than DFPQX4 and DFPQX9 are being edited manually in the reference_spice right now since the internal initialisation nodes are different.
 #.ic on net0148:F59 and net0148:F65 for DFPQX4 and DFPQX9 - Jul 10 2014
 #Added time=0 measure and echo statements to test the initial conditions - Jul 9 2014
 #Include glitch_CORE65GPSVT_selected_lib_vgRC.sp instead of glitch_CORE65GPSVT_selected_lib_vg.sp - includes R & C to solve the pseudo=tran method convergence issue- Jul 9 2014
 #Absolute paths introduced everywhere in the script, so that they can be run from one directory and no need of duplicating the scripts in all directories: June 25 2014
-#Initialisation node (net0139:F125)-M28 drain and M31 drain for HS65_GS_DFPQNX9 FF ,
-# net0139:F163 (M28 drain) and net0139:F95 (M31 drain) for DFPHQNX9 and 
-# net0238:F149 (M24 source) for DFPHQX9, is mentioned as a comment in the .ic section. NEed to manually change this in the reference.sp file, since we are not current differently identifying the different types of FFs: June 23 2014
-#rise and fall edge measurements limitedto 50ps duration. Else false values were being calculated: April 25 2014
+
+#Initialisation nodes
+
+# (net0139:F125)-M28 drain and M31 drain for HS65_GS_DFPQNX9,
+# net0139:F163 (M28 drain) and net0139:F95 (M31 drain) for DFPHQNX9
+# net0238:F149 (M24 source) for DFPHQX9, is mentioned as a comment in the .ic section. Need to manually change this in the reference.sp file, since we are not current differently identifying the different types of FFs: June 23 2014
 #.ic on net0148:F59 and net0148:F65 of the DFPQX4 and DFPQX9 to initialise correctly. This value should be the inverted value of what was supposed to be initialised originally.: April 2nd 2014
+
+#rise and fall edge measurements limitedto 50ps duration. Else false values were being calculated: April 25 2014
+
 #.ic square brackets being replaced by _ : feb 26 2014
 #.ic statement being specified to all outputs of all FFs.. and are being initialised to the rising edge of the current clk cycle thats picked : Feb 21 2014
 #.ic for all primary outputs being deleted. changed the PWL. It doesnt change value before 1st clk rising edge (reverting back to the original PWL statement): feb 21 2014
@@ -150,7 +156,7 @@ mkpath("$path/spice_results");
 open(SPC,"$spc")||die("unable to open file : $!");
 open(VLOG,"$vlog")||die("unable to open file : $!");
 open(SIM,">$path/$sim");
-
+open(FF_TYPE,">$path/flipflop_names.txt")||die("unable to open file : $!");
 
 
 #
@@ -211,6 +217,8 @@ $new_inp;
 $flag_flop=0;
 $flag1=0;
 $count_line=0;
+$aj=0;
+
 while(<VLOG>)
  {  
    
@@ -275,6 +283,9 @@ while(<VLOG>)
 		if($flag1 == 0)
 		   {
                      ($fftype1,$ffname1,$pin1)=split(" ",$_);#capturing t.ihe output pin of the flip flop
+                       $ff_types[$aj++]=$fftype1;
+		     print  FF_TYPE "$fftype1\n";
+		     
 		     $pin1=~m/\(.*\((.*)\)/;
 		     $ffopin1[$i++]=$1;#this array has all output pins of all FFs
 		     $flag1=1;
@@ -286,7 +297,7 @@ while(<VLOG>)
 		     $flag1=0;
 		   }
 	    }
-  }
+     }
 
 if(($_=~m/module $module \(/ .. /endmodule/)) #parsing the main module only
      {
@@ -297,13 +308,20 @@ if(($_=~m/module $module \(/ .. /endmodule/)) #parsing the main module only
         ($junk,$ff_name)=split(" ",$_);
         push(@to_ff,$ff_name);
         $flag_flop=1;
-        print $_;
+        print "line is $_\n";
         print "\n";
      }
   
   }
  
+} #End while
+
+foreach $i(0 .. $#ff_types)
+{
+  print "$ff_types[$i]\n";
+
 }
+	
 
 
 
@@ -584,6 +602,7 @@ foreach $i(0 .. $#to_ff)
    $new=~s/\]/_/g;
    $new=~s/\//_/g;
    
+   $ff_obtained=$ff_types[$i];
    
 if($i ne "clk")
    {
@@ -596,9 +615,33 @@ if($i ne "clk")
  # print SIM ".ic v(X$module.X$to_ff[$i]\_q\_reg.net0148:F65)= ##$new\_reference_1_neg##\n\n";
 
   #The following is for DFPQX4 and DFPQX9
-   print SIM ".ic v(X$module.X$to_ff[$i].net0148:F59)= ##$new\_reference_1_neg##\n";
-   print SIM ".ic v(X$module.X$to_ff[$i].net0148:F65)= ##$new\_reference_1_neg##\n\n";
-
+	if ($ff_obtained =~ m/(HS65_GS_DFPQX4|HS65_GS_DFPQX9)/)
+	{
+	print "1. Obtained DFF name is $ff_obtained\n";
+	print SIM ".ic v(X$module.X$to_ff[$i].net0148:F59)= ##$new\_reference_1_neg##\n";
+	print SIM ".ic v(X$module.X$to_ff[$i].net0148:F65)= ##$new\_reference_1_neg##\n\n";
+	}
+	
+	elsif ($ff_obtained =~ m/HS65_GS_DFPQNX9/)
+	{
+	print "2. Obtained DFF name is $ff_obtained\n";
+	print SIM ".ic v(X$module.X$to_ff[$i].net0139:F125)= ##$new\_reference_1_neg##\n\n";
+	}
+	
+	elsif ($ff_obtained =~ m/HS65_GS_DFPHQNX9/)
+	{
+	print "3. Obtained DFF name is $ff_obtained\n";
+	print SIM ".ic v(X$module.X$to_ff[$i].net0139:F163)= ##$new\_reference_1_neg##\n";
+	print SIM ".ic v(X$module.X$to_ff[$i].net0139:F95)= ##$new\_reference_1_neg##\n\n";
+	}
+	
+	elsif ($ff_obtained =~ m/HS65_GS_DFPHQX9/)
+	{
+	print "4. Obtained DFF name is $ff_obtained\n";
+	print SIM ".ic v(X$module.X$to_ff[$i].net0238:F149)= ##$new\_reference_1_neg##\n\n";
+	}
+	
+	
    #The following is for DFQNX9 FF, which has a different initialisation node
    #   print SIM ".ic v(X$module.X$to_ff[$i].net0139:F125)= ##$new\_reference_1_neg##\n";
 #The following for DFPHQNX9
