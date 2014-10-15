@@ -1,11 +1,14 @@
 
-#Example: perl perl_spice_netlist_format_65.pl -v /home/users/nanditha/Documents/utility/65nm/b12/b12_modelsim.v -s /home/users/nanditha/Documents/utility/65nm/b12/pnr/op_data/b12_final_new.dspf -c 400 -t 65 -m b12 -p /home/users/nanditha/Documents/utility/65nm/b12
+#Example: perl perl_spice_netlist_format_65.pl -v /home/users/nanditha/Documents/utility/65nm/c432/c432_modelsim.v -s /home/users/nanditha/Documents/utility/65nm/c432/pnr/op_data/c432_final_new.dspf -c 300 -t 65 -m c432 -p /home/users/nanditha/Documents/utility/65nm/c432
 
+#Example: perl perl_spice_netlist_format_65.pl -v /home/users/nanditha/Documents/utility/65nm/c432/c432_clk_ipFF_modelsim.v -s /home/users/nanditha/Documents/utility/65nm/c432/pnr/op_data/c432_clk_ipFF_final_new.dspf -c 350 -t 65 -m c432_clk_ipFF -p /home/users/nanditha/Documents/utility/65nm/c432
 
 #clk frequency in MHz
 
 #Modifications:
-# .ic statements for all flip-flops automated: Oct 15 2014
+#Automated the flip-flop type selection in meas statements and module instantiation of .ic statement (q_reg) for ISCAS and non-ISCAS benchmarks: Oct 15 2014 
+#'Q' and 'QN' nodes in meas tran statements have been automated: Oct 15 2014
+# .ic statements for all flip-flops automated: Oct 14 2014
 #Most flip-flops in the designs are : DFPQX4 and DFPQX9. Initialisation nodes for flip-flops other than DFPQX4 and DFPQX9 are being edited manually in the reference_spice right now since the internal initialisation nodes are different.
 #.ic on net0148:F59 and net0148:F65 for DFPQX4 and DFPQX9 - Jul 10 2014
 #Added time=0 measure and echo statements to test the initial conditions - Jul 9 2014
@@ -152,9 +155,12 @@ use File::Path qw(mkpath);
 mkpath("$path/spice_results");
 
 
-#opening the required files
+#opening the required files to read
 open(SPC,"$spc")||die("unable to open file : $!");
 open(VLOG,"$vlog")||die("unable to open file : $!");
+
+
+#To write
 open(SIM,">$path/$sim");
 open(FF_TYPE,">$path/flipflop_names.txt")||die("unable to open file : $!");
 
@@ -218,6 +224,8 @@ $flag_flop=0;
 $flag1=0;
 $count_line=0;
 $aj=0;
+$qreg=0;
+
 
 while(<VLOG>)
  {  
@@ -245,7 +253,15 @@ while(<VLOG>)
 	
      }
 
-
+	#To check if q_reg is present in the verilog file. 
+	#Depending on this, the measure statement will have different names
+    if ($qreg==0)
+    {
+    	if(($_=~ m/q_reg/))
+    	{
+    		$qreg=1;
+    	}
+    }
 
  if($flag_flop==1)
     {
@@ -282,8 +298,14 @@ while(<VLOG>)
 
 		if($flag1 == 0)
 		   {
-                     ($fftype1,$ffname1,$pin1)=split(" ",$_);#capturing t.ihe output pin of the flip flop
-                       $ff_types[$aj++]=$fftype1;
+                     ($fftype1,$ffname1,$pin1)=split(" ",$_);#capturing the output pin of the flip flop
+                     if ($fftype1 =~ m/dff_/)
+                     {
+                     $fftype1="HS65_GS_DFPQX4";
+                     }
+                     
+                     
+                     $ff_types[$aj++]=$fftype1;
 		     print  FF_TYPE "$fftype1\n";
 		     
 		     $pin1=~m/\(.*\((.*)\)/;
@@ -602,52 +624,81 @@ foreach $i(0 .. $#to_ff)
    $new=~s/\]/_/g;
    $new=~s/\//_/g;
    
-   $ff_obtained=$ff_types[$i];
+  
    
-if($i ne "clk")
+  #Initialisation nodes
+   if($i ne "clk")
    {
      # print SIM ".ic v(X$module.$to_ff[$i]:Q)= ##$new\_reference_1##\n";  
       #print SIM ".ic v(X$module.$to_ff[$i]\_q\_reg:Q)= ##$new\_reference_1##\n";
-      #print SIM ".ic v(X$module.X$to_ff[$i].R62)= ##$new\_reference_1_neg##\n";
-      
-  #The following is for DFPQX4 and DFPQX9
- # print SIM ".ic v(X$module.X$to_ff[$i]\_q\_reg.net0148:F59)= ##$new\_reference_1_neg##\n";
- # print SIM ".ic v(X$module.X$to_ff[$i]\_q\_reg.net0148:F65)= ##$new\_reference_1_neg##\n\n";
-
-  #The following is for DFPQX4 and DFPQX9
+ 	
+ 	$ff_obtained=$ff_types[$i];
+ 
 	if ($ff_obtained =~ m/(HS65_GS_DFPQX4|HS65_GS_DFPQX9)/)
 	{
-	print "1. Obtained DFF name is $ff_obtained\n";
-	print SIM ".ic v(X$module.X$to_ff[$i].net0148:F59)= ##$new\_reference_1_neg##\n";
-	print SIM ".ic v(X$module.X$to_ff[$i].net0148:F65)= ##$new\_reference_1_neg##\n\n";
+		if ($qreg==1)
+		{
+		print "1. Obtained DFF name is $ff_obtained\n";
+		print SIM ".ic v(X$module.X$to_ff[$i]\_q\_reg.net0148:F59)= ##$new\_reference_1_neg##\n";
+		print SIM ".ic v(X$module.X$to_ff[$i]\_q\_reg.net0148:F65)= ##$new\_reference_1_neg##\n\n";
+		}
+		else
+		{
+		print "1. Obtained DFF name is $ff_obtained\n";
+		print SIM ".ic v(X$module.X$to_ff[$i].net0148:F59)= ##$new\_reference_1_neg##\n";
+		print SIM ".ic v(X$module.X$to_ff[$i].net0148:F65)= ##$new\_reference_1_neg##\n\n";
+		}
 	}
 	
 	elsif ($ff_obtained =~ m/HS65_GS_DFPQNX9/)
 	{
-	print "2. Obtained DFF name is $ff_obtained\n";
-	print SIM ".ic v(X$module.X$to_ff[$i].net0139:F125)= ##$new\_reference_1_neg##\n\n";
+		
+		if ($qreg==1)
+		{
+		print "2. Obtained DFF name is $ff_obtained\n";
+		print SIM ".ic v(X$module.X$to_ff[$i]\_q\_reg.net0139:F125)= ##$new\_reference_1_neg##\n\n";
+		}
+		else
+		{
+		print "2. Obtained DFF name is $ff_obtained\n";
+		print SIM ".ic v(X$module.X$to_ff[$i].net0139:F125)= ##$new\_reference_1_neg##\n\n";
+		}
+	
 	}
 	
 	elsif ($ff_obtained =~ m/HS65_GS_DFPHQNX9/)
 	{
-	print "3. Obtained DFF name is $ff_obtained\n";
-	print SIM ".ic v(X$module.X$to_ff[$i].net0139:F163)= ##$new\_reference_1_neg##\n";
-	print SIM ".ic v(X$module.X$to_ff[$i].net0139:F95)= ##$new\_reference_1_neg##\n\n";
+	
+		if ($qreg==1)
+		{
+		print "3. Obtained DFF name is $ff_obtained\n";
+		print SIM ".ic v(X$module.X$to_ff[$i]\_q\_reg.net0139:F163)= ##$new\_reference_1_neg##\n";
+		print SIM ".ic v(X$module.X$to_ff[$i]\_q\_reg.net0139:F95)= ##$new\_reference_1_neg##\n\n";
+		}
+		else
+		{
+		print "3. Obtained DFF name is $ff_obtained\n";
+		print SIM ".ic v(X$module.X$to_ff[$i].net0139:F163)= ##$new\_reference_1_neg##\n";
+		print SIM ".ic v(X$module.X$to_ff[$i].net0139:F95)= ##$new\_reference_1_neg##\n\n";
+		}
+		
 	}
 	
 	elsif ($ff_obtained =~ m/HS65_GS_DFPHQX9/)
 	{
-	print "4. Obtained DFF name is $ff_obtained\n";
-	print SIM ".ic v(X$module.X$to_ff[$i].net0238:F149)= ##$new\_reference_1_neg##\n\n";
+		if ($qreg==1)
+		{
+		print "4. Obtained DFF name is $ff_obtained\n";
+		print SIM ".ic v(X$module.X$to_ff[$i]\_q\_reg.net0238:F149)= ##$new\_reference_1_neg##\n\n";
+		}
+		else
+		{
+		print "4. Obtained DFF name is $ff_obtained\n";
+		print SIM ".ic v(X$module.X$to_ff[$i].net0238:F149)= ##$new\_reference_1_neg##\n\n";
+		}
+		
 	}
-	
-	
-   #The following is for DFQNX9 FF, which has a different initialisation node
-   #   print SIM ".ic v(X$module.X$to_ff[$i].net0139:F125)= ##$new\_reference_1_neg##\n";
-#The following for DFPHQNX9
-   #   print SIM ".ic v(X$module.X$to_ff[$i].net0139:F163)= ##$new\_reference_1_neg##\n";
- #The following for DFPHQX9
-   #   print SIM ".ic v(X$module.X$to_ff[$i].net0238:F149)= ##$new\_reference_1_neg##\n";  
+ 
    }
 
    #$measure_at_falling_edge.="meas tran ff_op_$i MAX v(X$module.$to_ff[$i]:Q) from=$fall_from"."s"." to=$fall_to"."s\n";
@@ -692,38 +743,168 @@ print "$to_ff[$i]\n" ;
 print "v(X$module.$to_ff[$i]:Q)\n";
 }
 
-#Measure statements stored in the array: Meas at 2nd falling edge
+#Measure statements
 foreach $i(0 .. $#to_ff)
  {
 
-
-#This will need to be commented for non-ISCAS benchmark circuits
- #$measure_at_falling_edge.="meas tran ff_op_fall_$i MAX v(X$module.$to_ff[$i]\_q\_reg:Q) from=$fall_from"."s"." to=$fall_to"."s\n";
- #This will need to be enabled for non-ISCAS benchmark circuits
- $measure_at_falling_edge.="meas tran ff_op_fall_$i MAX v(X$module.$to_ff[$i]:Q) from=$fall_from"."s"." to=$fall_to"."s\n";
- }
-
-
-#Measure statements stored in the array: Meas at 2nd rising edge
-foreach $i(0 .. $#to_ff)
- {
-
-#This will need to be commented for non-ISCAS benchmark circuits
- #$measure_at_rising_edge.="meas tran ff_op_rise_$i MAX v(X$module.$to_ff[$i]\_q\_reg:Q) from=$rise_from_2nd"."s"." to=$rise_to_2nd"."s\n";
-
- #This will need to be enabled for non-ISCAS benchmark circuits
- $measure_at_rising_edge.="meas tran ff_op_rise_$i MAX v(X$module.$to_ff[$i]:Q) from=$rise_from_2nd"."s"." to=$rise_to_2nd"."s\n";
- }
+	$ff_obtained=$ff_types[$i];
  
-#To test if the initial conditions are set correctly
-foreach $i(0 .. $#to_ff)
- {
+	if ($ff_obtained =~ m/(HS65_GS_DFPQX4|HS65_GS_DFPQX9)/)
+	{
+		print "1. Obtained DFF name is $ff_obtained\n";
+	
+	####################  Fall edge  ##########################
+	
+		if ($qreg==1) #For ISCAS- benchmarks for eg.
+		{
+		$measure_at_falling_edge.="meas tran ff_op_fall_$i MAX v(X$module.$to_ff[$i]\_q\_reg:Q) from=$fall_from"."s"." to=$fall_to"."s\n";
+		}
+		else
+		{ 
+		#This will need to be enabled for non-ISCAS benchmark circuits for eg
+ 		$measure_at_falling_edge.="meas tran ff_op_fall_$i MAX v(X$module.$to_ff[$i]:Q) from=$fall_from"."s"." to=$fall_to"."s\n";
+ 		}
+	####################  Rise edge  ########################## 
+ 		if ($qreg==1) #For ISCAS- benchmarks for eg.
+		{
+		 $measure_at_rising_edge.="meas tran ff_op_rise_$i MAX v(X$module.$to_ff[$i]\_q\_reg:Q) from=$rise_from_2nd"."s"." to=$rise_to_2nd"."s\n";
+		}
+		 else
+		 {
+		 #This will need to be enabled for non-ISCAS benchmark circuits for eg
+		 $measure_at_rising_edge.="meas tran ff_op_rise_$i MAX v(X$module.$to_ff[$i]:Q) from=$rise_from_2nd"."s"." to=$rise_to_2nd"."s\n";
+	 	}
+ 
+	 ####################  Time 0  ########################## 
+ 		if ($qreg==1) #For ISCAS- benchmarks for eg.
+		{
+		$measure_at_time0.="meas tran ff_op_time0_$i MAX v(X$module.$to_ff[$i]\_q\_reg:Q) from=0.01e-9"."s"." to=0.05e-9"."s\n"
+		}
+		 else
+		{
+		#This will need to be enabled for non-ISCAS benchmark circuits for eg
+		 $measure_at_time0.="meas tran ff_op_time0_$i MAX v(X$module.$to_ff[$i]:Q) from=0.01e-9"."s"." to=0.05e-9"."s\n";
+		 }
+	 
+	}
+	
+	elsif ($ff_obtained =~ m/HS65_GS_DFPQNX9/)
+	{
+		print "2. Obtained DFF name is $ff_obtained\n";
+	####################  Fall edge  ##########################
+		if ($qreg==1) #For ISCAS- benchmarks for eg.
+		{
+		$measure_at_falling_edge.="meas tran ff_op_fall_$i MAX v(X$module.$to_ff[$i]\_q\_reg:QN) from=$fall_from"."s"." to=$fall_to"."s\n";
+		}
+		else
+		{ 
+		#This will need to be enabled for non-ISCAS benchmark circuits for eg
+	 	$measure_at_falling_edge.="meas tran ff_op_fall_$i MAX v(X$module.$to_ff[$i]:QN) from=$fall_from"."s"." to=$fall_to"."s\n";
+	 	}
+ 	####################  Rise edge  ########################## 
+		if ($qreg==1) #For ISCAS- benchmarks for eg.
+		{
+		 $measure_at_rising_edge.="meas tran ff_op_rise_$i MAX v(X$module.$to_ff[$i]\_q\_reg:QN) from=$rise_from_2nd"."s"." to=$rise_to_2nd"."s\n";
+		}
+		else
+		{ 
+		#This will need to be enabled for non-ISCAS benchmark circuits for eg
+		 $measure_at_rising_edge.="meas tran ff_op_rise_$i MAX v(X$module.$to_ff[$i]:QN) from=$rise_from_2nd"."s"." to=$rise_to_2nd"."s\n";
+		} 
+	 ####################  Time 0  ########################## 
+	 	if ($qreg==1) #For ISCAS- benchmarks for eg.
+		{
+		$measure_at_time0.="meas tran ff_op_time0_$i MAX v(X$module.$to_ff[$i]\_q\_reg:QN) from=0.01e-9"."s"." to=0.05e-9"."s\n"
+		}
+		else
+		{
+		#This will need to be enabled for non-ISCAS benchmark circuits for eg
+		 $measure_at_time0.="meas tran ff_op_time0_$i MAX v(X$module.$to_ff[$i]:QN) from=0.01e-9"."s"." to=0.05e-9"."s\n";
+		}
+	 
+	}
+	
+	elsif ($ff_obtained =~ m/HS65_GS_DFPHQNX9/)
+	{
+		print "3. Obtained DFF name is $ff_obtained\n";
+	####################  Fall edge  ##########################
+		if ($qreg==1) #For ISCAS- benchmarks for eg.
+		{
+		 $measure_at_falling_edge.="meas tran ff_op_fall_$i MAX v(X$module.$to_ff[$i]\_q\_reg:QN) from=$fall_from"."s"." to=$fall_to"."s\n";
+		 }
+		else
+		{
+		 #This will need to be enabled for non-ISCAS benchmark circuits for eg
+		 $measure_at_falling_edge.="meas tran ff_op_fall_$i MAX v(X$module.$to_ff[$i]:QN) from=$fall_from"."s"." to=$fall_to"."s\n";
+		 }
+ 	
+ 	####################  Rise edge  ########################## 
+	 	if ($qreg==1) #For ISCAS- benchmarks for eg.
+		{
+		$measure_at_rising_edge.="meas tran ff_op_rise_$i MAX v(X$module.$to_ff[$i]\_q\_reg:QN) from=$rise_from_2nd"."s"." to=$rise_to_2nd"."s\n";
+		}
 
-#This will need to be enabled for ISCAS benchmark circuits
-#$measure_at_time0.="meas tran ff_op_time0_$i MAX v(X$module.$to_ff[$i]\_q\_reg:Q) from=0.01e-9"."s"." to=0.05e-9"."s\n"
- #This will need to be enabled for non-ISCAS benchmark circuits
- $measure_at_time0.="meas tran ff_op_time0_$i MAX v(X$module.$to_ff[$i]:Q) from=0.01e-9"."s"." to=0.05e-9"."s\n";
+		else
+		{
+		#This will need to be enabled for non-ISCAS benchmark circuits
+		 $measure_at_rising_edge.="meas tran ff_op_rise_$i MAX v(X$module.$to_ff[$i]:QN) from=$rise_from_2nd"."s"." to=$rise_to_2nd"."s\n";
+		 }
+	 
+	 ####################  Time 0  ########################## 
+	 	if ($qreg==1) #For ISCAS- benchmarks for eg.
+		{
+		$measure_at_time0.="meas tran ff_op_time0_$i MAX v(X$module.$to_ff[$i]\_q\_reg:QN) from=0.01e-9"."s"." to=0.05e-9"."s\n"
+		}
+		else
+		{
+		#This will need to be enabled for non-ISCAS benchmark circuits
+		 $measure_at_time0.="meas tran ff_op_time0_$i MAX v(X$module.$to_ff[$i]:QN) from=0.01e-9"."s"." to=0.05e-9"."s\n";
+		 }
+	 
+	 }
+	
+	elsif ($ff_obtained =~ m/HS65_GS_DFPHQX9/)
+	{
+		print "4. Obtained DFF name is $ff_obtained\n";
+	####################  Fall edge  ##########################
+		if ($qreg==1) #For ISCAS- benchmarks for eg.
+		{
+		$measure_at_falling_edge.="meas tran ff_op_fall_$i MAX v(X$module.$to_ff[$i]\_q\_reg:Q) from=$fall_from"."s"." to=$fall_to"."s\n";
+		}
+		
+		else
+		{
+		 #This will need to be enabled for non-ISCAS benchmark circuits
+	 	$measure_at_falling_edge.="meas tran ff_op_fall_$i MAX v(X$module.$to_ff[$i]:Q) from=$fall_from"."s"." to=$fall_to"."s\n";
+ 		}
+ 	####################  Rise edge  ########################## 
+	 	if ($qreg==1) #For ISCAS- benchmarks for eg.
+		{
+		$measure_at_rising_edge.="meas tran ff_op_rise_$i MAX v(X$module.$to_ff[$i]\_q\_reg:Q) from=$rise_from_2nd"."s"." to=$rise_to_2nd"."s\n";
+		}
+		else
+		{
+		 #This will need to be enabled for non-ISCAS benchmark circuits
+		 $measure_at_rising_edge.="meas tran ff_op_rise_$i MAX v(X$module.$to_ff[$i]:Q) from=$rise_from_2nd"."s"." to=$rise_to_2nd"."s\n";
+	 	}
+	 
+	  ####################  Time 0  ########################## 
+ 		if ($qreg==1) #For ISCAS- benchmarks for eg.
+		{
+		$measure_at_time0.="meas tran ff_op_time0_$i MAX v(X$module.$to_ff[$i]\_q\_reg:Q) from=0.01e-9"."s"." to=0.05e-9"."s\n"
+		}
+		else
+		{
+		 #This will need to be enabled for non-ISCAS benchmark circuits
+		 $measure_at_time0.="meas tran ff_op_time0_$i MAX v(X$module.$to_ff[$i]:Q) from=0.01e-9"."s"." to=0.05e-9"."s\n";
+ 		}
+	 
+	}
+	
+ 
  }
+
+
  
 #Adding the control part
 print SIM "\n\n.control\n";

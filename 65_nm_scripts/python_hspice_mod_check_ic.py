@@ -104,8 +104,8 @@ for i in range(0,num_of_files):
 	
 	print ("Creating %s/spice_decks_%d/hspice_deck_%s.sp\n" %(path,dir_num,deck_num[i]))	
 	for line in fin:
-		if line ==".include ../glitch_CORE65GPSVT_selected_lib_WL_ad_noR.sp\n":
-			line=".include ../hspice_glitch_CORE65GPSVT_selected_lib_WL_ad_noR.sp\n"
+		if line ==".include ../glitch_CORE65GPSVT_selected_lib_vg.sp\n":
+			line=".include ../hspice_glitch_CORE65GPSVT_selected_lib_vg.sp\n"
 			fnew.write(line)
 			#print "line replaced"
 			#print line
@@ -268,6 +268,14 @@ for i in range(0,num_of_csv):
 	fout2.close()		
 	fout0.close()
 
+
+if os.path.exists('%s' %path):
+	os.chdir('%s/spice_decks_%d' %(path,dir_num))
+	for f in glob.glob("glitch_report_outputs_new1_*.csv"):
+		os.remove(f)
+	for f in glob.glob("glitch_report_outputs_new2_*.csv"):
+		os.remove(f)	
+		
 #Alternate way of coding inline .. need not be used now..
 """
 	for line in fileinput.input('%s/spice_decks_%d/%s' %(path,dir_num,file_names[i]), inplace=1):
