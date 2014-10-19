@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 #Modification summary:
+#Checking for DFP or DFF: to suit both 180nm and 65nm. 'DFPQX wont work for 65nm since there are FFs with 'DFPQNX', 'DFPHQNX' etc: June 27 2014
 #Modified DFFPOSX1 to DFPQX to suit the 65nm requirement: 25/4/2014
 #Changed the column iteration number for header from range(5) to range(6), since the drain number is also added: Feb 11 2014
 
@@ -121,7 +122,7 @@ if (os.path.isdir('%s/spice_results' %(path))):
 
 	for row in reader:
 	#The gate name is the 4th element in the row. Classify the gates based on whether it was a DFF or not
-		if re.search("DFPQX",row[3]): 
+		if re.search("DFP|DFF",row[3]): 
 			FF_list.append(row)
 		else:
 			gate_list.append(row)
@@ -290,7 +291,7 @@ if (os.path.isdir('%s/spice_results' %(path))):
 
 	for row_3 in reader_3:
 	#The gate name is the 4th element in the row. Classify the gates based on whether it was a DFF or not
-		if re.search("DFPQX",row_3[3]): 
+		if re.search("DFP|DFF",row_3[3]): 
 			FF_list_3.append(row_3)
 		else:
 			gate_list_3.append(row_3)
@@ -450,6 +451,8 @@ if (os.path.isdir('%s/spice_results' %(path))):
 	gate_no_effect=0
 	gate_strange_FF=0
 	gate_strange_FN=0
+	gate_cascaded_multiple=0
+
 	for row in gate_read2:
 	
 		temp_row=[]
@@ -471,8 +474,10 @@ if (os.path.isdir('%s/spice_results' %(path))):
 		#2nd rise edge data is available in gate_read2 (row), 3rd rise edge data is available in gate_read3 (row3)
 		#print "int(row[inputFF_2nd_rise[0]])" ,int(row[inputFF_2nd_rise[0]])
 		#print "int(row3[outputFF_3rd_rise[0]])",int(row3[outputFF_3rd_rise[0]])
-
+		
+		#Whichever flip-flop flips at the 2nd edge 
 		FF_at_2nd_rise= int(row[inputFF_2nd_rise[0]]) + int(row[outputFF_2nd_rise[0]])
+		#Whichever flip-flop flips at the 3rd edge 
 		FF_at_3rd_rise= int(row3[inputFF_3rd_rise[0]]) + int(row3[outputFF_3rd_rise[0]])
 
 		if (FF_at_2nd_rise==0 and FF_at_3rd_rise==0):
@@ -493,13 +498,21 @@ if (os.path.isdir('%s/spice_results' %(path))):
 		#If a strike happens on a gate, an input FF cannot flip!!
 		elif (FF_at_2nd_rise>=1 and FF_at_3rd_rise==0):
 			print "case 3"
-			temp_row.append("Strange!")
+			temp_row.append("FN- Strange?!")
 			gate_strange_FN=gate_strange_FN+1
 
 		elif (FF_at_2nd_rise>=1 and FF_at_3rd_rise>=1):
 			print "case 4"
-			temp_row.append("Strange!")
+			temp_row.append("FF- Strange?!")
 			gate_strange_FF=gate_strange_FF+1
+
+			if (FF_at_3rd_rise>1): #Calculating multiple flips
+				temp_row.append("Cascaded, flipped at multiple FFs")
+				gate_cascaded_multiple=gate_cascaded_multiple+1
+
+			elif(FF_at_3rd_rise==1):
+				temp_row.append("Cascaded, flipped at a single FF")
+
 		#print "temp_row final:", temp_row
 
 		gates_list_final.append(temp_row) #Append this to the list.. At the end of for loop, it would be a list of lists
@@ -508,6 +521,8 @@ if (os.path.isdir('%s/spice_results' %(path))):
 
 
 	gate_atleast_1_flip= (gate_csv_rows - gate_no_effect)
+	gate_multiple_flips= gate_cascaded_multiple + gate_glitch_captured_multiple
+
 	print"\n*************************************************************\n"
 	print"\nTotal number of particle strikes is:",total_csv_rows
 
@@ -517,14 +532,24 @@ if (os.path.isdir('%s/spice_results' %(path))):
 	print"\nNumber of captured flips due to gate strike is:",gate_glitch_captured
 	print"\nNumber of Multiple captured flips amongst the captured flips:",gate_glitch_captured_multiple
 	prob_gate_strike=(float(gate_csv_rows)/float(total_csv_rows))
-	prob_gate_no_effect=(float(gate_no_effect)/float(gate_csv_rows))
-	prob_gate_glitch_captured=(float(gate_glitch_captured)/float(gate_csv_rows))
-	prob_gate_FN=(float(gate_strange_FN)/float(gate_csv_rows))
-	prob_gate_FF=(float(gate_strange_FF)/float(gate_csv_rows))
 
-	prob_gate_atleast_1flip= float(gate_atleast_1_flip)/float(gate_csv_rows)
+	if gate_csv_rows>0:
+		prob_gate_no_effect=(float(gate_no_effect)/float(gate_csv_rows))
+		prob_gate_glitch_captured=(float(gate_glitch_captured)/float(gate_csv_rows))
+		prob_gate_FN=(float(gate_strange_FN)/float(gate_csv_rows))
+		prob_gate_FF=(float(gate_strange_FF)/float(gate_csv_rows))
+		prob_gate_atleast_1flip= float(gate_atleast_1_flip)/float(gate_csv_rows)
+
+	else:
+		prob_gate_no_effect=0.0
+		prob_gate_glitch_captured=0.0
+		prob_gate_FN=0.0
+		prob_gate_FF=0.0
+		prob_gate_atleast_1flip=0.0
+
+
 	if (gate_atleast_1_flip >1) :
-		prob_gate_multiple_conditional= float(gate_glitch_captured_multiple)/float(gate_atleast_1_flip)
+		prob_gate_multiple_conditional= float(gate_multiple_flips)/float(gate_atleast_1_flip)
 	else:
 		prob_gate_multiple_conditional=0.0
 
@@ -534,6 +559,10 @@ if (os.path.isdir('%s/spice_results' %(path))):
 	else:
 		prob_gate_glitch_captured_multiple=0.0
 
+	if gate_strange_FF >0: #Calculating conditional probability
+		prob_gate_cascaded_multiple=(float(gate_cascaded_multiple)/float(gate_strange_FF))
+	else:
+		prob_gate_cascaded_multiple=0.0
 
 	print"\n*************************************************************"
 	print"\nProbability of a gate strike amongst total cases is:",prob_gate_strike
@@ -574,6 +603,7 @@ if (os.path.isdir('%s/spice_results' %(path))):
 	fout.write ("\nP(multiple|NF): Conditional Probability of multiple captured flips given NF : %f" %prob_gate_glitch_captured_multiple)
 	fout.write ("\nProbability of FN(flip in 2nd cycle, no flip in 3rd cycle), due to gate strike is: %f" %prob_gate_FN)
 	fout.write ("\nProbability of FF(flip in 2nd cycle and flip in 3rd cycle), due to gate strike is: %f" %prob_gate_FF)
+	fout.write ("\nP(multiple|FF): Conditional Probability of multiple captured flips given FF : %f" %prob_gate_cascaded_multiple)
 	fout.close()
 
 	###########################Write out the results into a table in a pdf############################
@@ -612,7 +642,10 @@ if (os.path.isdir('%s/spice_results' %(path))):
 	       ['NF(Glitch- Propagated and captured)', prob_gate_glitch_captured],
 	       ['P(multiple flips at output | NF)', prob_gate_glitch_captured_multiple],
 		['FN (flip in 2nd cycle, no flip in 3rd cycle)', prob_gate_FN],
-		 ['FF (cascaded flip)', prob_gate_FF]]
+		 ['FF (cascaded flip)', prob_gate_FF],
+		['P(multiple flips at output | FF)', prob_gate_cascaded_multiple],
+		 ['P(multiple flips NFm or FFm | atleast one flip)', prob_gate_multiple_conditional]]
+
 	t=Table(data_gate)
 	t.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,-1),colors.white),
 			       ('TEXTCOLOR',(0,0),(1,0),colors.blue),  #(columns,rows) or (0,0,(-1,-4)
@@ -628,7 +661,6 @@ if (os.path.isdir('%s/spice_results' %(path))):
 	print "\n**Completed executing the gate_strike_taxonomy script***\n"
 	print "%s/spice_results/taxonomy_report_gates_%s.pdf has the results." %(path,module)
 	doc1.build(elements)
-
 
 
 

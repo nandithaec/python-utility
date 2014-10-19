@@ -266,6 +266,7 @@ if (os.path.isdir('%s/spice_results' %(path))):
 	FF_cascaded_flip_multiple=0
 	FF_no_effect=0
 	FF_output_glitch=0
+	F0_first_flip=0
 	for row in FF_read_2:
 	
 		temp_row=[]
@@ -293,14 +294,14 @@ if (os.path.isdir('%s/spice_results' %(path))):
 		FF_at_3rd_rise= int(row3[inputFF_3rd_rise[0]]) + int(row3[outputFF_3rd_rise[0]])
 		if (FF_at_2nd_rise==0 and FF_at_3rd_rise==0):
 			print "case 1"
-			temp_row.append("No effect")
+			temp_row.append("No effect- NN")
 			FF_no_effect=FF_no_effect+1
 		elif (FF_at_2nd_rise==0 and FF_at_3rd_rise >=1):
 			print "case 2"
 			FF_glitch_captured=FF_glitch_captured+1
 
 			if (FF_at_3rd_rise>1): #Calculating multiple flips
-				temp_row.append("Glitched and captured at multiple FFs")
+				temp_row.append("Glitched and captured at multiple FFs- NF")
 				FF_glitch_captured_multiple=FF_glitch_captured_multiple+1
 			elif (FF_at_3rd_rise==1):
 				temp_row.append("Glitched and captured at a FF")
@@ -308,19 +309,23 @@ if (os.path.isdir('%s/spice_results' %(path))):
 
 		elif (FF_at_2nd_rise>=1 and FF_at_3rd_rise==0):
 			print "case 3"
-			temp_row.append("Flipped and masked")
+			temp_row.append("Flipped and masked- FN")
 			FF_flip_masked=FF_flip_masked+1
+			F0_first_flip=F0_first_flip+1
+
 		elif (FF_at_2nd_rise>=1 and FF_at_3rd_rise>=1):
 			#temp_row.append("Cascaded flip")
 			print "case 4"
 			FF_cascaded_flip=FF_cascaded_flip+1
-	
+			F0_first_flip=F0_first_flip+1
+
 			if (FF_at_3rd_rise>1):
-				temp_row.append("Cascaded flip: Multiple at output")
+				temp_row.append("Cascaded flip: Multiple at output- FF")
 				FF_cascaded_flip_multiple=FF_cascaded_flip_multiple+1
 
 			elif (FF_at_3rd_rise==1):
 				temp_row.append("Cascaded flip: Single flip at output")
+
 		"""
 		elif (int(row[outputFF_2nd_rise[0]])>=1):
 			#temp_row.append("Cascaded flip")
@@ -368,10 +373,19 @@ if (os.path.isdir('%s/spice_results' %(path))):
 	print"\nNumber of flips due to strike on FF that got masked at output is:",FF_flip_masked
 
 	prob_FF_strike=(float(FF_csv_rows)/float(total_csv_rows))
-	prob_FF_no_effect=(float(FF_no_effect)/float(FF_csv_rows))
-	prob_FF_glitch_captured=(float(FF_glitch_captured)/float(FF_csv_rows))
-	#prob_FF_output_glitch=(float(FF_output_glitch)/float(FF_csv_rows))
-	prob_FF_atleast_1flip= float(FF_atleast_1_flip)/float(FF_csv_rows)
+	
+	if FF_csv_rows>0:
+		prob_FF_no_effect=(float(FF_no_effect)/float(FF_csv_rows))
+		prob_FF_glitch_captured=(float(FF_glitch_captured)/float(FF_csv_rows))
+		#prob_FF_output_glitch=(float(FF_output_glitch)/float(FF_csv_rows))
+		prob_FF_atleast_1flip= float(FF_atleast_1_flip)/float(FF_csv_rows)
+		prob_FF_flip_masked=(float(FF_flip_masked)/float(FF_csv_rows)) #FN
+	else:
+		prob_FF_no_effect=0.0
+		prob_FF_glitch_captured=0.0
+		prob_FF_atleast_1flip=0.0
+		prob_FF_flip_masked=0.0	
+	
 	if (FF_atleast_1_flip >1):
 		prob_FF_multiple_conditional= float(FF_multiple_flips)/float(FF_atleast_1_flip)
 	else:
@@ -385,13 +399,19 @@ if (os.path.isdir('%s/spice_results' %(path))):
 		prob_FF_glitch_captured_multiple=0.0
 
 	prob_FF_cascaded_flip=(float(FF_cascaded_flip)/float(FF_csv_rows))
+
 	#To avoid divide by zero error:	
 	if FF_cascaded_flip >0: #Calculating conditional probability
 		prob_FF_cascaded_flip_multiple=(float(FF_cascaded_flip_multiple)/float(FF_cascaded_flip)) #Calculating conditional probability
 	else:
 		prob_FF_cascaded_flip_multiple=0.0
 
-	prob_FF_flip_masked=(float(FF_flip_masked)/float(FF_csv_rows))
+	
+	if F0_first_flip>0:
+		prob_FN_given_F0= (float(FF_flip_masked)/float(F0_first_flip))
+	else:
+		prob_FN_given_F0=0.0
+
 
 	print"\n*************************************************************"
 	print"Probability of a FF strike amongst total cases is:",prob_FF_strike
@@ -428,16 +448,18 @@ if (os.path.isdir('%s/spice_results' %(path))):
 	fout.write ("\n*************************************************************************\n")
 	fout.write ("\nProbability of a FF strike amongst total cases is: %f" %prob_FF_strike)
 	fout.write ("\nProbability of atleast one flip is: %f" %prob_FF_atleast_1flip)
-	fout.write ("\nProbability of multiple flips given atleast one flip is: %f" %prob_FF_multiple_conditional)
+	fout.write ("\n(P(F>=1)|P(F>0)): Conditional probability of multiple flips: NFm or FFm given atleast one flip in either of the cycles, due to strike on FF is: %f" %prob_FF_multiple_conditional)
 	fout.write ("\nProbability of NN (no effect due to strike on FF) is: %f" %prob_FF_no_effect)
 	fout.write ("\nProbability of NF (captured flips due to strike on FF (glitch)) is: %f" %prob_FF_glitch_captured)
 	fout.write ("\nProbability of FF (cascaded flips due to strike on FF) is: %f" %prob_FF_cascaded_flip)
 	fout.write ("\nProbability of FN (flips due to strike on FF that got masked at output) is: %f" %prob_FF_flip_masked)
 	#fout.write ("\nProbability of flips due to direct strike on output FF that got masked at output is: %f" %prob_FF_output_glitch)
 	fout.write ("\n************************MULTIPLE FLIPS*************************************\n")
+	fout.write ("\nP(FN|first flip): Conditional probability of FN given the first flip occured, due to strike on FF is: %f" %prob_FN_given_F0)
 
 	fout.write ("\nP(Multiple|NF): Conditional probability of multiple captured flips given atleast one flip, due to strike on FF is: %f" %prob_FF_glitch_captured_multiple)
 	fout.write ("\nP(Multiple|FF): Conditional probability of multiple cascaded flips given atleast one flip, due to strike on FF is: %f" %prob_FF_cascaded_flip_multiple)
+	
 	fout.close()
 
 
@@ -475,8 +497,12 @@ if (os.path.isdir('%s/spice_results' %(path))):
 	       ['NF(Glitch- Propagated and captured)', prob_FF_glitch_captured],
 		['P(multiple flips at output | NF)', prob_FF_glitch_captured_multiple],
 		['FN(Flip- Masked)',prob_FF_flip_masked],
-	       ['FF(Cascaded flips)', prob_FF_cascaded_flip],
-		 ['P(multiple flips at output | FF)', prob_FF_cascaded_flip_multiple]]
+		['FF(Cascaded flips)', prob_FF_cascaded_flip],
+		 ['P(multiple flips at output FFm | FF)', prob_FF_cascaded_flip_multiple],
+		['FN|First flip (FN|F0)',prob_FN_given_F0],
+		 ['P(multiple flips NFm or FFm | atleast one flip)', prob_FF_multiple_conditional]]
+
+
 		#['Glitch on output(direct strike)',prob_FF_output_glitch]]
 	t1=Table(data_FF)
 	t1.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,-1),colors.white),
@@ -490,7 +516,6 @@ if (os.path.isdir('%s/spice_results' %(path))):
 	print "\n**Completed executing the gate_strike_taxonomy script***\n"
 	print "%s/spice_results/taxonomy_report_FFs_%s.pdf has the results." %(path,module)
 	doc1.build(elements)
-
 
 
 

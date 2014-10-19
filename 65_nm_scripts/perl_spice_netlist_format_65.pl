@@ -19,8 +19,8 @@
 
 # (net0139:F125)-M28 drain and M31 drain for HS65_GS_DFPQNX9,
 # net0139:F163 (M28 drain) and net0139:F95 (M31 drain) for DFPHQNX9
-# net0238:F149 (M24 source) for DFPHQX9, is mentioned as a comment in the .ic section. Need to manually change this in the reference.sp file, since we are not current differently identifying the different types of FFs: June 23 2014
-#.ic on net0148:F59 and net0148:F65 of the DFPQX4 and DFPQX9 to initialise correctly. This value should be the inverted value of what was supposed to be initialised originally.: April 2nd 2014
+# net0238:F149 (M24 source) for DFPHQX9. June 23 2014
+#.ic on net0148:F59 (M25 source) and net0148:F65 (M29 drain) of the DFPQX4 and DFPQX9 to initialise correctly. This value should be the inverted value of what was supposed to be initialised originally.: April 2nd 2014
 
 #rise and fall edge measurements limitedto 50ps duration. Else false values were being calculated: April 25 2014
 

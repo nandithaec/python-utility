@@ -12,7 +12,7 @@
 #This version of the script has the facility of selecting the gate based on the area of the gate. This version of the script uses another script python_weighted_gateselection.py to pick the random gate based on its area: Nov 17 2013
 #Glitch insertion window is within the 2.5 cycles, and not the 6.5 cycles that is required for the case with intermediate FFs
 
-#Example usage: python python_utility3_hspice_2cycles_time0_65.py -m b12 -p /home/users/nanditha/Documents/utility/65nm/b12 -t 65 -n 4 --group 4 --clk 300 -d b12
+#Example usage: python python_utility3_hspice_2cycles_time0_65.py -m b04 -p /home/users/nanditha/Documents/utility/65nm/b04 -t 65 -n 4 --group 4 --clk 300 -d b04
 
 #Example usage: python python_utility3_hspice_2cycles_time0_65.py -m c432_clk_ipFF -p /home/users/nanditha/Documents/utility/65nm/c432 -t 65 -n 4 --group 4 --clk 350 -d c432
 
@@ -338,14 +338,14 @@ for loop in range(start_loop, (num_of_loops+1)):
 	
 ##########################################################
 #Comment this out to see the decks and the result files it generates. 	
-"""
+
 	spice_dir = '%s/spice_decks_%s' %(path,loop)
 
 	
 	if os.path.exists(spice_dir):
 		shutil.rmtree(spice_dir)
 
-"""
+
 ########################################End of loop########################################################
 
 print "Combining all rtl diff files\n"

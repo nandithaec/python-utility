@@ -38,7 +38,7 @@ calculate_gates_clk [reference_spice_file,glitch_lib,tool_reference_output,modul
 
 DESCRIPTION
 
-calculate_gates_clk utility reads in the template/reference spice netlist (reference_spice.sp) and reports out the number of subckts/gates in the spice file so that the main script can pick a random gate out of these. It also reads in the <module>_pnr_reference_out/tool_reference_out.txt file to count the number of simulatable clock cycles so that the main script can pick a random clk cycle to simulate. This script outputs a tmp_random.txt in the current working directory which contains the number of gates in the circuit and the number of clk cycles
+calculate_gates_clk script reads in the template/reference spice netlist (reference_spice.sp) and reports out the number of subckts/gates in the spice file so that the main script can pick a random gate out of these. It also reads in the <module>_pnr_reference_out/tool_reference_out.txt file to count the number of simulatable clock cycles so that the main script can pick a random clk cycle to simulate. This script outputs a tmp_random.txt in the current working directory which contains the number of gates in the circuit and the number of clk cycles
 
 OPTIONS
 

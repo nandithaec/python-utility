@@ -16,7 +16,7 @@ from optparse import OptionParser
 #sys.path.append('/opt/app/Pypdf-1.13/lib/python2.6/site-packages/pyPdf')
 from pyPdf import PdfFileWriter, PdfFileReader
 
-parser = OptionParser('This script just combines 2 pdfs \nAuthor:Nanditha Rao(nanditha@ee.iitb.ac.in)\n')
+parser = OptionParser('This script just combines 2 pdfs of gates taxonomy and flip-flop taxonomy. The final pdf containing the 2 results is generated in spice_results/taxonomy_report_all_<design>.pdf\nAuthor:Nanditha Rao(nanditha@ee.iitb.ac.in)\n')
 
 parser.add_option("-p", "--path", dest="path",help="Enter the ENTIRE path to the folder which contains the 2 pdfs to be merged ")
 parser.add_option("-m", "--mod", dest="module",help="Enter the module name ")
