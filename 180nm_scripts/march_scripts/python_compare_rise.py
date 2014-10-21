@@ -1,10 +1,8 @@
 #!/usr/bin/env python
 
-
-#Changed the #column iteration number from range(5) to range(6), since the drain number is also added: Feb 11 2014
 #Compare results of spice and RTL, creates difference files and validation files for each run. Compare the 2nd rising edge in Verilog with the 2nd falling edge in spice: Feb 7 2014
 
-#Example usage: python python_compare_2nd_rise.py -m decoder_op_ip -f /home/external/iitb/nanditha/simulations/decoder_ip_opFF_rise -n 10 -t 180 -l 1
+#Example usage: python python_compare_rise.py -m c432_clk_opFF -f /home/external/iitb/nanditha/simulations/FF_optimisation/c432_priority_opFF -n 1000 -t 180 -l 1
 
 import optparse
 import re,os
@@ -63,7 +61,7 @@ print "vdd value is ",vdd_val
 
 f = open('%s/spice_results/final_results_spice_outputs_rise_%d.csv' %(path,int(outloop)), 'rb')
 frtl = open('%s/%s_reference_out/RTL_2nd_edge.csv' %(path,module), 'rb')
-fout = open('%s/spice_results/spice_rtl_difference_2nd_edge_%d.csv' %(path,int(outloop)), 'wb')
+fout = open('%s/spice_results/spice_rtl_difference_rise_%d.csv' %(path,int(outloop)), 'wb')
 
 
 reader = csv.reader(f)
@@ -211,8 +209,8 @@ fout.close()
 
 ################################# Validation file ###################################################
 
-fd = open('%s/spice_results/spice_rtl_difference_2nd_edge_%d.csv' %(path,int(outloop)), 'rb') #Open in read mode
-fv = open('%s/spice_results/spice_rtl_diff_testing_2nd_edge_%d.csv' %(path,int(outloop)), 'wb')
+fd = open('%s/spice_results/spice_rtl_difference_rise_%d.csv' %(path,int(outloop)), 'rb') #Open in read mode
+fv = open('%s/spice_results/spice_rtl_diff_testing_rise_%d.csv' %(path,int(outloop)), 'wb')
 
 diff_file = csv.reader(fd)
 validator= csv.writer(fv)
@@ -324,7 +322,7 @@ if os.path.isfile('%s/spice_results/final_results_spice_outputs_rise_%d.csv' %(p
 ###Count the number of flips so that the we can pick the files to be backed up. #########
 
 ###############Count the number of flips############
-fd = open('%s/spice_results/spice_rtl_difference_2nd_edge_%d.csv' %(path,int(outloop)), 'rb') 
+fd = open('%s/spice_results/spice_rtl_difference_rise_%d.csv' %(path,int(outloop)), 'rb') 
 diff_file = csv.reader(fd)
 
 
@@ -357,8 +355,8 @@ for row in diff_file: #For every row in the diff file. row is a list.
 	deck_number= ((int(outloop)-1)*int(num)) + csv_rows
 	#print "\nDeck number is:", deck_number
 
-#column iteration - number of columns. Dont count first 6 columns- since they are deck_num, clk and glitch, gate and subcktlinenum,drain
-	for i in (range(6,num_col)): #len is 11. so loop indexs stops at 10. So, if we want it to loop from 3 to 10, give range(3,11)		
+#column iteration - number of columns. Dont count first 5 columns- since they are deck_num, clk and glitch, gate and subcktlinenum
+	for i in (range(5,num_col)): #len is 11. so loop indexs stops at 10. So, if we want it to loop from 3 to 10, give range(3,11)		
 		#k.append(row [i])
 		count_num = count_num + int(row[i])
 		
@@ -403,46 +401,46 @@ len0=0
 if len(more_than4_flips) != 0 :
 	
 	len_morethan4=len(more_than4_flips)
-	if not os.path.exists('%s/backup_spice_decks_2nd_edge/four_flip' %(path)):
-		os.mkdir('%s/backup_spice_decks_2nd_edge/four_flip' %(path))
+	if not os.path.exists('%s/backup_spice_decks_rise/four_flip' %(path)):
+		os.mkdir('%s/backup_spice_decks_rise/four_flip' %(path))
 	for i in (range(0,len_morethan4)):
 		if os.path.isfile('%s/spice_decks_%d/deck_%d.sp' %(path,loop,more_than4_flips[i])):
-			shutil.copy('%s/spice_decks_%d/deck_%d.sp' %(path,loop,more_than4_flips[i]), '%s/backup_spice_decks_2nd_edge/four_flip' %(path))
-			shutil.copy('%s/spice_decks_%d/glitch_report_outputs_rise_%d.csv' %(path,loop,more_than4_flips[i]), '%s/backup_spice_decks_2nd_edge/four_flip' %(path))
+			shutil.copy('%s/spice_decks_%d/deck_%d.sp' %(path,loop,more_than4_flips[i]), '%s/backup_spice_decks_rise/four_flip' %(path))
+			shutil.copy('%s/spice_decks_%d/glitch_report_outputs_rise_%d.csv' %(path,loop,more_than4_flips[i]), '%s/backup_spice_decks_rise/four_flip' %(path))
 
 
 #Save decks in which 4 flips occured
 if len(four_flips) != 0 :
 	
 	len4=len(four_flips)
-	if not os.path.exists('%s/backup_spice_decks_2nd_edge/four_flip' %(path)):
-		os.mkdir('%s/backup_spice_decks_2nd_edge/four_flip' %(path))
+	if not os.path.exists('%s/backup_spice_decks_rise/four_flip' %(path)):
+		os.mkdir('%s/backup_spice_decks_rise/four_flip' %(path))
 	for i in (range(0,len4)):
 		if os.path.isfile('%s/spice_decks_%d/deck_%d.sp' %(path,loop,four_flips[i])):
-			shutil.copy('%s/spice_decks_%d/deck_%d.sp' %(path,loop,four_flips[i]), '%s/backup_spice_decks_2nd_edge/four_flip' %(path))
-			shutil.copy('%s/spice_decks_%d/glitch_report_outputs_rise_%d.csv' %(path,loop,four_flips[i]), '%s/backup_spice_decks_2nd_edge/four_flip' %(path))
+			shutil.copy('%s/spice_decks_%d/deck_%d.sp' %(path,loop,four_flips[i]), '%s/backup_spice_decks_rise/four_flip' %(path))
+			shutil.copy('%s/spice_decks_%d/glitch_report_outputs_rise_%d.csv' %(path,loop,four_flips[i]), '%s/backup_spice_decks_rise/four_flip' %(path))
 
 #Save decks in which 3 flips occured
 if len(three_flips) != 0 :
 	
 	len3=len(three_flips)
-	if not os.path.exists('%s/backup_spice_decks_2nd_edge/three_flip' %(path)):
-		os.mkdir('%s/backup_spice_decks_2nd_edge/three_flip' %(path))
+	if not os.path.exists('%s/backup_spice_decks_rise/three_flip' %(path)):
+		os.mkdir('%s/backup_spice_decks_rise/three_flip' %(path))
 	for i in (range(0,len3)):
 		if os.path.isfile('%s/spice_decks_%d/deck_%d.sp' %(path,loop,three_flips[i])):
-			shutil.copy('%s/spice_decks_%d/deck_%d.sp' %(path,loop,three_flips[i]), '%s/backup_spice_decks_2nd_edge/three_flip' %(path))
-			shutil.copy('%s/spice_decks_%d/glitch_report_outputs_rise_%d.csv' %(path,loop,three_flips[i]), '%s/backup_spice_decks_2nd_edge/three_flip' %(path))
+			shutil.copy('%s/spice_decks_%d/deck_%d.sp' %(path,loop,three_flips[i]), '%s/backup_spice_decks_rise/three_flip' %(path))
+			shutil.copy('%s/spice_decks_%d/glitch_report_outputs_rise_%d.csv' %(path,loop,three_flips[i]), '%s/backup_spice_decks_rise/three_flip' %(path))
 
 #Save decks in which 2 flips occured
 if len(two_flips) != 0 :
 			
 	len2=len(two_flips)
-	if not os.path.exists('%s/backup_spice_decks_2nd_edge/two_flip' %(path)):
-		os.mkdir('%s/backup_spice_decks_2nd_edge/two_flip' %(path))
+	if not os.path.exists('%s/backup_spice_decks_rise/two_flip' %(path)):
+		os.mkdir('%s/backup_spice_decks_rise/two_flip' %(path))
 	for i in (range(0,len2)):
 		if os.path.isfile('%s/spice_decks_%d/deck_%d.sp' %(path,loop,two_flips[i])):
-			shutil.copy('%s/spice_decks_%d/deck_%d.sp' %(path,loop,two_flips[i]), '%s/backup_spice_decks_2nd_edge/two_flip' %(path))
-			shutil.copy('%s/spice_decks_%d/glitch_report_outputs_rise_%d.csv' %(path,loop,two_flips[i]), '%s/backup_spice_decks_2nd_edge/two_flip' %(path))
+			shutil.copy('%s/spice_decks_%d/deck_%d.sp' %(path,loop,two_flips[i]), '%s/backup_spice_decks_rise/two_flip' %(path))
+			shutil.copy('%s/spice_decks_%d/glitch_report_outputs_rise_%d.csv' %(path,loop,two_flips[i]), '%s/backup_spice_decks_rise/two_flip' %(path))
 
 
 save_1=1 #Save one single flip deck 
@@ -452,30 +450,30 @@ save_0=1 #Save one no flip deck
 if len(one_flip) != 0:
 			
 	len1=len(one_flip)
-	if not os.path.exists('%s/backup_spice_decks_2nd_edge/one_flip' %(path)):
-		os.mkdir('%s/backup_spice_decks_2nd_edge/one_flip' %(path))
+	if not os.path.exists('%s/backup_spice_decks_rise/one_flip' %(path)):
+		os.mkdir('%s/backup_spice_decks_rise/one_flip' %(path))
 	
 	#for i in (range(0,save_1)):
 	#random.seed(seed)
 	random_deck= random.randrange(len1) #Pick a random array index in the length of the array
 	if os.path.isfile('%s/spice_decks_%d/deck_%d.sp' %(path,loop,one_flip[random_deck])):
-		shutil.copy('%s/spice_decks_%d/deck_%d.sp' %(path,loop,one_flip[random_deck]), '%s/backup_spice_decks_2nd_edge/one_flip' %(path))
-		shutil.copy('%s/spice_decks_%d/glitch_report_outputs_rise_%d.csv' %(path,loop,one_flip[random_deck]), '%s/backup_spice_decks_2nd_edge/one_flip' %(path))
+		shutil.copy('%s/spice_decks_%d/deck_%d.sp' %(path,loop,one_flip[random_deck]), '%s/backup_spice_decks_rise/one_flip' %(path))
+		shutil.copy('%s/spice_decks_%d/glitch_report_outputs_rise_%d.csv' %(path,loop,one_flip[random_deck]), '%s/backup_spice_decks_rise/one_flip' %(path))
 		#print "one flip deck saved=",one_flip[random_deck]
 
 #Save decks in which no flip occured
 if len(no_flip) != 0:
 		
 	len0=len(no_flip)
-	if not os.path.exists('%s/backup_spice_decks_2nd_edge/no_flip' %(path)):
-		os.mkdir('%s/backup_spice_decks_2nd_edge/no_flip' %(path))
+	if not os.path.exists('%s/backup_spice_decks_rise/no_flip' %(path)):
+		os.mkdir('%s/backup_spice_decks_rise/no_flip' %(path))
 	
 	#for i in (range(0,save_0)):
 	#random.seed(seed)
 	random_deck= random.randrange(len0) #Pick a random array index in the length of the array
 	if os.path.isfile('%s/spice_decks_%d/deck_%d.sp' %(path,loop,no_flip[random_deck])):
-		shutil.copy('%s/spice_decks_%d/deck_%d.sp' %(path,loop,no_flip[random_deck]), '%s/backup_spice_decks_2nd_edge/no_flip' %(path))
-		shutil.copy('%s/spice_decks_%d/glitch_report_outputs_rise_%d.csv' %(path,loop,no_flip[random_deck]), '%s/backup_spice_decks_2nd_edge/no_flip' %(path))
+		shutil.copy('%s/spice_decks_%d/deck_%d.sp' %(path,loop,no_flip[random_deck]), '%s/backup_spice_decks_rise/no_flip' %(path))
+		shutil.copy('%s/spice_decks_%d/glitch_report_outputs_rise_%d.csv' %(path,loop,no_flip[random_deck]), '%s/backup_spice_decks_rise/no_flip' %(path))
 		#print "Zero flip deck saved=",no_flip[random_deck]
 
 

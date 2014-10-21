@@ -1,0 +1,457 @@
+	*******    Job started   at Tue Oct 21 16:39:10 IST 2014    **********
+	******Giltched version of the library file and technology file included in the spice file
+qreg found value is 1   dff_72 iDFF_1 (.q(IPNN_PNN1), 
+
+   dff_71 iDFF_2 (.q(IPNN_PNN5), 
+
+   dff_70 iDFF_3 (.q(IPNN_PNN9), 
+
+   dff_69 iDFF_4 (.q(IPNN_PNN13), 
+
+   dff_68 iDFF_5 (.q(IPNN_PNN17), 
+
+   dff_67 iDFF_6 (.q(IPNN_PNN21), 
+
+   dff_66 iDFF_7 (.q(IPNN_PNN25), 
+
+   dff_65 iDFF_8 (.q(IPNN_PNN29), 
+
+   dff_64 iDFF_9 (.q(IPNN_PNN33), 
+
+   dff_63 iDFF_10 (.q(IPNN_PNN37), 
+
+   dff_62 iDFF_11 (.q(IPNN_PNN41), 
+
+   dff_61 iDFF_12 (.q(IPNN_PNN45), 
+
+   dff_60 iDFF_13 (.q(IPNN_PNN49), 
+
+   dff_59 iDFF_14 (.q(IPNN_PNN53), 
+
+   dff_58 iDFF_15 (.q(IPNN_PNN57), 
+
+   dff_57 iDFF_16 (.q(IPNN_PNN61), 
+
+   dff_56 iDFF_17 (.q(IPNN_PNN65), 
+
+   dff_55 iDFF_18 (.q(IPNN_PNN69), 
+
+   dff_54 iDFF_19 (.q(IPNN_PNN73), 
+
+   dff_53 iDFF_20 (.q(IPNN_PNN77), 
+
+   dff_52 iDFF_21 (.q(IPNN_PNN81), 
+
+   dff_51 iDFF_22 (.q(IPNN_PNN85), 
+
+   dff_50 iDFF_23 (.q(IPNN_PNN89), 
+
+   dff_49 iDFF_24 (.q(IPNN_PNN93), 
+
+   dff_48 iDFF_25 (.q(IPNN_PNN97), 
+
+   dff_47 iDFF_26 (.q(IPNN_PNN101), 
+
+   dff_46 iDFF_27 (.q(IPNN_PNN105), 
+
+   dff_45 iDFF_28 (.q(IPNN_PNN109), 
+
+   dff_44 iDFF_29 (.q(IPNN_PNN113), 
+
+   dff_43 iDFF_30 (.q(IPNN_PNN117), 
+
+   dff_42 iDFF_31 (.q(IPNN_PNN121), 
+
+   dff_41 iDFF_32 (.q(IPNN_PNN125), 
+
+   dff_40 iDFF_33 (.q(IPNN_PNN129), 
+
+   dff_39 iDFF_34 (.q(IPNN_PNN130), 
+
+   dff_38 iDFF_35 (.q(IPNN_PNN131), 
+
+   dff_37 iDFF_36 (.q(IPNN_PNN132), 
+
+   dff_36 iDFF_37 (.q(IPNN_PNN133), 
+
+   dff_35 iDFF_38 (.q(IPNN_PNN134), 
+
+   dff_34 iDFF_39 (.q(IPNN_PNN135), 
+
+   dff_33 iDFF_40 (.q(IPNN_PNN136), 
+
+   dff_32 iDFF_41 (.q(IPNN_PNN137), 
+
+   dff_31 DFF_1 (.q(Q_PNN724), 
+
+   dff_30 DFF_2 (.q(Q_PNN725), 
+
+   dff_29 DFF_3 (.q(Q_PNN726), 
+
+   dff_28 DFF_4 (.q(Q_PNN727), 
+
+   dff_27 DFF_5 (.q(Q_PNN728), 
+
+   dff_26 DFF_6 (.q(Q_PNN729), 
+
+   dff_25 DFF_7 (.q(Q_PNN730), 
+
+   dff_24 DFF_8 (.q(Q_PNN731), 
+
+   dff_23 DFF_9 (.q(Q_PNN732), 
+
+   dff_22 DFF_10 (.q(Q_PNN733), 
+
+   dff_21 DFF_11 (.q(Q_PNN734), 
+
+   dff_20 DFF_12 (.q(Q_PNN735), 
+
+   dff_19 DFF_13 (.q(Q_PNN736), 
+
+   dff_18 DFF_14 (.q(Q_PNN737), 
+
+   dff_17 DFF_15 (.q(Q_PNN738), 
+
+   dff_16 DFF_16 (.q(Q_PNN739), 
+
+   dff_15 DFF_17 (.q(Q_PNN740), 
+
+   dff_14 DFF_18 (.q(Q_PNN741), 
+
+   dff_13 DFF_19 (.q(Q_PNN742), 
+
+   dff_12 DFF_20 (.q(Q_PNN743), 
+
+   dff_11 DFF_21 (.q(Q_PNN744), 
+
+   dff_10 DFF_22 (.q(Q_PNN745), 
+
+   dff_9 DFF_23 (.q(Q_PNN746), 
+
+   dff_8 DFF_24 (.q(Q_PNN747), 
+
+   dff_7 DFF_25 (.q(Q_PNN748), 
+
+   dff_6 DFF_26 (.q(Q_PNN749), 
+
+   dff_5 DFF_27 (.q(Q_PNN750), 
+
+   dff_4 DFF_28 (.q(Q_PNN751), 
+
+   dff_3 DFF_29 (.q(Q_PNN752), 
+
+   dff_2 DFF_30 (.q(Q_PNN753), 
+
+   dff_1 DFF_31 (.q(Q_PNN754), 
+
+   dff_0 DFF_32 (.q(Q_PNN755), 
+
+
+	********** Input output of the RTL file extracted
+	*************Fills removed from the spice file
+	*************Sub circuit instantiated in the spice file
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+1. Obtained DFF name is 
+printing..
+length=72
+iDFF_1
+v(Xc499_clk_ipFF.iDFF_1:Q)
+iDFF_2
+v(Xc499_clk_ipFF.iDFF_2:Q)
+iDFF_3
+v(Xc499_clk_ipFF.iDFF_3:Q)
+iDFF_4
+v(Xc499_clk_ipFF.iDFF_4:Q)
+iDFF_5
+v(Xc499_clk_ipFF.iDFF_5:Q)
+iDFF_6
+v(Xc499_clk_ipFF.iDFF_6:Q)
+iDFF_7
+v(Xc499_clk_ipFF.iDFF_7:Q)
+iDFF_8
+v(Xc499_clk_ipFF.iDFF_8:Q)
+iDFF_9
+v(Xc499_clk_ipFF.iDFF_9:Q)
+iDFF_10
+v(Xc499_clk_ipFF.iDFF_10:Q)
+iDFF_11
+v(Xc499_clk_ipFF.iDFF_11:Q)
+iDFF_12
+v(Xc499_clk_ipFF.iDFF_12:Q)
+iDFF_13
+v(Xc499_clk_ipFF.iDFF_13:Q)
+iDFF_14
+v(Xc499_clk_ipFF.iDFF_14:Q)
+iDFF_15
+v(Xc499_clk_ipFF.iDFF_15:Q)
+iDFF_16
+v(Xc499_clk_ipFF.iDFF_16:Q)
+iDFF_17
+v(Xc499_clk_ipFF.iDFF_17:Q)
+iDFF_18
+v(Xc499_clk_ipFF.iDFF_18:Q)
+iDFF_19
+v(Xc499_clk_ipFF.iDFF_19:Q)
+iDFF_20
+v(Xc499_clk_ipFF.iDFF_20:Q)
+iDFF_21
+v(Xc499_clk_ipFF.iDFF_21:Q)
+iDFF_22
+v(Xc499_clk_ipFF.iDFF_22:Q)
+iDFF_23
+v(Xc499_clk_ipFF.iDFF_23:Q)
+iDFF_24
+v(Xc499_clk_ipFF.iDFF_24:Q)
+iDFF_25
+v(Xc499_clk_ipFF.iDFF_25:Q)
+iDFF_26
+v(Xc499_clk_ipFF.iDFF_26:Q)
+iDFF_27
+v(Xc499_clk_ipFF.iDFF_27:Q)
+iDFF_28
+v(Xc499_clk_ipFF.iDFF_28:Q)
+iDFF_29
+v(Xc499_clk_ipFF.iDFF_29:Q)
+iDFF_30
+v(Xc499_clk_ipFF.iDFF_30:Q)
+iDFF_31
+v(Xc499_clk_ipFF.iDFF_31:Q)
+iDFF_32
+v(Xc499_clk_ipFF.iDFF_32:Q)
+iDFF_33
+v(Xc499_clk_ipFF.iDFF_33:Q)
+iDFF_34
+v(Xc499_clk_ipFF.iDFF_34:Q)
+iDFF_35
+v(Xc499_clk_ipFF.iDFF_35:Q)
+iDFF_36
+v(Xc499_clk_ipFF.iDFF_36:Q)
+iDFF_37
+v(Xc499_clk_ipFF.iDFF_37:Q)
+iDFF_38
+v(Xc499_clk_ipFF.iDFF_38:Q)
+iDFF_39
+v(Xc499_clk_ipFF.iDFF_39:Q)
+iDFF_40
+v(Xc499_clk_ipFF.iDFF_40:Q)
+iDFF_41
+v(Xc499_clk_ipFF.iDFF_41:Q)
+DFF_1
+v(Xc499_clk_ipFF.DFF_1:Q)
+DFF_2
+v(Xc499_clk_ipFF.DFF_2:Q)
+DFF_3
+v(Xc499_clk_ipFF.DFF_3:Q)
+DFF_4
+v(Xc499_clk_ipFF.DFF_4:Q)
+DFF_5
+v(Xc499_clk_ipFF.DFF_5:Q)
+DFF_6
+v(Xc499_clk_ipFF.DFF_6:Q)
+DFF_7
+v(Xc499_clk_ipFF.DFF_7:Q)
+DFF_8
+v(Xc499_clk_ipFF.DFF_8:Q)
+DFF_9
+v(Xc499_clk_ipFF.DFF_9:Q)
+DFF_10
+v(Xc499_clk_ipFF.DFF_10:Q)
+DFF_11
+v(Xc499_clk_ipFF.DFF_11:Q)
+DFF_12
+v(Xc499_clk_ipFF.DFF_12:Q)
+DFF_13
+v(Xc499_clk_ipFF.DFF_13:Q)
+DFF_14
+v(Xc499_clk_ipFF.DFF_14:Q)
+DFF_15
+v(Xc499_clk_ipFF.DFF_15:Q)
+DFF_16
+v(Xc499_clk_ipFF.DFF_16:Q)
+DFF_17
+v(Xc499_clk_ipFF.DFF_17:Q)
+DFF_18
+v(Xc499_clk_ipFF.DFF_18:Q)
+DFF_19
+v(Xc499_clk_ipFF.DFF_19:Q)
+DFF_20
+v(Xc499_clk_ipFF.DFF_20:Q)
+DFF_21
+v(Xc499_clk_ipFF.DFF_21:Q)
+DFF_22
+v(Xc499_clk_ipFF.DFF_22:Q)
+DFF_23
+v(Xc499_clk_ipFF.DFF_23:Q)
+DFF_24
+v(Xc499_clk_ipFF.DFF_24:Q)
+DFF_25
+v(Xc499_clk_ipFF.DFF_25:Q)
+DFF_26
+v(Xc499_clk_ipFF.DFF_26:Q)
+DFF_27
+v(Xc499_clk_ipFF.DFF_27:Q)
+DFF_28
+v(Xc499_clk_ipFF.DFF_28:Q)
+DFF_29
+v(Xc499_clk_ipFF.DFF_29:Q)
+DFF_30
+v(Xc499_clk_ipFF.DFF_30:Q)
+DFF_31
+v(Xc499_clk_ipFF.DFF_31:Q)
+DFF_32
+v(Xc499_clk_ipFF.DFF_32:Q)
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+qreg value is 1
+	********control statement written in the spice file
+
+ SPICE FILE written named reference_spice.sp
+
+***********Generated the jobscript.txt file in the current working directory.***********
+
+
+***********This script will, by default execute python_utility_step2_yuva.py when copied to the Pune CDAC cluster through the job queue..***********
+
+***Done modifying the spice file to make it simulatable. File available in current directory reference_spice.sp
+

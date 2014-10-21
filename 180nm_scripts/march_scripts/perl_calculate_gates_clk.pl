@@ -73,7 +73,7 @@ END
 #  check for missing/extra arguments and show usage
 
 GetOptions( "s|spice=s"=>\$spc,
-	   
+	    "l|lib=s"=>\$lib,
 	    "r|ref=s"=>\$ref,
 	     "m|module=s"=>\$module,
 	    "f|folder=s"=>\$folder,
@@ -86,7 +86,7 @@ if ($help) {
   exit(0);
 }
 
-if ($#ARGV >= 0 || $ref eq "" || $spc eq ""|| $module eq ""|| $folder eq "") {
+if ($#ARGV >= 0 || $ref eq "" || $spc eq ""|| $lib eq "" || $module eq ""|| $folder eq "") {
   print STDERR "-E- Found missing/excess arguments\n";
   printErrMessage();
   exit(1);

@@ -1,0 +1,161 @@
+
+
+  Cadence Extraction QRC - Parasitic Extractor - Version 8.1.5-p014 Mon Aug
+16 19:43:08 PDT 2010
+---------------------------------------------------------------------------------------------------
+                            Copyright 2010 Cadence Design Systems, Inc.
+
+
+WARNING (EXTQRCXOPT-140) : At line 25 of file
+/home/users/nanditha/Documents/utility/180nm/c499/qrc_dspf.cmd :
+The "output_db -type dspf -compressed" option has been turned off because
+it is in conflict with the "output_setup -compressed" option.  The former
+will be obsolete in the future release.  Use the "output_setup -compressed"
+option to set compression setting. 
+
+INFO (EXTGRMP-102) : Starting at 2014-Oct-21 16:22:15 (2014-Oct-21 10:52:15 GMT).
+Running binary as: 
+ /cad/cadence/EXT81/tools.lnx86/extraction/bin/32bit/qrc -cmd
+./__qrc.qrc_dspf.cmd
+/home/users/nanditha/Documents/utility/180nm/c499/pnr/op_data/c499_clk_ipFF_final.def.gz
+ 
+
+INFO (EXTHPY-168) : Input stage started at Tue Oct 21 16:22:15 2014.
+
+
+INFO (EXTGRMP-158) : Opening cell library:
+/cad/digital/rtl2gds/rtl2gds_install/LIB/lib/tsmc018/fireIce/libgen_lef.cl
+
+INFO (EXTGRMP-160) : Reading technology data from cell library.
+
+INFO (EXTGRMP-205) : Reading DEF file:
+/home/users/nanditha/Documents/utility/180nm/c499/pnr/op_data/c499_clk_ipFF_final.def.gz
+
+INFO (EXTGRMP-195) : Line 56: reading VIAS section.  Expecting 12.
+
+INFO (EXTGRMP-195) : Line 155: reading COMPONENTS section.  Expecting 1473.
+
+INFO (EXTGRMP-208) : Reading cell definitions from cell library.
+
+WARNING (EXTGRMP-186) : Gray-box mode was selected for extraction, but 11
+macro definitions did not
+include any gray data.  The first 10 were:
+ INVX8 INVX2 XNOR2X1 NAND2X1 XOR2X1 AND2X1 NAND3X1 NOR2X1 OAI21X1 DFFPOSX1
+Check the library inputs and log files from library setup to determine
+whether there is a problem.
+
+WARNING (EXTGRMP-184) : Gray-box mode was selected for extraction, but 6
+macro definitions did not
+include any obstruction data.  The first 6 were:
+ INVX8 INVX2 NAND2X1 NAND3X1 NOR2X1 FILL
+Check the library inputs and log files from library setup to determine
+whether there is a problem.
+
+INFO (EXTGRMP-195) : Line 3104: reading PINS section.  Expecting 74.
+
+INFO (EXTGRMP-195) : Line 3329: reading SPECIALNETS section.  Expecting 2.
+
+INFO (EXTGRMP-195) : Line 3691: reading NETS section.  Expecting 303.
+
+INFO (EXTGRMP-248) : METAL FILL data is not available in DEF file.
+
+INFO (EXTGRMP-207) : Reading DEF file completed successfully.
+
+INFO (EXTGRMP-292) : Checking Command/Tech/License Files. 
+
+INFO (EXTGRMP-281) : Manufacturing Data Information :- 
+  DEF/GDS file 
+    does NOT contain MetalFill data. 
+  Techfile  
+    does NOT contain WEE data.     
+    does NOT contain Erosion data t=f( density ) 
+    does NOT contain R(w) data.    
+    does NOT contain R(w, s) data.  
+    does NOT contain TC(w) data.    
+    does NOT contain T/B enlargement data. 
+    does NOT contain Floating Metal Fill models. 
+    does NOT contain WBE data. 
+
+
+INFO (EXTHPY-170) : Input stage completed successfully at Tue Oct 21 16:22:15 2014.
+
+INFO (EXTHPY-171) : Resistance extraction started at Tue Oct 21 16:22:15 2014.
+
+
+INFO (EXTGRMP-371) : Reference temperature is not available in the techfile
+for the process !
+
+
+INFO (EXTGRMP-211) : Reading geometric data from DEF file:
+/home/users/nanditha/Documents/utility/180nm/c499/pnr/op_data/c499_clk_ipFF_final.def.gz
+
+INFO (EXTGRMP-196) : reading PINS section.  Expecting 74.
+
+INFO (EXTGRMP-196) : reading SPECIALNETS section.  Expecting 2.
+
+INFO (EXTGRMP-196) : reading NETS section.  Expecting 303.
+
+INFO (EXTHPY-101) : Initializing gray data from all cell instances for
+capacitance extraction.
+
+INFO (EXTHPY-102) : Processing of gray data completed successfully.
+
+INFO (EXTHPY-156) : Gray pins that are touching or overlapping extracted
+nets will be treated
+as gray data during extraction.
+
+INFO (EXTGRMP-213) : Reading geometric data from DEF completed
+successfully.
+
+
+INFO (EXTHPY-172) : Resistance extraction completed successfully at Tue Oct 21 16:22:16 2014.
+
+INFO (EXTHPY-173) : Capacitance extraction started at Tue Oct 21 16:22:16 2014. 
+
+
+INFO (EXTHPY-103) : Extracting capacitance values.
+
+
+INFO (EXTHPY-174) : Capacitance extraction completed successfully at Tue Oct 21 16:22:17 2014.
+
+INFO (EXTHPY-175) : Output generation started at Tue Oct 21 16:22:17 2014.
+
+
+INFO (EXTGRMP-216) : Computing reduced RC network and writing output.
+
+
+INFO (EXTHPY-176) : Output generation completed successfully at Tue Oct 21 16:22:18 2014.
+
+INFO (EXTHPY-190) : Final post-processing started at Tue Oct 21 16:22:18 2014.
+
+
+
+INFO (EXTHPY-191) : Final post-processing completed successfully at Tue Oct 21 16:22:19 2014.
+
+Ending at 2014-Oct-21 16:22:19 (2014-Oct-21 10:52:19 GMT).
+
+ Tool:                  Cadence Extraction QRC
+ Version:               8.1.5-p014 Mon Aug 16 19:43:08 PDT 2010
+ IR Build No:           12535 
+ Techfile:              /home/users/nanditha/tmp/_auto_qrc_tech/qrcTechFile
+; version: 3.1.3d 
+ License(s) used:       1 of Virtuoso_QRC_Extraction_XL 
+ User Name:             nanditha
+ Host Name:             vlsi28.ee.iitb.ac.in
+ Host OS Release:       Linux 2.6.18-348.6.1.el5
+ Host OS Version:       #1 SMP Fri Apr 26 09:21:26 EDT 2013
+ Run duration:          00:00:00 CPU time, 00:00:04 clock time
+ Max memory used:       142 MB
+ Max runtime disk used: 0 MB
+ Number of processes:   1
+ Nets/hour:             1090K nets/CPU-hr, 272K nets/clock-hr
+ Design data:
+    Components:         1474
+    Nets:               303
+    Unconnected pins:   0
+ Warning messages:      2
+ Error messages:        0
+
+Exit code 0.
+Cadence Extraction QRC completed successfully at 2014-Oct-21 16:22:19
+(2014-Oct-21 10:52:19 GMT).
