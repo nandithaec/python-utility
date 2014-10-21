@@ -1,7 +1,7 @@
 
 #!/usr/bin/env python
 
-
+#Created a parameter scripts_path - Oct 20 2014
 #Created a time0 spice_rtl_difference file will check the initial condition that is obtained vs expected- so that we can check if there is some error - July 2014
 #Modified the GNU_Parallel_hspice file to check if any deck is simulated using 'pseudo-transient method' - July 9th 2014
 #Creating multiple RTL.csv and RTL_2ndedge.csv files- as many as there are number of outer loops: June 15 2014
@@ -164,15 +164,14 @@ print "\nClk_period: ", clk_period
 ##This is to write out the processor nodes in a file, to be used by GNU Parallel later
 os.system('cat $PBS_NODEFILE > %s/nodes.txt' %path)
 print "PBS NODEFILE contents....written to nodes.txt\n"
-time.sleep(3)
+#time.sleep(3)
 
-ffg = open('%s/sshmachines.txt' %(path), 'w')
 
-os.system('python %s/python_ssh_addr_yuva.py -p %s' %(scripts_path,path))
+os.system('python %s/python_ssh_addr_yuva_65.py -p %s' %(scripts_path,path))
 os.system('cat %s/sshmachines.txt' %path)
 print "Check contents of sshmachines.txt file....\n"
-time.sleep(10)
-ffg.close()
+#time.sleep(10)
+
 
 ######################################################################################################
 

@@ -532,12 +532,22 @@ if (os.path.isdir('%s/spice_results' %(path))):
 	print"\nNumber of captured flips due to gate strike is:",gate_glitch_captured
 	print"\nNumber of Multiple captured flips amongst the captured flips:",gate_glitch_captured_multiple
 	prob_gate_strike=(float(gate_csv_rows)/float(total_csv_rows))
-	prob_gate_no_effect=(float(gate_no_effect)/float(gate_csv_rows))
-	prob_gate_glitch_captured=(float(gate_glitch_captured)/float(gate_csv_rows))
-	prob_gate_FN=(float(gate_strange_FN)/float(gate_csv_rows))
-	prob_gate_FF=(float(gate_strange_FF)/float(gate_csv_rows))
 
-	prob_gate_atleast_1flip= float(gate_atleast_1_flip)/float(gate_csv_rows)
+	if gate_csv_rows>0:
+		prob_gate_no_effect=(float(gate_no_effect)/float(gate_csv_rows))
+		prob_gate_glitch_captured=(float(gate_glitch_captured)/float(gate_csv_rows))
+		prob_gate_FN=(float(gate_strange_FN)/float(gate_csv_rows))
+		prob_gate_FF=(float(gate_strange_FF)/float(gate_csv_rows))
+		prob_gate_atleast_1flip= float(gate_atleast_1_flip)/float(gate_csv_rows)
+
+	else:
+		prob_gate_no_effect=0.0
+		prob_gate_glitch_captured=0.0
+		prob_gate_FN=0.0
+		prob_gate_FF=0.0
+		prob_gate_atleast_1flip=0.0
+
+
 	if (gate_atleast_1_flip >1) :
 		prob_gate_multiple_conditional= float(gate_multiple_flips)/float(gate_atleast_1_flip)
 	else:

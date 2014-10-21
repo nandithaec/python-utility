@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 #Modification summary:
+#Added few if conditions to solve zero division error: Oct 18 2014
 #Checking for DFP or DFF: to suit both 180nm and 65nm. 'DFPQX wont work for 65nm since there are FFs with 'DFPQNX', 'DFPHQNX' etc: June 27 2014
 #Modified DFFPOSX1 to DFPQX to suit the 65nm requirement: 25/4/2014
 #Changed the column iteration number for header from range(5) to range(6), since the drain number is also added: Feb 11 2014

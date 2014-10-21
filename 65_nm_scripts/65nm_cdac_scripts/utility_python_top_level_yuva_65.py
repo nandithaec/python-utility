@@ -1,12 +1,17 @@
 #!/usr/bin/env python
 
-#Example usage: python utility_python_top_level_yuva_65.py -p /home/users/nanditha/Documents/utility/65nm/b03 --rtl=/home/users/nanditha/Documents/utility/65nm/b03/b03.vhd --mod=b03 --test=/home/users/nanditha/Documents/utility/65nm/b03/test_b03.vhd --tb_mod=test_b03 --clk=400 --run=100us --design=b03 --tech=65 --num=10 --group 10 --extl=/home/external/iitb/nanditha/simulations/65nm/b03  --proc_node 1 --ppn 5 --days 00 --hrs 00 --mins 10 --script python_utility2_ngspice_yuva_65.py 
+#Example usage: python utility_python_top_level_yuva_65.py -p /home/users/nanditha/Documents/utility/65nm/b13 --rtl=/home/users/nanditha/Documents/utility/65nm/b13/b13.vhd --mod=b13 --test=/home/users/nanditha/Documents/utility/65nm/b13/test_b13.vhd --tb_mod=test_b13 --clk=350 --run=100us --design=b13 --tech=65 --num=10 --group 10 --extl=/home/external/iitb/nanditha/simulations/65nm/b13  --proc_node 1 --ppn 5 --days 00 --hrs 00 --mins 10 --script python_utility2_ngspice_yuva_65.py --scripts_path /home/external/iitb/nanditha/simulations/65nm/scripts_run
 
 
-#Example usage: python utility_python_top_level_yuva_65.py -p /home/users/nanditha/Documents/utility/65nm/c1355 --rtl=/home/users/nanditha/Documents/utility/65nm/c1355/c1355_clk_ipFF.v --mod=c1355_clk_ipFF --test=/home/users/nanditha/Documents/utility/65nm/c1355/test_c1355.v --tb_mod=test_c1355 --clk=350 --run=100us --design=c1355 --tech=65 --num=10 --group 10 --extl=/home/external/iitb/nanditha/simulations/65nm/c1355  --proc_node 1 --ppn 5 --days 00 --hrs 00 --mins 3 --script python_utility2_ngspice_yuva_65.py
+#Example usage: python utility_python_top_level_yuva_65.py -p /home/users/nanditha/Documents/utility/65nm/LFSR --rtl=/home/users/nanditha/Documents/utility/65nm/LFSR/lfsr.vhd --mod=lfsr --test=/home/users/nanditha/Documents/utility/65nm/LFSR/test_lfsr.vhd --tb_mod=lfsr_tb --clk=400 --run=100us --design=LFSR --tech=65 --num=10 --group 10 --extl=/home/external/iitb/nanditha/simulations/65nm/LFSR  --proc_node 1 --ppn 5 --days 00 --hrs 00 --mins 10 --script python_utility2_ngspice_yuva_65.py  --scripts_path /home/external/iitb/nanditha/simulations/65nm/scripts_run
+
+
+#Example usage: python utility_python_top_level_yuva_65.py -p /home/users/nanditha/Documents/utility/65nm/c1908 --rtl=/home/users/nanditha/Documents/utility/65nm/c1908/c1908_clk_ipFF.v --mod=c1908_clk_ipFF --test=/home/users/nanditha/Documents/utility/65nm/c1908/test_c1908.v --tb_mod=test_c1908 --clk=350 --run=100us --design=c1908 --tech=65 --num=10 --group 10 --extl=/home/external/iitb/nanditha/simulations/65nm/c1908  --proc_node 1 --ppn 5 --days 00 --hrs 00 --mins 3 --script python_utility2_ngspice_yuva_65.py --scripts_path /home/external/iitb/nanditha/simulations/65nm/scripts_run
 
 
 #Modifications to the script:
+#Created a parameter scripts_path - Oct 20 2014
+
 #The .ic for the different types of flipf-flops is currently being done manually in the reference.sp file. The flip-flops and its corresponding initialisation nodes are written in the help of NetLstfrmt.pl script
 
 #Absolute paths introduced everywhere in the script, so that they can be run from one directory and no need of duplicating the scripts in all directories: June 25 2014
@@ -55,6 +60,7 @@ parser.add_option("--days",dest='days', help='Enter the walltime- number of days
 parser.add_option("--hrs",dest='hrs', help='Enter the walltime- number of hours. If it does not take >1 hour, enter 00')
 parser.add_option("--mins",dest='mins', help='Enter the walltime- number of minutes in addition to the num of hrs. If nothing to enter, enter 00')
 parser.add_option("--script",dest='script', help='Enter the name of the python script to be executed on the Pune CDAC cluster, which will be submitted to the job queue. Enter the file extension (.py) as well')
+parser.add_option("-e", "--scripts_path", dest="scripts_path",help="Enter the ENTIRE path to your scripts folder on cdac machine.")
 #########################################################################
 
 #This is the most important line which will parse the cmd line arguments
@@ -84,6 +90,7 @@ days=options.days
 hrs=options.hrs
 mins=options.mins
 script=options.script
+scripts_path=options.scripts_path
 
 
 #Example usage: python python1_read_RTL_syn_pnr.py -f decoder.vhd -m decoder_behav_pnr -clk 900
@@ -93,13 +100,13 @@ print('Done 1st script rtl+pnr\n')
 #time.sleep(5)
 
 
-#Example usage: perl perl2_outwrtr.pl -v pnr/op_data/decoder_behav_pnr_final.v -m decoder_behav_pnr
+
 os.system('perl perl_write_simfile_65.pl -v %s/pnr/op_data/%s_final.v -m %s -p %s' %(main_path,module,module,main_path))
 
 print('Done creating modelsim simulation file\n')
 time.sleep(2)
 
-##Example usage: python python3_create_simdo_vsim.py -rtl decoder_behav_pnr_modelsim.v -tb test_decoder_pnr.vhd -tb_mod t_decoder_pnr -time 1us
+
 os.system('python python_create_simdo_vsim_65.py -v %s/%s_modelsim.v -t %s -b %s -r %s -p %s' %(main_path,module,test_path,test_module,runtime,main_path))
 
 print('Done modelsim simulation\n')
@@ -110,6 +117,8 @@ time.sleep(2)
 ##will show one instance per line (no + continuation of subckt)
 os.system('python python_gnd_gnds_dspf_modify.py -p %s -m %s' %(main_path,module))
 time.sleep(5)
+
+
 
 #Select only those library cells that are present in the design and copy them to a different lib file. 
 #This is done to reduce the lib file size (reduces simulation time)
@@ -132,5 +141,5 @@ os.system('perl perl_spice_netlist_format_noR_65.pl -v %s/%s_modelsim.v  -s %s/p
 print "***Done modifying the spice file to make it simulatable. File available in current directory reference_spice.sp\n"
 time.sleep(5)
 
-os.system('python python_create_jobscript_65.py -m %s -p %s -d %s -t %s -n %s --group %s --clk %s --proc_node %s --ppn %s --days %s --hrs %s --mins %s --script %s --path_here %s' %(module,extl_folder,design_folder,techn,num,group,clkfreq,nodes,ppn,days,hrs,mins,script,main_path))
+os.system('python python_create_jobscript_65.py -m %s -p %s -d %s -t %s -n %s --group %s --clk %s --proc_node %s --ppn %s --days %s --hrs %s --mins %s --script %s --path_here %s --scripts_path %s' %(module,extl_folder,design_folder,techn,num,group,clkfreq,nodes,ppn,days,hrs,mins,script,main_path,scripts_path))
 

@@ -1,10 +1,10 @@
-#Example: perl perl_glitchLibGen_65.pl   -p /home/users/nanditha/Documents/utility/65nm/b12 -i CORE65GPSVT_selected_lib_WL_ad_withR.sp
+#Example: perl perl_glitchLibGen_65.pl -p /home/users/nanditha/Documents/utility/65nm/b03 -i CORE65GPSVT_selected_lib_vg.sp
 
 #!/usr/bin/perl
 
 
 #Modifications:
-
+#The condition of distinct drains is removed: (($dlist=~m/$drain/) is deleted : Oct 20 2014
 #Modified the script to inject +ve current for PMOS and -ve current for NMOS. Also, PMOS current magnitude will be 1/3rd as that of NMOS: Aug 12 2014
 #Writing glitch_CORE65GPSVT_selected_lib_vgRC.sp instead of glitch_CORE65GPSVT_selected_lib_vg.sp - Jul 9 2014
 #Absolute paths introduced everywhere in the script, so that they can be run from one directory and no need of duplicating the scripts in all directories: June 25 2014
@@ -135,11 +135,12 @@ while(<NET>)
      
        $sub_ckt[$index++]=$_;
        if($_=~m/.SUBCKT/)
-         { print "Inside if\n";
+         { print "\nInside if\n";
 	   ($temp,$sub_ckt_name)=split(" ",$_);
 	   print "temp is $temp \n";
    	   print "subckt name is $sub_ckt_name \n";  
    	   $nth= (split " ", $_)[3]; 
+   	   print "nth is $nth \n";
 	 }
      }
 #creating the glitched version of a subcircuit and writing it to output file
@@ -152,8 +153,10 @@ while(<NET>)
 	   print out "\n******************************* ORIGINAL SUBCIRCUIT : $sub_ckt_name ******************************* \n\n";
    	  	print "orig subckt\n";
 	   print out join("",@sub_ckt);
+	   #print "printed join("",@sub_ckt);
 	   $head=shift (@sub_ckt);
            $tail=pop (@sub_ckt);  
+           print "head is $head, tail is $tail\n";
 	  # print "Working on subcircuit : $sub_ckt_num :$sub_ckt_name \n";
 #obtaining the distinct drain of the subcircuit
            foreach $i (0 .. $#sub_ckt)
@@ -183,7 +186,7 @@ while(<NET>)
 	  	   	print "AD/ad drain area: $drain_area \n";
 	             	             	
 	             	
-		     if(!(($dlist=~m/$drain/)||($drain=~m/gnd/)||($drain=~m/vdd/i)))
+		     if(!(($drain=~m/gnd/)||($drain=~m/vdd/i))) #($dlist=~m/$drain/)||
 		       {			                   
 			$dlist.=" $drain";
 		        $drain_num++;

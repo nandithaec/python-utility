@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
 #Modification summary:
+
+#Added few if conditions to solve zero division error: Oct 18 2014
 #Changed the cases and classification. At 2nd edge, any FF flip either input or output is considered as the same. Similarly for the 3rd edge. : feb 12 2014
 #Changed the column iteration number for header from range(5) to range(6), since the drain number is also added: Feb 11 2014
 

@@ -66,7 +66,7 @@ print "current working dir: ",os.getcwd()
 scripts_dir=os.getcwd()
 
 
-os.system('python %s/python_subckts_in_weight_script.py -m %s -p %s' %(scripts_path,module,path))
+os.system('python %s/python_subckts_in_weight_script.py -m %s -p %s --scripts %s' %(scripts_path,module,path,scripts_path))
 
 if os.path.exists('%s/spice_results' %path):
 	os.chdir('%s/spice_results' %path)

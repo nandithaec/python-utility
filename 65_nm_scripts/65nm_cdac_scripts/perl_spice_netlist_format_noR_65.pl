@@ -6,6 +6,7 @@
 #clk frequency in MHz
 
 #Modifications:
+#updated all .ic statements with new initialisation node names. DFPQX4 and DFPQX9 have different .ic node names- Oct 20 2014
 #.ic statements modified- to include different initialisation node names, since now there are no resistors- Oct 18 2014
 #Automated the flip-flop type selection in meas statements and module instantiation of .ic statement (q_reg) for ISCAS and non-ISCAS benchmarks: Oct 15 2014 
 #'Q' and 'QN' nodes in meas tran statements have been automated: Oct 15 2014
@@ -18,10 +19,11 @@
 
 #Initialisation nodes
 
+#.ic on net0148:F59 (M25 source) and net0148:F65 (M29 drain) of the DFPQX4 and DFPQX9 to initialise correctly. This value should be the inverted value of what was supposed to be initialised originally.: April 2nd 2014
 # (net0139:F125)-M28 drain and M31 drain for HS65_GS_DFPQNX9,
 # net0139:F163 (M28 drain) and net0139:F95 (M31 drain) for DFPHQNX9
 # net0238:F149 (M24 source) for DFPHQX9. June 23 2014
-#.ic on net0148:F59 (M25 source) and net0148:F65 (M29 drain) of the DFPQX4 and DFPQX9 to initialise correctly. This value should be the inverted value of what was supposed to be initialised originally.: April 2nd 2014
+
 
 #rise and fall edge measurements limitedto 50ps duration. Else false values were being calculated: April 25 2014
 
@@ -635,7 +637,7 @@ foreach $i(0 .. $#to_ff)
  	
  	$ff_obtained=$ff_types[$i];
  
-	if ($ff_obtained =~ m/(HS65_GS_DFPQX4|HS65_GS_DFPQX9)/)
+	if ($ff_obtained =~ m/(HS65_GS_DFPQX4)/)
 	{
 		if ($qreg==1)
 		{
@@ -647,6 +649,22 @@ foreach $i(0 .. $#to_ff)
 		{
 		print "1. Obtained DFF name is $ff_obtained\n";
 		print SIM ".ic v(X$module.X$to_ff[$i].AR64)= ##$new\_reference_1_neg##\n";
+		#print SIM ".ic v(X$module.X$to_ff[$i].net0148:F65)= ##$new\_reference_1_neg##\n\n";
+		}
+	}
+	
+	elsif ($ff_obtained =~ m/(HS65_GS_DFPQX9)/)
+	{
+		if ($qreg==1)
+		{
+		print "1. Obtained DFF name is $ff_obtained\n";
+		print SIM ".ic v(X$module.X$to_ff[$i]\_q\_reg.AR64)= ##$new\_reference_1_neg##\n";
+		#print SIM ".ic v(X$module.X$to_ff[$i]\_q\_reg.net0148:F65)= ##$new\_reference_1_neg##\n\n";
+		}
+		else
+		{
+		print "1. Obtained DFF name is $ff_obtained\n";
+		print SIM ".ic v(X$module.X$to_ff[$i].AR50)= ##$new\_reference_1_neg##\n";
 		#print SIM ".ic v(X$module.X$to_ff[$i].net0148:F65)= ##$new\_reference_1_neg##\n\n";
 		}
 	}
@@ -673,14 +691,14 @@ foreach $i(0 .. $#to_ff)
 		if ($qreg==1)
 		{
 		print "3. Obtained DFF name is $ff_obtained\n";
-		print SIM ".ic v(X$module.X$to_ff[$i]\_q\_reg.net0139:F163)= ##$new\_reference_1_neg##\n";
-		print SIM ".ic v(X$module.X$to_ff[$i]\_q\_reg.net0139:F95)= ##$new\_reference_1_neg##\n\n";
+		print SIM ".ic v(X$module.X$to_ff[$i]\_q\_reg.AR165)= ##$new\_reference_1_neg##\n";
+		#print SIM ".ic v(X$module.X$to_ff[$i]\_q\_reg.net0139:F95)= ##$new\_reference_1_neg##\n\n";
 		}
 		else
 		{
 		print "3. Obtained DFF name is $ff_obtained\n";
-		print SIM ".ic v(X$module.X$to_ff[$i].net0139:F163)= ##$new\_reference_1_neg##\n";
-		print SIM ".ic v(X$module.X$to_ff[$i].net0139:F95)= ##$new\_reference_1_neg##\n\n";
+		print SIM ".ic v(X$module.X$to_ff[$i].AR165)= ##$new\_reference_1_neg##\n";
+		#print SIM ".ic v(X$module.X$to_ff[$i].net0139:F95)= ##$new\_reference_1_neg##\n\n";
 		}
 		
 	}
@@ -690,12 +708,12 @@ foreach $i(0 .. $#to_ff)
 		if ($qreg==1)
 		{
 		print "4. Obtained DFF name is $ff_obtained\n";
-		print SIM ".ic v(X$module.X$to_ff[$i]\_q\_reg.net0238:F149)= ##$new\_reference_1_neg##\n\n";
+		print SIM ".ic v(X$module.X$to_ff[$i]\_q\_reg.AR51)= ##$new\_reference_1_neg##\n\n";
 		}
 		else
 		{
 		print "4. Obtained DFF name is $ff_obtained\n";
-		print SIM ".ic v(X$module.X$to_ff[$i].net0238:F149)= ##$new\_reference_1_neg##\n\n";
+		print SIM ".ic v(X$module.X$to_ff[$i].AR51)= ##$new\_reference_1_neg##\n\n";
 		}
 		
 	}
