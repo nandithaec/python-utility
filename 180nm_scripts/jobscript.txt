@@ -1,0 +1,22 @@
+###############################################################
+#!/bin/bash
+#PBS -l nodes=1:ppn=4
+#PBS -l walltime=00:00:4:00 
+#PBS -q batch
+#PBS -m bae  
+## Comma separated list of email address and mobile numbers 
+##PBS -M nanditha@ee.iitb.ac.in, 9769834234
+#PBS -r n 
+#PBS -V 
+##PBS -A <Project Name> # Account to be charged/debited
+export I_MPI_JOB_CONTEXT=$PBS_JOBID
+echo PBS JOB id is $PBS_JOBID
+echo PBS_NODEFILE is $PBS_NODEFILE 
+echo PBS_QUEUE is $PBS_QUEUE 
+NPROCS=`wc -l < $PBS_NODEFILE` 
+echo NPROCS is $NPROCS 
+cd $PBS_O_WORKDIR 
+###PBS -e /home/external/iitb/nanditha/simulations/180nm/c499/error.txt
+###PBS -o /home/external/iitb/nanditha/simulations/180nm/c499/outfile.txt
+python /home/external/iitb/nanditha/simulations/180nm/scripts_run/python_utility_step2_yuva.py -m c499_clk_ipFF -p /home/external/iitb/nanditha/simulations/180nm/c499 -d c499 -t 180 -n 4 --group 4 --clk 250 --scripts_path /home/external/iitb/nanditha/simulations/180nm/scripts_run >/dev/null 2&>1
+###############################################################

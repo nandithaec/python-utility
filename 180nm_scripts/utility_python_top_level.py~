@@ -77,7 +77,7 @@ hrs=options.hrs
 mins=options.mins
 script=options.script
 scripts_path=options.scripts_path
-
+"""
 #Example usage: python python1_read_RTL_syn_pnr.py -f decoder.vhd -m decoder_behav_pnr -clk 900
 os.system('python python_read_RTL_syn_pnr.py -f %s -m %s -c %s -p %s' %(rtl,module,clkfreq,main_path))
 
@@ -109,7 +109,7 @@ time.sleep(5)
 os.system('perl perl_glitchLibGen.pl -i osu018_stdcells_correct_vdd_gnd.sp -p %s' %(main_path))
 print "***Created glitch library..\n"
 time.sleep(5)
-
+"""
 ##Generate a template simulatable spice netlist from the dspf file generated after pnr. This would include all .ic, Voltage sources, meas, tran, control, param etc
 #NetlistFormat.pl
 #perl NetlstFrmt.pl -v decoder_behav_pnr_modelsim.v -s pnr/op_data/decoder_behav_pnr_final.dspf -l glitch_osu018_stdcells_correct_allcells.sp -c 1e9 -t 180 -m decoder_behav_pnr
