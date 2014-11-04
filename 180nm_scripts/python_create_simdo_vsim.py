@@ -93,7 +93,7 @@ fw1.write('\\rm -rf %s/work\n' %path)
 #fw1.write('vsim -c -do simulate_vsim.do >vsim.log\n')
 
 #Run simulation, invoke modelsim
-fw1.write('vsim -do %s/simulate_vsim.do \n' %path)
+fw1.write('vsim -c -do %s/simulate_vsim.do \n' %path)
 
 
 

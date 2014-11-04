@@ -4,7 +4,8 @@
 #Example usage: python utility_python_top_level.py -p /home/users/nanditha/Documents/utility/180nm/b11 --rtl=/home/users/nanditha/Documents/utility/180nm/b11/b11.vhd --mod=b11 --test=/home/users/nanditha/Documents/utility/180nm/b11/test_b11.vhd --tb_mod=test_b11 --clk=250 --run=100us --design=b11 --tech=180 --num=4 --group 4 --extl=/home/external/iitb/nanditha/simulations/180nm/b11  --proc_node 1 --ppn 4 --days 00 --hrs 00 --mins 4 --script python_utility_step2_yuva.py --scripts_path /home/external/iitb/nanditha/simulations/180nm/scripts_run
 
 
-#Example usage: python utility_python_top_level.py -p /home/users/nanditha/Documents/utility/180nm/c499 --rtl=/home/users/nanditha/Documents/utility/180nm/c499/c499_clk_ipFF.v --mod=c499_clk_ipFF --test=/home/users/nanditha/Documents/utility/180nm/c499/test_c499.v --tb_mod=test_c499 --clk=250 --run=100us --design=c499 --tech=180 --num=4 --group 4 --extl=/home/external/iitb/nanditha/simulations/180nm/c499  --proc_node 1 --ppn 4 --days 00 --hrs 00 --mins 4 --script python_utility_step2_yuva.py --scripts_path /home/external/iitb/nanditha/simulations/180nm/scripts_run
+#Example usage: python utility_python_top_level.py -p /home/users/nanditha/Documents/utility/180nm/c880 --rtl=/home/users/nanditha/Documents/utility/180nm/c880/c880_clk_ipFF.v --mod=c880_clk_ipFF --test=/home/users/nanditha/Documents/utility/180nm/c880/test_c880.v --tb_mod=test_c880 --clk=250 --run=100us --design=c880 --tech=180 --num=4 --group 4 --extl=/home/external/iitb/nanditha/simulations/180nm/c880  --proc_node 1 --ppn 4 --days 00 --hrs 00 --mins 6 --script python_utility_step2_yuva.py --scripts_path /home/external/iitb/nanditha/simulations/180nm/scripts_run
+
 
 
 
