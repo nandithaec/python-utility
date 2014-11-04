@@ -15,12 +15,14 @@ Modify the parameters in the jobscript.txt. Before launching thousands of jobs, 
 
 Changes done to scripts:
 
+perl_spice_netlist_format_noR_65.pl script updated- .ic statements: Oct 24 2014 
+
 utility_python_top_level_yuva_65.py: #Created a parameter scripts_path - Oct 20 2014
 python_utility2_ngspice_yuva_65.py: #Created a parameter scripts_path - Oct 20 2014
 
 perl_glitchLibGen_65.pl: #The condition of distinct drains is removed: (($dlist=~m/$drain/) is deleted : Oct 20 2014
 
-perl_spice_netlist_format_noR_65.pl script is created: #updated all .ic statements with new initialisation node names. DFPQX4 and DFPQX9 have different .ic node names- Oct 20 2014
+perl_spice_netlist_format_noR_65.pl script is updated: #updated all .ic statements with new initialisation node names. DFPQX4 and DFPQX9 have different .ic node names- Oct 20 2014
 
 python_create_jobscript_65.py: #Updated with scripts_path: Oct 20 2014
 

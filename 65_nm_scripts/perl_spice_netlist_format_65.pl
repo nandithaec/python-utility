@@ -1043,4 +1043,3 @@ print "\n SPICE FILE written named ".$sim."\n";
 
 
 
-

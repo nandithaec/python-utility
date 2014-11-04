@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-#Updated with scripts_path: Oct 20 2014
 #create a jobscript.txt file in the current directory. This entire dir will be copied to the Pune CDAC machine. The jobscript file will be used to submit the job to the queue
 
 ##Example usage: python python_create_jobscript.py -m c432_clk_opFF -p /home/external/iitb/nanditha/simulations/FF_optimisation/c432_priority_opFF -d c432_priority_opFF -t 180 -n 10 --group 10 --clk 250  --proc_node 1 --ppn 16 --days 00 --hrs 00 --mins 10 --script python_utility3_remote_seed_yuva_echo.py --path_here /home/users/nanditha/Documents/utility/65nm/c432

@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
-#Example usage: python utility_python_top_level_65.py -p /home/users/nanditha/Documents/utility/65nm/b04 --rtl=/home/users/nanditha/Documents/utility/65nm/b04/b04.vhd --mod=b04 --test=/home/users/nanditha/Documents/utility/65nm/b04/test_b04.vhd --tb_mod=test_b04 --clk=300 --run=100us --design=b04 --tech=65 --num=10 --group 10 --extl=/home/external/iitb/nanditha/simulations/65nm/b04  --proc_node 1 --ppn 5 --days 00 --hrs 00 --mins 10 --script python_utility3_yuva_2cycles_2nd_3rd_65.py 
+#Example usage: python utility_python_top_level_65.py -p /home/users/nanditha/Documents/utility/65nm/b10 --rtl=/home/users/nanditha/Documents/utility/65nm/b10/b10.vhd --mod=b10 --test=/home/users/nanditha/Documents/utility/65nm/b10/test_b10.vhd --tb_mod=test_b10 --clk=350 --run=100us --design=b10 --tech=65 --num=10 --group 10 --extl=/home/external/iitb/nanditha/simulations/65nm/b10  --proc_node 1 --ppn 5 --days 00 --hrs 00 --mins 10 --script python_utility3_yuva_2cycles_2nd_3rd_65.py 
 
 
-#Example usage: python utility_python_top_level_65.py -p /home/users/nanditha/Documents/utility/65nm/c432 --rtl=/home/users/nanditha/Documents/utility/65nm/c432/c432_clk_ipFF.v --mod=c432_clk_ipFF --test=/home/users/nanditha/Documents/utility/65nm/c432/test_c432.v --tb_mod=test_c432 --clk=350 --run=100us --design=c432 --tech=65 --num=10 --group 10 --extl=/home/external/iitb/nanditha/simulations/65nm/c432  --proc_node 1 --ppn 5 --days 00 --hrs 00 --mins 3 --script python_utility3_yuva_2cycles_2nd_3rd_65.py
+#Example usage: python utility_python_top_level_65.py -p /home/users/nanditha/Documents/utility/65nm/c1908 --rtl=/home/users/nanditha/Documents/utility/65nm/c1908/c1908_clk_ipFF.v --mod=c1908_clk_ipFF --test=/home/users/nanditha/Documents/utility/65nm/c1908/test_c1908.v --tb_mod=test_c1908 --clk=350 --run=100us --design=c1908 --tech=65 --num=10 --group 10 --extl=/home/external/iitb/nanditha/simulations/65nm/c1908  --proc_node 1 --ppn 5 --days 00 --hrs 00 --mins 3 --script python_utility3_yuva_2cycles_2nd_3rd_65.py
 
 
 #Modifications to the script:
@@ -86,20 +86,20 @@ mins=options.mins
 script=options.script
 
 
-#Example usage: python python1_read_RTL_syn_pnr.py -f decoder.vhd -m decoder_behav_pnr -clk 900
+#Example usage: python python1_read_RTL_syn_pnr.py -f c1908.vhd -m c1908_behav_pnr -clk 900
 os.system('python python_read_RTL_syn_pnr_65.py -f %s -m %s -c %s -p %s' %(rtl,module,clkfreq,main_path))
 
 print('Done 1st script rtl+pnr\n')
 #time.sleep(5)
 
 
-#Example usage: perl perl2_outwrtr.pl -v pnr/op_data/decoder_behav_pnr_final.v -m decoder_behav_pnr
+#Example usage: perl perl2_outwrtr.pl -v pnr/op_data/c1908_behav_pnr_final.v -m c1908_behav_pnr
 os.system('perl perl_write_simfile_65.pl -v %s/pnr/op_data/%s_final.v -m %s -p %s' %(main_path,module,module,main_path))
 
 print('Done creating modelsim simulation file\n')
 time.sleep(2)
 
-##Example usage: python python3_create_simdo_vsim.py -rtl decoder_behav_pnr_modelsim.v -tb test_decoder_pnr.vhd -tb_mod t_decoder_pnr -time 1us
+##Example usage: python python3_create_simdo_vsim.py -rtl c1908_behav_pnr_modelsim.v -tb test_c1908_pnr.vhd -tb_mod t_c1908_pnr -time 1us
 os.system('python python_create_simdo_vsim_65.py -v %s/%s_modelsim.v -t %s -b %s -r %s -p %s' %(main_path,module,test_path,test_module,runtime,main_path))
 
 print('Done modelsim simulation\n')
@@ -124,13 +124,13 @@ print "***Created glitch library..\n"
 time.sleep(5)
 
 
-
 ##Generate a template simulatable spice netlist from the dspf file generated after pnr. This would include all .ic, Voltage sources, meas, tran, control, param etc
 #NetlistFormat.pl
-#perl NetlstFrmt.pl -v decoder_behav_pnr_modelsim.v -s pnr/op_data/decoder_behav_pnr_final.dspf -l glitch_osu018_stdcells_correct_allcells.sp -c 1e9 -t 180 -m decoder_behav_pnr
+#perl NetlstFrmt.pl -v c1908_behav_pnr_modelsim.v -s pnr/op_data/c1908_behav_pnr_final.dspf -l glitch_osu018_stdcells_correct_allcells.sp -c 1e9 -t 180 -m c1908_behav_pnr
 os.system('perl perl_spice_netlist_format_65.pl -v %s/%s_modelsim.v  -s %s/pnr/op_data/%s_final_new.dspf  -c %s -t %s -m %s  -p %s' %(main_path,module,main_path,module,clkfreq,techn, module,main_path))
 print "***Done modifying the spice file to make it simulatable. File available in current directory reference_spice.sp\n"
 time.sleep(5)
 
 #os.system('python python_create_jobscript_65.py -m %s -p %s -d %s -t %s -n %s --group %s --clk %s --proc_node %s --ppn %s --days %s --hrs %s --mins %s --script %s' %(module,extl_folder,design_folder,techn,num,group,clkfreq,nodes,ppn,days,hrs,mins,script))
+
 

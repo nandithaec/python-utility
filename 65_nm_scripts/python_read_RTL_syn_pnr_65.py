@@ -236,10 +236,11 @@ time.sleep(5)
 
 with open("%s/pnr/reports/5.postRouteOpt_%s/%s_postRoute.slk" %(path,module,module),"r") as f:
 	words=map(str.split, f)
-"""
+
 line1=words[1] #2nd line after header
 slack_read=line1[2]
 print "\nSlack is: %s" %slack_read
+"""
 slack_string=slack_read.replace("*/","")
 slack_time=float(slack_string)
 print "\nSlack is: %f ns" %slack_time
@@ -268,5 +269,37 @@ if '1\'b0' in open('%s/pnr/op_data/%s_final.v' %(path,module).read():
 else:
 	print "\n1'b0 is NOT present in the verilog file and there is no need to manually tie it to gnd in the spice file\n"
 	time.sleep(5)
+"""
 
 """
+slack_string=slack_read.replace("*/","")
+slack_time=float(slack_string)
+print "\nSlack is: %f ns" %slack_time
+print "...Pause..."
+time.sleep(5)
+
+if slack_time < 0 :
+	print "WARNING: Slack is negative. Your design WILL NOT function at the frequency %s\n" %clkfreq
+	time.sleep(30)
+else:
+	print "Slack is positive. Your design WILL function at the frequency %s MHz\n" %clkfreq
+	time.sleep(5)
+"""
+
+if '1\'b1' in open('%s/pnr/op_data/%s_final.v' %(path,module)).read():
+	print "\n*******************WARNING******************\n"
+	print "\n1'b1 is present in the verilog file and the corresponding nets should be manually tie it to vdd in the spice file\n"
+	time.sleep(15)
+else:
+	print "\n1'b1 is NOT present in the verilog file and there is no need to manually tie it to vdd in the spice file\n"
+	time.sleep(5)
+
+if '1\'b0' in open('%s/pnr/op_data/%s_final.v' %(path,module)).read():
+	print "\n*******************WARNING******************\n"
+	print "\n1'b0 is present in the verilog file and the corresponding nets should be manually tie it to gnd in the spice file\n"
+	time.sleep(15)
+else:
+	print "\n1'b0 is NOT present in the verilog file and there is no need to manually tie it to gnd in the spice file\n"
+	time.sleep(5)
+
+

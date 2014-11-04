@@ -373,10 +373,19 @@ if (os.path.isdir('%s/spice_results' %(path))):
 	print"\nNumber of flips due to strike on FF that got masked at output is:",FF_flip_masked
 
 	prob_FF_strike=(float(FF_csv_rows)/float(total_csv_rows))
-	prob_FF_no_effect=(float(FF_no_effect)/float(FF_csv_rows))
-	prob_FF_glitch_captured=(float(FF_glitch_captured)/float(FF_csv_rows))
-	#prob_FF_output_glitch=(float(FF_output_glitch)/float(FF_csv_rows))
-	prob_FF_atleast_1flip= float(FF_atleast_1_flip)/float(FF_csv_rows)
+	
+	if FF_csv_rows>0:
+		prob_FF_no_effect=(float(FF_no_effect)/float(FF_csv_rows))
+		prob_FF_glitch_captured=(float(FF_glitch_captured)/float(FF_csv_rows))
+		#prob_FF_output_glitch=(float(FF_output_glitch)/float(FF_csv_rows))
+		prob_FF_atleast_1flip= float(FF_atleast_1_flip)/float(FF_csv_rows)
+		prob_FF_flip_masked=(float(FF_flip_masked)/float(FF_csv_rows)) #FN
+	else:
+		prob_FF_no_effect=0.0
+		prob_FF_glitch_captured=0.0
+		prob_FF_atleast_1flip=0.0
+		prob_FF_flip_masked=0.0	
+	
 	if (FF_atleast_1_flip >1):
 		prob_FF_multiple_conditional= float(FF_multiple_flips)/float(FF_atleast_1_flip)
 	else:
@@ -397,10 +406,11 @@ if (os.path.isdir('%s/spice_results' %(path))):
 	else:
 		prob_FF_cascaded_flip_multiple=0.0
 
-
-	prob_FF_flip_masked=(float(FF_flip_masked)/float(FF_csv_rows)) #FN
-
-	prob_FN_given_F0= (float(FF_flip_masked)/float(F0_first_flip))
+	
+	if F0_first_flip>0:
+		prob_FN_given_F0= (float(FF_flip_masked)/float(F0_first_flip))
+	else:
+		prob_FN_given_F0=0.0
 
 
 	print"\n*************************************************************"

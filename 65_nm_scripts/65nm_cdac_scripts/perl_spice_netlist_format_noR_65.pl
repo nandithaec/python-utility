@@ -658,7 +658,7 @@ foreach $i(0 .. $#to_ff)
 		if ($qreg==1)
 		{
 		print "1. Obtained DFF name is $ff_obtained\n";
-		print SIM ".ic v(X$module.X$to_ff[$i]\_q\_reg.AR64)= ##$new\_reference_1_neg##\n";
+		print SIM ".ic v(X$module.X$to_ff[$i]\_q\_reg.AR50)= ##$new\_reference_1_neg##\n";
 		#print SIM ".ic v(X$module.X$to_ff[$i]\_q\_reg.net0148:F65)= ##$new\_reference_1_neg##\n\n";
 		}
 		else
@@ -708,12 +708,12 @@ foreach $i(0 .. $#to_ff)
 		if ($qreg==1)
 		{
 		print "4. Obtained DFF name is $ff_obtained\n";
-		print SIM ".ic v(X$module.X$to_ff[$i]\_q\_reg.AR51)= ##$new\_reference_1_neg##\n\n";
+		print SIM ".ic v(X$module.X$to_ff[$i]\_q\_reg.AR71)= ##$new\_reference_1_neg##\n\n";
 		}
 		else
 		{
 		print "4. Obtained DFF name is $ff_obtained\n";
-		print SIM ".ic v(X$module.X$to_ff[$i].AR51)= ##$new\_reference_1_neg##\n\n";
+		print SIM ".ic v(X$module.X$to_ff[$i].AR71)= ##$new\_reference_1_neg##\n\n";
 		}
 		
 	}

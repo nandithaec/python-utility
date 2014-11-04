@@ -1,7 +1,7 @@
 
 #!/usr/bin/env python
 #Read in a RTL file, do synthesis and placement, route
-#Example usage: python python_subckts_in_weight_script.py -m c880_clk_ipFF -p /home/users/nanditha/Documents/utility/65nm/c880/
+#Example usage: python python_subckts_in_weight_script.py -m c880_clk_ipFF -p /home/users/nanditha/Documents/utility/65nm/c880/ --scripts <path>
 
 #freq added to synthesis part: Nov 19 2013
 
@@ -14,13 +14,14 @@ parser = OptionParser('A list of gates/flip-flops and their areas, is maintained
 
 parser.add_option("-p","--path", help='Enter the path',dest='path')
 parser.add_option("-m","--mod", help='Enter the entity name(vhdl) or module name (verilog) to be synthesised',dest='module_name')
-
+parser.add_option("-e", "--scripts", dest="scripts",help="Enter the ENTIRE path to your scripts folder.")
 
 #This is the most important line which will parse the cmd line arguments
 (options, args) = parser.parse_args()
 
 path=options.path
 module=options.module_name
+scripts_path=options.scripts
 
 ##############Find out the number of subckts in the current circuit############
 f=open("%s/pnr/reports/%s_summary.rpt" %(path,module),"r")
@@ -62,7 +63,7 @@ fnew.close()
 
 ##############Find out the number of subckts in the weights script############
 flag=0
-f=open("python_weighted_gateselection_65.py" ,"r")
+f=open("%s/python_weighted_gateselection_65.py" %scripts_path,"r")
 lines=f.readlines()
 
 
@@ -148,4 +149,5 @@ print "Total area of the subckts to be added:\n",area
 print "Individual area of the subckts to be added:\n",ind_area
 print "Individual integer areas of the subckts to be added:\n",int_area
 time.sleep(1)		
+
 

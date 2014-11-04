@@ -1,4 +1,4 @@
-#Example: perl perl_glitchLibGen_65.pl   -p /home/users/nanditha/Documents/utility/65nm/b11 -i test.sp
+#Example: perl perl_glitchLibGen_65.pl -p /home/users/nanditha/Documents/utility/65nm/b03 -i CORE65GPSVT_selected_lib_vg.sp
 
 #!/usr/bin/perl
 
@@ -255,5 +255,4 @@ print out " END ";
 print out "*"x60; 
 close(NET);
 close(out);
-
 
