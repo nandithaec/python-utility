@@ -1,4 +1,4 @@
-Code changes from Oct 21 2014
+Code changes from Oct 21 2014..
 
 spice library osu018_stdcells_correct_vdd_gnd.sp assumed to be in your scripts folder
 execute the script "utility_python_top_level.py" in your lab mc.
