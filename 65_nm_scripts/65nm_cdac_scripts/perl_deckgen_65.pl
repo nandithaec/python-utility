@@ -1,4 +1,4 @@
-#Example: perl perl_deckgen_65.pl -s /home/users/nanditha/Documents/utility/65nm/FF_optimisation/c432/reference_spice.sp  -r /home/users/nanditha/Documents/utility/65nm/FF_optimisation/c432/c432_clk_opFF_reference_out/tool_reference_out.txt -n 1 -m c432_clk_opFF -f /home/users/nanditha/Documents/utility/65nm/FF_optimisation/c432/ -g 105 -d 1 -c 3414 -i 1.001063e-09 -o 1 
+#Example: perl perl_deckgen_65.pl -s /home/external/iitb/nanditha/simulations/65nm/b03/reference_spice.sp  -r /home/external/iitb/nanditha/simulations/65nm/b03/b03_reference_out/tool_reference_out.txt -n 1 -m b03 -f /home/external/iitb/nanditha/simulations/65nm/b03/ -g 4 -d 26 -c 22411 -i 3.35392154768e-09 -o 1 
 
 #Modifications:
 #time=0 RTL value selection - Jul 10 2014

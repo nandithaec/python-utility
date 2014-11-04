@@ -12,9 +12,9 @@
 #This version of the script has the facility of selecting the gate based on the area of the gate. This version of the script uses another script python_weighted_gateselection.py to pick the random gate based on its area: Nov 17 2013
 #Glitch insertion window is within the 2.5 cycles, and not the 6.5 cycles that is required for the case with intermediate FFs
 
-#Example usage: python python_utility3_hspice_2cycles_time0_65_part.py -m b03 -p /home/users/nanditha/Documents/utility/65nm/b03 -t 65 -n 4 --group 4 --clk 400 -d b03
+#Example usage: python python_utility2_hspice_2cycles_time0_65_part.py -m b03 -p /home/users/nanditha/Documents/utility/65nm/b03 -t 65 -n 4 --group 4 --clk 400 -d b03
 
-#Example usage: python python_utility3_hspice_2cycles_time0_65_part.py -m c432_clk_ipFF -p /home/users/nanditha/Documents/utility/65nm/c432 -t 65 -n 4 --group 4 --clk 350 -d c432
+#Example usage: python python_utility2_hspice_2cycles_time0_65_part.py -m c1355_clk_ipFF -p /home/users/nanditha/Documents/utility/65nm/c1355 -t 65 -n 2500 --group 500 --clk 350 -d c1355
 
 import optparse
 import re,os
@@ -350,7 +350,7 @@ for loop in range(start_loop, (num_of_loops+1)):
 ########################################End of loop########################################################
 
 print "Combining all rtl diff files\n"
-seed="248782676839229878"
+seed="7511995095531778716"
 os.system('python  python_count_flips_2nd_3rd_edge_65.py -f %s  -n %s  --group %s -s %s' %(path,num,num_at_a_time,seed))  #To save the seed to results file
 
 

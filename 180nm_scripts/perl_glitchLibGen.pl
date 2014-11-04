@@ -1,6 +1,7 @@
 #Example: perl perl_glitchLibGen.pl -i osu018_stdcells_correct_vdd_gnd.sp -p /home/users/nanditha/Documents/utility/180nm/c499
 
-
+#Updates:
+#Glitch injection: Pmos name modified to suit 180nm. .param introduced for PMOS current magnitude: Oct 24 2014
 
 #!/usr/bin/perl
 use Getopt::Long;

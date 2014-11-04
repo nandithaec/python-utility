@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #Commented out copying glitch_reports.csv. Introduced an option of backing up hspice_deck*.sp or deck*.sp: June 23 2014
-#Introduced RTL_time0.csv - Jul 10 2014..
+#Introduced RTL_time0.csv - Jul 10 2014
 #Modified RTL.csv to RTL_<loop_var>.csv.. RTL_1.csv, RTL_2.csv: June 15 2014
 #Changed the #column iteration number from range(5) to range(6), since the drain number is also added: Feb 11 2014
 #Compare results of spice and RTL, creates difference files and validation files for each run. Compare the 3rd rising edge in Verilog with the 2nd falling edge in spice (just an optimisation in spice, to save simulating another extra half cycle)

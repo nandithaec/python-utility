@@ -1,6 +1,7 @@
-#Example: perl GlitchLibGen.pl -i osu018_stdcells_correct_original.sp -p <path>
+#Example: perl perl_glitchLibGen.pl -i osu018_stdcells_correct_vdd_gnd.sp -p /home/users/nanditha/Documents/utility/180nm/c499
 
-
+#Updates:
+#Glitch injection: Pmos name modified to suit 180nm. .param introduced for PMOS current magnitude: Pct 24 2014
 
 #!/usr/bin/perl
 use Getopt::Long;
@@ -174,16 +175,16 @@ while(<NET>)
 			chomp($drain);
 			
 			#introducing glitch into the selected drain depending on whether it is NMOS or PMOS
-			if ($pmos =~ /NSVTGP/) #This is NMOS
+			if ($pmos =~ /nfet/) #This is NMOS
 			{ 
 			#-ve current for the NMOS drain
 			$i="**NMOS current injection\nIcharge $drain 0 EXP (0 current_magnitude rise_delay rise_time_constant fall_delay fall_time_constant)\n\n";
 			print "We're talking about NMOS\n\n";
 			}
-			else
+			elsif ($pmos =~ /pfet/)
 			{
 			#+ve current for the PMOS drain with a current magnitude that is 1/3rd of that of NMOS
-			$i="**PMOS current injection\nIcharge 0 $drain EXP (0 current_magnitude/3 rise_delay rise_time_constant fall_delay fall_time_constant)\n\n";
+			$i="**PMOS current injection\n.param current_magnitude_by3='current_magnitude/3'\nIcharge 0 $drain EXP (0 current_magnitude_by3 rise_delay rise_time_constant fall_delay fall_time_constant)\n\n";
 			print "We're talking about PMOS\n\n";
 			}
 
@@ -229,4 +230,5 @@ print out " END ";
 print out "*"x60; 
 close(NET);
 close(out);
+
 

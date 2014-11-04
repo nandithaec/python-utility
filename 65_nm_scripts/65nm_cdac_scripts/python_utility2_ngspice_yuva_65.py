@@ -1,7 +1,7 @@
 
 #!/usr/bin/env python
 
-#Created a parameter scripts_path - Oct 20 2014
+
 #Created a time0 spice_rtl_difference file will check the initial condition that is obtained vs expected- so that we can check if there is some error - July 2014
 #Modified the GNU_Parallel_hspice file to check if any deck is simulated using 'pseudo-transient method' - July 9th 2014
 #Creating multiple RTL.csv and RTL_2ndedge.csv files- as many as there are number of outer loops: June 15 2014

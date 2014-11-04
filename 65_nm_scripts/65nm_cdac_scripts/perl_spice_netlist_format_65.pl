@@ -8,7 +8,7 @@
 #Modifications:
 #Automated the flip-flop type selection in meas statements and module instantiation of .ic statement (q_reg) for ISCAS and non-ISCAS benchmarks: Oct 15 2014 
 #'Q' and 'QN' nodes in meas tran statements have been automated: Oct 15 2014
-# .ic statements for all flip-flops automated: Oct 14 2014
+# .ic statements for all flip-flop types automated: Oct 14 2014
 #Most flip-flops in the designs are : DFPQX4 and DFPQX9. Initialisation nodes for flip-flops other than DFPQX4 and DFPQX9 are being edited manually in the reference_spice right now since the internal initialisation nodes are different.
 #.ic on net0148:F59 and net0148:F65 for DFPQX4 and DFPQX9 - Jul 10 2014
 #Added time=0 measure and echo statements to test the initial conditions - Jul 9 2014
