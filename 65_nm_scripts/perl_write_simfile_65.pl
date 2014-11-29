@@ -5,7 +5,7 @@
 #This was earlier named as mod_perl_outwrtr.pl
 
 #Modifications:
-#Eliminating the merging of the output pins which are not the output pin of any flip flop - Oct 20 2014
+#Eliminating the merging of the output pins which are not the output pin of any flip flop. Code at line 266 - Oct 20 2014
 #Created an array to store the flip-flop names- for the FN experiment, generated two more reference out files- modelsim - Sep 4 2014
 #Created the time=0 RTL file, and its header - Jul 10 2014
 #Absolute paths introduced everywhere in the script, so that they can be run from one directory and no need of duplicating the scripts in all directories: June 25 2014
@@ -263,7 +263,7 @@ while(<VLOG>)
 		#Merging the output pins which are not the output pin of any flip flop
     #$c_pins = join(" ",@ffopin);
     $limit = $#ffopin;	
-    
+    #Merging of output pins - sometimes it takes in pins which do not exist
    # foreach $j(0 .. $#opin)
     #  {  
 	#	  $match=0;

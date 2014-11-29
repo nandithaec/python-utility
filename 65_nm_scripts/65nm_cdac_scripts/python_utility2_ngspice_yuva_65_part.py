@@ -11,11 +11,10 @@
 #Backup directories etc created for the 2nd rise edge measurement backup. Other scripts which are being used to measure the 2nd rise edge data are being run from this script: Feb 7 2014
 #This version of the script has the facility of selecting the gate based on the area of the gate. This version of the script uses another script python_weighted_gateselection.py to pick the random gate based on its area: Nov 17 2013
 #Glitch insertion window is within the 2.5 cycles, and not the 6.5 cycles that is required for the case with intermediate FFs
-#NFm for gate and FF strike combined- Nov 28 2014
 
+#Example usage: python python_utility2_ngspice_yuva_65_part.py -m c880_clk_ipFF -p /home/external/iitb/nanditha/simulations/65nm/c880 -d c880 -t 65 -n 2000 --group 1000 --clk 350 --scripts_path /home/external/iitb/nanditha/simulations/65nm/scripts_run/
 
-#Example usage: python /home/external/iitb/nanditha/simulations/65nm/scripts_run/python_utility2_ngspice_yuva_65.py -m c880_clk_ipFF -p /home/external/iitb/nanditha/simulations/65nm/c880 -d c880 -t 65 -n 10 --group 10 --clk 350 --scripts_path /home/external/iitb/nanditha/simulations/65nm/scripts_run/
-
+#Example usage: python python_utility2_ngspice_yuva_65_part.py -m b03 -p /home/users/nanditha/Documents/utility/65nm/b03 -d b03 -t 65 -n 2000 --group 1000 --clk 350 --scripts_path /home/users/nanditha/Documents/utility/65nm/scripts_run
 
 import optparse
 import re,os
@@ -26,7 +25,6 @@ import random,sys
 from  python_weighted_gateselection_65 import weight_selection
 from  python_drain_selection_65 import drain_selection
 from  python_gate_strike_taxonomy_65 import gate_strike_taxonomy
-
 
 from optparse import OptionParser
 
@@ -68,7 +66,7 @@ num_of_loops=(int(num)/int(num_at_a_time))
 print "path of the script being run: ",os.path.dirname(os.path.abspath(__file__))
 print "current working dir: ",os.getcwd()
 scripts_dir=os.getcwd()
-
+"""
 
 os.system('python %s/python_subckts_in_weight_script.py -m %s -p %s --scripts %s' %(scripts_path,module,path,scripts_path))
 
@@ -208,7 +206,7 @@ if os.path.isfile("%s/%s_reference_out/RTL_2nd_edge*.csv" %(path,module)):
 if os.path.isfile("%s/%s_reference_out/RTL_time0*.csv" %(path,module)):
 	print "****Removing the existing RTL_time0.csv file in folder %s_reference_out ****\n" %(module)
 	os.remove("%s/%s_reference_out/RTL_time0*.csv" %(path,module))
-
+"""
 #Fresh simulation
 for loop in range(start_loop, (num_of_loops+1)): 
 
@@ -216,7 +214,7 @@ for loop in range(start_loop, (num_of_loops+1)):
 	
 	
 #########################################repeat_deckgen copied starting from here#######################################
-		
+	"""	
 		
 	#Now, we need the header in RTL.csv, so we create an RTL.csv and copy the headers from the RTL_backup.csv that we had saved from Netlstfrmt.pl
 	fout = open('%s/%s_reference_out/RTL_%d.csv' %(path,module,loop), 'w')
@@ -358,9 +356,9 @@ for loop in range(start_loop, (num_of_loops+1)):
 	if os.path.exists(spice_dir):
 		shutil.rmtree(spice_dir)
 
-
+	"""
 ########################################End of loop########################################################
-
+"""
 print "Combining all rtl diff files\n"
 #seed="1644931266534706027"
 os.system('python  %s/python_count_flips_2nd_3rd_edge_65.py -f %s  -n %s  --group %s -s %s' %(scripts_path,path,num,num_at_a_time,seed))  #To save the seed to results file
@@ -376,22 +374,23 @@ fb.writelines(read[filelen-2])
 fb.writelines(read[filelen-1])
 fa.close()
 fb.close()
-
+"""
 #Doing the gate taxonomy and strike taxonomy functions through this script.
 print "\nDoing the taxonomy for gates\n"
 
 """
 os.system('python  %s/python_gate_strike_taxonomy_65.py  -p %s -m %s' %(scripts_path,path,module)) 
 """
+
+#Gate strike taxonomy
 #Always run the gates first and then the FFs. FF script needs some outputs which are written out from the gates script.
 gate_glitch_captured_multiple, gate_glitch_captured =  gate_strike_taxonomy(path,module);
+print "Gate glitch capture multiple",gate_glitch_captured_multiple
+print "Gate glitch capture",gate_glitch_captured
 
-print "\nDoing the taxonomy for FFs\n"
 os.system('python  %s/python_FF_strike_taxonomy_65.py  -p %s -m %s --gl_multiple %d --gl_capture %d' %(scripts_path,path,module,gate_glitch_captured_multiple,gate_glitch_captured)) 
 
 print "\nCombining the pdf reports\n"
 os.system('python %s/python_combine_pdfs_yuva_65.py -p %s/spice_results -m %s' %(scripts_path,path,module))
-
-
 
 

@@ -12,9 +12,9 @@
 #This version of the script has the facility of selecting the gate based on the area of the gate. This version of the script uses another script python_weighted_gateselection.py to pick the random gate based on its area: Nov 17 2013
 #Glitch insertion window is within the 2.5 cycles, and not the 6.5 cycles that is required for the case with intermediate FFs
 
-#Example usage: python python_utility2_hspice_2cycles_time0_65_part.py -m b03 -p /home/users/nanditha/Documents/utility/65nm/b03 -t 65 -n 4 --group 4 --clk 400 -d b03
+#Example usage: python python_utility2_hspice_2cycles_time0_65_part.py -m b09 -p /home/users/nanditha/Documents/utility/65nm/b09 -t 65 -n 4 --group 4 --clk 350 -d b09
 
-#Example usage: python python_utility2_hspice_2cycles_time0_65_part.py -m c1355_clk_ipFF -p /home/users/nanditha/Documents/utility/65nm/c1355 -t 65 -n 2500 --group 500 --clk 350 -d c1355
+#Example usage: python python_utility2_hspice_2cycles_time0_65_part.py -m c880_clk_ipFF -p /home/users/nanditha/Documents/utility/65nm/c880 -t 65 -n 4 --group 4 --clk 350 -d c880
 
 import optparse
 import re,os
@@ -310,7 +310,7 @@ for loop in range(start_loop, (num_of_loops+1)):
 		os.system('perl perl_deckgen_65.pl -s %s/reference_spice.sp  -r %s/%s_reference_out/tool_reference_out.txt -n %d -m %s -f %s  -o %s -g %s -d %s -c %s -i %s' %(path,path,module,loop_var,module,path,loop,rand_gate,rand_drain,rand_clk,rand_glitch))
 		
 ##################Script repeat_deckgen copied ends here####################################
-	
+	"""
 		
 	#The following script will run GNU Parallel and hspice 
 	os.system ('python python_hspice_mod_check_ic.py -p %s -n %s -d %s -o %d -c %s' %(path,num_at_a_time,design_folder,loop,scripts_dir))
@@ -334,7 +334,7 @@ for loop in range(start_loop, (num_of_loops+1)):
 	print "Comparing the RTL and spice outputs at the time=0 \n"
 	os.system('python python_compare_time0_65.py -m %s -f %s -n %s -t %s -l %d' %(module,path,num_at_a_time,tech,loop))
 
-	"""
+	
 #For testing out new glitch files (afterdeleting process if at each echo statement). comment this out in the final run, else it will copy ALL spice files and consume lot of disk space
 	
 ##########################################################

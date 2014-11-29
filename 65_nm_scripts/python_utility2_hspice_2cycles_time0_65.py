@@ -12,9 +12,9 @@
 #This version of the script has the facility of selecting the gate based on the area of the gate. This version of the script uses another script python_weighted_gateselection.py to pick the random gate based on its area: Nov 17 2013
 #Glitch insertion window is within the 2.5 cycles, and not the 6.5 cycles that is required for the case with intermediate FFs
 
-#Example usage: python python_utility2_hspice_2cycles_time0_65.py -m b10 -p /home/users/nanditha/Documents/utility/65nm/b10 -t 65 -n 4 --group 4 --clk 350 -d b10 --scripts_path /home/users/nanditha/Documents/utility/65nm/scripts_run
+#Example usage: python python_utility2_hspice_2cycles_time0_65.py -m b09 -p /home/users/nanditha/Documents/utility/65nm/b09 -t 65 -n 4 --group 4 --clk 350 -d b09 --scripts_path /home/users/nanditha/Documents/utility/65nm/scripts_run
 
-#Example usage: python python_utility2_hspice_2cycles_time0_65.py -m c1908_clk_ipFF -p /home/users/nanditha/Documents/utility/65nm/c1908 -t 65 -n 4 --group 4 --clk 350 -d c1908 --scripts_path /home/users/nanditha/Documents/utility/65nm/scripts_run
+#Example usage: python python_utility2_hspice_2cycles_time0_65.py -m c880_clk_ipFF -p /home/users/nanditha/Documents/utility/65nm/c880 -t 65 -n 4 --group 4 --clk 350 -d c880 --scripts_path /home/users/nanditha/Documents/utility/65nm/scripts_run
 
 import optparse
 import re,os
@@ -165,12 +165,12 @@ print "\nclk is ",clk
 print "\nClk_period: ", clk_period
 
 
-#Uncomment this for future designs. For c1908 example, c1908 folder has already been created on desktop
+#Uncomment this for future designs. For c880 example, c880 folder has already been created on desktop
 #os.system('ssh nanditha@10.107.90.52 mkdir /home/nanditha/simulations/%s' %(design_folder))
 ###########################################Comment this out if not using desktop to run##################################
 
 ######################################################################################################
-#perl perl_calculate_gates_clk.pl -s reference_spice.sp -l glitch_osu018_stdcells_correct_vdd_gnd.sp -r c1908_behav_pnr_reference_out/tool_reference_out.txt -m c1908_behav_pnr -f /home/user1/simulations/c1908
+#perl perl_calculate_gates_clk.pl -s reference_spice.sp -l glitch_osu018_stdcells_correct_vdd_gnd.sp -r c880_behav_pnr_reference_out/tool_reference_out.txt -m c880_behav_pnr -f /home/user1/simulations/c880
 
 os.system("perl perl_calculate_gates_clk_65.pl -s %s/reference_spice.sp  -r %s/%s_reference_out/tool_reference_out.txt -m %s -f %s" %(path,path,module,module,path))
 

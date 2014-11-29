@@ -2,8 +2,7 @@
 
 # Sep 4 2014
 
-#Inputs to this script should be only F0 cases- flip at 2nd edge (FN or FF) obtained from gates strike or flip-flop strike taxonomy csv files in spice_results. This file should be divided into 2 parts- 2nd and 3rd edge csv files containing the '0' or '1' of all outputs at that edge. For this, sort the 2nd_edge_flips by descending order so as to get F0 cases on top of the excel.Delete the other rows (non F0 rows). Make 2 copies of this csv- one for 2nd edge and other for 3rd edge. Eliminate the 3rd edge and 2nd edge columns from these 2 csvs respectively
-
+#Inputs to this script should be only F0 cases- flip at 2nd edge (FN or FF) obtained from gates strike or flip-flop strike taxonomy csv files in spice_results. This file should be divided into 2 parts- 2nd and 3rd edge csv files containing the '0' or '1' of all outputs at that edge. For this, sort the 2nd_edge_flips by descending order so as to get F0 cases on top of the excel.
 
 #Example usage: python python_F0_expt.py -m decoder_op_ip -f /home/users/nanditha/Documents/utility/65nm/F0_expt/decoder_65nm/spice_results/decoder_2nd_edge.csv -g /home/users/nanditha/Documents/utility/65nm/F0_expt/decoder_65nm/spice_results/decoder_3rd_edge.csv   -p /home/users/nanditha/Documents/utility/65nm/F0_expt/decoder_65nm -b dec_0 --test_path /home/users/nanditha/Documents/utility/65nm/F0_expt/decoder_65nm/test_decoder_opFF.vhd --tb_mod test_decoder_op_ip --period 4000
 
