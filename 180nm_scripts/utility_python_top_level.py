@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 
 
-#Example usage: python utility_python_top_level.py -p /home/users/nanditha/Documents/utility/180nm/b11 --rtl=/home/users/nanditha/Documents/utility/180nm/b11/b11.vhd --mod=b11 --test=/home/users/nanditha/Documents/utility/180nm/b11/test_b11.vhd --tb_mod=test_b11 --clk=250 --run=100us --design=b11 --tech=180 --num=4 --group 4 --extl=/home/external/iitb/nanditha/simulations/180nm/b11  --proc_node 1 --ppn 4 --days 00 --hrs 00 --mins 4 --script python_utility_step2_yuva.py --scripts_path /home/external/iitb/nanditha/simulations/180nm/scripts_run
+#Example usage: python utility_python_top_level.py -p /home/users/nanditha/Documents/utility/180nm/b13 --rtl=/home/users/nanditha/Documents/utility/180nm/b13/b13.vhd --mod=b13 --test=/home/users/nanditha/Documents/utility/180nm/b13/test_b13.vhd --tb_mod=test_b13 --clk=280 --run=100us --design=b13 --tech=180 --num=4 --group 4 --extl=/home/external/iitb/nanditha/simulations/180nm/b13 --proc_node 1 --ppn 4 --days 00 --hrs 00 --mins 4 --script python_utility_step2_yuva.py --scripts_path /home/external/iitb/nanditha/simulations/180nm/scripts_run
 
 
-#Example usage: python utility_python_top_level.py -p /home/users/nanditha/Documents/utility/180nm/c880 --rtl=/home/users/nanditha/Documents/utility/180nm/c880/c880_clk_ipFF.v --mod=c880_clk_ipFF --test=/home/users/nanditha/Documents/utility/180nm/c880/test_c880.v --tb_mod=test_c880 --clk=250 --run=100us --design=c880 --tech=180 --num=4 --group 4 --extl=/home/external/iitb/nanditha/simulations/180nm/c880  --proc_node 1 --ppn 4 --days 00 --hrs 00 --mins 6 --script python_utility_step2_yuva.py --scripts_path /home/external/iitb/nanditha/simulations/180nm/scripts_run
+#Example usage: python utility_python_top_level.py -p /home/users/nanditha/Documents/utility/180nm/c1908 --rtl=/home/users/nanditha/Documents/utility/180nm/c1908/c1908_clk_ipFF.v --mod=c1908_clk_ipFF --test=/home/users/nanditha/Documents/utility/180nm/c1908/test_c1908.v --tb_mod=test_c1908 --clk=250 --run=100us --design=c1908 --tech=180 --num=4 --group 4 --extl=/home/external/iitb/nanditha/simulations/180nm/c1908  --proc_node 1 --ppn 4 --days 00 --hrs 00 --mins 6 --script python_utility_step2_yuva.py --scripts_path /home/external/iitb/nanditha/simulations/180nm/scripts_run
 
 
+#Example usage: python utility_python_top_level.py -p /home/users/nanditha/Documents/utility/180nm/lfsr --rtl=/home/users/nanditha/Documents/utility/180nm/lfsr/lfsr.vhd --mod=lfsr --test=/home/users/nanditha/Documents/utility/180nm/lfsr/test_lfsr.vhd --tb_mod=lfsr_tb --clk=500 --run=100us --design=lfsr --tech=180 --num=4 --group 4 --extl=/home/external/iitb/nanditha/simulations/180nm/lfsr --proc_node 1 --ppn 4 --days 00 --hrs 00 --mins 4 --script python_utility_step2_yuva.py --scripts_path /home/external/iitb/nanditha/simulations/180nm/scripts_run
 
 
 #This script is modified to call those python/perl scripts which have been modified to capture the outputs of the 2nd rising edge in spice and compare them with the 2nd rising edge in RTL simulation: Feb 7 2014
@@ -79,25 +80,25 @@ mins=options.mins
 script=options.script
 scripts_path=options.scripts_path
 
-#Example usage: python python1_read_RTL_syn_pnr.py -f decoder.vhd -m decoder_behav_pnr -clk 900
+#Example usage: python python1_read_RTL_syn_pnr.py -f lfsr.vhd -m lfsr_behav_pnr -clk 900
 os.system('python python_read_RTL_syn_pnr.py -f %s -m %s -c %s -p %s' %(rtl,module,clkfreq,main_path))
 
 print('Done 1st script rtl+pnr\n')
 time.sleep(5)
 
-#Example usage: python python2_run_qrc_spice_extraction.py -m decoder_behav_pnr
+#Example usage: python python2_run_qrc_spice_extraction.py -m lfsr_behav_pnr
 os.system('python python_run_qrc_spice_extraction.py -m %s -p %s' %(module,main_path))
 
 print('Done 2nd script QRC extracting spice\n')
 time.sleep(5)
 
-#Example usage: perl perl2_outwrtr.pl -v pnr/op_data/decoder_behav_pnr_final.v -m decoder_behav_pnr
+#Example usage: perl perl2_outwrtr.pl -v pnr/op_data/lfsr_behav_pnr_final.v -m lfsr_behav_pnr
 os.system('perl perl_write_simfile.pl -v %s/pnr/op_data/%s_final.v -m %s -p %s' %(main_path,module,module,main_path))
 
 print('Done creating modelsim simulation file\n')
 time.sleep(5)
 
-##Example usage: python python3_create_simdo_vsim.py -rtl decoder_behav_pnr_modelsim.v -tb test_decoder_pnr.vhd -tb_mod t_decoder_pnr -time 1us
+##Example usage: python python3_create_simdo_vsim.py -rtl lfsr_behav_pnr_modelsim.v -tb test_lfsr_pnr.vhd -tb_mod t_lfsr_pnr -time 1us
 os.system('python python_create_simdo_vsim.py -v %s/%s_modelsim.v -t %s -b %s -r %s -p %s' %(main_path,module,test_path,test_module,runtime,main_path))
 
 print('Done modelsim simulation\n')
@@ -113,7 +114,7 @@ time.sleep(5)
 
 ##Generate a template simulatable spice netlist from the dspf file generated after pnr. This would include all .ic, Voltage sources, meas, tran, control, param etc
 #NetlistFormat.pl
-#perl NetlstFrmt.pl -v decoder_behav_pnr_modelsim.v -s pnr/op_data/decoder_behav_pnr_final.dspf -l glitch_osu018_stdcells_correct_allcells.sp -c 1e9 -t 180 -m decoder_behav_pnr
+#perl NetlstFrmt.pl -v lfsr_behav_pnr_modelsim.v -s pnr/op_data/lfsr_behav_pnr_final.dspf -l glitch_osu018_stdcells_correct_allcells.sp -c 1e9 -t 180 -m lfsr_behav_pnr
 os.system('perl perl_spice_netlist_format.pl -v %s/%s_modelsim.v  -s %s/%s.dspf -c %s -t %s -m %s -p %s' %(main_path,module,main_path,module,clkfreq,techn, module,main_path))
 print "***Done modifying the spice file to make it simulatable. File available in current directory reference_spice.sp\n"
 time.sleep(5)

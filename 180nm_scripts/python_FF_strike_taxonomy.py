@@ -3,6 +3,7 @@
 #Modification summary:
 #Changed the cases and classification. At 2nd edge, any FF flip either input or output is considered as the same. Similarly for the 3rd edge. : feb 12 2014
 #Changed the column iteration number for header from range(5) to range(6), since the drain number is also added: Feb 11 2014
+#NFm for gate and FF strike combined- Nov 28 2014
 
 
 #This script reads in the <path>/<design_case>/results/weighted/gates_FF/low_slack/spice_results/spice_rtl_difference_summary.csv and count_flips_summary.csv in the same path, to classify the observed flips. Two files are written out:\n1. <path>/spice_results/strike_on_gates.csv and\n2.<path>/spice_results/strike_on_FF.csv.\n The classification data for the gates is written out to another pdf called  <path>/taxonomy_report.pdf 
@@ -25,12 +26,15 @@ parser = OptionParser('This script reads in the <path>/<design_case>/results/wei
 
 parser.add_option("-p", "--path", dest="path",help="Enter the ENTIRE path to the folder which contains /spice_results  ")
 parser.add_option("-m", "--mod", dest="module",help="Enter the name of the design module ")
+parser.add_option("-g", "--gl_multiple", dest="gate_multiple",help="Enter the number of multiple flips due to glitch (gate strike) ")
+parser.add_option("-c", "--gl_capture", dest="gate_capture",help="Enter the number of glitch capture (gate strike) ")
 
 (options, args) = parser.parse_args()
 
 path=options.path
 module=options.module
-
+gate_multiple=int(options.gate_multiple)
+gate_capture=int(options.gate_capture)
 
 print "Executing FF strike taxonomy\n"
 time.sleep(2)
@@ -366,7 +370,7 @@ if (os.path.isdir('%s/spice_results' %(path))):
 	print"\nNumber of cascaded flips due to strike on FF is:",FF_cascaded_flip
 	print"\nNumber of cascaded flips amongst the captured flips:",FF_cascaded_flip_multiple
 	print"\nNumber of flips due to strike on FF that got masked at output is:",FF_flip_masked
-
+	
 	prob_FF_strike=(float(FF_csv_rows)/float(total_csv_rows))
 	prob_FF_no_effect=(float(FF_no_effect)/float(FF_csv_rows))
 	prob_FF_glitch_captured=(float(FF_glitch_captured)/float(FF_csv_rows))
@@ -381,6 +385,13 @@ if (os.path.isdir('%s/spice_results' %(path))):
 	#To avoid divide by zero error:	
 	if FF_glitch_captured >0: #Calculating conditional probability
 		prob_FF_glitch_captured_multiple=(float(FF_glitch_captured_multiple)/float(FF_glitch_captured))
+		if gate_capture >0:
+			#af=float(FF_glitch_captured+gate_capture)
+			#print "Gate capture in if %f" %af
+			prob_gate_FF_NFm=(float(FF_glitch_captured_multiple+gate_multiple)/float(FF_glitch_captured+gate_capture))
+		else:
+			prob_gate_FF_NFm=0.0
+			
 	else:
 		prob_FF_glitch_captured_multiple=0.0
 
@@ -407,7 +418,8 @@ if (os.path.isdir('%s/spice_results' %(path))):
 	print"\n*************************************************************"
 	print"Probability of multiple captured flips amongst the captured flips is:",prob_FF_glitch_captured_multiple
 	print"Probability of multiple cascaded flips amongst the captured flips is:",prob_FF_cascaded_flip_multiple
-
+	print"Probability of multiple flips NFm amongst the captured flips for both gate and flip-flop strike is:",prob_gate_FF_NFm
+	
 	print "Output written: %s/spice_results/taxonomy_summary_FFs_%s.csv" %(path,module)
 
 	print"\n*************************************************************\n"
@@ -438,6 +450,8 @@ if (os.path.isdir('%s/spice_results' %(path))):
 
 	fout.write ("\nP(Multiple|NF): Conditional probability of multiple captured flips given atleast one flip, due to strike on FF is: %f" %prob_FF_glitch_captured_multiple)
 	fout.write ("\nP(Multiple|FF): Conditional probability of multiple cascaded flips given atleast one flip, due to strike on FF is: %f" %prob_FF_cascaded_flip_multiple)
+	fout.write ("\nP(NFm|NF for gate and flip-flop): %f" %prob_gate_FF_NFm)
+	
 	fout.close()
 
 
@@ -476,7 +490,8 @@ if (os.path.isdir('%s/spice_results' %(path))):
 		['P(multiple flips at output | NF)', prob_FF_glitch_captured_multiple],
 		['FN(Flip- Masked)',prob_FF_flip_masked],
 	       ['FF(Cascaded flips)', prob_FF_cascaded_flip],
-		 ['P(multiple flips at output | FF)', prob_FF_cascaded_flip_multiple]]
+		 ['P(multiple flips at output | FF)', prob_FF_cascaded_flip_multiple],
+		 ['P(NFm for gate and flip-flop | NF)', prob_gate_FF_NFm]]
 		#['Glitch on output(direct strike)',prob_FF_output_glitch]]
 	t1=Table(data_FF)
 	t1.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,-1),colors.white),

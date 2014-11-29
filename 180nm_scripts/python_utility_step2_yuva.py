@@ -10,6 +10,8 @@
 #Backup directories etc created for the 2nd rise edge measurement backup. Other scripts which are being used to measure the 2nd rise edge data are being run from this script: Feb 7 2014
 #This version of the script has the facility of selecting the gate based on the area of the gate. This version of the script uses another script python_weighted_gateselection.py to pick the random gate based on its area: Nov 17 2013
 #Glitch insertion window is within the 2.5 cycles, and not the 6.5 cycles that is required for the case with intermediate FFs
+#NFm for gate and FF strike combined- Nov 28 2014
+
 
 #Example usage: python python_utility_step2_yuva.py -m c432_clk_opFF -p /home/nanditha/Documents/iitb/utility/c432_priority_opFF -d c432_priority_opFF -t 180 -n 2 --group 2 --clk 100 --scripts_path /home/external/iitb/nanditha/simulations/180nm/scripts_run/
 
@@ -20,6 +22,7 @@ import random
 import subprocess, time
 import random,sys
 from  python_weighted_gateselection import weight_selection
+from  python_gate_strike_taxonomy import gate_strike_taxonomy
 
 from optparse import OptionParser
 
@@ -377,10 +380,12 @@ fb.close()
 print "\nDoing the taxonomy for gates\n"
 
 #Always run the gates first and then the FFs. FF script needs some outputs which are written out from the gates script.
-os.system('python  %s/python_gate_strike_taxonomy.py  -p %s -m %s' %(scripts_path,path,module)) 
+#os.system('python  %s/python_gate_strike_taxonomy.py  -p %s -m %s' %(scripts_path,path,module)) 
+gate_glitch_captured_multiple, gate_glitch_captured =  gate_strike_taxonomy(path,module);
+
 print "\nDoing the taxonomy for FFs\n"
 
-os.system('python  %s/python_FF_strike_taxonomy.py  -p %s -m %s' %(scripts_path,path,module)) 
+os.system('python  %s/python_FF_strike_taxonomy.py  -p %s -m %s --gl_multiple %d --gl_capture %d' %(scripts_path,path,module,gate_glitch_captured_multiple,gate_glitch_captured)) 
 
 print "\nCombining the pdf reports\n"
 os.system('python %s/python_combine_pdfs.py -p %s/spice_results -m %s' %(scripts_path,path,module))

@@ -1,4 +1,4 @@
-#Example: perl perl_glitchLibGen.pl -i osu018_stdcells_correct_vdd_gnd.sp -p /home/users/nanditha/Documents/utility/180nm/c499
+#Example: perl perl_glitchLibGen.pl -i osu018_stdcells_correct_vdd_gnd.sp -p /home/users/nanditha/Documents/utility/180nm/decoder
 
 #Glitch injection: Pmos name modified to suit 180nm. .param introduced for PMOS current magnitude: Oct 24 2014
 
@@ -106,7 +106,7 @@ print "CWD is $pwd\n\n";
 print "Path is $path/$library";
 
 #opening the required files
-open(NET,"$path/$library")||die("unable to open file : $!");
+open(NET,"$library")||die("unable to open file : $!");
 open(out,">$path/$glib");
 #open(logf,">$log");
 print  out "*"x10;

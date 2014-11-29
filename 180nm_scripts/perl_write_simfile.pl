@@ -2,6 +2,7 @@
 #Example usage: perl modperl2_outwrtr_rise.pl -v pnr/op_data/b01_final.v -m b01 -p <path>
 
 #Modifications:
+#Eliminating the merging of the output pins which are not the output pin of any flip flop. Code at line 249 - Oct 20 2014
 #Appended the random_drain to the RTL*.csv header. This is needed to generate decks by just looking at the taxonomy.csv: Feb 11 2014
 #RTL_2nd_edge.csv header file created to store reference outputs at the 2nd rising edge : feb 7 2014
 #Outputs of all FFs being written out at +ve clock edge, instead of -ve clk edge. fwrite statements are being changed: Feb 6 2014
@@ -245,23 +246,23 @@ while(<VLOG>)
 		#Outputs of the FFs
 		#Merging the output pins which are not the output pin of any flip flop
     #$c_pins = join(" ",@ffopin);
-    $limit = $#ffopin;	
-    foreach $j(0 .. $#opin)
-      {  
-		  $match=0;
-		  foreach $l(0 .. $limit)
-		     {
-				 if($opin[$j] eq $ffopin[$l])
-	               {
-		               $match=1;
-		            }
-		      }
-		   if($match==0)
-		      {
-				  #print "\n$opin[$j]\n";
-				  push(@ffopin,$opin[$j]);
-			  }
-      }		        
+     #Merging of output pins - sometimes it takes in pins which do not exist
+   # foreach $j(0 .. $#opin)
+    #  {  
+	#	  $match=0;
+	#	  foreach $l(0 .. $limit)
+	#	     {
+	#			 if($opin[$j] eq $ffopin[$l])
+	 #              {
+	#	               $match=1;
+	#	            }
+	#	      }
+	#	   if($match==0)
+	#	      {
+	#			  #print "\n$opin[$j]\n";
+	#			  push(@ffopin,$opin[$j]);
+	#		  }
+      #}		           
      	
 	foreach $i(0 .. $#ffopin)
 		{
@@ -293,23 +294,23 @@ while(<VLOG>)
 		#Outputs of the FFs
 		#Merging the output pins which are not the output pin of any flip flop
     #$c_pins = join(" ",@ffopin);
-    $limit = $#ffopin;	
-    foreach $j(0 .. $#opin)
-      {  
-		  $match=0;
-		  foreach $l(0 .. $limit)
-		     {
-				 if($opin[$j] eq $ffopin[$l])
-	               {
-		               $match=1;
-		            }
-		      }
-		   if($match==0)
-		      {
-				  #print "\n$opin[$j]\n";
-				  push(@ffopin,$opin[$j]);
-			  }
-      }		        
+   # $limit = $#ffopin;	
+    #foreach $j(0 .. $#opin)
+     # {  
+	#	  $match=0;
+	#	  foreach $l(0 .. $limit)
+	#	     {
+	#			 if($opin[$j] eq $ffopin[$l])
+	 #              {
+	#	               $match=1;
+	#	            }
+	#	      }
+	#	   if($match==0)
+	#	      {
+	#			  #print "\n$opin[$j]\n";
+	#			  push(@ffopin,$opin[$j]);
+	#		  }
+      #}		        
      	
 	foreach $i(0 .. $#ffopin)
 		{

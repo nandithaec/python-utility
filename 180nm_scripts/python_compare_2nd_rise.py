@@ -143,7 +143,7 @@ for r in range(len(headers_rtl)):
 
 		for num_rows in range(0,int(num)): # 10 rows. This will be a user input
 			k1.append(rt[num_rows])
-			print "\n rtl contents inside no match header is:", rt[num_rows]
+			#print "\n rtl contents inside no match header is:", rt[num_rows]
 
 		km.append(k1) # appended to an empty list
 		#print "km is\n",km
@@ -155,13 +155,13 @@ for r in range(len(headers_rtl)):
 	match_flag=0	 ##Reset this every r loop only
 	for s in range(len(headers)):
 		if (match_flag==0): # If a header match is not found, loop through the spice headers, else if match found stop looping
-			print "\n\nlooping !! \nHeader RTL: %s \nspice header: %s \n" %(headers_rtl[r],headers[s])
+			#print "\n\nlooping !! \nHeader RTL: %s \nspice header: %s \n" %(headers_rtl[r],headers[s])
 	
 			if (headers_rtl[r] == headers[s]): ##That is, if the headers in spice file match with the rtl headers
 		#if (re.match(headers_rtl[r], headers[s]) != None): ##re.match which for the pattern at the beginning of the string. So IN_N1 and IN_N13 will say it matches
 		
 				k= [] ##Empty the temporary List before starting to append a new column
-				print "\n\nMatch found!! \n spice Header: %s \n RTL header: %s\nspice column: %s \nRTL column: %s:\n" %(headers[s],headers_rtl[r],column[headers[s]],column_rtl[headers_rtl[r]])
+				#print "\n\nMatch found!! \n spice Header: %s \n RTL header: %s\nspice column: %s \nRTL column: %s:\n" %(headers[s],headers_rtl[r],column[headers[s]],column_rtl[headers_rtl[r]])
 				match_flag=1 #match has been found. stop looping for this string pattern.
 				k.append('diff_rise_edge_'+headers_rtl[r]) #Append header
 
@@ -178,16 +178,16 @@ for r in range(len(headers_rtl)):
 					spice_val=sp[num_rows]
 					if rt[num_rows] == '1': 
 						rtl_val = vdd_val  #This will have to depend on the techn node
-						print "\nrt val in rt[num_rows] == 1: is", rtl_val
+						#print "\nrt val in rt[num_rows] == 1: is", rtl_val
 					else: 
 						rtl_val = 0
-						print "\nrt val in else is", rtl_val
+						#print "\nrt val in else is", rtl_val
 		
 		
 					ab=abs(float(spice_val) - float(rtl_val))
 					print "\ndiff is\n",ab
 					#print "\nab is\n", ab
-					if ab <= 0.5: #This will have to depend on the techn node
+					if ab <= 0.4: #This will have to depend on the techn node
 						k.append('0')
 						#print "\nab in ab<0.5 is\n", ab
 					else:
