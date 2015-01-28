@@ -11,6 +11,8 @@
 #Backup directories etc created for the 2nd rise edge measurement backup. Other scripts which are being used to measure the 2nd rise edge data are being run from this script: Feb 7 2014
 #This version of the script has the facility of selecting the gate based on the area of the gate. This version of the script uses another script python_weighted_gateselection.py to pick the random gate based on its area: Nov 17 2013
 #Glitch insertion window is within the 2.5 cycles, and not the 6.5 cycles that is required for the case with intermediate FFs
+#NFm for gate and FF strike combined- Nov 28 2014
+
 
 #Example usage: python /home/external/iitb/nanditha/simulations/65nm/scripts_run/python_utility2_ngspice_yuva_65.py -m c880_clk_ipFF -p /home/external/iitb/nanditha/simulations/65nm/c880 -d c880 -t 65 -n 10 --group 10 --clk 350 --scripts_path /home/external/iitb/nanditha/simulations/65nm/scripts_run/
 
@@ -23,6 +25,8 @@ import subprocess, time
 import random,sys
 from  python_weighted_gateselection_65 import weight_selection
 from  python_drain_selection_65 import drain_selection
+from  python_gate_strike_taxonomy_65 import gate_strike_taxonomy
+
 
 from optparse import OptionParser
 
@@ -376,13 +380,18 @@ fb.close()
 #Doing the gate taxonomy and strike taxonomy functions through this script.
 print "\nDoing the taxonomy for gates\n"
 
-#Always run the gates first and then the FFs. FF script needs some outputs which are written out from the gates script.
+"""
 os.system('python  %s/python_gate_strike_taxonomy_65.py  -p %s -m %s' %(scripts_path,path,module)) 
-print "\nDoing the taxonomy for FFs\n"
+"""
+#Always run the gates first and then the FFs. FF script needs some outputs which are written out from the gates script.
+gate_glitch_captured_multiple, gate_glitch_captured =  gate_strike_taxonomy(path,module);
 
-os.system('python  %s/python_FF_strike_taxonomy_65.py  -p %s -m %s' %(scripts_path,path,module)) 
+print "\nDoing the taxonomy for FFs\n"
+os.system('python  %s/python_FF_strike_taxonomy_65.py  -p %s -m %s --gl_multiple %d --gl_capture %d' %(scripts_path,path,module,gate_glitch_captured_multiple,gate_glitch_captured)) 
 
 print "\nCombining the pdf reports\n"
 os.system('python %s/python_combine_pdfs_yuva_65.py -p %s/spice_results -m %s' %(scripts_path,path,module))
+
+
 
 

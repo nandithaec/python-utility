@@ -12,7 +12,7 @@
 #This version of the script has the facility of selecting the gate based on the area of the gate. This version of the script uses another script python_weighted_gateselection.py to pick the random gate based on its area: Nov 17 2013
 #Glitch insertion window is within the 2.5 cycles, and not the 6.5 cycles that is required for the case with intermediate FFs
 
-#Example usage: python /home/external/iitb/nanditha/simulations/65nm/scripts_run/python_utility2_ngspice_yuva_65.py -m c880_clk_ipFF -p /home/external/iitb/nanditha/simulations/65nm/c880 -d c880 -t 65 -n 10 --group 10 --clk 350 --scripts_path /home/external/iitb/nanditha/simulations/65nm/scripts_run/
+#Example usage: python /home/external/iitb/nanditha/simulations/65nm/scripts_run/python_utility2_ngspice_yuva_nopbs_65.py -m lfsr -p /home/external/iitb/nanditha/simulations/65nm/LFSR -d LFSR -t 65 -n 4 --group 4 --clk 400 --scripts_path /home/external/iitb/nanditha/simulations/65nm/scripts_run
 
 
 import optparse
@@ -160,19 +160,20 @@ clk_period = (1.0/float(clk))*(0.000001) #for the MHz
 
 print "\nclk is ",clk
 print "\nClk_period: ", clk_period
-
+"""
 ##This is to write out the processor nodes in a file, to be used by GNU Parallel later
 os.system('cat $PBS_NODEFILE > %s/nodes.txt' %path)
 print "PBS NODEFILE contents....written to nodes.txt\n"
-#time.sleep(3)
+time.sleep(3)
 
+ffg = open('%s/sshmachines.txt' %(path), 'w')
 
-os.system('python %s/python_ssh_addr_yuva_65.py -p %s' %(scripts_path,path))
+os.system('python %s/python_ssh_addr_yuva.py -p %s' %(scripts_path,path))
 os.system('cat %s/sshmachines.txt' %path)
 print "Check contents of sshmachines.txt file....\n"
-#time.sleep(10)
-
-
+time.sleep(10)
+ffg.close()
+"""
 ######################################################################################################
 
 os.system("perl %s/perl_calculate_gates_clk_65.pl -s %s/reference_spice.sp  -r %s/%s_reference_out/tool_reference_out.txt -m %s -f %s" %(scripts_path,path,path,module,module,path))
@@ -347,14 +348,14 @@ for loop in range(start_loop, (num_of_loops+1)):
 	
 ##########################################################
 #Comment this out to see the decks and the result files it generates. 	
-
+"""
 	spice_dir = '%s/spice_decks_%s' %(path,loop)
 
 	
 	if os.path.exists(spice_dir):
 		shutil.rmtree(spice_dir)
 
-
+"""
 ########################################End of loop########################################################
 
 print "Combining all rtl diff files\n"

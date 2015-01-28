@@ -259,7 +259,7 @@ while(<VLOG>)
     {
     	if(($_=~ m/q_reg/))
     	{
-    		$qreg=1;
+    		$qreg=1; #For ISCAS benchmarks
     	}
     }
 
@@ -637,13 +637,13 @@ foreach $i(0 .. $#to_ff)
 	if ($ff_obtained =~ m/(HS65_GS_DFPQX4|HS65_GS_DFPQX9)/)
 	{
 		if ($qreg==1)
-		{
+		{ #For ISCAS benchmarks
 		print "1. Obtained DFF name is $ff_obtained\n";
 		print SIM ".ic v(X$module.X$to_ff[$i]\_q\_reg.net0148:F59)= ##$new\_reference_1_neg##\n";
 		print SIM ".ic v(X$module.X$to_ff[$i]\_q\_reg.net0148:F65)= ##$new\_reference_1_neg##\n\n";
 		}
 		else
-		{
+		{ #For ITC benchmarks
 		print "1. Obtained DFF name is $ff_obtained\n";
 		print SIM ".ic v(X$module.X$to_ff[$i].net0148:F59)= ##$new\_reference_1_neg##\n";
 		print SIM ".ic v(X$module.X$to_ff[$i].net0148:F65)= ##$new\_reference_1_neg##\n\n";

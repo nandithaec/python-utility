@@ -10,7 +10,7 @@
 #Assumption: We are assuming that the output FFs in all subdirectoies have "Qout" or "Q" or "output" in their names and that no other FFs have these strings in their names. If this condition is not met, the results will be incorrect!
 #Nanditha Rao
 
-#Example usage: python python_FF_strike_taxonomy.py  -p /home/external/iitb/nanditha/simulations/decoder_ip_opFF_rise -m decoder_op_ip -g %d -c %d
+#Example usage: python python_FF_strike_taxonomy.py  -p /home/external/iitb/nanditha/simulations/decoder_ip_opFF_rise -m decoder_op_ip
 
 
 
@@ -25,15 +25,11 @@ parser = OptionParser('This script reads in the <path>/<design_case>/results/wei
 
 parser.add_option("-p", "--path", dest="path",help="Enter the ENTIRE path to the folder which contains /spice_results  ")
 parser.add_option("-m", "--mod", dest="module",help="Enter the name of the design module ")
-parser.add_option("-g", "--gl_multiple", dest="gate_multiple",help="Enter the number of multiple flips due to glitch (gate strike) ")
-parser.add_option("-c", "--gl_capture", dest="gate_capture",help="Enter the number of glitch capture (gate strike) ")
 
 (options, args) = parser.parse_args()
 
 path=options.path
 module=options.module
-gate_multiple=int(options.gate_multiple)
-gate_capture=int(options.gate_capture)
 
 
 print "Executing FF strike taxonomy\n"
@@ -297,11 +293,11 @@ if (os.path.isdir('%s/spice_results' %(path))):
 		FF_at_2nd_rise= int(row[inputFF_2nd_rise[0]]) + int(row[outputFF_2nd_rise[0]])
 		FF_at_3rd_rise= int(row3[inputFF_3rd_rise[0]]) + int(row3[outputFF_3rd_rise[0]])
 		if (FF_at_2nd_rise==0 and FF_at_3rd_rise==0):
-			#print "case 1"
+			print "case 1"
 			temp_row.append("No effect- NN")
 			FF_no_effect=FF_no_effect+1
 		elif (FF_at_2nd_rise==0 and FF_at_3rd_rise >=1):
-			#print "case 2"
+			print "case 2"
 			FF_glitch_captured=FF_glitch_captured+1
 
 			if (FF_at_3rd_rise>1): #Calculating multiple flips
@@ -312,14 +308,14 @@ if (os.path.isdir('%s/spice_results' %(path))):
 			
 
 		elif (FF_at_2nd_rise>=1 and FF_at_3rd_rise==0):
-			#print "case 3"
+			print "case 3"
 			temp_row.append("Flipped and masked- FN")
 			FF_flip_masked=FF_flip_masked+1
 			F0_first_flip=F0_first_flip+1
 
 		elif (FF_at_2nd_rise>=1 and FF_at_3rd_rise>=1):
 			#temp_row.append("Cascaded flip")
-			#print "case 4"
+			print "case 4"
 			FF_cascaded_flip=FF_cascaded_flip+1
 			F0_first_flip=F0_first_flip+1
 
@@ -389,26 +385,19 @@ if (os.path.isdir('%s/spice_results' %(path))):
 		prob_FF_glitch_captured=0.0
 		prob_FF_atleast_1flip=0.0
 		prob_FF_flip_masked=0.0	
-		prob_gate_FF_NFm=0.0
-
+	
 	if (FF_atleast_1_flip >1):
 		prob_FF_multiple_conditional= float(FF_multiple_flips)/float(FF_atleast_1_flip)
 	else:
 		prob_FF_multiple_conditional= 0.0
 
-	print "Gate capture", gate_capture
+
 	#To avoid divide by zero error:	
 	if FF_glitch_captured >0: #Calculating conditional probability
 		prob_FF_glitch_captured_multiple=(float(FF_glitch_captured_multiple)/float(FF_glitch_captured))
-		if gate_capture >0:
-			#af=float(FF_glitch_captured+gate_capture)
-			#print "Gate capture in if %f" %af
-			prob_gate_FF_NFm=(float(FF_glitch_captured_multiple+gate_multiple)/float(FF_glitch_captured+gate_capture))
-		else:
-			prob_gate_FF_NFm=0.0
 	else:
 		prob_FF_glitch_captured_multiple=0.0
-	
+
 	prob_FF_cascaded_flip=(float(FF_cascaded_flip)/float(FF_csv_rows))
 
 	#To avoid divide by zero error:	
@@ -438,7 +427,6 @@ if (os.path.isdir('%s/spice_results' %(path))):
 	print"\n*************************************************************"
 	print"Probability of multiple captured flips amongst the captured flips is:",prob_FF_glitch_captured_multiple
 	print"Probability of multiple cascaded flips amongst the captured flips is:",prob_FF_cascaded_flip_multiple
-	print"Probability of multiple flips NFm amongst the captured flips for both gate and flip-flop strike is:",prob_gate_FF_NFm
 
 	print "Output written: %s/spice_results/taxonomy_summary_FFs_%s.csv" %(path,module)
 
@@ -471,7 +459,6 @@ if (os.path.isdir('%s/spice_results' %(path))):
 
 	fout.write ("\nP(Multiple|NF): Conditional probability of multiple captured flips given atleast one flip, due to strike on FF is: %f" %prob_FF_glitch_captured_multiple)
 	fout.write ("\nP(Multiple|FF): Conditional probability of multiple cascaded flips given atleast one flip, due to strike on FF is: %f" %prob_FF_cascaded_flip_multiple)
-	fout.write ("\nP(NFm|NF for gate and flip-flop): %f" %prob_gate_FF_NFm)
 	
 	fout.close()
 
@@ -513,8 +500,7 @@ if (os.path.isdir('%s/spice_results' %(path))):
 		['FF(Cascaded flips)', prob_FF_cascaded_flip],
 		 ['P(multiple flips at output FFm | FF)', prob_FF_cascaded_flip_multiple],
 		['FN|First flip (FN|F0)',prob_FN_given_F0],
-		 ['P(multiple flips NFm or FFm | atleast one flip)', prob_FF_multiple_conditional],
-		 ['P(NFm for gate and flip-flop | NF)', prob_gate_FF_NFm]]
+		 ['P(multiple flips NFm or FFm | atleast one flip)', prob_FF_multiple_conditional]]
 
 
 		#['Glitch on output(direct strike)',prob_FF_output_glitch]]
