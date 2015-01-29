@@ -24,6 +24,7 @@ import subprocess, time
 import random,sys
 from  python_weighted_gateselection_65 import weight_selection
 from  python_drain_selection_65 import drain_selection
+from  python_gate_strike_taxonomy_65 import gate_strike_taxonomy
 
 from optparse import OptionParser
 
@@ -342,14 +343,14 @@ for loop in range(start_loop, (num_of_loops+1)):
 	
 ##########################################################
 #Comment this out to see the decks and the result files it generates. 	
-
+"""
 	spice_dir = '%s/spice_decks_%s' %(path,loop)
 
 	
 	if os.path.exists(spice_dir):
 		shutil.rmtree(spice_dir)
 
-
+"""
 ########################################End of loop########################################################
 
 print "Combining all rtl diff files\n"
@@ -371,12 +372,16 @@ fb.close()
 #Doing the gate taxonomy and strike taxonomy functions through this script.
 print "\nDoing the taxonomy for gates\n"
 
+"""
+os.system('python  %s/python_gate_strike_taxonomy_65.py  -p %s -m %s' %(scripts_path,path,module)) 
+"""
 #Always run the gates first and then the FFs. FF script needs some outputs which are written out from the gates script.
-os.system('python  python_gate_strike_taxonomy_65.py  -p %s -m %s' %(path,module)) 
-print "\nDoing the taxonomy for FFs\n"
+gate_glitch_captured_multiple, gate_glitch_captured =  gate_strike_taxonomy(path,module);
 
-os.system('python  python_FF_strike_taxonomy_65.py  -p %s -m %s' %(path,module)) 
+print "\nDoing the taxonomy for FFs\n"
+os.system('python  %s/python_FF_strike_taxonomy_65.py  -p %s -m %s --gl_multiple %d --gl_capture %d' %(scripts_path,path,module,gate_glitch_captured_multiple,gate_glitch_captured)) 
+
 
 print "\nCombining the pdf reports\n"
-os.system('python python_combine_pdfs_65.py -p %s/spice_results -m %s' %(path,module))
+#os.system('python python_combine_pdfs_65.py -p %s/spice_results -m %s' %(path,module))
 

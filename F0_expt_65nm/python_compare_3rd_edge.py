@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 
+#Spice flip count in 3rd edge is being calculated. Difference between RTL and spice 3rd edge flip count is now being calculated. Entire flow is automated. spice_results/F0_spice_rtl_difference_3rd_edge.csv - Nov 30th 2014
 
-#Example usage: python python_compare_3rd_edge.py -m b04 -f /home/users/nanditha/Documents/utility/65nm/b04
+#Example usage: python python_compare_3rd_edge.py -m c432_clk_ipFF -f /home/users/nanditha/Documents/utility/65nm/c432 -t /home/users/nanditha/Documents/utility/65nm/c432/spice_results/c432_F0_3rd_edge.csv
 
 import optparse
 import re,os
@@ -13,18 +14,18 @@ import random,shutil
 from optparse import OptionParser
 
 
-parser = OptionParser("This script reads in the <path>/spice_results/final_results_spice_outputs_%d.csv (spice output Flip-flop values at 3rd rising edge) and <path>/<module>_reference_out/RTL.csv (RTL reference output values) to compare the spice simulation (with glitch) output with the original RTL simulation (no glitch) output. Two files are written out:\n1. <path>/spice_results/spice_rtl_difference_%d.csv and\n2.<path>/spice_results/spice_rtl_diff_testing_%d.csv.\n Both contain essentially same data but the _testing file has both spice and RTL outputs so that the result in the other file can be verified by us.\nIt then counts the number of flips- single/double etc., each time this script is executed (for a group of simulations) and then backs up few decks randomly for each case- no_flip case, single,double flip and triple flip case. These decks are saved in backup_spice_decks_3rd_edge folder and a separate folder is created for each of the no flip, single, double flips etc.,\nAuthor:Nanditha Rao(nanditha@ee.iitb.ac.in)\n")
+parser = OptionParser("Calculates the difference in flip count between spice and RTL at the 3rd edge. Output is written out in spice_results/F0_spice_rtl_difference_3rd_edge.csv\nAuthor:Nanditha Rao(nanditha@ee.iitb.ac.in)\n")
 
 parser.add_option("-m", "--mod",dest='module', help='Enter the entity name(vhdl) or module name (verilog)')
 parser.add_option("-f", "--folder", dest="path",help="Enter the ENTIRE path to your design folder(your working dir)- either on this machine or remote machine ")
+parser.add_option("-t", "--file2",dest='file2', help='Enter the path and the file name of the file that contains 3rd edge flip summary in csv format')
 
 (options, args) = parser.parse_args()
 
 
 module=options.module
 path=options.path
-
-
+file_edge3=options.file2
 
 
 ##########################################################################################
@@ -33,8 +34,8 @@ path=options.path
 
 f = open('%s/%s_reference_out/F0_obtained.csv' %(path,module), 'rb')
 frtl = open('%s/%s_reference_out/RTL_expected.csv' %(path,module), 'rb')
-fout = open('%s/spice_results/F0_rtl_difference_3rd_edge.csv' %(path), 'wb')
-
+fout = open('%s/spice_results/F0_spice_rtl_difference_3rd_edge.csv' %(path), 'wb')
+#This file gives the flips after injecting the F0, in RTL
 
 reader = csv.reader(f)
 reader_rtl = csv.reader(frtl)
@@ -63,7 +64,7 @@ for row in reader:
 	for h, v in zip(headers_F0, row):
 		column[h].append(v)
 
-print "\n column[headers_F0[0]]:\n", column[headers_F0[0]]  #This means, column[output_dec_7_], where output_dec_7_ is the headers[0]
+print "\n column[headers_F0[0]]:\n", column[headers_F0[0]]  #This means, column[output_dec_7_], where output_dec_7_ is the headers[0]- value is '0' or '1'
 #print "\nSpice Column:\n", column
 
 ####################################################################################
@@ -85,14 +86,21 @@ for row2 in reader_rtl:
 
 print "\nColumn :\n", column_rtl[headers_rtl[0]]
 
-####################################################################################
 
+#################################Read 3rd edge file and sum up the number of flips##############################
+f3 = open('%s' %(file_edge3), 'rb')
+reader3 = csv.reader(f3)
+#print "3rd edge file", reader3
+headers_spice = reader3.next() #Spice headers
+
+####################################################################################
 
 km=[]
 
-#Take difference between the 2 files
+#Take difference between the 2 files to find the flips in RTL
 for r in range(len(headers_rtl)):
-		
+
+	rows_number=0	
 	k= [] ##Empty the temporary List before starting to append a new column
 	#print "\n\nMatch found!! \n spice Header: %s \n RTL header: %s\nspice column: %s \nRTL column: %s:\n" %(headers[s],headers_rtl[r],column[headers[s]],column_rtl[headers_rtl[r]])
 	
@@ -106,7 +114,8 @@ for r in range(len(headers_rtl)):
 	rt= column_rtl[headers_rtl[r]] #Get the entire column in the RTL file
 	#Each item in the column is referenced as rt[0], rt[1] etc as many are the number of rows
 	print "\nrtl is:\n",rt[0]
-
+	
+	#For all rows in that selected column.
 	for num_rows in range(0,num_of_rows): 
 		print "inside for", num_rows
 	
@@ -117,114 +126,87 @@ for r in range(len(headers_rtl)):
 		difference= abs(int(F0_val) - int(rtl_val))
 		k.append(difference)
 		print "\nk is\n",k
-	
+		rows_number=rows_number+1
 
 		
 	print "\nk is\n", k  #All the data in the column is collected in k
 	km.append(k) # appended to an empty list
-	#print "km is\n",km
-
-
+	print "km is\n",km
+	#transpose_row=zip(*km)
+	#print "transpose_row:\n",transpose_row
 #Since we have collected data column-wise, and python has no way of writing out column wise to a csv,
 #We take a transpose of the list and print it out!!
-#print "transpose:\n",zip(*km)
-writer.writerows(zip(*km))
+flip=[]
+flip.append("RTL_flip_count")
+
+spice_flip=[]
+spice_flip.append("Spice_flip_count")
+
+spice_rtl_diff=[]
+spice_rtl_diff.append("Spice_RTL_Diff_flips")
+
+print "Num of rows",rows_number
+transpose=zip(*km)
+print "transpose:\n",transpose
+print "transpose[0]:\n",transpose[0]  #header
+
+#print "transpose[1]:\n",transpose[1]
+mismatch=0
+
+for b in range(1,rows_number+1):
+	#For every row, excluding the header
+	RTL_flip_sum=0
+	print "RTL Row is ",transpose[b]
+	for i in range(0,len(transpose[b])):
+		RTL_flip_sum=RTL_flip_sum+transpose[b][i] #calculate the no. of flips
+		#print "transpose[%d][%d]: %d\n" %(b,i,transpose[b][i])
+
+	print "RTL_flip_sum of row %d: %d\n" %(b,RTL_flip_sum)
+	flip.append(RTL_flip_sum)
+	
+	#Spice 3rd edge file
+	row_spice = reader3.next() #Spice line
+	print "Spice Row is",row_spice
+	#Sum up the elements of the row excluding the first 6 elements- which are clk, deck_num etc.,
+	spice_flip_sum=0
+	sp_rt_diff=0
+	for a in range(6,len(row_spice)):
+		spice_flip_sum=spice_flip_sum+int(row_spice[a])
+
+	spice_flip.append(spice_flip_sum)
+	print "Spice flip sum is %d" %spice_flip_sum
+	
+	sp_rt_diff= abs(RTL_flip_sum - spice_flip_sum)
+	spice_rtl_diff.append(sp_rt_diff)
+	print "Spice - RTL flip diff is %d" %sp_rt_diff
+	print "**************\n\n"
+	
+	
+	if (sp_rt_diff>0):
+		mismatch=mismatch+1
+	
+percent_mismatch= (float(mismatch)/float(rows_number))*100.0
+
+print "Flip RTL",flip
+print "Flip Spice",spice_flip
+print "Diff is",spice_rtl_diff
+print "Spice RTL mismatch is %d" %mismatch
+print "Spice RTL mismatch is %f" %percent_mismatch
+
+#Append this to the original list
+km.append(flip)
+km.append(spice_flip)
+km.append(spice_rtl_diff)
+
+print "km appended:\n",km 
+
+transpose_new=zip(*km)
+print "transpose_new:\n",transpose_new
+writer.writerows(transpose_new)
+
+fout.write("Num of rows: %d\n" %rows_number)
+fout.write("Spice RTL mismatch cases is: %d\n" %mismatch)
+fout.write("Percentage Spice RTL mismatch for F0 cases for design %s is %f percent" %(module,percent_mismatch))
 
 fout.close()
 
-
-
-################################# Validation file ###################################################
-"""
-fd = open('%s/spice_results/spice_rtl_difference_3rd_edge_%d.csv' %(path,int(outloop)), 'rb') #Open in read mode
-fv = open('%s/spice_results/spice_rtl_diff_testing_3rd_edge_%d.csv' %(path,int(outloop)), 'wb')
-
-diff_file = csv.reader(fd)
-validator= csv.writer(fv)
-
-a=[]
-####################################################################################
-headers_diff = diff_file.next() #Diff headers
-
-#print "\nDiff Headers:\n", headers_diff
-#print "\nDiff Headers[0]:\n", headers_diff[0]
-
-a.append(headers_diff)
-#print "a=\n",a
-
-column_diff = {}
-for hd in headers_diff:
-	column_diff[hd] = []
-
-#print "\nColumn diff:\n", column_diff
-
-for row in diff_file:  
-	for hd, v in zip(headers_diff, row):
-		column_diff[hd].append(v)
-
-#print "\nColumn 0:\n", column_diff[headers_diff[0]]
-
-####################################################################################
-
-test=[]
-
-#For all columns in RTL file
-for r in range(len(headers_rtl)):
-	#print "\n\nHeader: %s  \nRTL column: %s:\n" %(headers_rtl[r],column_rtl[headers_rtl[r]])
-	k1=[]
-	k1.append('rtl_'+headers_rtl[r]) #Append header
-	rt= column_rtl[headers_rtl[r]] #Get the entire column in the RTL file
-
-	for num_rows in range(0,int(num)): # This will be a user input
-		k1.append(rt[num_rows])
-		#print "\n rtl contents in test file is:", rt[num_rows]
-
-	test.append(k1) # appended to an empty list
-	#print "test array is\n",test
-
-
-#For all columns in spice file
-for s in range(len(headers)):
-	#print "\n\nHeader: %s \nspice column: %s\n" %(headers[s],column[headers[s]])
-	k1=[]
-	k1.append('spice_'+headers[s]) #Append header
-	sp= column[headers[s]] #Get the entire column in the RTL file
-
-	for num_rows in range(0,int(num)): 
-		k1.append(sp[num_rows])
-		#print "\n rtl contents in test file is:", sp[num_rows]
-
-	test.append(k1) # appended to an empty list
-	#print "test array is\n",test
-
-#print "diff file entering\n"
-
-
-#For all columns in diff file
-for s in range(len(headers_diff)):
-	#pattern= re.compile('deck_num |clk |glitch')
-	#if (pattern.match(headers_diff[s])): 
-	#	print "Match found\n"
-	#Ignore these headers
-	if ((re.match(headers_diff[s], 'deck_num') == None) and (re.match(headers_diff[s], 'clk') == None) and (re.match(headers_diff[s], 'glitch') == None)and (re.match(headers_diff[s], 'gate') == None)and (re.match(headers_diff[s], 'subcktlinenum') == None)):
-		#print "\n\nDiff Header: %s \nspice column: %s\n" %(headers_diff[s],column_diff[headers_diff[s]])
-		k1=[]
-		k1.append(headers_diff[s]) #Append header
-		d= column_diff[headers_diff[s]] #Get the entire column in the RTL file
-
-		for num_rows in range(0,int(num)): # 10 rows including header. This will be a user in
-			k1.append(d[num_rows])
-			#print "\n rtl contents in test file is:", d[num_rows]
-
-		test.append(k1) # appended to an empty list
-		#print "test array is\n",test
-
-validator.writerows(zip(*test))
-
-fv.close()
-fd.close()
-
-print "Ending compare\n"
-
-
-"""

@@ -382,13 +382,15 @@ print "\nDoing the taxonomy for gates\n"
 os.system('python  %s/python_gate_strike_taxonomy_65.py  -p %s -m %s' %(scripts_path,path,module)) 
 """
 
-#Gate strike taxonomy
+"""
+os.system('python  %s/python_gate_strike_taxonomy_65.py  -p %s -m %s' %(scripts_path,path,module)) 
+"""
 #Always run the gates first and then the FFs. FF script needs some outputs which are written out from the gates script.
 gate_glitch_captured_multiple, gate_glitch_captured =  gate_strike_taxonomy(path,module);
-print "Gate glitch capture multiple",gate_glitch_captured_multiple
-print "Gate glitch capture",gate_glitch_captured
 
+print "\nDoing the taxonomy for FFs\n"
 os.system('python  %s/python_FF_strike_taxonomy_65.py  -p %s -m %s --gl_multiple %d --gl_capture %d' %(scripts_path,path,module,gate_glitch_captured_multiple,gate_glitch_captured)) 
+
 
 print "\nCombining the pdf reports\n"
 os.system('python %s/python_combine_pdfs_yuva_65.py -p %s/spice_results -m %s' %(scripts_path,path,module))

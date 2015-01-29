@@ -1,15 +1,15 @@
 #!/usr/bin/env python
 
-# Sep 4 2014
 
-#Inputs to this script should be only F0 cases- flip at 2nd edge (FN or FF) obtained from gates strike or flip-flop strike taxonomy csv files in spice_results. This file should be divided into 2 parts- 2nd and 3rd edge csv files containing the '0' or '1' of all outputs at that edge. For this, sort the 2nd_edge_flips by descending order so as to get F0 cases on top of the excel.Delete the other rows (non F0 rows). Make 2 copies of this csv- one for 2nd edge and other for 3rd edge. Eliminate the 3rd edge and 2nd edge columns from these 2 csvs respectively
+#Compare 3rd edge.py script modified. Spice flip count in 3rd edge is being calculated. Difference between RTL and spice 3rd edge flip count is now being calculated. Entire flow is automated. spice_results/F0_spice_rtl_difference_3rd_edge.csv is the final result file. Percent difference between spice and RTL can be read out from this file  - Nov 30th 2014
 
+# First version: Sep 4 2014
 
-#Example usage: python python_F0_expt.py -m decoder_op_ip -f /home/users/nanditha/Documents/utility/65nm/F0_expt/decoder_65nm/spice_results/decoder_2nd_edge.csv -g /home/users/nanditha/Documents/utility/65nm/F0_expt/decoder_65nm/spice_results/decoder_3rd_edge.csv   -p /home/users/nanditha/Documents/utility/65nm/F0_expt/decoder_65nm -b dec_0 --test_path /home/users/nanditha/Documents/utility/65nm/F0_expt/decoder_65nm/test_decoder_opFF.vhd --tb_mod test_decoder_op_ip --period 4000
+#Example usage: python python_F0_expt.py -m lfsr -f /home/users/nanditha/Documents/utility/65nm/LFSR/spice_results/LFSR_F0_2nd_edge.csv -g /home/users/nanditha/Documents/utility/65nm/LFSR/spice_results/LFSR_F0_3rd_edge.csv   -p /home/users/nanditha/Documents/utility/65nm/LFSR -b uut --test_path /home/users/nanditha/Documents/utility/65nm/LFSR/test_lfsr.vhd --tb_mod lfsr_tb --period 1000
 
-#Example usage: python python_F0_expt.py -m c432 -f /home/users/nanditha/Documents/utility/65nm/c432/spice_results/c432_F0_2nd_edge.csv -g /home/users/nanditha/Documents/utility/65nm/c432/spice_results/c432_F0_3rd_edge.csv   -p /home/users/nanditha/Documents/utility/65nm/c432 -b des_c432 --test_path /home/users/nanditha/Documents/utility/65nm/c432/test_c432.vhd --tb_mod test_c432 --period 4000
+#Example usage: python python_F0_expt.py -m b13 -f /home/users/nanditha/Documents/utility/65nm/b13/spice_results/b13_F0_2nd_edge.csv -g /home/users/nanditha/Documents/utility/65nm/b13/spice_results/b13_F0_3rd_edge.csv   -p /home/users/nanditha/Documents/utility/65nm/b13 -b des_b13 --test_path /home/users/nanditha/Documents/utility/65nm/b13/test_b13.vhd --tb_mod test_b13 --period 4000
 
-#Example usage: python python_F0_expt.py -m c432_clk_ipFF -f /home/users/nanditha/Documents/utility/65nm/c432/spice_results/c432_F0_2nd_edge.csv -g /home/users/nanditha/Documents/utility/65nm/c432/spice_results/c432_F0_3rd_edge.csv   -p /home/users/nanditha/Documents/utility/65nm/c432 -b u1 --test_path /home/users/nanditha/Documents/utility/65nm/c432/test_c432.v --tb_mod test_c432 --period 20000
+#Example usage: python python_F0_expt.py -m c1908_clk_ipFF -f /home/users/nanditha/Documents/utility/65nm/c1908/spice_results/c1908_F0_2nd_edge.csv -g /home/users/nanditha/Documents/utility/65nm/c1908/spice_results/c1908_F0_3rd_edge.csv   -p /home/users/nanditha/Documents/utility/65nm/c1908 -b u1 --test_path /home/users/nanditha/Documents/utility/65nm/c1908/test_c1908.v --tb_mod test_c1908 --period 20000
 
 
 import optparse
@@ -22,7 +22,7 @@ import random,time
 from optparse import OptionParser
 
 
-parser = OptionParser('This script reads in the <path>/spice_results/final_results_spice_outputs_%d.csv (spice output Flip-flop values) and <path>/<module>_reference_out/RTL_2nd_edge.csv (RTL reference output values) to compare the spice simulation (with glitch) output with the original RTL simulation (no glitch) output. Two files are written out:\n1. <path>/spice_results/spice_rtl_difference_%d.csv and\n2.<path>/spice_results/spice_rtl_diff_testing_%d.csv.\n Both contain essentially same data but the _testing file has both spice and RTL outputs so that the result in the other file can be verified by us.\nIt then counts the number of flips- single/double etc., each time this script is executed (for a group of simulations) and then backs up few decks randomly for each case- no_flip case, single,double flip and triple flip case. These decks are saved in backup_spice_decks folder and a separate folder is created for each of the no flip, single, double flips etc.,\nAuthor:Nanditha Rao(nanditha@ee.iitb.ac.in)\n')
+parser = OptionParser('This script reads in pnr verilog file and simulates in modelsim to create a reference output. It then reads the F0 cases from spice (at 2nd edge), captures the clock cycle at which there was a flip, and the flip-flop that flipped. This flip is introduced in the RTL pnr file F0_modelsim.v file at that clk edge, and the output at the next edge is noted. It is compared with the reference RTL output, to see if there was a flip. The RTL flips are noted down. This is compared with the 3rd edge spice flip count available from the 3rd_edge.csv flip file, which is one of the inputs to this script. The difference between the spice and RTL flip count at the 3rd edge, is calculated. The number of such cases, amongst the total number of F0 cases is calculated and the percentage is reportd out in spice_results/F0_spice_rtl_difference_3rd_edge.csv,\nAuthor:Nanditha Rao(nanditha@ee.iitb.ac.in)\n')
 
 parser.add_option("-m", "--mod",dest='module', help='Enter the entity name(vhdl) or module name (verilog)')
 parser.add_option("-f", "--file1", dest="file1",help="Enter the path and the file name of the file that contains 2nd edge flip summary in csv format")
@@ -52,7 +52,7 @@ period=int(options.period)
 
 ########################################################################################################
 #Simulation without the flip being injected. This is the reference output
-"""
+
 os.system('perl perl_write_simfile_65.pl -v %s/pnr/op_data/%s_final.v -m %s -p %s' %(path,module,module,path))
 print('Done executing perl_write_simfile_65.pl.. created modelsim simulation file\n')
 #time.sleep(2)
@@ -63,21 +63,21 @@ runtime="100us"
 os.system('python python3_create_simdo_vsim_65.py -v %s/%s_modelsim.v -t %s -b %s -r %s -p %s' %(path,module,test_path,test_module,runtime,path))
 print('Done executing python3_create_simdo_vsim_65.py.. and modelsim simulation\n')
 #time.sleep(2)
-"""
+
 ########################################################################################################
 #Add XORs to FF outputs in the verilog file
 os.system('python python_xors_DFF_output.py -p %s -m %s' %(path,module))
 print('Done executing python_xors_DFF_output.py\n')
 #time.sleep(5)
 
-#Write out file I/O statements to the verilog file and header of tool_reference_out file	
+#Write out file I/O statements to the final xors verilog file and header of tool_reference_out file	
 os.system('perl F0_perl_write_simfile_65.pl -v %s/pnr/op_data/%s_final_xors.v -m %s -p %s' %(path,module,module,path))
 print('Done executing F0_perl_write_simfile_65.pl\n')
 print "%s/pnr/op_data/F0_%s_modelsim.v written out.." %(path,module)
 #time.sleep(5)
 
 
-#These files will be appended to, in the followin script after every simulation 
+#These files will be appended to, in the following script after every simulation 
 f = open('%s/%s_reference_out/F0_tool_reference_out.txt' %(path,module), 'rb')
 fwr = open('%s/%s_reference_out/F0_obtained.csv' %(path,module), 'wb')
 F0_data=f.readlines()
@@ -176,8 +176,11 @@ for row_number in range(0,len(summary)):
 	#From here on, these scripts have to be executed in a loop,for as many number of rows are there in the F0 spice file
 	#Write modelsim simulatable file and do file. This will change as per the clk cycle and the 
 	if row_number==0: #Delete this work directory only first time.. else retain it as it is
+		#Simulate till the edge where the flip-flop is supposed to be flipped, introduce '1' to the XOR input which is connected to the flip-flop which should be flipped, and continue the simulation
+		print "Executing F0_python3_create_simdo_vsim_65_1.py"
 		os.system('python F0_python3_create_simdo_vsim_65_1.py -v F0_%s_modelsim.v -t %s -b %s -r %dps -p %s -d %s -m %s -f %s --period %d' %(module,test_path,test_module,sim_time,path,dutname,module,flipped_output,period))
 	else:
+		print "Executing F0_python3_create_simdo_vsim_65.py"
 		os.system('python F0_python3_create_simdo_vsim_65.py -v F0_%s_modelsim.v -t %s -b %s -r %dps -p %s -d %s -m %s -f %s --period %d' %(module,test_path,test_module,sim_time,path,dutname,module,flipped_output,period))
 	print('Done executing F0_python3_create_simdo_vsim_65.py\n')
 	#time.sleep(5)
@@ -190,7 +193,7 @@ for row_number in range(0,len(summary)):
 	
 
 #Get out of loop and run this comparison.
-#The output of this script is <path>/spice_results/F0_rtl_difference_3rd_edge.csv
-os.system("python python_compare_3rd_edge.py -m %s -f %s" %(module,path))
+#The output of this script is <path>/spice_results/F0_spice_rtl_difference_3rd_edge.csv
+os.system("python python_compare_3rd_edge.py -m %s -f %s -t %s" %(module,path,file_edge3))
 print('Done executing python_compare_3rd_edge.py\n')
 #time.sleep(5)

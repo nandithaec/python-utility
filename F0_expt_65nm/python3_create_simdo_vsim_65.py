@@ -79,7 +79,7 @@ fw.write('add wave * \n #Uncomment out the next line if required \n #add list * 
 fw.write('run %s \n' %runtime)
 fw.write('#If the add list above was uncommented, then uncomment the following line as well, to store the list file \n')
 fw.write('#write list -window .main_pane.mdi.interior.cs.vm.paneset.cli_1.wf.clip.cs list_script.lst \n')
-fw.write('\n\n#quit -f \n ')
+fw.write('\n\nquit -f \n ')
 
 os.chdir("%s" %path)
 

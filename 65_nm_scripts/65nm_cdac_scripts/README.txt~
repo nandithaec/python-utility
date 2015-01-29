@@ -15,7 +15,7 @@ Modify the parameters in the jobscript.txt. Before launching thousands of jobs, 
 
 Changes done to scripts:
 
-perl_spice_netlist_format_noR_65.pl script updated: Oct 24 2014 
+perl_spice_netlist_format_noR_65.pl script updated- .ic statements: Oct 24 2014 
 
 utility_python_top_level_yuva_65.py: #Created a parameter scripts_path - Oct 20 2014
 python_utility2_ngspice_yuva_65.py: #Created a parameter scripts_path - Oct 20 2014
@@ -30,4 +30,3 @@ python_create_jobscript_65.py: #Updated with scripts_path: Oct 20 2014
 python_FF_strike_taxonomy_65.py and python_gate_strike_taxonomy_65.py : #Added few if conditions to solve zero division error: Oct 18 2014
 
 python_combine_pdfs_yuva_65.py created: Oct 18 2014
-

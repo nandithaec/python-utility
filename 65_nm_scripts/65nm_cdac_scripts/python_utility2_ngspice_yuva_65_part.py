@@ -23,6 +23,7 @@ import subprocess, time
 import random,sys
 from  python_weighted_gateselection_65 import weight_selection
 from  python_drain_selection_65 import drain_selection
+from  python_gate_strike_taxonomy_65 import gate_strike_taxonomy
 
 from optparse import OptionParser
 

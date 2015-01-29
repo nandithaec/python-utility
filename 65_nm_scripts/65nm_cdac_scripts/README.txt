@@ -2,6 +2,8 @@ Usage:
 
 You need to have the spice library file “CORE65GPSVT_all_vdd_gnd_WL_ad_noR.txt” one level up from your scripts folder, to generate the glitch library. 
 
+Copy the hspice_65nm_models directory from this directory to your design directory
+
 Have your design (vhd) file and test bench in a design folder
 
 Copy all the scripts in the “65nm_cdac_scripts” to a directory.

@@ -46,24 +46,44 @@ period=int(options.period)
 
 fl=open("%s/pnr/op_data/%s_final.v" %(path,module),"r")
 lines=fl.readlines()
+if 'q_reg' in open("%s/pnr/op_data/%s_final.v" %(path,module)).read():
+	q_reg=1 #ISCAS
+	print "ISCAS q_reg found"
+else:
+	q_reg=0	#ITC
+	print "ITC q_reg not found"
+	
+
 fl.close()
 
 Q_name=[]
 for i in range(len(lines)):
 	#print "Lines",lines[i]
-	#if re.search("DFP",lines[i]): #This is for decoder
-	if re.search("DFF",lines[i]): #This is for iscas
-		words=lines[i].split()
-		#print "**\n\n\nWords",words
-		#if words[2].startswith("(.Q("): #3rd word is the Q node- capture the output node name- for decoder and ITC 
-		if words[2].startswith("(.q("): #3rd word is the Q node- capture the output node name- for iscas
-			Q_name.append("q")
-			#print "\nQ_name",Q_name
+	if q_reg==1: #ISCAS	
+		if re.search("DFF",lines[i]): #This is for iscas
+			words=lines[i].split()
+			#print "**\n\n\nWords",words
+			if words[2].startswith("(.q("): #3rd word is the Q node- capture the output node name- for iscas
+				Q_name.append("q")
+				#print "\nQ_name",Q_name
 			
-		elif words[2].startswith("(.QN("): #3rd word is the QN node- capture the output node name- for ITC 
-		#elif words[2].startswith("(.QN("): #3rd word is the Q node- capture the output node name- for iscas
-			Q_name.append("QN")
-			#print "\nQ_name",Q_name
+			#elif words[2].startswith("(.QN("): #3rd word is the QN node- capture the output node name- for ITC 
+			elif words[2].startswith("(.QN("): #3rd word is the Q node- capture the output node name- for iscas
+				Q_name.append("QN")
+				#print "\nQ_name",Q_name
+
+	elif q_reg==0: #ITC	
+		if re.search("DFP",lines[i]): #This is for decoder
+			words=lines[i].split()
+			#print "**\n\n\nWords",words
+			if words[2].startswith("(.Q("): #3rd word is the Q node- capture the output node name- for decoder and ITC 
+				Q_name.append("Q")
+				#print "\nQ_name",Q_name
+			
+			elif words[2].startswith("(.QN("): #3rd word is the QN node- capture the output node name- for ITC 
+			#elif words[2].startswith("(.QN("): #3rd word is the Q node- capture the output node name- for iscas
+				Q_name.append("QN")
+				#print "\nQ_name",Q_name
 print "\nQ_name",Q_name
 fw = open('%s/F0_simulate_vsim.do' %path, 'w') ## This is the commands input file for modelsim
 fdo = open('%s/simdo.do' %path, 'w') ## This is the do file for modelsim

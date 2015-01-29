@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-
+#Pick the relevant row (using the clk cycle) from F0_tool_reference_out.txt and write it into F0_obtained.csv in csv format
 #Example usage: python python_pick_3rd_edge_values.py -m c432_clk_ipFF -f //home/users/nanditha/Documents/utility/65nm/c432 -c 1443
 
 import optparse
@@ -13,7 +13,7 @@ import random,shutil
 from optparse import OptionParser
 
 
-parser = OptionParser("This is run after every simulation is complete,\nAuthor:Nanditha Rao(nanditha@ee.iitb.ac.in)\n")
+parser = OptionParser("This is run after every simulation is complete,Picks the relevant row (using the clk cycle) from F0_tool_reference_out.txt and writes it into F0_obtained.csv in csv format\nAuthor:Nanditha Rao(nanditha@ee.iitb.ac.in)\n")
 
 parser.add_option("-m", "--mod",dest='module', help='Enter the entity name(vhdl) or module name (verilog)')
 parser.add_option("-f", "--folder", dest="path",help="Enter the ENTIRE path to your design folder(your working dir)- either on this machine or remote machine ")

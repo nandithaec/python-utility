@@ -408,7 +408,7 @@ if (os.path.isdir('%s/spice_results' %(path))):
 			prob_gate_FF_NFm=0.0
 	else:
 		prob_FF_glitch_captured_multiple=0.0
-	
+		prob_gate_FF_NFm=0.0
 	prob_FF_cascaded_flip=(float(FF_cascaded_flip)/float(FF_csv_rows))
 
 	#To avoid divide by zero error:	
@@ -475,7 +475,7 @@ if (os.path.isdir('%s/spice_results' %(path))):
 	
 	fout.close()
 
-
+	"""
 	###########################Write out the results into a table in a pdf############################
 	from reportlab.lib import colors
 	from reportlab.lib.pagesizes import letter
@@ -530,6 +530,6 @@ if (os.path.isdir('%s/spice_results' %(path))):
 	print "\n**Completed executing the gate_strike_taxonomy script***\n"
 	print "%s/spice_results/taxonomy_report_FFs_%s.pdf has the results." %(path,module)
 	doc1.build(elements)
-
+	"""
 
 
