@@ -90,7 +90,7 @@ mins=options.mins
 script=options.script
 scripts_path=options.scripts_path
 
-"""
+
 #Example usage: python python1_read_RTL_syn_pnr.py -f decoder.vhd -m decoder_behav_pnr -clk 900
 os.system('python python_read_RTL_syn_pnr_65.py -f %s -m %s -c %s -p %s' %(rtl,module,clkfreq,main_path))
 
@@ -110,7 +110,7 @@ os.system('python python_create_simdo_vsim_65.py -v %s/%s_modelsim.v -t %s -b %s
 print('Done modelsim simulation\n')
 time.sleep(2)
 ####################################################################################################################################################################
-"""
+
 
 ##will show one instance per line (no + continuation of subckt)
 os.system('python python_gnd_gnds_dspf_modify.py -p %s -m %s' %(main_path,module))
@@ -131,7 +131,7 @@ print "***Created glitch library..\n"
 time.sleep(5)
 
 
-"""
+
 ##Generate a template simulatable spice netlist from the dspf file generated after pnr. This would include all .ic, Voltage sources, meas, tran, control, param etc
 #NetlistFormat.pl
 #perl NetlstFrmt.pl -v decoder_behav_pnr_modelsim.v -s pnr/op_data/decoder_behav_pnr_final.dspf -l glitch_osu018_stdcells_correct_allcells.sp -c 1e9 -t 180 -m decoder_behav_pnr
@@ -140,4 +140,4 @@ print "***Done modifying the spice file to make it simulatable. File available i
 time.sleep(5)
 
 os.system('python python_create_jobscript_65.py -m %s -p %s -d %s -t %s -n %s --group %s --clk %s --proc_node %s --ppn %s --days %s --hrs %s --mins %s --script %s --path_here %s --scripts_path %s' %(module,extl_folder,design_folder,techn,num,group,clkfreq,nodes,ppn,days,hrs,mins,script,main_path,scripts_path))
-"""
+
